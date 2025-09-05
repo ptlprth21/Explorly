@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn('min-h-screen font-body antialiased', inter.variable)}>
+      <body className={cn('min-h-screen font-body antialiased flex flex-col', inter.variable)}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -32,7 +32,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
           <Toaster />
         </ThemeProvider>
