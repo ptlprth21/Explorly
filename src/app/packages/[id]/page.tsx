@@ -1,4 +1,4 @@
-import { getPackageById, getReviewsByPackageId } from '@/lib/mock-data';
+import { getPackageById, getReviewsByPackageId } from '@/lib/data';
 import Container from '@/components/ui/Container';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -19,7 +19,7 @@ export default async function PackageDetailPage({ params }: { params: { id: stri
     notFound();
   }
 
-  const reviews = getReviewsByPackageId(pkg.id);
+  const reviews = await getReviewsByPackageId(pkg.id);
 
   return (
     <Container className="py-12">

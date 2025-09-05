@@ -1,8 +1,10 @@
-import { continents } from '@/lib/mock-data';
+
+import { getContinents } from '@/lib/data';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const ContinentsExplorer = () => {
+const ContinentsExplorer = async () => {
+  const continents = await getContinents();
   return (
     <section className="py-12 md:py-24">
       <div className="text-center mb-12">

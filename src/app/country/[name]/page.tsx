@@ -1,4 +1,4 @@
-import { getPackagesByCountry, getReviewsByCountry } from '@/lib/mock-data';
+import { getPackagesByCountry, getReviewsByCountry } from '@/lib/data';
 import Container from '@/components/ui/Container';
 import { notFound } from 'next/navigation';
 import PackageGrid from '@/components/packages/PackageGrid';

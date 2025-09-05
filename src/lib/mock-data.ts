@@ -1,41 +1,7 @@
 
-'use client';
-import { config } from 'dotenv';
-config();
+import type { Package, Review, Continent } from '@/types';
 
-import { Package, Review, Continent } from '@/types';
-import { aiImageSelection } from '@/ai/flows/ai-image-selection';
-import { slugify } from './utils';
-
-// This is a mock function that simulates the AI selection process.
-// In a real app, this would be an async call to the Genkit flow.
-const getAiSelectedImage = async (gallery: string[], title: string) => {
-  // Simple logic for mock: pick one image randomly as "AI selected"
-  const selectedImage = gallery[Math.floor(Math.random() * gallery.length)];
-  
-  try {
-    const result = await aiImageSelection({
-      imageUrls: gallery,
-      packageId: title,
-      reviewSentiment: 'Very positive reviews, customers love the scenic views and cultural experiences.',
-      averageRating: 4.8
-    });
-    
-    // Return the real AI selected image if the flow succeeds, otherwise a random one.
-    return {
-      image: result?.selectedImageUrl || selectedImage,
-      reason: result?.reason || 'This image was selected for its vibrant colors and dynamic composition, which perfectly captures the adventurous spirit of the tour.'
-    };
-  } catch (error) {
-    console.error("AI image selection failed, using fallback.", error);
-    return {
-      image: selectedImage,
-      reason: 'This image was selected for its vibrant colors and dynamic composition, which perfectly captures the adventurous spirit of the tour.'
-    }
-  }
-};
-
-const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
+export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
   {
     title: 'Serengeti Wildlife Safari',
     destination: 'Serengeti National Park',
@@ -57,9 +23,9 @@ const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     itinerary: [
       { day: 1, title: 'Arrival in Arusha', description: 'Transfer to your lodge and relax.' },
       { day: 2, title: 'Tarangire National Park', description: 'Full day game drive to see elephants and baobab trees.' },
-      { day: 3-5, title: 'Central Serengeti', description: 'Explore the heart of the Serengeti, seeking out the Big Five.' },
-      { day: 6, title: 'Ngorongoro Crater', description: 'Descend into the crater for a unique wildlife viewing experience.' },
-      { day: 7, title: 'Departure', description: 'Return to Arusha for your flight home.' },
+      { day: 3, title: 'Central Serengeti', description: 'Explore the heart of the Serengeti, seeking out the Big Five.' },
+      { day: 4, title: 'Ngorongoro Crater', description: 'Descend into the crater for a unique wildlife viewing experience.' },
+      { day: 5, title: 'Departure', description: 'Return to Arusha for your flight home.' },
     ],
     inclusions: ['4x4 Vehicle', 'Park Fees', 'Experienced Guide', 'Full Board Accommodation'],
     exclusions: ['International Flights', 'Visa Fees', 'Gratuities'],
@@ -113,10 +79,10 @@ const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     highlights: ['Classic Inca Trail', 'Sunrise at Machu Picchu', 'Sacred Valley Tour'],
     description: 'Trek the ancient paths of the Incas to the lost city of Machu Picchu. A challenging but rewarding journey through stunning Andean landscapes.',
     itinerary: [
-        { day: 1-2, title: 'Acclimatization in Cusco', description: 'Explore Cusco and the Sacred Valley.' },
-        { day: 3-6, title: 'Inca Trail Trek', description: 'Four days of trekking through breathtaking scenery.' },
-        { day: 7, title: 'Machu Picchu Tour', description: 'Guided tour of the ancient citadel.' },
-        { day: 8, title: 'Departure', description: 'Return to Cusco for departure.' },
+        { day: 1, title: 'Acclimatization in Cusco', description: 'Explore Cusco and the Sacred Valley.' },
+        { day: 2, title: 'Inca Trail Trek', description: 'Four days of trekking through breathtaking scenery.' },
+        { day: 3, title: 'Machu Picchu Tour', description: 'Guided tour of the ancient citadel.' },
+        { day: 4, title: 'Departure', description: 'Return to Cusco for departure.' },
     ],
     inclusions: ['Inca Trail Permit', 'Porters and Cook', 'Camping Equipment', 'Machu Picchu Entrance'],
     exclusions: ['International Flights', 'Sleeping Bag', 'Travel Insurance'],
@@ -141,10 +107,10 @@ const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     highlights: ['Santorini Caldera Sunset', 'Mykonos Nightlife', 'Historical Knossos Palace'],
     description: 'Discover the magic of the Greek Islands. From the iconic white-washed villages of Santorini to the vibrant beaches of Mykonos, this is the ultimate Mediterranean escape.',
     itinerary: [
-        { day: 1-3, title: 'Santorini', description: 'Explore Oia and Fira, and enjoy a catamaran cruise.' },
-        { day: 4-6, title: 'Mykonos', description: 'Relax on the famous beaches and explore Mykonos Town.' },
-        { day: 7-9, title: 'Crete', description: 'Visit Knossos Palace and hike the Samaria Gorge.' },
-        { day: 10, title: 'Departure', description: 'Fly out from Heraklion.' },
+        { day: 1, title: 'Santorini', description: 'Explore Oia and Fira, and enjoy a catamaran cruise.' },
+        { day: 2, title: 'Mykonos', description: 'Relax on the famous beaches and explore Mykonos Town.' },
+        { day: 3, title: 'Crete', description: 'Visit Knossos Palace and hike the Samaria Gorge.' },
+        { day: 4, title: 'Departure', description: 'Fly out from Heraklion.' },
     ],
     inclusions: ['Ferry Tickets', '4-star Hotels', 'Santorini Catamaran Cruise', 'Airport Transfers'],
     exclusions: ['International Flights', 'Most Meals', 'Optional Activities'],
@@ -322,50 +288,3 @@ export const continents: Continent[] = [
     { name: 'South America', image: 'https://picsum.photos/seed/southamerica/800/600', dataAiHint: 'inca ruins' },
     { name: 'Australia', image: 'https://picsum.photos/seed/australia/800/600', dataAiHint: 'outback desert' },
 ];
-
-let packages: Promise<Package[]> | null = null;
-
-const processPackages = async (): Promise<Package[]> => {
-  const processedPackages = await Promise.all(
-    packagesData.map(async (pkg) => {
-      const id = slugify(pkg.title);
-      const { image, reason } = await getAiSelectedImage(pkg.gallery, pkg.title);
-      return {
-        ...pkg,
-        id,
-        image,
-        aiReasoning: reason,
-      };
-    })
-  );
-  return processedPackages;
-};
-
-export const getPackages = async (): Promise<Package[]> => {
-  if (!packages) {
-    packages = processPackages();
-  }
-  return await packages;
-};
-
-export const getPackageById = async (id: string): Promise<Package | undefined> => {
-  const allPackages = await getPackages();
-  return allPackages.find(pkg => pkg.id === id);
-};
-
-export const getPackagesByCountry = async (countrySlug: string): Promise<Package[]> => {
-    const allPackages = await getPackages();
-    return allPackages.filter(p => slugify(p.country) === countrySlug);
-};
-
-export const getReviewsByPackageId = (packageId: string): Review[] => {
-    return reviews.filter(review => review.packageId === packageId);
-}
-
-export const getReviewsByCountry = async (countrySlug: string): Promise<Review[]> => {
-    const countryPackages = await getPackagesByCountry(countrySlug);
-    const packageIds = countryPackages.map(p => p.id);
-    return reviews.filter(r => packageIds.includes(r.packageId));
-};
-
-    

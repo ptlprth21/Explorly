@@ -1,3 +1,4 @@
+
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,12 +9,24 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "../ui/button"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import { continents } from "@/lib/mock-data"
+import type { Continent } from "@/types"
+import { getContinents } from "@/lib/data"
+
 
 const FilterControls = () => {
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
+
+    const [continents, setContinents] = useState<Continent[]>([]);
+
+    useEffect(() => {
+        const fetchContinents = async () => {
+            const fetchedContinents = await getContinents();
+            setContinents(fetchedContinents);
+        };
+        fetchContinents();
+    }, []);
 
     const [filters, setFilters] = useState({
         sortBy: searchParams.get('sortBy') || 'popularity',

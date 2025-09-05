@@ -1,4 +1,4 @@
-import { getPackages } from '@/lib/mock-data';
+import { getPackages } from '@/lib/data';
 import MusicPlayerCard from './MusicPlayerCard';
 
 const PopularPackages = async () => {

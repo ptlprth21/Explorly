@@ -1,6 +1,6 @@
 import BookingWizard from '@/components/booking/BookingWizard';
 import Container from '@/components/ui/Container';
-import { getPackageById } from '@/lib/mock-data';
+import { getPackageById } from '@/lib/data';
 import { notFound } from 'next/navigation';
 
 export default async function BookingPage({ params }: { params: { id: string } }) {

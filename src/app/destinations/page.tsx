@@ -1,5 +1,5 @@
 import Container from '@/components/ui/Container';
-import { getPackages } from '@/lib/mock-data';
+import { getPackages } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import FilterControls from '@/components/packages/FilterControls';
 import type { Package } from '@/types';
