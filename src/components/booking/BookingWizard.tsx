@@ -25,9 +25,9 @@ const BookingWizard = ({ package: pkg }: BookingWizardProps) => {
   const totalPrice = pkg.price * travelers;
 
   const progressValue = {
-    selection: 33,
-    information: 66,
-    payment: 100,
+    selection: 25,
+    information: 50,
+    payment: 75,
     confirmation: 100,
   }[step];
 
@@ -157,7 +157,7 @@ const BookingWizard = ({ package: pkg }: BookingWizardProps) => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
       <div className="lg:col-span-2">
         <Card className="min-h-[600px] flex flex-col">
             <div className="p-6">

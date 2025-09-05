@@ -54,11 +54,11 @@ export default async function DestinationsPage({ searchParams }: { searchParams:
         <p className="text-lg text-muted-foreground mt-2">Browse our curated collection of adventures.</p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <aside className="md:col-span-1">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <aside className="lg:col-span-1">
             <FilterControls />
         </aside>
-        <main className="md:col-span-3">
+        <main className="lg:col-span-3">
           <PackageGrid packages={filteredPackages} />
         </main>
       </div>

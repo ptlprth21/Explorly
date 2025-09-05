@@ -26,16 +26,16 @@ const Hero = () => {
           <p className="mt-4 max-w-2xl text-lg text-white/90 drop-shadow-md animate-fade-in-up animation-delay-300">
             Discover curated travel packages, from relaxing beach getaways to thrilling safari adventures.
           </p>
-          <div className="mt-8 flex w-full max-w-xl items-center space-x-2 animate-fade-in-up animation-delay-600">
-            <div className="relative flex-grow">
+          <div className="mt-8 flex flex-col sm:flex-row w-full max-w-xl items-center space-y-2 sm:space-y-0 sm:space-x-2 animate-fade-in-up animation-delay-600">
+            <div className="relative flex-grow w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search destinations, e.g., 'Tanzania'"
-                className="pl-10 h-12 text-base"
+                className="pl-10 h-12 text-base w-full"
               />
             </div>
-            <Button type="submit" size="lg" className="h-12 bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button type="submit" size="lg" className="h-12 w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground">
               Search
             </Button>
           </div>

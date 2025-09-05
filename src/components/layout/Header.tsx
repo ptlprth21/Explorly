@@ -3,10 +3,11 @@
 
 import Link from 'next/link';
 import { Menu, PlaneTakeoff, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Container from '../ui/Container';
+import { usePathname } from 'next/navigation';
 
 const navigationLinks = [
   { href: '/', label: 'Home' },
@@ -17,10 +18,16 @@ const navigationLinks = [
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+  
+  useEffect(() => {
+    // Close mobile menu on route change
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -30,7 +37,7 @@ const Header = () => {
             <PlaneTakeoff className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold tracking-tight text-foreground">RoamReady</span>
           </Link>
-          <div className="hidden items-center space-x-4 md:flex">
+          <div className="hidden items-center space-x-4 lg:flex">
             <nav className="flex items-center space-x-6 text-sm font-medium">
               {navigationLinks.map((link) => (
                 <Link key={`${link.href}-${link.label}`} href={link.href} className="text-foreground/80 transition-colors hover:text-primary">
@@ -42,7 +49,7 @@ const Header = () => {
               <Button>Book a Trip</Button>
             </Link>
           </div>
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Button onClick={toggleNavbar} variant="ghost" size="icon">
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -51,7 +58,7 @@ const Header = () => {
         {isOpen && (
           <div
             className={cn(
-              'absolute left-0 top-16 w-full animate-in fade-in-20 slide-in-from-top-4 md:hidden',
+              'absolute left-0 top-16 w-full animate-in fade-in-20 slide-in-from-top-4 lg:hidden',
               'bg-background border-b border-border/40'
             )}
           >
