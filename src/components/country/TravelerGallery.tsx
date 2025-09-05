@@ -17,7 +17,7 @@ const TravelerGallery = ({ images }: TravelerGalleryProps) => {
             src={src}
             alt={`Traveler photo ${index + 1}`}
             width={500}
-            height={Math.floor(Math.random() * (600 - 300 + 1)) + 300} // Random height for masonry effect
+            height={400} 
             className="rounded-lg object-cover w-full h-auto"
             data-ai-hint="travel people"
           />
