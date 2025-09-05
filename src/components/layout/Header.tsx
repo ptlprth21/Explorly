@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -32,7 +33,7 @@ const Header = () => {
           <div className="hidden items-center space-x-4 md:flex">
             <nav className="flex items-center space-x-6 text-sm font-medium">
               {navigationLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="text-foreground/80 transition-colors hover:text-primary">
+                <Link key={`${link.href}-${link.label}`} href={link.href} className="text-foreground/80 transition-colors hover:text-primary">
                   {link.label}
                 </Link>
               ))}
@@ -54,7 +55,7 @@ const Header = () => {
           >
             <nav className="grid gap-4 p-4">
               {navigationLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="text-lg font-medium text-foreground/80 transition-colors hover:text-primary" onClick={toggleNavbar}>
+                <Link key={`${link.href}-${link.label}-mobile`} href={link.href} className="text-lg font-medium text-foreground/80 transition-colors hover:text-primary" onClick={toggleNavbar}>
                   {link.label}
                 </Link>
               ))}
