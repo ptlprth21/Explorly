@@ -43,4 +43,6 @@ export interface Continent {
   name: ContinentName;
   image: string;
   dataAiHint: string;
+  emoji?: string;
+  description?: string;
 }

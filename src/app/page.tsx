@@ -6,12 +6,10 @@ import Container from '@/components/ui/Container';
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-black">
       <Hero />
-      <Container>
-        <PopularPackages />
-        <ContinentsExplorer />
-      </Container>
+      <PopularPackages />
+      <ContinentsExplorer />
     </div>
   );
 }
