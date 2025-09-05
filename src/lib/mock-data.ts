@@ -1,3 +1,4 @@
+
 import type { Package, Review, Continent } from '@/types';
 
 export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
@@ -283,7 +284,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     country: 'UAE',
     continent: 'Asia',
     duration: '4 days',
-    price: 1870,
+    price: 870,
     gallery: [
         'https://picsum.photos/seed/abudhabi1/1200/800',
         'https://picsum.photos/seed/abudhabi2/1200/800',
@@ -507,7 +508,7 @@ export const reviews: Review[] = [
   { id: '19', packageId: 'egyptian-wonders', userName: 'Sam', rating: 5, comment: 'Standing in front of the Pyramids is a surreal experience. I felt like I was in a movie.', date: '2024-03-10T10:45:00Z', verified: true },
   { id: '20', packageId: 'flavors-of-italy', userName: 'Tina', rating: 5, comment: 'I ate my weight in pasta and have no regrets. Rome was chaotic but wonderful.', date: '2024-06-02T13:20:00Z', verified: true },
   { id: '21', packageId: 'golden-triangle-of-india', userName: 'Umar', rating: 5, comment: 'The Taj Mahal is even more stunning in person. Our guide was incredibly knowledgeable.', date: '2024-11-01T08:00:00Z', verified: true },
-  { id: '22', packageId: 'desert-calm-4-days-of-culture-escape-in-abu-dhabi', userName: 'Vera', rating: 5, comment: 'The desert safari was so much fun! The views from the Burj Khalifa are insane.', date: '2024-12-01T17:30:00Z', verified: true },
+  { id: '22', packageId: 'desert-calm-4-days-of-culture-escape-in-abu-dhabi', userName: 'Vera', rating: 5, comment: 'The desert safari was so much fun! The Grand Mosque is a must-see.', date: '2024-12-01T17:30:00Z', verified: true },
   { id: '23', packageId: 'parisian-romance', userName: 'Will', rating: 5, comment: 'Paris is everything I dreamed of. The river cruise at night was incredibly romantic.', date: '2024-09-20T21:00:00Z', verified: true },
 ];
 
