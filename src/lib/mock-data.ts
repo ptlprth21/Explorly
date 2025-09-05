@@ -2,7 +2,6 @@
 import { Package, Review, Continent } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
-import { config } from 'dotenv';
 
 // This is a mock function that simulates the AI selection process.
 // In a real app, this would be an async call to the Genkit flow.
@@ -11,7 +10,6 @@ const getAiSelectedImage = async (gallery: string[], title: string) => {
   const selectedImage = gallery[Math.floor(Math.random() * gallery.length)];
   
   try {
-    config(); // Ensure environment variables are loaded
     const { output } = await aiImageSelection({
       imageUrls: gallery,
       packageId: title,
