@@ -14,12 +14,14 @@ export interface Review {
   verified: boolean;
 }
 
+export type ContinentName = 'Asia' | 'Europe' | 'Africa' | 'North America' | 'South America' | 'Australia' | 'Antarctica';
+
 export interface Package {
   id: string;
   title: string;
   destination: string;
   country: string;
-  continent: 'Asia' | 'Europe' | 'Africa' | 'North America' | 'South America' | 'Australia';
+  continent: ContinentName;
   duration: string;
   price: number;
   image: string;
@@ -38,7 +40,7 @@ export interface Package {
 }
 
 export interface Continent {
-  name: 'Asia' | 'Europe' | 'Africa' | 'North America' | 'South America' | 'Australia';
+  name: ContinentName;
   image: string;
   dataAiHint: string;
 }
