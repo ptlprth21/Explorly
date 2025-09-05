@@ -38,7 +38,9 @@ const Header = () => {
                 </Link>
               ))}
             </nav>
-            <Button>Book a Trip</Button>
+            <Link href="/destinations">
+              <Button>Book a Trip</Button>
+            </Link>
           </div>
           <div className="md:hidden">
             <Button onClick={toggleNavbar} variant="ghost" size="icon">
@@ -59,7 +61,9 @@ const Header = () => {
                   {link.label}
                 </Link>
               ))}
-              <Button className="w-full">Book a Trip</Button>
+              <Link href="/destinations">
+                <Button className="w-full">Book a Trip</Button>
+              </Link>
             </nav>
           </div>
         )}

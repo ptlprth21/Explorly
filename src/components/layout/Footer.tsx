@@ -24,14 +24,14 @@ const Footer = () => {
               <h3 className="font-semibold mb-4">Explore</h3>
               <ul className="space-y-2">
                 <li><Link href="/destinations" className="text-sm text-foreground/60 hover:text-primary transition-colors">Destinations</Link></li>
-                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Popular Tours</Link></li>
-                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Special Offers</Link></li>
+                <li><Link href="/destinations" className="text-sm text-foreground/60 hover:text-primary transition-colors">Popular Tours</Link></li>
+                <li><Link href="/destinations" className="text-sm text-foreground/60 hover:text-primary transition-colors">Special Offers</Link></li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">About Us</Link></li>
+                <li><Link href="/about" className="text-sm text-foreground/60 hover:text-primary transition-colors">About Us</Link></li>
                 <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Blog</Link></li>
                 <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Careers</Link></li>
               </ul>
@@ -39,8 +39,8 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Contact</Link></li>
-                <li><Link href="#" className="textsm text-foreground/60 hover:text-primary transition-colors">FAQ</Link></li>
+                <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">Contact</Link></li>
+                <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">FAQ</Link></li>
                 <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Privacy Policy</Link></li>
               </ul>
             </div>
