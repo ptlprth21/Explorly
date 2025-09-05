@@ -1,4 +1,8 @@
 
+'use client';
+import { config } from 'dotenv';
+config();
+
 import { Package, Review, Continent } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
@@ -10,7 +14,7 @@ const getAiSelectedImage = async (gallery: string[], title: string) => {
   const selectedImage = gallery[Math.floor(Math.random() * gallery.length)];
   
   try {
-    const { output } = await aiImageSelection({
+    const result = await aiImageSelection({
       imageUrls: gallery,
       packageId: title,
       reviewSentiment: 'Very positive reviews, customers love the scenic views and cultural experiences.',
@@ -19,8 +23,8 @@ const getAiSelectedImage = async (gallery: string[], title: string) => {
     
     // Return the real AI selected image if the flow succeeds, otherwise a random one.
     return {
-      image: output?.selectedImageUrl || selectedImage,
-      reason: output?.reason || 'This image was selected for its vibrant colors and dynamic composition, which perfectly captures the adventurous spirit of the tour.'
+      image: result?.selectedImageUrl || selectedImage,
+      reason: result?.reason || 'This image was selected for its vibrant colors and dynamic composition, which perfectly captures the adventurous spirit of the tour.'
     };
   } catch (error) {
     console.error("AI image selection failed, using fallback.", error);
@@ -363,3 +367,5 @@ export const getReviewsByCountry = async (countrySlug: string): Promise<Review[]
     const packageIds = countryPackages.map(p => p.id);
     return reviews.filter(r => packageIds.includes(r.packageId));
 };
+
+    
