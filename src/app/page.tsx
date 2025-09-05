@@ -1,3 +1,4 @@
+
 import Hero from '@/components/home/Hero';
 import PopularPackages from '@/components/home/PopularPackages';
 import ContinentsExplorer from '@/components/home/ContinentsExplorer';

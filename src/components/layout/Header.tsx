@@ -18,6 +18,7 @@ const navigationLinks = [
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   const toggleNavbar = () => {
@@ -25,17 +26,34 @@ const Header = () => {
   };
   
   useEffect(() => {
-    // Close mobile menu on route change
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className={cn(
+      "sticky top-0 z-50 w-full transition-all duration-300",
+      isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/40" : "bg-transparent"
+    )}>
       <Container>
         <div className="relative flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <PlaneTakeoff className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold tracking-tight text-foreground">RoamReady</span>
+            <span className="text-xl font-bold tracking-tight text-foreground">WorldTrips</span>
           </Link>
           <div className="hidden items-center space-x-4 lg:flex">
             <nav className="flex items-center space-x-6 text-sm font-medium">
