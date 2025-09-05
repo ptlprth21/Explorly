@@ -1,0 +1,57 @@
+import Link from 'next/link';
+import { PlaneTakeoff, Facebook, Twitter, Instagram } from 'lucide-react';
+import Container from '../ui/Container';
+
+const Footer = () => {
+  return (
+    <footer className="border-t border-border/40 bg-background/95">
+      <Container>
+        <div className="py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="flex flex-col gap-4">
+              <Link href="/" className="flex items-center gap-2">
+                <PlaneTakeoff className="h-8 w-8 text-primary" />
+                <span className="text-xl font-bold tracking-tight text-foreground">RoamReady</span>
+              </Link>
+              <p className="text-sm text-foreground/60">Your adventure starts here. Discover and book unique travel experiences worldwide.</p>
+              <div className="flex gap-4">
+                <Link href="#" aria-label="Facebook"><Facebook className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></Link>
+                <Link href="#" aria-label="Twitter"><Twitter className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></Link>
+                <Link href="#" aria-label="Instagram"><Instagram className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></Link>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Explore</h3>
+              <ul className="space-y-2">
+                <li><Link href="/destinations" className="text-sm text-foreground/60 hover:text-primary transition-colors">Destinations</Link></li>
+                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Popular Tours</Link></li>
+                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Special Offers</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2">
+                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">About Us</Link></li>
+                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Blog</Link></li>
+                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Careers</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Support</h3>
+              <ul className="space-y-2">
+                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Contact</Link></li>
+                <li><Link href="#" className="textsm text-foreground/60 hover:text-primary transition-colors">FAQ</Link></li>
+                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Privacy Policy</Link></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-border/40 py-6 text-center text-sm text-foreground/60">
+          <p>&copy; {new Date().getFullYear()} RoamReady. All rights reserved.</p>
+        </div>
+      </Container>
+    </footer>
+  );
+};
+
+export default Footer;
