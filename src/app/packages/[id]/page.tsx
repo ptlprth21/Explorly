@@ -1,3 +1,4 @@
+
 'use client';
 
 import { getPackageById, getReviewsByPackageId, getPackages } from '@/lib/data';
@@ -15,14 +16,13 @@ import Link from 'next/link';
 import { slugify } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import type { Package, Review } from '@/types';
-import BookingForm from '@/components/booking/BookingForm';
+import BookingWizard from '@/components/booking/BookingWizard';
 
 
 export default function PackageDetailPage({ params }: { params: { id: string } }) {
   const [pkg, setPackage] = useState<Package | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [allPackages, setAllPackages] = useState<Package[]>([]);
-  const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -33,8 +33,6 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
         setPackage(packageData);
         const reviewData = await getReviewsByPackageId(packageData.id);
         setReviews(reviewData);
-        const allPkgs = await getPackages();
-        setAllPackages(allPkgs);
       } else {
         notFound();
       }
@@ -54,8 +52,6 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
       </Container>
     );
   }
-
-  const tourOptions = allPackages.map(p => `${p.title} - €${p.price}`);
 
   return (
     <>
@@ -104,7 +100,7 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
                 <p className="text-muted-foreground text-sm">from <span className="text-3xl font-bold text-primary">${pkg.price}</span> per person</p>
               </CardHeader>
               <CardContent className="space-y-4">
-                  <Button onClick={() => setIsBookingFormOpen(true)} size="lg" className="w-full bg-teal-400 hover:bg-teal-300 text-neutral-900 font-semibold text-lg">
+                  <Button onClick={() => setIsBookingOpen(true)} size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg">
                       Send Booking Request
                   </Button>
                   <p className="text-xs text-muted-foreground text-center">Questions? Send a booking request and we'll get back to you within 24 hours.</p>
@@ -196,13 +192,14 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
           </Tabs>
         </section>
       </Container>
-      {isBookingFormOpen && (
-        <BookingForm
-          selectedPackage={`${pkg.title} - €${pkg.price}`}
-          allTours={tourOptions}
-          onClose={() => setIsBookingFormOpen(false)}
+      {isBookingOpen && (
+        <BookingWizard
+          selectedPackage={pkg}
+          onClose={() => setIsBookingOpen(false)}
         />
       )}
     </>
   );
 }
+
+    
