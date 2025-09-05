@@ -11,8 +11,8 @@ import Container from '../ui/Container';
 const navigationLinks = [
   { href: '/', label: 'Home' },
   { href: '/destinations', label: 'Destinations' },
-  { href: '#', label: 'About Us' },
-  { href: '#', label: 'Contact' },
+  { href: '/about', label: 'About Us' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 const Header = () => {
