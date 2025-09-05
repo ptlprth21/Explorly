@@ -18,14 +18,14 @@ const getAiSelectedImage = async (gallery: string[], title: string) => {
     
     // Return the real AI selected image if the flow succeeds, otherwise a random one.
     return {
-      image: result?.selectedImageUrl || gallery[0],
+      image: result?.selectedImageUrl || gallery[Math.floor(Math.random() * gallery.length)],
       reason: result?.reason || 'This image was selected for its vibrant colors and dynamic composition, which perfectly captures the adventurous spirit of the tour.'
     };
   } catch (error) {
     console.error("AI image selection failed, using fallback.", error);
-    // Simple logic for mock: pick the first image as "AI selected" on failure
+    // Simple logic for mock: pick a random image as "AI selected" on failure
     return {
-      image: gallery[0],
+      image: gallery[Math.floor(Math.random() * gallery.length)],
       reason: 'This image was selected for its vibrant colors and dynamic composition, which perfectly captures the adventurous spirit of the tour.'
     }
   }
