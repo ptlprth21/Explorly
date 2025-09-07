@@ -101,9 +101,9 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
               </CardHeader>
               <CardContent className="space-y-4">
                   <Button onClick={() => setIsBookingOpen(true)} size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg">
-                      Send Booking Request
+                      Book Now
                   </Button>
-                  <p className="text-xs text-muted-foreground text-center">Questions? Send a booking request and we'll get back to you within 24 hours.</p>
+                  <p className="text-xs text-muted-foreground text-center">Secure payments powered by Stripe. Cancellation policy applies.</p>
               </CardContent>
             </Card>
           </aside>
@@ -201,5 +201,3 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
     </>
   );
 }
-
-    
