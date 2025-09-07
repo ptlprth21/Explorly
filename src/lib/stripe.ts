@@ -22,17 +22,27 @@ interface PaymentIntentPayload {
     metadata: Record<string, string>;
 }
 
-// This function would live on a secure backend in a real application.
-// For demonstration, we're calling a placeholder/mock function.
-export async function createPaymentIntent(payload: PaymentIntentPayload): Promise<{ clientSecret: string } | null> {
-    
-    // In a real app, you would make a fetch request to your own API endpoint.
-    // e.g., const response = await fetch('/api/create-payment-intent', { ... });
-    // That endpoint would securely use the Stripe Node.js library to create the intent.
 
-    console.warn("This is a mock payment intent creation. In a real app, this would be a secure backend call.");
-    
-    // For now, we return a mock client secret for development.
-    // This allows the UI to proceed without a real backend.
-    return { clientSecret: 'pi_mock_client_secret_for_development_and_testing_only' };
+export async function createPaymentIntent(payload: PaymentIntentPayload): Promise<{ clientSecret: string } | null> {
+    try {
+        const response = await fetch('/api/create-payment-intent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Failed to create payment intent');
+        }
+
+        const data = await response.json();
+        return { clientSecret: data.clientSecret };
+
+    } catch (error) {
+        console.error('Error creating payment intent:', error);
+        return null;
+    }
 }
