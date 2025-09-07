@@ -1,30 +1,26 @@
 
 'use client';
 
-import { getPackageById, getReviewsByPackageId, getPackages } from '@/lib/data';
-import Container from '@/components/ui/Container';
+import { getPackageById } from '@/lib/data';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import StarRating from '@/components/ui/StarRating';
-import { Clock, Mountain, MapPin, CheckCircle, XCircle, Users, Calendar, BrainCircuit, Utensils, Home } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Clock, Mountain, MapPin, CheckCircle, XCircle, ArrowLeft, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import PackageGallery from '@/components/packages/PackageGallery';
-import Link from 'next/link';
-import { slugify } from '@/lib/utils';
 import { useEffect, useState } from 'react';
-import type { Package, Review } from '@/types';
-import BookingWizard from '@/components/booking/BookingWizard';
+import type { Package } from '@/types';
 import FirebaseReviews from '@/components/packages/FirebaseReviews';
 import { useBookingWizard } from '@/context/BookingWizardContext';
+import PackageGallery from '@/components/packages/PackageGallery';
 
 
 export default function PackageDetailPage({ params }: { params: { id: string } }) {
   const [pkg, setPackage] = useState<Package | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('overview');
   const { openWizard } = useBookingWizard();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,141 +39,211 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
 
   if (isLoading || !pkg) {
     return (
-      <Container className="py-12">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center p-24">
             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary mx-auto"></div>
             <p className="mt-4 text-muted-foreground">Loading Package...</p>
         </div>
-      </Container>
+      </div>
     );
   }
 
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'itinerary', label: 'Itinerary' },
+    { id: 'gallery', label: 'Gallery' },
+    { id: 'reviews', label: 'Reviews' }
+  ];
+
   return (
-    <>
-      <Container className="py-12">
-        {/* Header Section */}
-        <section className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-headline font-bold">{pkg.title}</h1>
-          <div className="flex flex-wrap items-center gap-4 text-muted-foreground mt-4 text-sm">
-            <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4" />
-              <span>{pkg.destination}, <Link href={`/country/${slugify(pkg.country)}`} className="hover:text-primary hover:underline">{pkg.country}</Link></span>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <div className="bg-background/80 backdrop-blur-md sticky top-16 z-40 border-b border-border">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+           <button
+            onClick={() => router.back()}
+            className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
+          >
+            <ArrowLeft className="h-5 w-5" />
+            <span>Back</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <div className="relative h-96 overflow-hidden">
+        <Image
+          src={pkg.image}
+          alt={pkg.title}
+          fill
+          className="w-full h-full object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="absolute bottom-8 left-8 text-white">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">{pkg.title}</h1>
+          <div className="flex items-center space-x-4 text-lg">
+            <div className="flex items-center space-x-1">
+              <MapPin className="h-5 w-5" />
+              <span>{pkg.destination}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <StarRating rating={pkg.rating} />
-              <span>{pkg.rating.toFixed(1)} ({pkg.reviewCount} reviews)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
+            <div className="flex items-center space-x-1">
+              <Clock className="h-5 w-5" />
               <span>{pkg.duration}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <Mountain className="w-4 h-4" />
-              <span>{pkg.difficulty}</span>
+            <div className="flex items-center space-x-1">
+              <StarRating rating={pkg.rating} />
+              <span>{pkg.rating} ({pkg.reviewCount} reviews)</span>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
 
-        {/* Gallery and Booking */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Content */}
           <div className="lg:col-span-2">
-            <PackageGallery mainImage={pkg.image} gallery={pkg.gallery} title={pkg.title} />
-            <Card className="mt-4 bg-primary/10 border-primary/30">
-              <CardHeader className='flex-row items-center gap-4 space-y-0 pb-2'>
-                <BrainCircuit className="w-8 h-8 text-primary" />
-                <CardTitle className="text-primary text-lg">AI-Powered Image Selection</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-primary/80">{pkg.aiReasoning}</p>
-              </CardContent>
-            </Card>
-          </div>
-          <aside className="lg:col-span-1">
-            <Card className="sticky top-24">
-              <CardHeader>
-                <CardTitle className="text-2xl">Book Your Trip</CardTitle>
-                <p className="text-muted-foreground text-sm">from <span className="text-3xl font-bold text-primary">${pkg.price}</span> per person</p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                  <Button onClick={() => openWizard(pkg)} size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg">
-                      Send Booking Request
-                  </Button>
-                  <p className="text-xs text-muted-foreground text-center">Secure payments powered by Stripe. Cancellation policy applies.</p>
-              </CardContent>
-            </Card>
-          </aside>
-        </section>
-        
-        {/* Details Tabs */}
-        <section className="mt-12">
-          <Tabs defaultValue="overview">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="itinerary">Itinerary</TabsTrigger>
-              <TabsTrigger value="inclusions">What's Included</TabsTrigger>
-              <TabsTrigger value="reviews">Reviews</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="overview" className="prose prose-invert max-w-none mt-6">
-              <h3 className="font-bold text-xl mb-4">Trip Overview</h3>
-              <p>{pkg.description}</p>
-              <h4 className="font-bold text-lg mt-6 mb-2">Highlights</h4>
-              <ul className="list-disc pl-5">
-                {pkg.highlights.map((highlight, i) => <li key={i}>{highlight}</li>)}
-              </ul>
-            </TabsContent>
-            
-            <TabsContent value="itinerary" className="mt-6">
-              <div className="space-y-8">
-                {pkg.itinerary.map((step, index) => (
-                  <div key={step.day} className="relative pl-16">
-                      <div className="absolute left-6 top-0 w-12 h-12 bg-primary/20 border-2 border-primary/50 text-primary rounded-full flex items-center justify-center font-bold text-lg">
-                          {step.day}
+            {/* Tabs */}
+            <div className="bg-card rounded-xl shadow-sm mb-8">
+              <div className="border-b border-border">
+                <nav className="flex space-x-8 px-6">
+                  {tabs.map((tab) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                        activeTab === tab.id
+                          ? 'border-primary text-primary'
+                          : 'border-transparent text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </nav>
+              </div>
+
+              <div className="p-6">
+                {activeTab === 'overview' && (
+                  <div className="space-y-6 prose prose-invert max-w-none">
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">About This Trip</h3>
+                      <p className="text-muted-foreground leading-relaxed">{pkg.description}</p>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">Highlights</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {pkg.highlights.map((highlight, index) => (
+                          <div key={index} className="flex items-start space-x-2">
+                            <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-foreground">{highlight}</span>
+                          </div>
+                        ))}
                       </div>
-                      {index < pkg.itinerary.length - 1 && (
-                          <div className="absolute left-12 top-6 w-0.5 h-full bg-border -translate-x-1/2"></div>
-                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h3 className="text-xl font-semibold mb-3">Included</h3>
+                        <div className="space-y-2">
+                          {pkg.inclusions.map((item, index) => (
+                            <div key={index} className="flex items-start space-x-2">
+                              <CheckCircle className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
+                              <span className="text-sm text-foreground">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                       
-                      <div className="ml-4">
-                          <h4 className="font-bold text-xl mb-1 text-primary-foreground">{step.title}</h4>
-                          <p className="text-muted-foreground">{step.description}</p>
+                      <div>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-3">Not Included</h3>
+                        <div className="space-y-2">
+                          {pkg.exclusions.map((item, index) => (
+                            <div key={index} className="flex items-start space-x-2">
+                              <XCircle className="h-4 w-4 text-red-500 mt-1 flex-shrink-0" />
+                              <span className="text-sm text-foreground">{item}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </TabsContent>
+                )}
 
-            <TabsContent value="inclusions" className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="font-bold text-xl mb-4">Inclusions</h3>
-                <ul className="space-y-2">
-                  {pkg.inclusions.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                {activeTab === 'itinerary' && (
+                    <div className="space-y-8">
+                        {pkg.itinerary.map((step, index) => (
+                        <div key={step.day} className="relative pl-16">
+                            <div className="absolute left-6 top-0 w-12 h-12 bg-primary/20 border-2 border-primary/50 text-primary rounded-full flex items-center justify-center font-bold text-lg">
+                                {step.day}
+                            </div>
+                            {index < pkg.itinerary.length - 1 && (
+                                <div className="absolute left-12 top-6 w-0.5 h-full bg-border -translate-x-1/2"></div>
+                            )}
+                            
+                            <div className="ml-4">
+                                <h4 className="font-bold text-xl mb-1 text-primary-foreground">{step.title}</h4>
+                                <p className="text-muted-foreground">{step.description}</p>
+                            </div>
+                        </div>
+                        ))}
+                    </div>
+                )}
+                {activeTab === 'gallery' && <PackageGallery images={[pkg.image, ...pkg.gallery]} title={pkg.title} />}
+                {activeTab === 'reviews' && <FirebaseReviews packageId={pkg.id} rating={pkg.rating} reviewCount={pkg.reviewCount} />}
               </div>
-              <div>
-                <h3 className="font-bold text-xl mb-4">Exclusions</h3>
-                <ul className="space-y-2">
-                  {pkg.exclusions.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <XCircle className="w-5 h-5 text-red-500 mt-1 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </TabsContent>
+            </div>
+          </div>
 
-            <TabsContent value="reviews" className="mt-6">
-               <FirebaseReviews packageId={pkg.id} rating={pkg.rating} reviewCount={pkg.reviewCount} />
-            </TabsContent>
-          </Tabs>
-        </section>
-      </Container>
-    </>
+          {/* Booking Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="bg-card rounded-xl shadow-sm p-6 sticky top-24">
+              <div className="text-center mb-6">
+                <div className="text-3xl font-bold text-foreground">
+                  ${pkg.price.toLocaleString()}
+                </div>
+                <div className="text-muted-foreground">per person</div>
+              </div>
+
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Duration:</span>
+                  <span className="font-medium">{pkg.duration}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Difficulty:</span>
+                  <span className="font-medium">{pkg.difficulty}</span>
+                </div>
+              </div>
+
+              <Button
+                onClick={() => openWizard(pkg)}
+                size="lg"
+                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mb-4"
+              >
+                Book This Trip
+              </Button>
+
+              <Button variant="outline" className="w-full">
+                Add to Wishlist
+              </Button>
+
+              <div className="mt-6 pt-6 border-t border-border">
+                <h4 className="font-semibold text-foreground mb-3">Available Dates</h4>
+                <div className="space-y-2">
+                  {pkg.availableDates.map((date) => (
+                    <div key={date} className="flex items-center justify-between text-sm">
+                      <span>{new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                      <span className="text-green-400 font-medium">Available</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

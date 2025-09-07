@@ -39,11 +39,13 @@ const processPackages = async (): Promise<Package[]> => {
     packagesData.map(async (pkg) => {
       const id = slugify(pkg.title);
       const { image, reason } = await getAiSelectedImage(pkg.gallery, pkg.title);
+      const reviews = allReviews.filter(review => review.packageId === id);
       return {
         ...pkg,
         id,
         image,
         aiReasoning: reason,
+        reviews,
       };
     })
   );

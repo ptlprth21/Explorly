@@ -1,6 +1,7 @@
 
 
 
+
 export interface ItineraryDay {
   day: number;
   title: string;
@@ -49,6 +50,7 @@ export interface Package {
   exclusions: string[];
   availableDates: string[];
   aiReasoning: string;
+  reviews: Review[];
 }
 
 export interface Continent {

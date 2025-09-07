@@ -1,66 +1,32 @@
-'use client';
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import useEmblaCarousel from 'embla-carousel-react'
-
 
 interface PackageGalleryProps {
-  mainImage: string;
-  gallery: string[];
+  images: string[];
   title: string;
 }
 
-const PackageGallery = ({ mainImage, gallery, title }: PackageGalleryProps) => {
-  const [isClient, setIsClient] = useState(false);
-  const [emblaRef] = useEmblaCarousel()
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const allImages = [mainImage, ...gallery.filter(img => img !== mainImage)].slice(0, 5); // Max 5 images
-
-  if (!isClient) {
-    // Render a static placeholder on the server
-    return (
-        <div className="relative aspect-video w-full rounded-lg overflow-hidden">
-            <Image
-                src={mainImage}
-                alt={`Main view for ${title}`}
-                fill
-                className="object-cover"
-                data-ai-hint="travel landscape"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-        </div>
-    );
-  }
-
+const PackageGallery = ({ images, title }: PackageGalleryProps) => {
   return (
-    <Carousel className="w-full">
-      <CarouselContent>
-        {allImages.map((img, index) => (
-          <CarouselItem key={index}>
-            <div className="relative aspect-video w-full rounded-lg overflow-hidden">
-              <Image
-                src={img}
-                alt={`View ${index + 1} for ${title}`}
-                fill
-                className="object-cover"
-                data-ai-hint="travel landscape"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
-              />
-            </div>
-          </CarouselItem>
+    <div className="space-y-6">
+      <h3 className="text-xl font-semibold text-foreground mb-4">Photo Gallery</h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {images.map((image, index) => (
+          <div key={index} className="relative group overflow-hidden rounded-xl aspect-video">
+            <Image
+              src={image}
+              alt={`${title} - Photo ${index + 1}`}
+              fill
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              data-ai-hint="travel landscape"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+          </div>
         ))}
-      </CarouselContent>
-      <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10 hidden sm:flex" />
-      <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10 hidden sm:flex" />
-    </Carousel>
-  );
+      </div>
+    </div>
+  )
 };
 
 export default PackageGallery;
