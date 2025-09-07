@@ -18,7 +18,7 @@ import { AuthProvider } from '@/context/AuthContext';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 // export const metadata: Metadata = {
-//   title: 'RoamReady - Your Adventure Awaits',
+//   title: 'Explorly - Your Adventure Awaits',
 //   description: 'A modern travel booking platform for unforgettable journeys.',
 //   icons: {
 //     icon: '/favicon.ico',
@@ -33,7 +33,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="flex-1 flex flex-col">{children}</main>
       <Footer />
-      <FloatingBookingPanel onOpenWizard={() => openWizard(null)} />
+      <FloatingBookingPanel />
       {isWizardOpen && (
         <BookingWizard
           selectedPackage={selectedPackage}
@@ -53,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
        <head>
-        <title>RoamReady - Your Adventure Awaits</title>
+        <title>Explorly - Your Adventure Awaits</title>
         <meta name="description" content="A modern travel booking platform for unforgettable journeys." />
         <link rel="icon" href="/favicon.ico" />
       </head>

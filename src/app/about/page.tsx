@@ -36,7 +36,7 @@ export default function AboutPage() {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-          <h1 className="text-5xl font-headline font-bold text-white">About RoamReady</h1>
+          <h1 className="text-5xl font-headline font-bold text-white">About Explorly</h1>
         </div>
       </section>
 

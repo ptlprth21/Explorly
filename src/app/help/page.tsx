@@ -31,7 +31,7 @@ export default function HelpCenterPage() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">Send us an email and our team will get back to you shortly.</p>
-              <a href="mailto:support@roamready.com" className="text-primary hover:underline">support@roamready.com</a>
+              <a href="mailto:support@explorly.eu" className="text-primary hover:underline">support@explorly.eu</a>
             </CardContent>
           </Card>
           <Card>

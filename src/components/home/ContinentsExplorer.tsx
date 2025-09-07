@@ -38,20 +38,20 @@ export default function ContinentsExplorer() {
   };
 
   return (
-    <section id="continents" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-neutral-950 to-black">
+    <section id="continents" className="py-16 sm:py-20 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Compass className="h-6 w-6 sm:h-8 sm:w-8 text-teal-400" />
-            <span className="text-teal-300 font-medium text-sm sm:text-base uppercase tracking-wider">Explore by Continent</span>
+            <Compass className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
+            <span className="text-primary font-medium text-sm sm:text-base uppercase tracking-wider">Explore by Continent</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6 px-4">
             Choose Your
-            <span className="block bg-gradient-to-r from-teal-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="block text-primary">
               Adventure
             </span>
           </h2>
-          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
             From ancient civilizations to pristine wilderness, discover your perfect destination
           </p>
         </div>
@@ -64,7 +64,7 @@ export default function ContinentsExplorer() {
               onMouseEnter={() => setHoveredContinent(continent.name)}
               onMouseLeave={() => setHoveredContinent(null)}
               onClick={() => handleContinentClick(continent.name)}
-              className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl h-64 sm:h-72 lg:h-80 transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-400/20"
+              className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl h-64 sm:h-72 lg:h-80 transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20"
             >
               {/* Background Image */}
               <div className="absolute inset-0">
@@ -78,9 +78,6 @@ export default function ContinentsExplorer() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
               </div>
 
-              {/* Glass Card Overlay */}
-              <div className="absolute inset-0 bg-white/5 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
               {/* Content */}
               <div className="relative h-full flex flex-col justify-between p-4 sm:p-6 lg:p-8 text-white">
                 {/* Top Section */}
@@ -90,7 +87,7 @@ export default function ContinentsExplorer() {
 
                 {/* Bottom Section */}
                 <div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 group-hover:text-teal-400 transition-colors">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 group-hover:text-primary transition-colors">
                     {continent.name}
                   </h3>
                   <p className="text-sm sm:text-base text-gray-300 mb-4 leading-relaxed">
@@ -106,31 +103,31 @@ export default function ContinentsExplorer() {
                     <div className={`flex items-center space-x-2 transition-all duration-300 ${
                       hoveredContinent === continent.name ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
                     }`}>
-                      <span className="text-sm font-semibold text-teal-300">Explore</span>
-                      <ArrowRight className="h-4 w-4 text-teal-400" />
+                      <span className="text-sm font-semibold text-primary">Explore</span>
+                      <ArrowRight className="h-4 w-4 text-primary" />
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Hover Effect Border */}
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-teal-400/50 rounded-2xl sm:rounded-3xl transition-all duration-300 pointer-events-none"></div>
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 rounded-2xl sm:rounded-3xl transition-all duration-300 pointer-events-none"></div>
             </div>
           ))}
         </div>
 
         {/* Interactive Map Teaser */}
         <div className="mt-16 sm:mt-20 text-center">
-          <div className="bg-gradient-to-r from-teal-900/20 to-blue-900/20 backdrop-blur-sm border border-teal-400/20 rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto">
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+          <div className="bg-card/50 backdrop-blur-sm border border-border rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Explore All Destinations
             </h3>
-            <p className="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-6 sm:mb-8">
               Click the button to see all our curated travel experiences.
             </p>
             <button 
               onClick={() => router.push('/destinations')}
-              className="bg-teal-500 hover:bg-teal-400 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold transition-colors text-sm sm:text-base"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold transition-colors text-sm sm:text-base"
             >
               <span>Explore All Destinations</span>
             </button>

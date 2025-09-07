@@ -15,7 +15,7 @@ export default async function Home() {
   const spotlightCountry = countries.find(c => c.name === 'Italy');
 
   return (
-    <div className="bg-black">
+    <div>
       <Hero />
       <MusicPlayerPackages packages={packages} />
       {spotlightCountry && <CountrySpotlight country={spotlightCountry} />}

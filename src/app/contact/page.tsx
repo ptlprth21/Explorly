@@ -98,7 +98,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Email</h3>
-                  <p className="text-muted-foreground">support@roamready.com</p>
+                  <p className="text-muted-foreground">support@explorly.eu</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">

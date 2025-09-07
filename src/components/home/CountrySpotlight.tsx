@@ -18,18 +18,18 @@ export default function CountrySpotlight({ country }: CountrySpotlightProps) {
   if (!country) return null;
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-neutral-900 to-black">
+    <section className="py-16 sm:py-20 lg:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <span className="text-2xl sm:text-3xl">{country.flag}</span>
-            <span className="text-purple-400 font-medium text-sm uppercase tracking-wider">This Month's Featured Country</span>
+            <span className="text-accent font-medium text-sm uppercase tracking-wider">This Month's Featured Country</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
             Discover {country.name}
           </h2>
-          <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             {country.culture}
           </p>
         </div>
@@ -50,15 +50,15 @@ export default function CountrySpotlight({ country }: CountrySpotlightProps) {
               <p className="text-base sm:text-lg text-gray-200 mb-4">{country.tagline}</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
               <div>
-                  <div className="text-teal-400 font-semibold">Best Time</div>
+                  <div className="text-primary font-semibold">Best Time</div>
                   <div>{country.bestTime}</div>
               </div>
               <div>
-                  <div className="text-teal-400 font-semibold">Currency</div>
+                  <div className="text-primary font-semibold">Currency</div>
                   <div>{country.currency}</div>
               </div>
               <div className="hidden sm:block">
-                  <div className="text-teal-400 font-semibold">Language</div>
+                  <div className="text-primary font-semibold">Language</div>
                   <div>{country.language}</div>
               </div>
               </div>
@@ -66,7 +66,7 @@ export default function CountrySpotlight({ country }: CountrySpotlightProps) {
 
           {/* Explore Button */}
           <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-8">
-              <Button asChild size="lg" className="bg-teal-500/90 hover:bg-teal-400 text-white font-semibold transition-colors">
+              <Button asChild size="lg" className="bg-primary/90 hover:bg-primary/80 text-primary-foreground font-semibold transition-colors">
                   <Link href={`/country/${slugify(country.name)}`}>
                       <span>Explore {country.name}</span>
                       <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
@@ -77,7 +77,7 @@ export default function CountrySpotlight({ country }: CountrySpotlightProps) {
 
         {/* See All Tours CTA */}
         <div className="text-center">
-            <Button asChild size="lg" className="bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-400 hover:to-blue-400 text-white font-semibold transition-all duration-300 transform hover:scale-105 rounded-2xl px-6 sm:px-8 lg:px-12 py-3 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg">
+            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-300 transform hover:scale-105 rounded-2xl px-6 sm:px-8 lg:px-12 py-3 sm:py-4 lg:py-5 text-sm sm:text-base lg:text-lg">
                 <Link href={`/country/${slugify(country.name)}`}>
                     <span>See All Tours in {country.name}</span>
                     <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />

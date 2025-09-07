@@ -13,7 +13,7 @@ import { useBookingWizard } from '@/context/BookingWizardContext';
 export default function FloatingBookingPanel() {
   const { openWizard } = useBookingWizard();
   const [packages, setPackages] = useState<Package[]>([]);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true);
   const [selectedPackageId, setSelectedPackageId] = useState<string>('');
 
   useEffect(() => {
@@ -60,16 +60,7 @@ export default function FloatingBookingPanel() {
               </div>
               
               <div className="space-y-3">
-                <Input 
-                  placeholder="Your name" 
-                  className="bg-neutral-800/60 border-neutral-700"
-                />
-                <Input 
-                  placeholder="Email" 
-                  type="email"
-                  className="bg-neutral-800/60 border-neutral-700"
-                />
-                <Select onValueChange={setSelectedPackageId}>
+                <Select onValueChange={setSelectedPackageId} value={selectedPackageId}>
                   <SelectTrigger className="bg-neutral-800/60 border-neutral-700">
                     <SelectValue placeholder="Choose destination" />
                   </SelectTrigger>
@@ -108,9 +99,6 @@ export default function FloatingBookingPanel() {
                   Plan My Trip
                 </Button>
                 
-                <Button variant="link" className="w-full text-xs text-muted-foreground">
-                  Ask a question instead
-                </Button>
               </div>
             </>
           )}

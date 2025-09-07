@@ -86,10 +86,10 @@ export default function Hero() {
 
   if (!stats) {
     return (
-        <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+        <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
             <div className="text-center">
-                <div className="w-16 h-16 border-4 border-teal-400/30 border-t-teal-400 rounded-full animate-spin mb-4"></div>
-                <p className="text-white text-lg">Loading Your Adventure...</p>
+                <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
+                <p className="text-muted-foreground text-lg">Loading Your Adventure...</p>
             </div>
         </div>
     );
@@ -106,15 +106,7 @@ export default function Hero() {
           className="object-cover"
           data-ai-hint="epic landscape"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/50 via-neutral-900/70 to-purple-900/50"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(45,212,191,0.15),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-        
-        {/* Floating Particles */}
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-teal-400/60 rounded-full animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-blue-400/60 rounded-full animate-ping"></div>
-        <div className="absolute bottom-1/3 left-1/5 w-1.5 h-1.5 bg-purple-400/60 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-2 h-2 bg-teal-300/60 rounded-full animate-ping"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background"></div>
         
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -129,14 +121,14 @@ export default function Hero() {
       <div className="relative z-10 text-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         
         {/* Headlines */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight mb-4 sm:mb-6 bg-gradient-to-b from-white via-gray-100 to-gray-300 bg-clip-text text-transparent px-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight mb-4 sm:mb-6 text-foreground px-4">
           Explore the World,
-          <span className="block bg-gradient-to-r from-teal-400 to-blue-400 bg-clip-text text-transparent">
+          <span className="block text-primary">
             One Trip at a Time
           </span>
         </h1>
         
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
           {animatedStats.countries}+ countries · {animatedStats.packages}+ curated trips · endless memories
         </p>
 
@@ -145,29 +137,29 @@ export default function Hero() {
 
         {/* Animated Global Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4 mt-12">
-          <div className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/10">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-400 mb-1">
+          <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
               🌍 {animatedStats.countries}+
             </div>
-            <div className="text-xs sm:text-sm text-gray-400">Countries</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Countries</div>
           </div>
-          <div className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/10">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-400 mb-1">
+          <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
               🏞️ {animatedStats.packages}+
             </div>
-            <div className="text-xs sm:text-sm text-gray-400">Packages</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Packages</div>
           </div>
-          <div className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/10">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-400 mb-1">
+          <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
               ❤️ {(animatedStats.travelers / 1000).toFixed(0)}K
             </div>
-            <div className="text-xs sm:text-sm text-gray-400">Happy Travelers</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Happy Travelers</div>
           </div>
-          <div className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/10">
-            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-400 mb-1">
+          <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
               ⭐ {(animatedStats.rating / 10).toFixed(1)}
             </div>
-            <div className="text-xs sm:text-sm text-gray-400">Average Rating</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Average Rating</div>
           </div>
         </div>
 

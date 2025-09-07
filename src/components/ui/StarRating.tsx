@@ -22,19 +22,19 @@ const StarRating = ({
       {[...Array(totalStars)].map((_, index) => {
         const starNumber = index + 1;
         if (starNumber <= fullStars) {
-          return <Star key={index} fill="currentColor" className="text-accent" style={{ width: size, height: size }} />;
+          return <Star key={index} fill="currentColor" className="text-yellow-400" style={{ width: size, height: size }} />;
         }
         if (starNumber === fullStars + 1 && partialStarFill > 0) {
             return (
                 <div key={index} className="relative" style={{ width: size, height: size }}>
-                    <Star className="text-accent/30" style={{ width: size, height: size }} />
+                    <Star className="text-yellow-400/30" style={{ width: size, height: size }} />
                     <div className="absolute top-0 left-0 h-full overflow-hidden" style={{ width: `${partialStarFill}%` }}>
-                        <Star fill="currentColor" className="text-accent" style={{ width: size, height: size }} />
+                        <Star fill="currentColor" className="text-yellow-400" style={{ width: size, height: size }} />
                     </div>
                 </div>
             )
         }
-        return <Star key={index} className="text-accent/30" style={{ width: size, height: size }} />;
+        return <Star key={index} className="text-yellow-400/30" style={{ width: size, height: size }} />;
       })}
     </div>
   );

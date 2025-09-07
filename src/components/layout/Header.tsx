@@ -56,7 +56,7 @@ const Header = () => {
         <div className="relative flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <PlaneTakeoff className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold tracking-tight text-foreground">RoamReady</span>
+            <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
           </Link>
           <div className="hidden items-center space-x-4 lg:flex">
             <nav className="flex items-center space-x-6 text-sm font-medium">

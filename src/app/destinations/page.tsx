@@ -6,6 +6,7 @@ import type { Package } from '@/types';
 import { getPackages } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import Container from '@/components/ui/Container';
 
 export default function DestinationsPage() {
   const router = useRouter();
@@ -47,11 +48,11 @@ export default function DestinationsPage() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-black to-neutral-900" id="destinations">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20" id="destinations">
+      <Container>
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            DISCOVER THE WORLD
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Discover the World
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Explore our handpicked destinations and embark on extraordinary journeys
@@ -65,7 +66,7 @@ export default function DestinationsPage() {
             className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
               selectedDestination === ''
                 ? 'bg-primary text-primary-foreground'
-                : 'bg-white/10 text-white hover:bg-white/20'
+                : 'bg-card hover:bg-muted'
             }`}
           >
             All Destinations
@@ -77,7 +78,7 @@ export default function DestinationsPage() {
               className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 selectedDestination === destination
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-white/10 text-white hover:bg-white/20'
+                  : 'bg-card hover:bg-muted'
               }`}
             >
               {destination}
@@ -86,7 +87,7 @@ export default function DestinationsPage() {
         </div>
 
         <PackageGrid packages={filteredPackages} isLoading={isLoading} />
-      </div>
+      </Container>
     </section>
   );
 }

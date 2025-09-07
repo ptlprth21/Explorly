@@ -15,6 +15,7 @@ import StarRating from '@/components/ui/StarRating';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
 import { useBookingWizard } from '@/context/BookingWizardContext';
+import { Card, CardContent } from '@/components/ui/card';
 
 
 export default function CountryDetailPage({ params }: { params: { name: string } }) {
@@ -91,8 +92,8 @@ export default function CountryDetailPage({ params }: { params: { name: string }
 
   if (isLoading || !country) {
     return (
-      <div className="min-h-screen bg-neutral-950 text-neutral-100 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-teal-400"></div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -100,22 +101,23 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   const currentPackage = filteredPackages[currentPackageIndex];
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100">
+    <div className="min-h-screen">
+      <Container>
       {/* Header with Breadcrumbs */}
-      <div className="sticky top-0 z-40 backdrop-blur-md bg-neutral-900/80 border-b border-neutral-800/50">
+      <div className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border">
         <Container className="py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-400">
-              <Link href="/" className="hover:text-teal-400 transition-colors">Home</Link>
-              <span>→</span>
-              <Link href="/destinations" className="hover:text-teal-400 transition-colors cursor-pointer">Destinations</Link>
-              <span>→</span>
-              <span className="text-white">{country.name}</span>
+            <div className="flex items-center space-x-2 text-xs sm:text-sm text-muted-foreground">
+              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+              <span>/</span>
+              <Link href="/destinations" className="hover:text-primary transition-colors cursor-pointer">Destinations</Link>
+              <span>/</span>
+              <span className="text-foreground">{country.name}</span>
             </div>
             <Button
               variant="ghost"
               onClick={() => router.back()}
-              className="flex items-center space-x-1 sm:space-x-2 text-gray-400 hover:text-teal-400 transition-colors text-sm"
+              className="flex items-center space-x-1 sm:space-x-2 text-muted-foreground hover:text-primary transition-colors text-sm"
             >
               <ArrowLeft className="h-5 w-5" />
               <span className="hidden sm:inline">Back</span>
@@ -125,7 +127,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
       </div>
 
       {/* Cinematic Hero */}
-      <section className="relative h-[70vh] sm:h-[80vh] lg:h-screen overflow-hidden flex items-center justify-center">
+      <section className="relative h-[60vh] overflow-hidden flex items-center justify-center my-8 rounded-xl">
         <div className="absolute inset-0">
           <Image
             src={country.heroImage}
@@ -134,22 +136,22 @@ export default function CountryDetailPage({ params }: { params: { name: string }
             className="w-full h-full object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-neutral-950/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         </div>
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-center space-x-3 mb-6">
             <span className="text-4xl sm:text-5xl lg:text-6xl animate-pulse">{country.flag}</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-extrabold leading-tight mb-4 bg-gradient-to-b from-white to-neutral-300 bg-clip-text text-transparent">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 text-white">
             {country.name.toUpperCase()}
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-neutral-200 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
             {country.tagline}
           </p>
           <a 
             href="#packages" 
-            className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-400 hover:to-blue-400 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
+            className="inline-flex items-center space-x-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 text-sm sm:text-base"
           >
             <span>Discover Packages</span>
             <Play className="h-5 w-5" />
@@ -159,31 +161,31 @@ export default function CountryDetailPage({ params }: { params: { name: string }
 
       {/* Filters Section */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-neutral-900/40 backdrop-blur-sm border border-neutral-800/50 rounded-2xl p-6">
+        <Card className="bg-card/80 backdrop-blur-sm border border-border p-6">
           <div className="flex items-center space-x-2 mb-6">
-            <Filter className="h-5 w-5 text-teal-400" />
+            <Filter className="h-5 w-5 text-primary" />
             <h3 className="text-lg font-semibold">Filter & Sort Packages</h3>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
-              <Label className="block text-sm font-medium text-neutral-300 mb-2">Price Range</Label>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">Price Range</label>
               <Slider 
                 value={priceFilter} 
                 onValueChange={setPriceFilter} 
                 max={10000} 
                 step={100} 
               />
-              <div className="flex justify-between text-xs text-neutral-400 mt-2">
+              <div className="flex justify-between text-xs text-muted-foreground mt-2">
                 <span>${priceFilter[0]}</span>
                 <span>${priceFilter[1]}</span>
               </div>
             </div>
             
             <div>
-              <Label className="block text-sm font-medium text-neutral-300 mb-2">Duration</Label>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">Duration</label>
               <Select value={durationFilter} onValueChange={setDurationFilter}>
-                <SelectTrigger className="w-full bg-neutral-800/60 border-neutral-700 text-sm"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-full text-sm"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Durations</SelectItem>
                   <SelectItem value="short">Short (1-5 days)</SelectItem>
@@ -194,9 +196,9 @@ export default function CountryDetailPage({ params }: { params: { name: string }
             </div>
             
             <div>
-              <Label className="block text-sm font-medium text-neutral-300 mb-2">Difficulty</Label>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">Difficulty</label>
               <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-                <SelectTrigger className="w-full bg-neutral-800/60 border-neutral-700 text-sm"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-full text-sm"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Levels</SelectItem>
                   <SelectItem value="Easy">Easy</SelectItem>
@@ -207,9 +209,9 @@ export default function CountryDetailPage({ params }: { params: { name: string }
             </div>
             
             <div>
-              <Label className="block text-sm font-medium text-neutral-300 mb-2">Sort By</Label>
+              <label className="block text-sm font-medium text-muted-foreground mb-2">Sort By</label>
                <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-full bg-neutral-800/60 border-neutral-700 text-sm"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="w-full text-sm"><SelectValue /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="rating">Rating</SelectItem>
                   <SelectItem value="price-asc">Price: Low to High</SelectItem>
@@ -219,23 +221,23 @@ export default function CountryDetailPage({ params }: { params: { name: string }
               </Select>
             </div>
           </div>
-        </div>
+        </Card>
       </section>
 
-      {/* Music Player Style Package Cards */}
+      {/* Package Cards */}
       <section id="packages" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             Featured Experiences
           </h2>
-          <p className="text-lg sm:text-xl text-neutral-400">
+          <p className="text-lg sm:text-xl text-muted-foreground">
             Handpicked adventures in {country.name}
           </p>
         </div>
 
         {filteredPackages.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-neutral-400 text-lg">No packages match your current filters.</p>
+            <p className="text-muted-foreground text-lg">No packages match your current filters.</p>
             <Button 
               onClick={() => {
                 setPriceFilter([0, 10000]);
@@ -243,7 +245,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                 setDifficultyFilter('all');
               }}
               variant="default"
-              className="mt-4 bg-teal-500 hover:bg-teal-400 text-white"
+              className="mt-4"
             >
               Reset Filters
             </Button>
@@ -251,8 +253,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
         ) : (
           <div className="relative">
             <div className="w-full max-w-3xl mx-auto">
-              <div 
-                className="group relative bg-neutral-900/60 backdrop-blur-xl border border-neutral-800/50 rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-teal-400/20 transition-all duration-500 hover:scale-[1.02]">
+              <Card className="group relative overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-xl">
                 {currentPackage && (
                   <>
                   <div className="relative h-48 sm:h-64 lg:h-80 overflow-hidden">
@@ -267,7 +268,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <Button 
                         onClick={() => openWizard(currentPackage)}
-                        className="w-16 sm:w-20 h-16 sm:h-20 bg-teal-500/90 backdrop-blur-sm rounded-full text-white hover:bg-teal-400 transition-colors transform hover:scale-110"
+                        className="w-16 sm:w-20 h-16 sm:h-20 bg-primary/90 backdrop-blur-sm rounded-full text-white hover:bg-primary/80 transition-colors transform hover:scale-110"
                         size="icon"
                       >
                         <Play className="h-6 sm:h-8 w-6 sm:w-8 ml-1" />
@@ -277,10 +278,10 @@ export default function CountryDetailPage({ params }: { params: { name: string }
 
                   <div className="p-4 sm:p-6 lg:p-8">
                     <div className="mb-6">
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 group-hover:text-teal-300 transition-colors">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                         {currentPackage.title}
                       </h3>
-                      <div className="flex items-center space-x-2 text-neutral-400 text-sm sm:text-base">
+                      <div className="flex items-center space-x-2 text-muted-foreground text-sm sm:text-base">
                         <span className="text-base sm:text-lg">{country.flag}</span>
                         <span>{currentPackage.destination}</span>
                         <span>•</span>
@@ -289,34 +290,34 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                     </div>
 
                     <div className="mb-6">
-                      <div className="flex justify-between text-xs sm:text-sm text-neutral-400 mb-2">
+                      <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-2">
                         <span>Rating</span>
                          <StarRating rating={currentPackage.rating} />
                       </div>
-                      <div className="w-full bg-neutral-800 rounded-full h-2">
-                        <div className="bg-gradient-to-r from-teal-400 to-blue-400 h-2 rounded-full" style={{ width: `${(currentPackage.rating / 5) * 100}%` }}></div>
+                      <div className="w-full bg-muted rounded-full h-2">
+                        <div className="bg-primary h-2 rounded-full" style={{ width: `${(currentPackage.rating / 5) * 100}%` }}></div>
                       </div>
                     </div>
 
                     <div className="flex items-center justify-between flex-wrap gap-4">
                       <div className="flex items-center space-x-4">
-                        <Button variant="ghost" size="icon" className="text-neutral-400 hover:text-white">
+                        <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
                           <Heart className="h-5 w-5" />
                         </Button>
                         <div className="flex items-center space-x-1 text-sm">
                           <Star className="h-4 w-4 text-yellow-400 fill-current" />
                           <span className="font-semibold">{currentPackage.rating}</span>
-                          <span className="text-neutral-400">({currentPackage.reviewCount})</span>
+                          <span className="text-muted-foreground">({currentPackage.reviewCount})</span>
                         </div>
                       </div>
                       
                       <div className="flex items-center space-x-3 sm:space-x-4">
                         <div className="text-right">
-                          <div className="text-xl sm:text-2xl font-bold text-teal-400">${currentPackage.price.toLocaleString()}</div>
-                          <div className="text-xs sm:text-sm text-neutral-400">per person</div>
+                          <div className="text-xl sm:text-2xl font-bold text-primary">${currentPackage.price.toLocaleString()}</div>
+                          <div className="text-xs sm:text-sm text-muted-foreground">per person</div>
                         </div>
                         <Link href={`/packages/${currentPackage.id}`}>
-                          <Button className="bg-teal-500 hover:bg-teal-400 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-semibold transition-colors text-sm sm:text-base">
+                          <Button className="font-semibold transition-colors text-sm sm:text-base">
                             View Details
                           </Button>
                         </Link>
@@ -325,28 +326,28 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                   </div>
                   </>
                 )}
-              </div>
+              </Card>
             </div>
             {filteredPackages.length > 1 && (
               <>
                 <Button
                   onClick={prevPackage}
                   size="icon"
-                  variant="ghost"
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-black/80"
+                  variant="outline"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full"
                 >
                   <ChevronLeft className="h-5 sm:h-6 w-5 sm:w-6" />
                 </Button>
                 <Button
                   onClick={nextPackage}
                   size="icon"
-                  variant="ghost"
-                  className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-black/80"
+                  variant="outline"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full"
                 >
                   <ChevronRight className="h-5 sm:h-6 w-5 sm:w-6" />
                 </Button>
                 <div className="text-center mt-6">
-                  <span className="text-neutral-400 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     {String(currentPackageIndex + 1).padStart(2, '0')} / {String(filteredPackages.length).padStart(2, '0')}
                   </span>
                 </div>
@@ -357,34 +358,34 @@ export default function CountryDetailPage({ params }: { params: { name: string }
 
         {/* Key Highlights */}
         <div className="mt-12 sm:mt-16 text-center">
-          <div className="bg-neutral-900/40 backdrop-blur-sm border border-neutral-800/50 rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto">
+          <Card className="p-6 sm:p-8 max-w-4xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               <div className="flex flex-col items-center space-y-2">
-                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-teal-500/20 rounded-full flex items-center justify-center">
-                  <Check className="h-5 sm:h-6 w-5 sm:w-6 text-teal-400" />
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Check className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
                 </div>
-                <span className="text-xs sm:text-sm text-neutral-300 text-center">Local Guide Included</span>
+                <span className="text-xs sm:text-sm text-muted-foreground text-center">Local Guide Included</span>
               </div>
               <div className="flex flex-col items-center space-y-2">
-                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-teal-500/20 rounded-full flex items-center justify-center">
-                  <MapPin className="h-5 sm:h-6 w-5 sm:w-6 text-teal-400" />
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <MapPin className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
                 </div>
-                <span className="text-xs sm:text-sm text-neutral-300 text-center">Hotel Stay</span>
+                <span className="text-xs sm:text-sm text-muted-foreground text-center">Hotel Stay</span>
               </div>
               <div className="flex flex-col items-center space-y-2">
-                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-teal-500/20 rounded-full flex items-center justify-center">
-                  <Users className="h-5 sm:h-6 w-5 sm:w-6 text-teal-400" />
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Users className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
                 </div>
-                <span className="text-xs sm:text-sm text-neutral-300 text-center">Airport Pickup</span>
+                <span className="text-xs sm:text-sm text-muted-foreground text-center">Airport Pickup</span>
               </div>
               <div className="flex flex-col items-center space-y-2">
-                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-teal-500/20 rounded-full flex items-center justify-center">
-                  <Calendar className="h-5 sm:h-6 w-5 sm:w-6 text-teal-400" />
+                <div className="w-10 sm:w-12 h-10 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Calendar className="h-5 sm:h-6 w-5 sm:w-6 text-primary" />
                 </div>
-                <span className="text-xs sm:text-sm text-neutral-300 text-center">Flexible Dates</span>
+                <span className="text-xs sm:text-sm text-muted-foreground text-center">Flexible Dates</span>
               </div>
             </div>
-          </div>
+          </Card>
         </div>
       </section>
 
@@ -395,21 +396,21 @@ export default function CountryDetailPage({ params }: { params: { name: string }
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
               Open the world for yourself
             </h2>
-            <p className="text-lg sm:text-xl text-neutral-300 mb-6 sm:mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
               From sunrise hikes to quiet lakeside cabins, our trips blend nature, culture, and comfort—so you can explore more and stress less.
             </p>
             <div className="grid grid-cols-3 gap-4 sm:gap-6 text-center">
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-teal-400 mb-1">{allCountryPackages.length}+</div>
-                <div className="text-xs sm:text-sm text-neutral-400">Experiences</div>
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">{allCountryPackages.length}+</div>
+                <div className="text-xs sm:text-sm text-muted-foreground">Experiences</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-teal-400 mb-1">4.8+</div>
-                <div className="text-xs sm:text-sm text-neutral-400">Avg. Rating</div>
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">4.8+</div>
+                <div className="text-xs sm:text-sm text-muted-foreground">Avg. Rating</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-teal-400 mb-1">100%</div>
-                <div className="text-xs sm:text-sm text-neutral-400">Satisfaction</div>
+                <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">100%</div>
+                <div className="text-xs sm:text-sm text-muted-foreground">Satisfaction</div>
               </div>
             </div>
           </div>
@@ -422,7 +423,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
               className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" 
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300"></div>
-            <button className="absolute inset-0 m-auto h-12 sm:h-16 w-12 sm:w-16 rounded-full bg-white/90 hover:bg-white text-neutral-900 font-bold flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <button className="absolute inset-0 m-auto h-12 sm:h-16 w-12 sm:w-16 rounded-full bg-white/90 hover:bg-white text-foreground font-bold flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <Play className="h-5 sm:h-6 w-5 sm:w-6 ml-1" />
             </button>
           </div>
@@ -433,7 +434,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Gallery</h2>
-          <p className="text-lg sm:text-xl text-neutral-400">Captured moments from {country.name}</p>
+          <p className="text-lg sm:text-xl text-muted-foreground">Captured moments from {country.name}</p>
         </div>
 
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:mb-4">
@@ -454,17 +455,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
         </div>
       </section>
 
-      {/* Mobile Booking CTA */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-neutral-900/95 backdrop-blur-xl border-t border-neutral-800/50 p-3 sm:p-4">
-        <Button 
-          onClick={() => currentPackage && openWizard(currentPackage)}
-          disabled={!currentPackage}
-          className="w-full bg-teal-500 hover:bg-teal-400 text-white py-3 sm:py-4 rounded-xl font-semibold transition-colors flex items-center justify-center space-x-2 text-sm sm:text-base"
-        >
-          <Play className="h-5 w-5" />
-          <span>Book This Experience</span>
-        </Button>
-      </div>
+      </Container>
     </div>
   );
 }
