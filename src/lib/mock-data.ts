@@ -35,103 +35,6 @@ export const countries: Country[] = [
 
 export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
   {
-    title: 'Desert Calm: 4 Days of Culture & Escape in Abu Dhabi',
-    destination: 'Abu Dhabi',
-    country: 'UAE',
-    continent: 'Asia',
-    duration: '4',
-    price: 870,
-    gallery: [
-        'https://picsum.photos/seed/uae-grand-mosque/1200/800',
-        'https://picsum.photos/seed/uae-louvre-museum/1200/800',
-        'https://picsum.photos/seed/uae-desert-adventure/1200/800',
-        'https://picsum.photos/seed/uae-mangrove-kayak/1200/800',
-    ],
-    rating: 4.8,
-    reviewCount: 175,
-    type: 'Cultural',
-    theme: 'cultural',
-    difficulty: 'Easy',
-    highlights: ['Sheikh Zayed Grand Mosque', 'Louvre Abu Dhabi', 'Desert Safari Adventure'],
-    description: 'Where golden sands meet timeless stories. Experience the cultural treasures and serene desert landscapes of Abu Dhabi.',
-    itinerary: [
-      { day: 1, title: 'Arrival & Coastal Calm', description: 'Private pickup from Abu Dhabi International Airport and check-in at your hotel. Enjoy a relaxing evening.' },
-      { day: 2, title: 'Spiritual Icons & Cultural Treasures', description: 'Guided visits to the Sheikh Zayed Grand Mosque, BAPS Hindu Mandir, and the Louvre Abu Dhabi.' },
-      { day: 3, title: 'Desert Adventure & Arabian Night', description: 'Enjoy a free morning before an afternoon desert safari with dune bashing, camel rides, a BBQ dinner, and cultural show.' },
-      { day: 4, title: 'Nature & Farewell', description: 'A guided kayaking tour in Jubail Mangrove Park, last-minute shopping, and a private transfer to the airport for your departure.' },
-    ],
-    inclusions: [
-      '3 nights hotel accommodation (choice of 4★ or 5★)',
-      'Daily breakfast',
-      'Private airport transfers (arrival & departure)',
-      'All scheduled transfers to activities',
-      'Entry tickets to Sheikh Zayed Grand Mosque, BAPS Hindu Mandir, and Louvre Abu Dhabi',
-      'Desert Safari with BBQ dinner',
-      'Jubail Mangrove Park kayaking experience',
-      'English-speaking guide for key cultural visits',
-      '24/7 on-ground support',
-    ],
-    exclusions: [
-      'Flights to/from Abu Dhabi',
-      'Travel insurance',
-      'Meals other than breakfast and desert safari dinner',
-      'Optional activities',
-      'Personal expenses',
-      'Visa fees (if applicable)',
-    ],
-    availableDates: ['2025-11-10', '2025-12-05', '2026-01-20', '2026-02-15'],
-  },
-  {
-    title: 'Sands & Skylines: 7 Days Across Abu Dhabi & Dubai',
-    destination: 'Abu Dhabi & Dubai',
-    country: 'UAE',
-    continent: 'Asia',
-    duration: '7',
-    price: 1390,
-    gallery: [
-      'https://picsum.photos/seed/dubai-burj-khalifa-view/1200/800',
-      'https://picsum.photos/seed/uae-grand-mosque-interior/1200/800',
-      'https://picsum.photos/seed/dubai-marina-night/1200/800',
-      'https://picsum.photos/seed/dubai-souk-market/1200/800',
-      'https://picsum.photos/seed/uae-desert-camel-ride/1200/800',
-    ],
-    rating: 4.9,
-    reviewCount: 210,
-    type: 'Cultural',
-    theme: 'city',
-    difficulty: 'Easy',
-    highlights: ['Sheikh Zayed Grand Mosque', 'Louvre Abu Dhabi', 'Burj Khalifa', 'Desert Safari'],
-    description: 'From sacred sands to shimmering towers, experience the best of the UAE in one epic journey.',
-    itinerary: [
-      { day: 1, title: 'Arrival & Coastal Welcome in Abu Dhabi', description: 'Private pickup from Abu Dhabi International Airport (AUH) and check-in at your hotel. Optional sunset stroll along the Corniche.' },
-      { day: 2, title: 'Abu Dhabi: Culture, Art & Sacred Sites', description: 'Visit the Sheikh Zayed Grand Mosque and the BAPS Hindu Mandir, followed by an exploration of the Louvre Abu Dhabi.' },
-      { day: 3, title: 'Abu Dhabi: Desert Adventure', description: 'Free morning for relaxation, followed by an evening Desert Safari with dune bashing, camel rides, and a BBQ dinner under the stars.' },
-      { day: 4, title: 'Dubai Arrival & Marina Vibes', description: 'Private transfer to Dubai. Check-in to your hotel and explore the stunning Dubai Marina or JBR Walk in the evening.' },
-      { day: 5, title: 'Icons of Dubai', description: 'Ascend the Burj Khalifa for breathtaking views, then explore the massive Dubai Mall and watch the spectacular Fountain Show.' },
-      { day: 6, title: 'Dubai: Desert or Water Thrill (Choose Your Day)', description: 'Choose between another thrilling desert safari or a fun-filled day at Aquaventure Waterpark or IMG Worlds of Adventure.' },
-      { day: 7, title: 'Dubai: Souks, Culture & Departure', description: 'Explore Old Dubai with a tour of Al Fahidi Historical District, an abra boat ride on the Creek, and a visit to the Gold & Spice Souks before your flight from DXB.' },
-    ],
-    inclusions: [
-      '6 nights hotel stay (3 in Abu Dhabi, 3 in Dubai) - 4★ category',
-      'Daily breakfast',
-      'Private airport transfers (AUH arrival, DXB departure)',
-      'Private intercity transfer from Abu Dhabi to Dubai',
-      'All scheduled transportation to attractions',
-      'Tickets to: Sheikh Zayed Grand Mosque, BAPS Hindu Temple, Louvre Abu Dhabi, Desert Safari (with dinner), Burj Khalifa At The Top',
-      'Abra boat ride across Dubai Creek',
-      'English-speaking guide for cultural tours',
-      '24/7 on-trip support',
-    ],
-    exclusions: [
-      'Flights to/from UAE',
-      'Lunches & dinners (except desert safari)',
-      'Personal expenses (souvenirs, tips, etc.)',
-      'Optional activities not mentioned in the itinerary',
-      'Visa fees and travel insurance',
-    ],
-    availableDates: ['2025-10-15', '2025-11-22', '2025-12-10', '2026-01-25', '2026-02-20'],
-  },
-  {
     title: 'Serengeti Wildlife Safari',
     destination: 'Serengeti National Park',
     country: 'Tanzania',
@@ -160,6 +63,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['4x4 Vehicle', 'Park Fees', 'Experienced Guide', 'Full Board Accommodation'],
     exclusions: ['International Flights', 'Visa Fees', 'Gratuities'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Kyoto Cultural Expedition',
@@ -190,6 +94,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Accommodation', 'Guided Tours', 'Tea Ceremony', 'Public Transport Pass'],
     exclusions: ['International Flights', 'Lunches and Dinners', 'Personal Expenses'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Machu Picchu Inca Trail',
@@ -219,6 +124,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Inca Trail Permit', 'Porters and Cook', 'Camping Equipment', 'Machu Picchu Entrance'],
     exclusions: ['International Flights', 'Sleeping Bag', 'Travel Insurance'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Greek Islands Hopping',
@@ -248,6 +154,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Ferry Tickets', '4-star Hotels', 'Santorini Catamaran Cruise', 'Airport Transfers'],
     exclusions: ['International Flights', 'Most Meals', 'Optional Activities'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Canadian Rockies Adventure',
@@ -272,6 +179,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['National Park Passes', 'Accommodation', 'Ice Explorer Ride'],
     exclusions: ['Flights', 'Most Meals', 'Car Rental'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Australian Outback Odyssey',
@@ -296,6 +204,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Guided Tours', 'Accommodation', 'Park Entrance Fees'],
     exclusions: ['Flights to Alice Springs', 'Meals', 'Optional Camel Ride'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Flavors of Italy',
@@ -320,6 +229,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Train Tickets', 'Accommodation', 'Cooking Class', 'Wine Tasting'],
     exclusions: ['Flights', 'City Taxes', 'Lunches and Dinners'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Amalfi Coast Dream',
@@ -344,6 +254,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Boutique hotel accommodation', 'Private boat tour', 'Limoncello tasting'],
     exclusions: ['Flights', 'Most meals', 'Optional tours'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Roman Holiday',
@@ -368,6 +279,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Central 4-star hotel', 'Skip-the-line Colosseum tickets', 'Guided Vatican tour'],
     exclusions: ['Flights', 'City tax', 'Lunches and dinners'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Vibrant Vietnam',
@@ -392,6 +304,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Internal Flights', 'Accommodation', 'Ha Long Bay Cruise', 'Guided Tours'],
     exclusions: ['International Flights', 'Visa Fees', 'Some Meals'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Patagonia Hiking Explorer',
@@ -416,6 +329,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['All Accommodation', 'Guided Hikes', 'Glacier Tour', 'Bus Transfers'],
     exclusions: ['Flights', 'National Park Entrance Fees', 'Most Meals'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Egyptian Wonders',
@@ -440,6 +354,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Nile Cruise (Full Board)', 'Domestic Flights', 'Egyptologist Guide'],
     exclusions: ['International Flights', 'Visa', 'Entrance Fees to some sites'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Golden Triangle of India',
@@ -464,6 +379,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Accommodation', 'Private vehicle with driver', 'Guided tours'],
     exclusions: ['International flights', 'Visa fees', 'Lunches and dinners'],
     availableDates: [],
+    reviews: [],
   },
  
   {
@@ -489,6 +405,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Beachfront resort accommodation', 'Ferry transfers', 'James Bond Island tour'],
     exclusions: ['International flights', 'Most meals', 'National park fees'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Temples of Angkor',
@@ -513,6 +430,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Boutique hotel', 'Angkor Pass', 'Private Tuk-tuk guide'],
     exclusions: ['International flights', 'Visa fees', 'Lunches and dinners'],
     availableDates: [],
+    reviews: [],
   },
    {
     title: 'Gardens of Singapore',
@@ -537,6 +455,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['4-star hotel', 'Airport transfers', 'Gardens by the Bay admission'],
     exclusions: ['Flights', 'Most meals', 'Optional tours'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Kuala Lumpur & Malacca',
@@ -561,6 +480,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Accommodation', 'Coach transfer to Malacca', 'KL Tower ticket'],
     exclusions: ['Flights', 'Lunches and dinners', 'Visa fees'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Seoul K-Wave & Culture',
@@ -585,6 +505,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['Centrally located hotel', 'DMZ Tour', 'K-pop dance class', 'T-money transport card'],
     exclusions: ['Flights', 'Most meals', 'Personal shopping'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Parisian Romance',
@@ -609,6 +530,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['4-star central hotel', 'Museum Pass', 'Seine River Cruise'],
     exclusions: ['Flights', 'Most meals', 'Metro tickets'],
     availableDates: [],
+    reviews: [],
   },
   {
     title: 'Spanish Sunshine',
@@ -633,6 +555,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     inclusions: ['High-speed train between cities', 'Accommodation', 'Flamenco Show with Dinner'],
     exclusions: ['Flights', 'Most meals', 'City taxes'],
     availableDates: [],
+    reviews: [],
   },
 ];
 
@@ -671,4 +594,3 @@ export const continents: Continent[] = [
     { name: 'Australia', image: 'https://picsum.photos/seed/australia-red-rock/800/600', dataAiHint: 'outback desert', emoji: '🏄‍♂️' },
     { name: 'Antarctica', image: 'https://picsum.photos/seed/antarctica-glacier/800/600', dataAiHint: 'iceberg snow', emoji: '❄️' },
 ];
-

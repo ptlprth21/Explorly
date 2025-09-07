@@ -3,7 +3,8 @@
 import type { Package, Review, Continent, Country, Theme } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
-import { packagesData, reviews as allReviews, continents as allContinents, countries as allCountries, themes as allThemes } from './mock-data';
+import { packagesData as mockPackagesData, reviews as allReviews, continents as allContinents, countries as allCountries, themes as allThemes } from './mock-data';
+import { realPackagesData } from './real-data';
 import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { db } from './firebase';
 
@@ -37,8 +38,9 @@ const getAiSelectedImage = async (gallery: string[], title: string) => {
 let packages: Promise<Package[]> | null = null;
 
 const processPackages = async (): Promise<Package[]> => {
+  const allPackagesData = [...realPackagesData, ...mockPackagesData];
   const processedPackages = await Promise.all(
-    packagesData.map(async (pkg) => {
+    allPackagesData.map(async (pkg) => {
       const id = slugify(pkg.title);
       const { image, reason } = await getAiSelectedImage(pkg.gallery, pkg.title);
       const reviews = allReviews.filter(review => review.packageId === id);
