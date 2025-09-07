@@ -18,12 +18,13 @@ import { useEffect, useState } from 'react';
 import type { Package, Review } from '@/types';
 import BookingWizard from '@/components/booking/BookingWizard';
 import FirebaseReviews from '@/components/packages/FirebaseReviews';
+import { useBookingWizard } from '@/context/BookingWizardContext';
 
 
 export default function PackageDetailPage({ params }: { params: { id: string } }) {
   const [pkg, setPackage] = useState<Package | null>(null);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { openWizard } = useBookingWizard();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,7 +99,7 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
                 <p className="text-muted-foreground text-sm">from <span className="text-3xl font-bold text-primary">${pkg.price}</span> per person</p>
               </CardHeader>
               <CardContent className="space-y-4">
-                  <Button onClick={() => setIsBookingOpen(true)} size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg">
+                  <Button onClick={() => openWizard(pkg)} size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg">
                       Send Booking Request
                   </Button>
                   <p className="text-xs text-muted-foreground text-center">Secure payments powered by Stripe. Cancellation policy applies.</p>
@@ -174,12 +175,6 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
           </Tabs>
         </section>
       </Container>
-      {isBookingOpen && (
-        <BookingWizard
-          selectedPackage={pkg}
-          onClose={() => setIsBookingOpen(false)}
-        />
-      )}
     </>
   );
 }

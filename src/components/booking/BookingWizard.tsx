@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState } from 'react';
@@ -321,7 +322,7 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
               >
                 {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Check className="mr-2 h-4 w-4" />}
                 {loading ? 'Submitting...' : 'Submit Request'}
-              </button>
+              </Button>
             )}
           </div>
         </div>

@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, Star, Clock, MapPin, Users, Calendar, Play, Heart, ChevronLeft, ChevronRight, Check, Filter, SortAsc } from 'lucide-react';
 import type { Package, Country } from '@/types';
 import { getPackagesByCountry, getCountryBySlug } from '@/lib/data';
-import BookingForm from '@/components/booking/BookingForm';
 import Container from '@/components/ui/Container';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -15,6 +14,7 @@ import { Slider } from '@/components/ui/slider';
 import StarRating from '@/components/ui/StarRating';
 import Link from 'next/link';
 import { slugify } from '@/lib/utils';
+import { useBookingWizard } from '@/context/BookingWizardContext';
 
 
 export default function CountryDetailPage({ params }: { params: { name: string } }) {
@@ -24,8 +24,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [showBookingForm, setShowBookingForm] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState<Package | undefined>(undefined);
+  const { openWizard } = useBookingWizard();
   const [currentPackageIndex, setCurrentPackageIndex] = useState(0);
 
   // Filters
@@ -89,11 +88,6 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   const prevPackage = () => {
     setCurrentPackageIndex((prev) => (prev - 1 + filteredPackages.length) % filteredPackages.length);
   };
-
-  const handleBookNow = (pkg: Package) => {
-    setSelectedPackage(pkg);
-    setShowBookingForm(true);
-  }
 
   if (isLoading || !country) {
     return (
@@ -272,7 +266,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                     
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <Button 
-                        onClick={() => handleBookNow(currentPackage)}
+                        onClick={() => openWizard(currentPackage)}
                         className="w-16 sm:w-20 h-16 sm:h-20 bg-teal-500/90 backdrop-blur-sm rounded-full text-white hover:bg-teal-400 transition-colors transform hover:scale-110"
                         size="icon"
                       >
@@ -463,7 +457,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
       {/* Mobile Booking CTA */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-neutral-900/95 backdrop-blur-xl border-t border-neutral-800/50 p-3 sm:p-4">
         <Button 
-          onClick={() => currentPackage && handleBookNow(currentPackage)}
+          onClick={() => currentPackage && openWizard(currentPackage)}
           disabled={!currentPackage}
           className="w-full bg-teal-500 hover:bg-teal-400 text-white py-3 sm:py-4 rounded-xl font-semibold transition-colors flex items-center justify-center space-x-2 text-sm sm:text-base"
         >
@@ -471,13 +465,6 @@ export default function CountryDetailPage({ params }: { params: { name: string }
           <span>Book This Experience</span>
         </Button>
       </div>
-
-      {showBookingForm && (
-        <BookingForm
-          selectedPackage={selectedPackage}
-          onClose={() => setShowBookingForm(false)}
-        />
-      )}
     </div>
   );
 }
