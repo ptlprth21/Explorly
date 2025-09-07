@@ -16,7 +16,8 @@ export interface BookingData {
   selectedDate: string;
   totalPrice: number;
   specialRequests?: string;
-  bookingDate?: any; 
+  bookingDate?: any;
+  paymentIntentId?: string;
 }
 
 export async function createBooking(bookingData: Omit<BookingData, 'packageName' | 'totalPrice'> & { package: Package }): Promise<string | null> {
@@ -31,7 +32,7 @@ export async function createBooking(bookingData: Omit<BookingData, 'packageName'
       packageName: pkg.title,
       totalPrice: totalPrice,
       bookingDate: serverTimestamp(),
-      status: 'pending', 
+      status: 'confirmed', // From 'pending' to 'confirmed' after payment
     });
     console.log('Booking request created with ID: ', docRef.id);
     return docRef.id;

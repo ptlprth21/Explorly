@@ -2,6 +2,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { X, ChevronLeft, ChevronRight, Check, Calendar, Users, CreditCard, MapPin, Star, Loader2 } from 'lucide-react';
 import type { Package } from '@/types';
 import { createBooking } from '@/lib/firebase-actions';
@@ -10,6 +12,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import Image from 'next/image';
+import StripePaymentForm from './StripePaymentForm';
+import { getStripe } from '@/lib/stripe';
 
 interface BookingWizardProps {
   selectedPackage: Package | null;
@@ -20,7 +24,7 @@ const steps = [
   { id: 1, title: 'Package', icon: MapPin },
   { id: 2, title: 'Dates', icon: Calendar },
   { id: 3, title: 'Details', icon: Users },
-  { id: 4, title: 'Confirm', icon: Check }
+  { id: 4, title: 'Payment', icon: CreditCard }
 ];
 
 export default function BookingWizard({ selectedPackage, onClose }: BookingWizardProps) {
@@ -49,7 +53,7 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
     }
   };
 
-  const handleSubmit = async () => {
+  const handlePaymentSuccess = async (paymentIntentId: string) => {
     if (!selectedPackage) return;
     
     setLoading(true);
@@ -58,18 +62,19 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
         ...formData,
         packageId: selectedPackage.id,
         package: selectedPackage,
+        paymentIntentId: paymentIntentId,
       });
       
       if (bookingId) {
         toast({
-            title: 'Booking Request Sent!',
-            description: "We've received your request and will contact you within 24 hours to confirm.",
+            title: 'Booking Confirmed!',
+            description: "Your adventure is booked. Check your email for confirmation.",
         });
         onClose();
       } else {
         toast({
             title: 'Booking Failed',
-            description: 'Failed to create booking. Please try again.',
+            description: 'Failed to save booking after payment. Please contact support.',
             variant: 'destructive',
         });
       }
@@ -83,6 +88,14 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
     } finally {
       setLoading(false);
     }
+  };
+
+  const handlePaymentError = (error: string) => {
+    toast({
+        title: 'Payment Error',
+        description: error,
+        variant: 'destructive',
+    });
   };
 
   return (
@@ -138,158 +151,144 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
 
         {/* Step Content */}
         <div className="p-6 overflow-y-auto">
-          {/* Step 1: Package Info */}
-          {currentStep === 1 && selectedPackage && (
-            <div className="space-y-6 animate-in fade-in-50">
-              <h3 className="text-xl font-bold text-white mb-4">Selected Package</h3>
-              <div className="bg-card/50 rounded-xl p-4 border border-border">
-                <div className="flex items-center space-x-4">
-                  <Image 
-                    src={selectedPackage.image} 
-                    alt={selectedPackage.title}
-                    width={80}
-                    height={80}
-                    className="w-20 h-20 object-cover rounded-lg"
-                  />
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-white">{selectedPackage.title}</h4>
-                    <p className="text-sm text-muted-foreground">{selectedPackage.destination} • {selectedPackage.duration}</p>
-                    <div className="flex items-center space-x-2 mt-2">
-                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                      <span className="text-sm text-muted-foreground">{selectedPackage.rating} ({selectedPackage.reviewCount} reviews)</span>
+          {currentStep !== 4 && (
+            <>
+              {/* Step 1: Package Info */}
+              {currentStep === 1 && selectedPackage && (
+                <div className="space-y-6 animate-in fade-in-50">
+                  <h3 className="text-xl font-bold text-white mb-4">Selected Package</h3>
+                  <div className="bg-card/50 rounded-xl p-4 border border-border">
+                    <div className="flex items-center space-x-4">
+                      <Image 
+                        src={selectedPackage.image} 
+                        alt={selectedPackage.title}
+                        width={80}
+                        height={80}
+                        className="w-20 h-20 object-cover rounded-lg"
+                      />
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-white">{selectedPackage.title}</h4>
+                        <p className="text-sm text-muted-foreground">{selectedPackage.destination} • {selectedPackage.duration}</p>
+                        <div className="flex items-center space-x-2 mt-2">
+                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                          <span className="text-sm text-muted-foreground">{selectedPackage.rating} ({selectedPackage.reviewCount} reviews)</span>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xl font-bold text-primary">${selectedPackage.price.toLocaleString()}</div>
+                        <div className="text-xs text-muted-foreground">per person</div>
+                      </div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-xl font-bold text-primary">${selectedPackage.price.toLocaleString()}</div>
-                    <div className="text-xs text-muted-foreground">per person</div>
+                </div>
+              )}
+
+              {/* Step 2: Select Dates */}
+              {currentStep === 2 && selectedPackage && (
+                <div className="space-y-6 animate-in fade-in-50">
+                  <h3 className="text-xl font-bold text-white mb-4">Select Your Dates</h3>
+                  <div>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Departure Date</label>
+                    <Input
+                      type="date"
+                      value={formData.selectedDate}
+                      onChange={(e) => setFormData({...formData, selectedDate: e.target.value})}
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-sm font-medium text-muted-foreground mb-3">Available Departures</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                      {selectedPackage.availableDates.map(date => (
+                        <Button
+                          key={date}
+                          onClick={() => setFormData({...formData, selectedDate: date})}
+                          variant={formData.selectedDate === date ? 'default' : 'outline'}
+                          className="p-3 h-auto flex flex-col"
+                        >
+                          <span className="font-semibold">{new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                          <span className="text-xs">{new Date(date).getFullYear()}</span>
+                        </Button>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              )}
+
+              {/* Step 3: Traveler Details */}
+              {currentStep === 3 && (
+                <div className="space-y-6 animate-in fade-in-50">
+                  <h3 className="text-xl font-bold text-white mb-4">Traveler Information</h3>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Number of Travelers</label>
+                    <div className="flex items-center space-x-4">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setFormData({...formData, travelers: Math.max(1, formData.travelers - 1)})}
+                      >
+                        <span>−</span>
+                      </Button>
+                      <span className="text-xl font-semibold text-white w-8 text-center">{formData.travelers}</span>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={() => setFormData({...formData, travelers: Math.min(10, formData.travelers + 1)})}
+                      >
+                        <span>+</span>
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-muted-foreground mb-2">First Name</label>
+                      <Input value={formData.firstName} onChange={(e) => setFormData({...formData, firstName: e.target.value})} required />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-muted-foreground mb-2">Last Name</label>
+                      <Input value={formData.lastName} onChange={(e) => setFormData({...formData, lastName: e.target.value})} required />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-muted-foreground mb-2">Email</label>
+                      <Input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} required />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-muted-foreground mb-2">Phone</label>
+                      <Input type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-muted-foreground mb-2">Special Requests</label>
+                    <Textarea
+                      value={formData.specialRequests}
+                      onChange={(e) => setFormData({...formData, specialRequests: e.target.value})}
+                      rows={3}
+                      placeholder="Dietary restrictions, accessibility needs, etc."
+                    />
+                  </div>
+                </div>
+              )}
+            </>
           )}
 
-          {/* Step 2: Select Dates */}
-          {currentStep === 2 && selectedPackage && (
-            <div className="space-y-6 animate-in fade-in-50">
-              <h3 className="text-xl font-bold text-white mb-4">Select Your Dates</h3>
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Departure Date</label>
-                <Input
-                  type="date"
-                  value={formData.selectedDate}
-                  onChange={(e) => setFormData({...formData, selectedDate: e.target.value})}
-                  required
-                />
-              </div>
-              
-              <div>
-                <h4 className="text-sm font-medium text-muted-foreground mb-3">Available Departures</h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-                  {selectedPackage.availableDates.map(date => (
-                    <Button
-                      key={date}
-                      onClick={() => setFormData({...formData, selectedDate: date})}
-                      variant={formData.selectedDate === date ? 'default' : 'outline'}
-                      className="p-3 h-auto flex flex-col"
-                    >
-                      <span className="font-semibold">{new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-                      <span className="text-xs">{new Date(date).getFullYear()}</span>
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Step 3: Traveler Details */}
-          {currentStep === 3 && (
-            <div className="space-y-6 animate-in fade-in-50">
-              <h3 className="text-xl font-bold text-white mb-4">Traveler Information</h3>
-              
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Number of Travelers</label>
-                <div className="flex items-center space-x-4">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => setFormData({...formData, travelers: Math.max(1, formData.travelers - 1)})}
-                  >
-                    <span>−</span>
-                  </Button>
-                  <span className="text-xl font-semibold text-white w-8 text-center">{formData.travelers}</span>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => setFormData({...formData, travelers: Math.min(10, formData.travelers + 1)})}
-                  >
-                    <span>+</span>
-                  </Button>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">First Name</label>
-                  <Input value={formData.firstName} onChange={(e) => setFormData({...formData, firstName: e.target.value})} required />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Last Name</label>
-                  <Input value={formData.lastName} onChange={(e) => setFormData({...formData, lastName: e.target.value})} required />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Email</label>
-                  <Input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} required />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-muted-foreground mb-2">Phone</label>
-                  <Input type="tel" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Special Requests</label>
-                <Textarea
-                  value={formData.specialRequests}
-                  onChange={(e) => setFormData({...formData, specialRequests: e.target.value})}
-                  rows={3}
-                  placeholder="Dietary restrictions, accessibility needs, etc."
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Step 4: Confirmation */}
+          {/* Step 4: Payment */}
           {currentStep === 4 && selectedPackage && (
-            <div className="space-y-6 animate-in fade-in-50">
-              <h3 className="text-xl font-bold text-white mb-4">Booking Summary</h3>
-              
-              <div className="bg-card/50 rounded-xl p-4 border border-border">
-                <h4 className="font-semibold text-white mb-3">Trip Details</h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span className="text-muted-foreground">Package:</span><span className="text-foreground">{selectedPackage.title}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Date:</span><span className="text-foreground">{formData.selectedDate}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Travelers:</span><span className="text-foreground">{formData.travelers} guests</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Duration:</span><span className="text-foreground">{selectedPackage.duration}</span></div>
-                </div>
-              </div>
-
-              <div className="bg-card/50 rounded-xl p-4 border border-border">
-                <h4 className="font-semibold text-white mb-3">Price Breakdown</h4>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between"><span className="text-muted-foreground">Base price:</span><span className="text-foreground">${(selectedPackage.price * formData.travelers).toLocaleString()}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Service fee:</span><span className="text-foreground">$99</span></div>
-                  <div className="border-t border-border pt-2 mt-2">
-                    <div className="flex justify-between font-semibold">
-                      <span className="text-foreground">Total:</span>
-                      <span className="text-primary text-lg">${(selectedPackage.price * formData.travelers + 99).toLocaleString()}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+             <Elements stripe={getStripe()}>
+                <StripePaymentForm 
+                    package={selectedPackage}
+                    travelers={formData.travelers}
+                    customerInfo={formData}
+                    onSuccess={handlePaymentSuccess}
+                    onError={handlePaymentError}
+                />
+            </Elements>
           )}
 
           {/* Navigation */}
@@ -297,13 +296,13 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
             <Button 
               variant="outline"
               onClick={prevStep}
-              disabled={currentStep === 1}
+              disabled={currentStep === 1 || loading}
             >
               <ChevronLeft className="h-4 w-4 mr-2" />
               Back
             </Button>
 
-            {currentStep < steps.length ? (
+            {currentStep < steps.length -1 ? (
               <Button 
                 onClick={nextStep}
                 disabled={
@@ -314,16 +313,16 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
                 Next
                 <ChevronRight className="h-4 w-4 ml-2" />
               </Button>
-            ) : (
-              <Button 
-                onClick={handleSubmit}
-                disabled={loading}
-                className="bg-green-600 hover:bg-green-500"
-              >
-                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Check className="mr-2 h-4 w-4" />}
-                {loading ? 'Submitting...' : 'Submit Request'}
-              </Button>
-            )}
+            ) : currentStep === 3 ? (
+                <Button 
+                    onClick={nextStep}
+                    disabled={!formData.firstName || !formData.lastName || !formData.email}
+                    className="bg-green-600 hover:bg-green-500"
+                >
+                    Proceed to Payment
+                    <CreditCard className="h-4 w-4 ml-2" />
+                </Button>
+            ) : null}
           </div>
         </div>
       </div>
