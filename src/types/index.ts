@@ -1,6 +1,7 @@
 
 
-export interface ItineraryStep {
+
+export interface ItineraryDay {
   day: number;
   title: string;
   description: string;
@@ -43,7 +44,7 @@ export interface Package {
   difficulty: 'Easy' | 'Moderate' | 'Hard';
   highlights: string[];
   description: string;
-  itinerary: ItineraryStep[];
+  itinerary: ItineraryDay[];
   inclusions: string[];
   exclusions: string[];
   availableDates: string[];

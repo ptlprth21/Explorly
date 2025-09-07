@@ -8,7 +8,7 @@ import { notFound } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import StarRating from '@/components/ui/StarRating';
-import { Clock, Mountain, MapPin, CheckCircle, XCircle, Users, Calendar, BrainCircuit } from 'lucide-react';
+import { Clock, Mountain, MapPin, CheckCircle, XCircle, Users, Calendar, BrainCircuit, Utensils, Home } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import PackageGallery from '@/components/packages/PackageGallery';
@@ -128,17 +128,20 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
             </TabsContent>
             
             <TabsContent value="itinerary" className="mt-6">
-              <div className="space-y-6">
-                {pkg.itinerary.map((step) => (
-                  <div key={step.day} className="flex gap-4">
-                    <div className="flex flex-col items-center">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold">{step.day}</div>
-                      <div className="w-px h-full bg-border"></div>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-lg">{step.title}</h4>
-                      <p className="text-muted-foreground mt-1">{step.description}</p>
-                    </div>
+              <div className="space-y-8">
+                {pkg.itinerary.map((step, index) => (
+                  <div key={step.day} className="relative pl-16">
+                      <div className="absolute left-6 top-0 w-12 h-12 bg-primary/20 border-2 border-primary/50 text-primary rounded-full flex items-center justify-center font-bold text-lg">
+                          {step.day}
+                      </div>
+                      {index < pkg.itinerary.length - 1 && (
+                          <div className="absolute left-12 top-6 w-0.5 h-full bg-border -translate-x-1/2"></div>
+                      )}
+                      
+                      <div className="ml-4">
+                          <h4 className="font-bold text-xl mb-1 text-primary-foreground">{step.title}</h4>
+                          <p className="text-muted-foreground">{step.description}</p>
+                      </div>
                   </div>
                 ))}
               </div>
