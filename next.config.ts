@@ -1,3 +1,4 @@
+
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
@@ -26,7 +27,8 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     allowedDevOrigins: [
-      "https://*.cluster-p5o54ufozbgxywgwqxykwgahws.cloudworkstations.dev"
+      "https://*.cluster-p5o54ufozbgxywgwqxykwgahws.cloudworkstations.dev",
+      "https://explorly.eu"
     ]
   }
 };
