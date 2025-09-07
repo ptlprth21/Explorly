@@ -1,10 +1,8 @@
+
 import { Package } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Star, Clock, Mountain } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import StarRating from "../ui/StarRating";
-import { slugify } from "@/lib/utils";
+import { MapPin, Star, Clock, ArrowRight } from "lucide-react";
 
 interface PackageCardProps {
   package: Package;
@@ -12,48 +10,66 @@ interface PackageCardProps {
 
 const PackageCard = ({ package: pkg }: PackageCardProps) => {
   return (
-    <Link href={`/packages/${pkg.id}`} className="group block">
-      <div className="bg-card rounded-lg overflow-hidden shadow-lg border border-border hover:shadow-primary/20 hover:border-primary/50 transition-all duration-300 h-full flex flex-col">
-        <div className="relative aspect-video overflow-hidden">
+    <Link href={`/packages/${pkg.id}`} className="group block h-full">
+      <div 
+        className="relative group cursor-pointer overflow-hidden rounded-2xl h-80 transform transition-all duration-500 hover:scale-105 hover:shadow-2xl h-full"
+      >
+        {/* Background Image */}
+        <div className="absolute inset-0">
           <Image
             src={pkg.image}
             alt={pkg.title}
-            data-ai-hint="travel landscape"
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            data-ai-hint="travel landscape"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
         </div>
-        <div className="p-4 flex-grow flex flex-col">
-          <div className="flex items-center justify-between">
-            <Badge variant="secondary">{pkg.type}</Badge>
-            <div className="flex items-center gap-2">
-              <StarRating rating={pkg.rating} />
-              <span className="text-xs text-muted-foreground">({pkg.reviewCount})</span>
+
+        {/* Content Overlay */}
+        <div className="relative h-full flex flex-col justify-between p-6 text-white">
+          {/* Top Section */}
+          <div className="flex justify-between items-start">
+            <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
+              <span className="text-sm font-medium">{pkg.type}</span>
             </div>
-          </div>
-          <h3 className="font-bold text-lg mt-2 group-hover:text-primary transition-colors">{pkg.title}</h3>
-          <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
-            <MapPin className="w-4 h-4" />
-            <span>{pkg.destination}, <Link href={`/country/${slugify(pkg.country)}`} className="inline-block hover:text-primary hover:underline" onClick={(e) => e.stopPropagation()}>{pkg.country}</Link></span>
+            <div className="flex items-center space-x-1 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
+              <Star className="h-4 w-4 text-yellow-400 fill-current" />
+              <span className="text-sm font-semibold">{pkg.rating}</span>
+            </div>
           </div>
 
-          <div className="mt-4 pt-4 border-t border-border/50 flex-grow flex flex-col justify-end">
-            <div className="flex justify-between items-center text-sm">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                    <Clock className="w-4 h-4" />
-                    <span>{pkg.duration}</span>
-                </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                    <Mountain className="w-4 h-4" />
-                    <span>{pkg.difficulty}</span>
-                </div>
+          {/* Bottom Section */}
+          <div>
+            <div className="flex items-center space-x-2 mb-2">
+              <MapPin className="h-4 w-4 text-teal-400" />
+              <span className="text-sm text-gray-300">{pkg.destination}</span>
             </div>
-            <div className="mt-4 text-right">
-              <span className="text-sm text-muted-foreground">From </span>
-              <span className="text-xl font-bold text-primary">${pkg.price}</span>
+            
+            <h3 className="text-xl font-bold mb-2 group-hover:text-teal-400 transition-colors">
+              {pkg.title}
+            </h3>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-1">
+                  <Clock className="h-4 w-4 text-gray-400" />
+                  <span className="text-sm text-gray-300">{pkg.duration} Days</span>
+                </div>
+                <div className="text-lg font-bold text-teal-400">
+                  ${pkg.price.toLocaleString()}
+                </div>
+              </div>
+              
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <ArrowRight className="h-5 w-5 text-teal-400" />
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Hover Effect Border */}
+        <div className="absolute inset-0 border-2 border-transparent group-hover:border-teal-400/50 rounded-2xl transition-all duration-300 pointer-events-none"></div>
       </div>
     </Link>
   );

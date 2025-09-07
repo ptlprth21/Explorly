@@ -1,5 +1,6 @@
+
 import { getPackages } from '@/lib/data';
-import MusicPlayerCard from './MusicPlayerCard';
+import PackageCard from '../packages/PackageCard';
 
 const PopularPackages = async () => {
   const allPackages = await getPackages();
@@ -14,7 +15,7 @@ const PopularPackages = async () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {popularPackages.map((pkg) => (
-          <MusicPlayerCard key={pkg.id} package={pkg} />
+          <PackageCard key={pkg.id} package={pkg} />
         ))}
       </div>
     </section>
