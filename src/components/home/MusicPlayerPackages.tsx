@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Star, Clock, Play, Heart, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
 import type { Package } from '@/types';
@@ -21,6 +21,15 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
   const [currentIndex, setCurrentIndex] = useState(0);
   const [filter, setFilter] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
+  const [availability, setAvailability] = useState({ seatsLeft: 0, totalSeats: 0 });
+
+  useEffect(() => {
+    // Generate random availability only on the client-side to prevent hydration errors.
+    setAvailability({
+      seatsLeft: Math.floor(Math.random() * 10) + 5,
+      totalSeats: Math.floor(Math.random() * 10) + 15
+    });
+  }, [currentIndex]); // Re-roll when package changes for variety
 
   const filters = [
     { id: 'all', name: 'All Packages', icon: '🌍' },
@@ -183,7 +192,7 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
                     <div className="mb-6">
                     <div className="flex justify-between text-xs sm:text-sm text-neutral-400 mb-2">
                         <span>Availability</span>
-                        <span>{Math.floor(Math.random() * 10) + 5}/{Math.floor(Math.random() * 10) + 15} seats left</span>
+                        <span>{availability.seatsLeft}/{availability.totalSeats} seats left</span>
                     </div>
                     <div className="w-full bg-neutral-800 rounded-full h-2">
                         <div className="bg-gradient-to-r from-teal-400 to-blue-400 h-2 rounded-full" style={{ width: `${(currentPackage.rating / 5) * 100}%` }}></div>
