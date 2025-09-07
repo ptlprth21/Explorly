@@ -3,7 +3,7 @@
 
 import { getPackageById } from '@/lib/data';
 import Image from 'next/image';
-import { notFound, useRouter } from 'next/navigation';
+import { notFound, useRouter, useParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import StarRating from '@/components/ui/StarRating';
 import { Clock, Mountain, MapPin, CheckCircle, XCircle, ArrowLeft, Check } from 'lucide-react';
@@ -15,7 +15,9 @@ import { useBookingWizard } from '@/context/BookingWizardContext';
 import PackageGallery from '@/components/packages/PackageGallery';
 
 
-export default function PackageDetailPage({ params: { id } }: { params: { id: string } }) {
+export default function PackageDetailPage() {
+  const params = useParams();
+  const id = params.id as string;
   const [pkg, setPackage] = useState<Package | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
@@ -34,7 +36,9 @@ export default function PackageDetailPage({ params: { id } }: { params: { id: st
       setIsLoading(false);
     };
 
-    fetchData();
+    if (id) {
+      fetchData();
+    }
   }, [id]);
 
   if (isLoading || !pkg) {
