@@ -49,7 +49,7 @@ export default function ContactPage() {
     <>
       <section className="relative h-64 w-full">
         <Image
-          src="https://picsum.photos/seed/contact-hero/1920/1080"
+          src="https://picsum.photos/seed/person-writing-notebook/1920/400"
           alt="A person writing on a notebook with a laptop nearby"
           data-ai-hint="contact us"
           fill

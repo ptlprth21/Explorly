@@ -1,3 +1,4 @@
+
 import { z } from 'zod';
 
 export interface ItineraryDay {
@@ -69,6 +70,7 @@ export interface Country {
     bestTime: string;
     currency: string;
     language: string;
+    dataAiHint?: string;
 }
 
 export interface GlobalStats {

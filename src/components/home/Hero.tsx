@@ -105,6 +105,7 @@ export default function Hero() {
           fill
           className="object-cover"
           data-ai-hint="norway fjord"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background"></div>
         

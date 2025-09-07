@@ -59,10 +59,10 @@ export const realPackagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] =
       duration: '7',
       price: 1390,
       gallery: [
-        'https://picsum.photos/seed/dubai-burj-khalifa-view/1200/800',
+        'https://picsum.photos/seed/dubai-burj-khalifa/1200/800',
         'https://picsum.photos/seed/uae-grand-mosque-interior/1200/800',
         'https://picsum.photos/seed/dubai-marina-night/1200/800',
-        'https://picsum.photos/seed/dubai-souk-market/1200/800',
+        'https://picsum.photos/seed/dubai-gold-souk/1200/800',
         'https://picsum.photos/seed/uae-desert-camel-ride/1200/800',
       ],
       rating: 4.9,
