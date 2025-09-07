@@ -17,11 +17,11 @@ import { slugify } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import type { Package, Review } from '@/types';
 import BookingWizard from '@/components/booking/BookingWizard';
+import FirebaseReviews from '@/components/packages/FirebaseReviews';
 
 
 export default function PackageDetailPage({ params }: { params: { id: string } }) {
   const [pkg, setPackage] = useState<Package | null>(null);
-  const [reviews, setReviews] = useState<Review[]>([]);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,8 +31,6 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
       const packageData = await getPackageById(params.id);
       if (packageData) {
         setPackage(packageData);
-        const reviewData = await getReviewsByPackageId(packageData.id);
-        setReviews(reviewData);
       } else {
         notFound();
       }
@@ -101,7 +99,7 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
               </CardHeader>
               <CardContent className="space-y-4">
                   <Button onClick={() => setIsBookingOpen(true)} size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold text-lg">
-                      Book Now
+                      Send Booking Request
                   </Button>
                   <p className="text-xs text-muted-foreground text-center">Secure payments powered by Stripe. Cancellation policy applies.</p>
               </CardContent>
@@ -171,23 +169,7 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
             </TabsContent>
 
             <TabsContent value="reviews" className="mt-6">
-              <h3 className="font-bold text-xl mb-4">Traveler Reviews</h3>
-              <div className="space-y-6">
-                {reviews.map(review => (
-                  <Card key={review.id} className="bg-card">
-                    <CardHeader className="pb-2">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-bold">{review.userName}</h4>
-                        <StarRating rating={review.rating} />
-                      </div>
-                      <p className="text-xs text-muted-foreground">{new Date(review.date).toLocaleDateString()}</p>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-foreground/80">{review.comment}</p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+               <FirebaseReviews packageId={pkg.id} rating={pkg.rating} reviewCount={pkg.reviewCount} />
             </TabsContent>
           </Tabs>
         </section>

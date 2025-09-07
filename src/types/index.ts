@@ -14,6 +14,7 @@ export interface Review {
   comment: string;
   date: string;
   verified: boolean;
+  country?: string;
 }
 
 export type ThemeId = 'all' | 'safari' | 'cultural' | 'beach' | 'adventure' | 'city';
