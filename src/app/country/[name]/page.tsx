@@ -132,6 +132,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
           <Image
             src={country.heroImage}
             alt={country.name}
+            data-ai-hint="country landscape"
             fill
             className="w-full h-full object-cover"
             priority
@@ -260,6 +261,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                     <Image
                       src={currentPackage.image}
                       alt={currentPackage.title}
+                      data-ai-hint="package adventure"
                       fill
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
@@ -417,7 +419,8 @@ export default function CountryDetailPage({ params }: { params: { name: string }
           
           <div className="relative aspect-video overflow-hidden rounded-2xl group cursor-pointer mt-8 md:mt-0">
             <Image 
-              src={country.heroImage} 
+              src={country.heroImage}
+              data-ai-hint="video travel"
               alt="Video thumbnail"
               fill
               className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" 
@@ -445,7 +448,8 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                   src={image}
                   alt={`Gallery ${index + 1}`}
                   width={500}
-                  height={Math.random() * (600 - 400) + 400}
+                  height={Math.floor(Math.random() * (600 - 400) + 400)}
+                  data-ai-hint="traveler photo"
                   className="w-full h-auto group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
@@ -459,3 +463,5 @@ export default function CountryDetailPage({ params }: { params: { name: string }
     </div>
   );
 }
+
+    

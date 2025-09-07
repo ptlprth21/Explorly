@@ -121,9 +121,9 @@ export default function GlobalGalleryPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
             Global Gallery
-          </h2>
+          </h1>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Immerse yourself in breathtaking moments from around the world
           </p>
@@ -184,7 +184,8 @@ export default function GlobalGalleryPage() {
                         src={item.src}
                         alt={item.location}
                         width={500}
-                        height={Math.random() * (600-400) + 400}
+                        height={Math.floor(Math.random() * (600-400) + 400)}
+                        data-ai-hint="gallery photo"
                         className="w-full h-auto group-hover:scale-110 transition-transform duration-500"
                     />
                     
@@ -299,3 +300,5 @@ export default function GlobalGalleryPage() {
     </section>
   );
 }
+
+    
