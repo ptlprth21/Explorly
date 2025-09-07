@@ -69,3 +69,10 @@ export interface Country {
     currency: string;
     language: string;
 }
+
+export interface GlobalStats {
+  countries: number;
+  packages: number;
+  happyTravelers: number;
+  averageRating: number;
+}

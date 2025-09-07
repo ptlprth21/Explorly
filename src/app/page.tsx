@@ -1,4 +1,5 @@
 
+
 import Hero from '@/components/home/Hero';
 import ContinentsExplorer from '@/components/home/ContinentsExplorer';
 import Container from '@/components/ui/Container';
@@ -16,7 +17,8 @@ export default async function Home() {
     <div className="bg-black">
       <Hero />
       {spotlightCountry && <CountrySpotlight country={spotlightCountry} packages={packages} />}
-      <ContinentsExplorer continents={continents} />
+      <ContinentsExplorer />
     </div>
   );
 }
+
