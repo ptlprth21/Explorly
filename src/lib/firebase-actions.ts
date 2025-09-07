@@ -20,7 +20,11 @@ export async function createBooking(bookingData: Omit<BookingData, 'packageName'
     const bookingsCollection = collection(db, 'bookings');
     const { package: pkg, ...restOfBookingData } = bookingData;
 
-    const totalPrice = (pkg.price * bookingData.travelers) + 99; // base price + service fee
+    // This calculation must match the one in StripePaymentForm.tsx
+    const subtotal = pkg.price * bookingData.travelers;
+    const serviceFee = 99; // Fixed service fee
+    const stripeFee = Math.round(subtotal * 0.029 + 30); // Stripe fee (2.9% + €0.30)
+    const totalPrice = subtotal + serviceFee + stripeFee;
 
     const docRef = await addDoc(bookingsCollection, {
       ...restOfBookingData,
