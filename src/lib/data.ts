@@ -4,6 +4,8 @@ import type { Package, Review, Continent, Country, Theme } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
 import { packagesData, reviews as allReviews, continents as allContinents, countries as allCountries, themes as allThemes } from './mock-data';
+import { collection, query, where, getDocs, limit } from 'firebase/firestore';
+import { db } from './firebase';
 
 // This is a mock function that simulates the AI selection process.
 // In a real app, this would be an async call to the Genkit flow.
@@ -98,4 +100,21 @@ export async function getCountryBySlug(slug: string): Promise<Country | undefine
 
 export async function getThemes(): Promise<Theme[]> {
     return allThemes;
+}
+
+
+// In a real app, this data would be in Firestore and indexed for search.
+// For the demo, we filter the mock data.
+export async function searchPackages(searchTerm: string): Promise<Package[]> {
+  const allPackages = await getPackages();
+  if (!searchTerm) {
+    return [];
+  }
+  const searchTermLower = searchTerm.toLowerCase();
+  return allPackages.filter(pkg => 
+    pkg.title.toLowerCase().includes(searchTermLower) ||
+    pkg.destination.toLowerCase().includes(searchTermLower) ||
+    pkg.country.toLowerCase().includes(searchTermLower) ||
+    pkg.highlights.some(h => h.toLowerCase().includes(searchTermLower))
+  ).slice(0, 8); // Return top 8 matches
 }

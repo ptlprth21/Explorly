@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Shuffle, MapPin, Star, Clock, Loader2, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import type { Package, Country } from '@/types';
-import { searchPackages } from '@/lib/firebase-actions';
+import { searchPackages } from '@/lib/data';
 import { getCountries } from '@/lib/data';
 import Image from 'next/image';
 import { Button } from '../ui/button';

@@ -1,7 +1,7 @@
 
 'use server';
 
-import { collection, addDoc, serverTimestamp, query, where, getDocs, limit, orderBy } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from './firebase'; // Assumes db is exported from firebase.ts
 import type { Package, Review } from '@/types';
 
@@ -9,6 +9,7 @@ export interface BookingData {
   packageId: string;
   packageName: string;
   firstName: string;
+
   lastName: string;
   email: string;
   phone: string;
@@ -58,50 +59,4 @@ export async function addReview(reviewData: NewReviewData): Promise<string | nul
         console.error('Error adding review: ', e);
         return null;
     }
-}
-
-export async function searchPackages(searchTerm: string): Promise<Package[]> {
-  const packagesRef = collection(db, 'packages');
-  const searchTermLower = searchTerm.toLowerCase();
-  
-  // Create queries for title and destination
-  const titleQuery = query(
-    packagesRef,
-    where('title_lowercase', '>=', searchTermLower),
-    where('title_lowercase', '<=', searchTermLower + '\uf8ff'),
-    limit(5)
-  );
-
-  const destinationQuery = query(
-    packagesRef,
-    where('destination_lowercase', '>=', searchTermLower),
-    where('destination_lowercase', '<=', searchTermLower + '\uf8ff'),
-    limit(5)
-  );
-
-  try {
-    const [titleSnapshot, destinationSnapshot] = await Promise.all([
-      getDocs(titleQuery),
-      getDocs(destinationQuery),
-    ]);
-
-    const resultsMap = new Map<string, Package>();
-
-    titleSnapshot.forEach((doc) => {
-      if (!resultsMap.has(doc.id)) {
-        resultsMap.set(doc.id, { id: doc.id, ...doc.data() } as Package);
-      }
-    });
-
-    destinationSnapshot.forEach((doc) => {
-      if (!resultsMap.has(doc.id)) {
-        resultsMap.set(doc.id, { id: doc.id, ...doc.data() } as Package);
-      }
-    });
-    
-    return Array.from(resultsMap.values());
-  } catch (error) {
-    console.error("Error searching packages:", error);
-    return [];
-  }
 }
