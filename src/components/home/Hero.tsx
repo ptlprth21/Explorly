@@ -3,14 +3,12 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search, Shuffle, ArrowRight, TrendingUp } from 'lucide-react';
 import type { Country, GlobalStats, Package } from '@/types';
 import InteractiveGlobe from './InteractiveGlobe';
 import { getCountries, getPackages } from '@/lib/data';
 import { slugify } from '@/lib/utils';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
 import Container from '../ui/Container';
+import GlobalSearch from './GlobalSearch';
 
 interface GlobalHeroProps {
   stats: GlobalStats;
@@ -20,8 +18,6 @@ interface GlobalHeroProps {
 
 export default function Hero() {
   const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const [countries, setCountries] = useState<Country[]>([]);
   const [packages, setPackages] = useState<Package[]>([]);
   const [stats, setStats] = useState<GlobalStats | null>(null);
@@ -84,19 +80,8 @@ export default function Hero() {
     
   }, [stats]);
 
-  const filteredCountries = countries.filter(country =>
-    country.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   const handleCountrySelect = (country: Country) => {
-    setSearchTerm('');
-    setShowSuggestions(false);
     router.push(`/country/${slugify(country.name)}`);
-  };
-
-  const onRandomCountry = () => {
-    const randomCountry = countries[Math.floor(Math.random() * countries.length)];
-    handleCountrySelect(randomCountry);
   };
 
   if (!stats) {
@@ -166,67 +151,10 @@ export default function Hero() {
         </p>
 
         {/* Search Section */}
-        <div className="max-w-2xl mx-auto mb-8 sm:mb-12 px-4">
-          <div className="relative">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 sm:h-6 sm:w-6 text-gray-400" />
-              <Input
-                type="text"
-                placeholder="Where do you want to go?"
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setShowSuggestions(e.target.value.length > 0);
-                }}
-                onFocus={() => setShowSuggestions(searchTerm.length > 0)}
-                className="w-full pl-12 sm:pl-14 pr-4 py-3 sm:py-4 lg:py-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-gray-400 text-base sm:text-lg lg:text-xl focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:bg-white/20 transition-all"
-              />
-            </div>
-
-            {/* Search Suggestions */}
-            {showSuggestions && filteredCountries.length > 0 && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-black/90 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden z-50 max-h-60 overflow-y-auto">
-                {filteredCountries.slice(0, 5).map((country) => (
-                  <button
-                    key={country.name}
-                    onClick={() => handleCountrySelect(country)}
-                    className="w-full px-4 py-3 text-left hover:bg-white/10 transition-colors flex items-center space-x-3"
-                  >
-                    <span className="text-xl sm:text-2xl">{country.flag}</span>
-                    <div>
-                      <div className="font-medium text-white text-sm sm:text-base">{country.name}</div>
-                      <div className="text-xs sm:text-sm text-gray-400">{country.tagline}</div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-6 sm:mt-8">
-            <Button
-              onClick={onRandomCountry}
-              size="lg"
-              className="bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-400 hover:to-blue-400 text-white font-semibold transition-all duration-300 transform hover:scale-105"
-            >
-              <Shuffle className="h-4 w-4 sm:h-5 sm:w-5" />
-              <span>Surprise Me</span>
-            </Button>
-            <Button
-              onClick={() => router.push('/destinations')}
-              size="lg"
-              variant="outline"
-              className="border-2 border-white/30 backdrop-blur-sm text-white font-semibold hover:bg-white/10"
-            >
-              <span>Explore Tours</span>
-              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
-            </Button>
-          </div>
-        </div>
+        <GlobalSearch />
 
         {/* Animated Global Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4 mt-12">
           <div className="text-center bg-white/5 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-white/10">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-400 mb-1">
               🌍 {animatedStats.countries}+
@@ -253,13 +181,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Trending Now Badge */}
-        <div className="mt-8 sm:mt-12 flex justify-center">
-          <div className="flex items-center space-x-2 bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-sm border border-orange-400/30 rounded-full px-4 sm:px-6 py-2 sm:py-3">
-            <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
-            <span className="text-orange-300 font-medium text-sm sm:text-base">Trending: Japan Cherry Blossom Season</span>
-          </div>
-        </div>
       </div>
 
       {/* Scroll Indicator */}
@@ -271,4 +192,3 @@ export default function Hero() {
     </section>
   );
 }
-
