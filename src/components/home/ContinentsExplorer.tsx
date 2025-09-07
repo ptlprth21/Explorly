@@ -22,7 +22,7 @@ export default function ContinentsExplorer() {
             case 'Europe': return {...c, emoji: '🏰', description: 'Historic cities, alpine adventures, and cultural treasures'};
             case 'Asia': return {...c, emoji: '🏯', description: 'Ancient traditions, modern cities, and spiritual journeys'};
             case 'Africa': return {...c, emoji: '🦁', description: 'Safari adventures, diverse cultures, and natural wonders'};
-            case 'North America': return {...c, emoji: '🗽', description: 'From ancient ruins to modern metropolises'};
+            case 'North America': return {...c, emoji: '🏞️', description: 'From national parks to vibrant metropolises'};
             case 'South America': return {...c, emoji: '💃', description: 'Vibrant cultures, ancient ruins, and stunning landscapes'};
             case 'Australia': return {...c, emoji: '🏄‍♂️', description: 'Tropical paradises and unique wildlife experiences'};
             default: return {...c, emoji: '❄️', description: 'The last frontier of pristine icy wilderness'};
