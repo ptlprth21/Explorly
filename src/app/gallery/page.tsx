@@ -182,9 +182,9 @@ export default function GlobalGalleryPage() {
                     <div className="relative">
                     <Image
                         src={item.src}
-                        alt={item.location}
+                        alt={item.title}
                         width={500}
-                        height={Math.floor(Math.random() * (600-400) + 400)}
+                        height={500}
                         data-ai-hint="gallery photo"
                         className="w-full h-auto group-hover:scale-110 transition-transform duration-500"
                     />

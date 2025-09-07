@@ -446,9 +446,9 @@ export default function CountryDetailPage({ params }: { params: { name: string }
               <div className="relative overflow-hidden rounded-xl">
                 <Image
                   src={image}
-                  alt={`Gallery ${index + 1}`}
+                  alt={`Gallery image of ${country.name} ${index + 1}`}
                   width={500}
-                  height={Math.floor(Math.random() * (600 - 400) + 400)}
+                  height={500}
                   data-ai-hint="traveler photo"
                   className="w-full h-auto group-hover:scale-110 transition-transform duration-500"
                 />

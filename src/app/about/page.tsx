@@ -8,7 +8,7 @@ export default function AboutPage() {
     <>
       <section className="relative h-64 w-full">
         <Image
-          src="https://picsum.photos/seed/explorly-team/1920/1080"
+          src="https://picsum.photos/seed/about-hero/1920/1080"
           alt="A team of hikers celebrating on a mountain peak"
           data-ai-hint="team mountains"
           fill

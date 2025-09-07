@@ -100,7 +100,7 @@ export default function Hero() {
       {/* Animated Background */}
       <div className="absolute inset-0">
         <Image 
-          src="https://picsum.photos/seed/hero-landscape/1920/1080"
+          src="https://picsum.photos/seed/hero-main/1920/1080"
           alt="Breathtaking landscape of mountains and a lake"
           fill
           className="object-cover"
