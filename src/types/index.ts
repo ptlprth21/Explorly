@@ -63,4 +63,8 @@ export interface Country {
     heroImage: string;
     tagline: string;
     continent: ContinentName;
+    culture: string;
+    bestTime: string;
+    currency: string;
+    language: string;
 }

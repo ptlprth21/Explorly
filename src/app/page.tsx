@@ -1,15 +1,22 @@
 
 import Hero from '@/components/home/Hero';
-import PopularPackages from '@/components/home/PopularPackages';
 import ContinentsExplorer from '@/components/home/ContinentsExplorer';
 import Container from '@/components/ui/Container';
+import { getContinents, getCountries, getPackages } from '@/lib/data';
+import CountrySpotlight from '@/components/home/CountrySpotlight';
 
-export default function Home() {
+export default async function Home() {
+  const continents = await getContinents();
+  const countries = await getCountries();
+  const packages = await getPackages();
+
+  const spotlightCountry = countries.find(c => c.name === 'Italy');
+
   return (
     <div className="bg-black">
       <Hero />
-      <PopularPackages />
-      <ContinentsExplorer />
+      {spotlightCountry && <CountrySpotlight country={spotlightCountry} packages={packages} />}
+      <ContinentsExplorer continents={continents} />
     </div>
   );
 }
