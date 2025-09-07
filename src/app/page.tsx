@@ -5,6 +5,7 @@ import ContinentsExplorer from '@/components/home/ContinentsExplorer';
 import Container from '@/components/ui/Container';
 import { getContinents, getCountries, getPackages } from '@/lib/data';
 import CountrySpotlight from '@/components/home/CountrySpotlight';
+import MusicPlayerPackages from '@/components/home/MusicPlayerPackages';
 
 export default async function Home() {
   const continents = await getContinents();
@@ -16,9 +17,9 @@ export default async function Home() {
   return (
     <div className="bg-black">
       <Hero />
+      <MusicPlayerPackages packages={packages} />
       {spotlightCountry && <CountrySpotlight country={spotlightCountry} packages={packages} />}
       <ContinentsExplorer />
     </div>
   );
 }
-
