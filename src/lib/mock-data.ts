@@ -588,9 +588,10 @@ export const continents: Continent[] = [
     { name: 'Africa', image: 'https://picsum.photos/seed/africa-savannah/800/600', dataAiHint: 'savannah animal', emoji: '🦁' },
     { name: 'Asia', image: 'https://picsum.photos/seed/asia-pagoda/800/600', dataAiHint: 'temple asia', emoji: '🏯' },
     { name: 'Europe', image: 'https://picsum.photos/seed/europe-old-town/800/600', dataAiHint: 'old city', emoji: '🏰' },
-    { name: 'North America', image: 'https://picsum.photos/seed/north-america-mountains/800/600', dataAiHint: 'mountain lake', emoji: '🏞️' },
+    { name: 'North America', image: 'https://picsum.photos/seed/canada-rockies-lake/800/600', dataAiHint: 'mountain lake', emoji: '🏞️' },
     { name: 'South America', image: 'https://picsum.photos/seed/south-america-ruins/800/600', dataAiHint: 'inca ruins', emoji: '💃' },
     { name: 'Australia', image: 'https://picsum.photos/seed/australia-red-rock/800/600', dataAiHint: 'outback desert', emoji: '🏄‍♂️' },
     { name: 'Antarctica', image: 'https://picsum.photos/seed/antarctica-glacier/800/600', dataAiHint: 'iceberg snow', emoji: '❄️' },
 ];
+
 
