@@ -2,6 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Calendar, Users, MapPin, Plane } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -12,6 +13,7 @@ import { useBookingWizard } from '@/context/BookingWizardContext';
 
 export default function FloatingBookingPanel() {
   const { openWizard } = useBookingWizard();
+  const router = useRouter();
   const [packages, setPackages] = useState<Package[]>([]);
   const [isMinimized, setIsMinimized] = useState(true);
   const [selectedPackageId, setSelectedPackageId] = useState<string>('');
@@ -25,8 +27,21 @@ export default function FloatingBookingPanel() {
   }, []);
 
   const handleOpenWizard = () => {
-    const selectedPackage = packages.find(p => p.id === selectedPackageId) || null;
-    openWizard(selectedPackage);
+    const selectedPackage = packages.find(p => p.id === selectedPackageId);
+    if (selectedPackage) {
+      openWizard(selectedPackage);
+    } else {
+      router.push('/destinations');
+    }
+  };
+
+  const handleMobileClick = () => {
+    const defaultPackage = packages.find(p => p.availableDates.length > 0) || null;
+    if (defaultPackage) {
+      openWizard(defaultPackage);
+    } else {
+      router.push('/destinations');
+    }
   };
 
   return (
@@ -65,7 +80,7 @@ export default function FloatingBookingPanel() {
                     <SelectValue placeholder="Choose destination" />
                   </SelectTrigger>
                   <SelectContent>
-                    {packages.map(pkg => (
+                    {packages.filter(p => p.availableDates.length > 0).map(pkg => (
                       <SelectItem key={pkg.id} value={pkg.id}>{pkg.title}</SelectItem>
                     ))}
                   </SelectContent>
@@ -108,7 +123,7 @@ export default function FloatingBookingPanel() {
       {/* Mobile Sticky CTA */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-neutral-900/95 backdrop-blur-xl border-t border-neutral-800/50 p-4">
         <Button 
-          onClick={() => openWizard(null)}
+          onClick={handleMobileClick}
           className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-4"
         >
           <Plane className="h-5 w-5" />
