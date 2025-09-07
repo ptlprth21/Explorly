@@ -6,13 +6,14 @@ import Image from 'next/image';
 import { notFound, useRouter, useParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import StarRating from '@/components/ui/StarRating';
-import { Clock, Mountain, MapPin, CheckCircle, XCircle, ArrowLeft, Check } from 'lucide-react';
+import { Clock, Mountain, MapPin, CheckCircle, XCircle, ArrowLeft, Check, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import type { Package } from '@/types';
 import FirebaseReviews from '@/components/packages/FirebaseReviews';
 import { useBookingWizard } from '@/context/BookingWizardContext';
 import PackageGallery from '@/components/packages/PackageGallery';
+import { useWishlist } from '@/context/WishlistContext';
 
 
 export default function PackageDetailPage() {
@@ -23,6 +24,8 @@ export default function PackageDetailPage() {
   const [activeTab, setActiveTab] = useState('overview');
   const { openWizard } = useBookingWizard();
   const router = useRouter();
+  const { wishlist, toggleWishlist } = useWishlist();
+  const isWishlisted = wishlist.includes(id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -229,8 +232,9 @@ export default function PackageDetailPage() {
                 Book This Trip
               </Button>
 
-              <Button variant="outline" className="w-full">
-                Add to Wishlist
+              <Button variant="outline" className="w-full" onClick={() => toggleWishlist(id)}>
+                <Heart className={`mr-2 h-4 w-4 ${isWishlisted ? 'fill-current text-red-500' : ''}`} />
+                {isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
               </Button>
 
               <div className="mt-6 pt-6 border-t border-border">

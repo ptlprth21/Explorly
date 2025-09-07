@@ -14,6 +14,7 @@ import { BookingWizardProvider, useBookingWizard } from '@/context/BookingWizard
 import BookingWizard from '@/components/booking/BookingWizard';
 import FloatingBookingPanel from '@/components/layout/FloatingBookingPanel';
 import { AuthProvider } from '@/context/AuthContext';
+import { WishlistProvider } from '@/context/WishlistContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -65,12 +66,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <ErrorBoundary>
-              <BookingWizardProvider>
-                <AppLayout>{children}</AppLayout>
-              </BookingWizardProvider>
-              <Toaster />
-            </ErrorBoundary>
+            <WishlistProvider>
+              <ErrorBoundary>
+                <BookingWizardProvider>
+                  <AppLayout>{children}</AppLayout>
+                </BookingWizardProvider>
+                <Toaster />
+              </ErrorBoundary>
+            </WishlistProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
