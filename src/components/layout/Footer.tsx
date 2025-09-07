@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="flex flex-col gap-4 md:col-span-1 lg:col-span-1">
               <Link href="/" className="flex items-center gap-2">
                 <PlaneTakeoff className="h-8 w-8 text-primary" />
-                <span className="text-xl font-bold tracking-tight text-foreground">WorldTrips</span>
+                <span className="text-xl font-bold tracking-tight text-foreground">RoamReady</span>
               </Link>
               <p className="text-sm text-foreground/60">Your adventure starts here. Discover and book unique travel experiences worldwide.</p>
               <div className="flex gap-4">
@@ -48,7 +48,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border/40 py-6 text-center text-sm text-foreground/60">
-          <p>&copy; {new Date().getFullYear()} WorldTrips. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} RoamReady. All rights reserved.</p>
         </div>
       </Container>
     </footer>
