@@ -15,7 +15,7 @@ import { useBookingWizard } from '@/context/BookingWizardContext';
 import PackageGallery from '@/components/packages/PackageGallery';
 
 
-export default function PackageDetailPage({ params }: { params: { id: string } }) {
+export default function PackageDetailPage({ params: { id } }: { params: { id: string } }) {
   const [pkg, setPackage] = useState<Package | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
@@ -25,7 +25,7 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const packageData = await getPackageById(params.id);
+      const packageData = await getPackageById(id);
       if (packageData) {
         setPackage(packageData);
       } else {
@@ -35,7 +35,7 @@ export default function PackageDetailPage({ params }: { params: { id: string } }
     };
 
     fetchData();
-  }, [params.id]);
+  }, [id]);
 
   if (isLoading || !pkg) {
     return (
