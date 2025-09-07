@@ -1,9 +1,9 @@
 
 'use server';
-import type { Package, Review, Continent, Country } from '@/types';
+import type { Package, Review, Continent, Country, Theme } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
-import { packagesData, reviews as allReviews, continents as allContinents, countries as allCountries } from './mock-data';
+import { packagesData, reviews as allReviews, continents as allContinents, countries as allCountries, themes as allThemes } from './mock-data';
 
 // This is a mock function that simulates the AI selection process.
 // In a real app, this would be an async call to the Genkit flow.
@@ -92,4 +92,8 @@ export async function getCountries(): Promise<Country[]> {
 
 export async function getCountryBySlug(slug: string): Promise<Country | undefined> {
   return allCountries.find(c => slugify(c.name) === slug);
+}
+
+export async function getThemes(): Promise<Theme[]> {
+    return allThemes;
 }

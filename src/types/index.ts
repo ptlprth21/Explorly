@@ -1,4 +1,5 @@
 
+
 export interface ItineraryStep {
   day: number;
   title: string;
@@ -13,6 +14,13 @@ export interface Review {
   comment: string;
   date: string;
   verified: boolean;
+}
+
+export type ThemeId = 'all' | 'safari' | 'cultural' | 'beach' | 'adventure' | 'city';
+export interface Theme {
+    id: ThemeId;
+    name: string;
+    icon: string;
 }
 
 export type ContinentName = 'Asia' | 'Europe' | 'Africa' | 'North America' | 'South America' | 'Australia' | 'Antarctica';
@@ -30,6 +38,7 @@ export interface Package {
   rating: number;
   reviewCount: number;
   type: 'Safari' | 'Cultural' | 'Beach' | 'Adventure' | 'City Break';
+  theme: ThemeId;
   difficulty: 'Easy' | 'Moderate' | 'Hard';
   highlights: string[];
   description: string;
@@ -53,4 +62,5 @@ export interface Country {
     flag: string;
     heroImage: string;
     tagline: string;
+    continent: ContinentName;
 }
