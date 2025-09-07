@@ -19,7 +19,7 @@ const TravelerGallery = ({ images }: TravelerGalleryProps) => {
             width={500}
             height={400} 
             className="rounded-lg object-cover w-full h-auto"
-            data-ai-hint="travel people"
+            data-ai-hint="travel people destination"
           />
         </div>
       ))}

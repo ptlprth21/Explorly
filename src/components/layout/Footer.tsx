@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { PlaneTakeoff, Facebook, Twitter, Instagram } from 'lucide-react';
+import { PlaneTakeoff, Facebook, X, Instagram } from 'lucide-react';
 import Container from '../ui/Container';
 
 const Footer = () => {
@@ -17,7 +17,7 @@ const Footer = () => {
               <p className="text-sm text-foreground/60">Your adventure starts here. Discover and book unique travel experiences worldwide.</p>
               <div className="flex gap-4">
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><Twitter className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
+                <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X"><X className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
               </div>
             </div>

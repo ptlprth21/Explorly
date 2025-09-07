@@ -51,7 +51,7 @@ export default function ContactPage() {
         <Image
           src="https://picsum.photos/seed/contact-hero/1920/1080"
           alt="A person writing on a notebook with a laptop nearby"
-          data-ai-hint="writing contact"
+          data-ai-hint="contact us"
           fill
           className="object-cover"
         />
