@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { X, ChevronLeft, ChevronRight, Check, Calendar, Users, CreditCard, MapPin, Star, Loader2 } from 'lucide-react';
 import type { Package } from '@/types';
@@ -15,6 +15,7 @@ import StripePaymentForm from './StripePaymentForm';
 import { getStripe } from '@/lib/stripe';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
+import { getPackages } from '@/lib/data';
 
 interface BookingWizardProps {
   selectedPackage: Package | null;
@@ -28,11 +29,25 @@ const steps = [
   { id: 4, title: 'Payment', icon: CreditCard }
 ];
 
-export default function BookingWizard({ selectedPackage, onClose }: BookingWizardProps) {
+export default function BookingWizard({ selectedPackage: initialPackage, onClose }: BookingWizardProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const { user } = useAuth();
+  
+  const [selectedPackage, setSelectedPackage] = useState<Package | null>(initialPackage);
+  const [availablePackages, setAvailablePackages] = useState<Package[]>([]);
+
+  useEffect(() => {
+    if (!initialPackage) {
+      const fetchPackages = async () => {
+        const allPackages = await getPackages();
+        const realPackages = allPackages.filter(p => p.availableDates.length > 0);
+        setAvailablePackages(realPackages);
+      };
+      fetchPackages();
+    }
+  }, [initialPackage]);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -99,6 +114,11 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
         variant: 'destructive',
     });
   };
+  
+  const handleSelectPackage = (pkg: Package) => {
+    setSelectedPackage(pkg);
+    nextStep();
+  }
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
@@ -166,34 +186,63 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
           {currentStep !== 4 && (
             <>
               {/* Step 1: Package Info */}
-              {currentStep === 1 && selectedPackage && (
+              {currentStep === 1 && (
                 <div className="space-y-6 animate-in fade-in-50">
-                  <h3 className="text-xl font-bold text-white mb-4">Selected Package</h3>
-                  <div className="bg-card/50 rounded-xl p-4 border border-border">
-                    <div className="flex items-center space-x-4">
-                      <Image 
-                        src={selectedPackage.image} 
-                        alt={selectedPackage.title}
-                        width={80}
-                        height={80}
-                        className="w-20 h-20 object-cover rounded-lg"
-                      />
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-white">{selectedPackage.title}</h4>
-                        <p className="text-sm text-muted-foreground">{selectedPackage.destination} • {selectedPackage.duration}</p>
-                        <div className="flex items-center space-x-2 mt-2">
-                          <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                          <span className="text-sm text-muted-foreground">{selectedPackage.rating} ({selectedPackage.reviewCount} reviews)</span>
+                  <h3 className="text-xl font-bold text-white mb-4">
+                    {selectedPackage ? 'Selected Package' : 'Choose Your Adventure'}
+                  </h3>
+                  {selectedPackage ? (
+                    <div className="bg-card/50 rounded-xl p-4 border border-border">
+                      <div className="flex items-center space-x-4">
+                        <Image 
+                          src={selectedPackage.image} 
+                          alt={selectedPackage.title}
+                          width={80}
+                          height={80}
+                          className="w-20 h-20 object-cover rounded-lg"
+                        />
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-white">{selectedPackage.title}</h4>
+                          <p className="text-sm text-muted-foreground">{selectedPackage.destination} • {selectedPackage.duration}</p>
+                          <div className="flex items-center space-x-2 mt-2">
+                            <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                            <span className="text-sm text-muted-foreground">{selectedPackage.rating} ({selectedPackage.reviewCount} reviews)</span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-xl font-bold text-primary">${selectedPackage.price.toLocaleString()}</div>
+                          <div className="text-xs text-muted-foreground">per person</div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-xl font-bold text-primary">${selectedPackage.price.toLocaleString()}</div>
-                        <div className="text-xs text-muted-foreground">per person</div>
-                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {availablePackages.map(pkg => (
+                        <button key={pkg.id} onClick={() => handleSelectPackage(pkg)} className="w-full text-left bg-card/50 rounded-xl p-4 border border-border hover:border-primary transition-all">
+                          <div className="flex items-center space-x-4">
+                            <Image 
+                              src={pkg.image} 
+                              alt={pkg.title}
+                              width={60}
+                              height={60}
+                              className="w-16 h-16 object-cover rounded-lg"
+                            />
+                            <div className="flex-1">
+                              <h4 className="font-semibold text-white">{pkg.title}</h4>
+                              <p className="text-sm text-muted-foreground">{pkg.destination}</p>
+                            </div>
+                            <div className="text-right">
+                              <div className="font-bold text-primary">${pkg.price.toLocaleString()}</div>
+                              <div className="text-xs text-muted-foreground">per person</div>
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
+
 
               {/* Step 2: Select Dates */}
               {currentStep === 2 && selectedPackage && (
@@ -318,6 +367,7 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
               <Button 
                 onClick={nextStep}
                 disabled={
+                  (currentStep === 1 && !selectedPackage) ||
                   (currentStep === 2 && !formData.selectedDate) ||
                   (currentStep === 3 && (!formData.firstName || !formData.lastName || !formData.email))
                 }

@@ -13,7 +13,6 @@ import { useBookingWizard } from '@/context/BookingWizardContext';
 
 export default function FloatingBookingPanel() {
   const { openWizard } = useBookingWizard();
-  const router = useRouter();
   const [packages, setPackages] = useState<Package[]>([]);
   const [isMinimized, setIsMinimized] = useState(true);
   const [selectedPackageId, setSelectedPackageId] = useState<string>('');
@@ -28,20 +27,11 @@ export default function FloatingBookingPanel() {
 
   const handleOpenWizard = () => {
     const selectedPackage = packages.find(p => p.id === selectedPackageId);
-    if (selectedPackage) {
-      openWizard(selectedPackage);
-    } else {
-      router.push('/destinations');
-    }
+    openWizard(selectedPackage || null);
   };
 
   const handleMobileClick = () => {
-    const defaultPackage = packages.find(p => p.availableDates.length > 0) || null;
-    if (defaultPackage) {
-      openWizard(defaultPackage);
-    } else {
-      router.push('/destinations');
-    }
+    openWizard(null);
   };
 
   return (
