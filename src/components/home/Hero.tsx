@@ -4,11 +4,11 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Country, GlobalStats, Package } from '@/types';
-import InteractiveGlobe from './InteractiveGlobe';
 import { getCountries, getPackages } from '@/lib/data';
 import { slugify } from '@/lib/utils';
 import Container from '../ui/Container';
 import GlobalSearch from './GlobalSearch';
+import Image from 'next/image';
 
 interface GlobalHeroProps {
   stats: GlobalStats;
@@ -97,9 +97,16 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background with Globe */}
+      {/* Animated Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/30 via-neutral-900/50 to-purple-900/30"></div>
+        <Image 
+          src="https://picsum.photos/seed/hero-bg/1920/1080"
+          alt="Breathtaking landscape"
+          fill
+          className="object-cover"
+          data-ai-hint="epic landscape"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/50 via-neutral-900/70 to-purple-900/50"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(45,212,191,0.15),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,rgba(59,130,246,0.1),transparent_50%)]"></div>
         
@@ -119,25 +126,8 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 text-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Rotating Globe */}
-        <div className="mb-8 sm:mb-12 flex justify-center">
-          <div className="w-full max-w-4xl h-[300px] sm:h-[400px] lg:h-[500px] relative">
-            <Suspense fallback={
-              <div className="w-full h-full flex items-center justify-center bg-neutral-900/20 rounded-2xl">
-                <div className="text-center">
-                  <div className="w-16 h-16 border-4 border-teal-400/30 border-t-teal-400 rounded-full animate-spin mb-4"></div>
-                  <p className="text-white text-lg">Loading Interactive Globe...</p>
-                </div>
-              </div>
-            }>
-              <InteractiveGlobe 
-                onCountrySelect={handleCountrySelect}
-              />
-            </Suspense>
-          </div>
-        </div>
-
+      <div className="relative z-10 text-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        
         {/* Headlines */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight mb-4 sm:mb-6 bg-gradient-to-b from-white via-gray-100 to-gray-300 bg-clip-text text-transparent px-4">
           Explore the World,
