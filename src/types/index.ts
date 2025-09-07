@@ -1,3 +1,4 @@
+import { z } from 'zod';
 
 export interface ItineraryDay {
   day: number;
@@ -95,3 +96,16 @@ export interface BookingData {
   paymentIntentId?: string;
   status: 'confirmed' | 'pending' | 'cancelled';
 }
+
+// Contact Form Schemas and Types
+export const ContactFormInputSchema = z.object({
+  name: z.string().describe('The name of the person submitting the form.'),
+  email: z.string().email().describe('The email address of the person.'),
+  message: z.string().describe('The message content.'),
+});
+export type ContactFormInput = z.infer<typeof ContactFormInputSchema>;
+
+export const ContactFormOutputSchema = z.object({
+  reply: z.string().describe('A confirmation message to show the user.'),
+});
+export type ContactFormOutput = z.infer<typeof ContactFormOutputSchema>;
