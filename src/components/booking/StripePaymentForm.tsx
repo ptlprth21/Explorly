@@ -146,11 +146,11 @@ export default function StripePaymentForm({
         </h3>
         
         <div className="space-y-3 text-sm">
-          <div className="flex justify-between"><span className="text-muted-foreground">{pkg.title} × {travelers}</span> <span className="text-white">${subtotal.toLocaleString()}</span></div>
-          <div className="flex justify-between"><span className="text-muted-foreground">Service fee</span> <span className="text-white">${serviceFee}</span></div>
-          <div className="flex justify-between"><span className="text-muted-foreground">Payment processing</span> <span className="text-white">${stripeFee.toFixed(2)}</span></div>
+          <div className="flex justify-between"><span className="text-muted-foreground">{pkg.title} × {travelers}</span> <span className="text-white">€{subtotal.toLocaleString()}</span></div>
+          <div className="flex justify-between"><span className="text-muted-foreground">Service fee</span> <span className="text-white">€{serviceFee}</span></div>
+          <div className="flex justify-between"><span className="text-muted-foreground">Payment processing</span> <span className="text-white">€{stripeFee.toFixed(2)}</span></div>
           <div className="border-t border-border pt-3 mt-3">
-            <div className="flex justify-between font-semibold text-lg"><span className="text-white">Total</span><span className="text-primary">${totalAmount.toLocaleString()}</span></div>
+            <div className="flex justify-between font-semibold text-lg"><span className="text-white">Total</span><span className="text-primary">€{totalAmount.toLocaleString()}</span></div>
           </div>
         </div>
       </div>
@@ -181,7 +181,7 @@ export default function StripePaymentForm({
             ) : (
               <>
                 <Lock className="h-5 w-5 mr-2" />
-                <span>Pay ${totalAmount.toLocaleString()} Securely</span>
+                <span>Pay €{totalAmount.toLocaleString()} Securely</span>
               </>
             )}
           </Button>

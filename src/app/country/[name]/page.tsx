@@ -178,8 +178,8 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                 step={100} 
               />
               <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                <span>${priceFilter[0]}</span>
-                <span>${priceFilter[1]}</span>
+                <span>€{priceFilter[0]}</span>
+                <span>€{priceFilter[1]}</span>
               </div>
             </div>
             
@@ -315,7 +315,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
                       
                       <div className="flex items-center space-x-3 sm:space-x-4">
                         <div className="text-right">
-                          <div className="text-xl sm:text-2xl font-bold text-primary">${currentPackage.price.toLocaleString()}</div>
+                          <div className="text-xl sm:text-2xl font-bold text-primary">€{currentPackage.price.toLocaleString()}</div>
                           <div className="text-xs sm:text-sm text-muted-foreground">per person</div>
                         </div>
                         <Link href={`/packages/${currentPackage.id}`}>
@@ -463,5 +463,3 @@ export default function CountryDetailPage({ params }: { params: { name: string }
     </div>
   );
 }
-
-    

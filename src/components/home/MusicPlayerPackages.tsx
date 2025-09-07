@@ -223,7 +223,7 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
                     </div>
                     
                     <div className="text-right">
-                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">${currentPackage.price.toLocaleString()}</div>
+                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-primary">€{currentPackage.price.toLocaleString()}</div>
                         <div className="text-xs sm:text-sm text-muted-foreground">per person</div>
                     </div>
                     </div>

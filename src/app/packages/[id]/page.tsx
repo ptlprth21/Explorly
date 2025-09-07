@@ -208,7 +208,7 @@ export default function PackageDetailPage() {
             <div className="bg-card rounded-xl shadow-sm p-6 sticky top-24">
               <div className="text-center mb-6">
                 <div className="text-3xl font-bold text-foreground">
-                  ${pkg.price.toLocaleString()}
+                  €{pkg.price.toLocaleString()}
                 </div>
                 <div className="text-muted-foreground">per person</div>
               </div>

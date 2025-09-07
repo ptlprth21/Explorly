@@ -57,7 +57,7 @@ const PackageCard = ({ package: pkg }: PackageCardProps) => {
                   <span className="text-sm text-gray-300">{pkg.duration} Days</span>
                 </div>
                 <div className="text-lg font-bold text-teal-400">
-                  ${pkg.price.toLocaleString()}
+                  €{pkg.price.toLocaleString()}
                 </div>
               </div>
               

@@ -139,7 +139,7 @@ export default function AccountPage() {
                             <CardTitle className="mb-2 text-xl">{booking.packageName}</CardTitle>
                             <p className="text-sm text-muted-foreground">Booked for: {new Date(booking.selectedDate).toLocaleDateString()}</p>
                             <p className="text-sm text-muted-foreground">Travelers: {booking.travelers}</p>
-                            <p className="text-lg font-semibold text-primary mt-4">${booking.totalPrice.toLocaleString()}</p>
+                            <p className="text-lg font-semibold text-primary mt-4">€{booking.totalPrice.toLocaleString()}</p>
                             <Button asChild variant="outline" className="mt-4">
                                 <Link href={`/packages/${booking.packageId}`}>View Package</Link>
                             </Button>

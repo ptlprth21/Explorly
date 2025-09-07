@@ -210,7 +210,7 @@ export default function BookingWizard({ selectedPackage: initialPackage, onClose
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-xl font-bold text-primary">${selectedPackage.price.toLocaleString()}</div>
+                          <div className="text-xl font-bold text-primary">€{selectedPackage.price.toLocaleString()}</div>
                           <div className="text-xs text-muted-foreground">per person</div>
                         </div>
                       </div>
@@ -232,7 +232,7 @@ export default function BookingWizard({ selectedPackage: initialPackage, onClose
                               <p className="text-sm text-muted-foreground">{pkg.destination}</p>
                             </div>
                             <div className="text-right">
-                              <div className="font-bold text-primary">${pkg.price.toLocaleString()}</div>
+                              <div className="font-bold text-primary">€{pkg.price.toLocaleString()}</div>
                               <div className="text-xs text-muted-foreground">per person</div>
                             </div>
                           </div>

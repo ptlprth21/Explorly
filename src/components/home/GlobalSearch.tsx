@@ -121,7 +121,7 @@ export default function GlobalSearch() {
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-teal-400 font-bold text-sm">${pkg.price}</div>
+                <div className="text-teal-400 font-bold text-sm">€{pkg.price}</div>
               </div>
             </button>
           ))}

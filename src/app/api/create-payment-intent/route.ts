@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
-      currency: 'usd',
+      currency: 'eur',
       receipt_email: customerEmail,
       description: `Booking for ${metadata.packageTitle}`,
       metadata: {
