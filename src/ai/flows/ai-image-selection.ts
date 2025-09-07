@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -31,39 +32,14 @@ const AiImageSelectionOutputSchema = z.object({
 export type AiImageSelectionOutput = z.infer<typeof AiImageSelectionOutputSchema>;
 
 export async function aiImageSelection(input: AiImageSelectionInput): Promise<AiImageSelectionOutput> {
-  return aiImageSelectionFlow(input);
-}
-
-const aiImageSelectionPrompt = ai.definePrompt({
-  name: 'aiImageSelectionPrompt',
-  input: {schema: AiImageSelectionInputSchema},
-  output: {schema: AiImageSelectionOutputSchema},
-  prompt: `You are an AI image selection expert for a travel booking platform.
-  Given a list of image URLs for a travel package, user review sentiments, the average rating, and the package ID,
-  select the most visually appealing image that is likely to attract potential customers.
-  Prioritize images that reflect positive sentiment from reviews and high ratings, and also consider image quality and relevance to the package.
-
-  Image URLs: {{imageUrls}}
-  Package ID: {{packageId}}
-  Review Sentiment: {{reviewSentiment}}
-  Average Rating: {{averageRating}}
-
-  Based on these factors, choose the best image URL and explain your reasoning. Be concise.
-  Return the selected image URL and your reason for selecting it. Keep the reason to under 30 words.
-  {
-    "selectedImageUrl": "<selected_image_url>",
-    "reason": "<reason_for_selection>"
-  }`,
-});
-
-const aiImageSelectionFlow = ai.defineFlow(
-  {
-    name: 'aiImageSelectionFlow',
-    inputSchema: AiImageSelectionInputSchema,
-    outputSchema: AiImageSelectionOutputSchema,
-  },
-  async input => {
-    const {output} = await aiImageSelectionPrompt(input);
-    return output!;
+  // Check if there are any images to select from.
+  if (!input.imageUrls || input.imageUrls.length === 0) {
+    throw new Error('No image URLs provided for AI selection.');
   }
-);
+
+  // Fallback: return the first image.
+  return {
+    selectedImageUrl: input.imageUrls[0],
+    reason: 'This is a default image. The AI selection feature is currently unavailable.'
+  };
+}
