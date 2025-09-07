@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, PlaneTakeoff, X } from 'lucide-react';
+import { Menu, Compass, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -55,7 +55,7 @@ const Header = () => {
       <Container>
         <div className="relative flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <PlaneTakeoff className="h-8 w-8 text-primary" />
+            <Compass className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
           </Link>
           <div className="hidden items-center space-x-4 lg:flex">

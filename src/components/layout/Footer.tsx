@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { PlaneTakeoff, Facebook, X, Instagram } from 'lucide-react';
+import { Compass, Facebook, X, Instagram } from 'lucide-react';
 import Container from '../ui/Container';
 
 const Footer = () => {
@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="flex flex-col gap-4 md:col-span-1 lg:col-span-1">
               <Link href="/" className="flex items-center gap-2">
-                <PlaneTakeoff className="h-8 w-8 text-primary" />
+                <Compass className="h-8 w-8 text-primary" />
                 <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
               </Link>
               <p className="text-sm text-foreground/60">Your adventure starts here. Discover and book unique travel experiences worldwide.</p>

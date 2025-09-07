@@ -100,11 +100,11 @@ export default function Hero() {
       {/* Animated Background */}
       <div className="absolute inset-0">
         <Image 
-          src="https://picsum.photos/seed/hero-main/1920/1080"
-          alt="Breathtaking landscape of mountains and a lake"
+          src="https://picsum.photos/seed/norway-fjord-view/1920/1080"
+          alt="Breathtaking landscape of mountains and a lake in Norway"
           fill
           className="object-cover"
-          data-ai-hint="epic landscape"
+          data-ai-hint="norway fjord"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background"></div>
         
