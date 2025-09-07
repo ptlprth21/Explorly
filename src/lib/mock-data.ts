@@ -1,5 +1,27 @@
 
-import type { Package, Review, Continent } from '@/types';
+import type { Package, Review, Continent, Country } from '@/types';
+
+export const countries: Country[] = [
+    { name: 'Tanzania', flag: '🇹🇿', heroImage: 'https://picsum.photos/seed/tanzania-hero/1920/1080', tagline: 'The Soul of Africa' },
+    { name: 'Japan', flag: '🇯🇵', heroImage: 'https://picsum.photos/seed/japan-hero/1920/1080', tagline: 'Land of the Rising Sun' },
+    { name: 'Peru', flag: '🇵🇪', heroImage: 'https://picsum.photos/seed/peru-hero/1920/1080', tagline: 'Empire of Hidden Treasures' },
+    { name: 'Greece', flag: '🇬🇷', heroImage: 'https://picsum.photos/seed/greece-hero/1920/1080', tagline: 'The Cradle of Western Civilization' },
+    { name: 'Canada', flag: '🇨🇦', heroImage: 'https://picsum.photos/seed/canada-hero/1920/1080', tagline: 'The Great White North' },
+    { name: 'Australia', flag: '🇦🇺', heroImage: 'https://picsum.photos/seed/australia-hero/1920/1080', tagline: 'The Land Down Under' },
+    { name: 'Italy', flag: '🇮🇹', heroImage: 'https://picsum.photos/seed/italy-hero/1920/1080', tagline: 'La Dolce Vita' },
+    { name: 'Vietnam', flag: '🇻🇳', heroImage: 'https://picsum.photos/seed/vietnam-hero/1920/1080', tagline: 'The Timeless Charm of Southeast Asia' },
+    { name: 'Argentina', flag: '🇦🇷', heroImage: 'https://picsum.photos/seed/argentina-hero/1920/1080', tagline: 'The Land of Silver' },
+    { name: 'Egypt', flag: '🇪🇬', heroImage: 'https://picsum.photos/seed/egypt-hero/1920/1080', tagline: 'The Gift of the Nile' },
+    { name: 'India', flag: '🇮🇳', heroImage: 'https://picsum.photos/seed/india-hero/1920/1080', tagline: 'Incredible India' },
+    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://picsum.photos/seed/uae-hero/1920/1080', tagline: 'The Land of Seven Emirates' },
+    { name: 'Thailand', flag: '🇹🇭', heroImage: 'https://picsum.photos/seed/thailand-hero/1920/1080', tagline: 'The Land of Smiles' },
+    { name: 'Cambodia', flag: '🇰🇭', heroImage: 'https://picsum.photos/seed/cambodia-hero/1920/1080', tagline: 'Kingdom of Wonder' },
+    { name: 'Singapore', flag: '🇸🇬', heroImage: 'https://picsum.photos/seed/singapore-hero/1920/1080', tagline: 'The Lion City' },
+    { name: 'Malaysia', flag: '🇲🇾', heroImage: 'https://picsum.photos/seed/malaysia-hero/1920/1080', tagline: 'Truly Asia' },
+    { name: 'South Korea', flag: '🇰🇷', heroImage: 'https://picsum.photos/seed/korea-hero/1920/1080', tagline: 'The Land of the Morning Calm' },
+    { name: 'France', flag: '🇫🇷', heroImage: 'https://picsum.photos/seed/france-hero/1920/1080', tagline: 'The City of Light' },
+    { name: 'Spain', flag: '🇪🇸', heroImage: 'https://picsum.photos/seed/spain-hero/1920/1080', tagline: 'The Kingdom of the Sun' },
+];
 
 export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
   {
@@ -7,7 +29,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Serengeti National Park',
     country: 'Tanzania',
     continent: 'Africa',
-    duration: '7 days',
+    duration: '7',
     price: 3499,
     gallery: [
       'https://picsum.photos/seed/safari1/1200/800',
@@ -36,7 +58,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Kyoto',
     country: 'Japan',
     continent: 'Asia',
-    duration: '5 days',
+    duration: '5',
     price: 2899,
     gallery: [
       'https://picsum.photos/seed/kyoto1/1200/800',
@@ -65,7 +87,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Cusco & Machu Picchu',
     country: 'Peru',
     continent: 'South America',
-    duration: '8 days',
+    duration: '8',
     price: 2950,
     gallery: [
       'https://picsum.photos/seed/peru1/1200/800',
@@ -93,7 +115,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Santorini, Mykonos, Crete',
     country: 'Greece',
     continent: 'Europe',
-    duration: '10 days',
+    duration: '10',
     price: 4200,
     gallery: [
       'https://picsum.photos/seed/greece1/1200/800',
@@ -121,7 +143,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Banff & Jasper',
     country: 'Canada',
     continent: 'North America',
-    duration: '9 days',
+    duration: '9',
     price: 3800,
     gallery: [
         'https://picsum.photos/seed/canada1/1200/800',
@@ -144,7 +166,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Uluru & Kings Canyon',
     country: 'Australia',
     continent: 'Australia',
-    duration: '4 days',
+    duration: '4',
     price: 2100,
     gallery: [
         'https://picsum.photos/seed/oz1/1200/800',
@@ -167,7 +189,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Rome, Florence, Tuscany',
     country: 'Italy',
     continent: 'Europe',
-    duration: '10 days',
+    duration: '10',
     price: 3900,
     gallery: [
         'https://picsum.photos/seed/italy1/1200/800',
@@ -190,7 +212,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Hanoi, Ha Long Bay, Hoi An',
     country: 'Vietnam',
     continent: 'Asia',
-    duration: '12 days',
+    duration: '12',
     price: 2500,
     gallery: [
         'https://picsum.photos/seed/vietnam1/1200/800',
@@ -213,7 +235,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'El Chaltén & Torres del Paine',
     country: 'Argentina',
     continent: 'South America',
-    duration: '14 days',
+    duration: '14',
     price: 5500,
     gallery: [
         'https://picsum.photos/seed/patagonia1/1200/800',
@@ -236,7 +258,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Cairo, Luxor, Aswan',
     country: 'Egypt',
     continent: 'Africa',
-    duration: '9 days',
+    duration: '9',
     price: 2750,
     gallery: [
         'https://picsum.photos/seed/egypt1/1200/800',
@@ -260,7 +282,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Delhi, Agra, Jaipur',
     country: 'India',
     continent: 'Asia',
-    duration: '8 Days',
+    duration: '8',
     price: 1999,
     gallery: [
         'https://picsum.photos/seed/india1/1200/800',
@@ -283,7 +305,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Abu Dhabi',
     country: 'UAE',
     continent: 'Asia',
-    duration: '4 days',
+    duration: '4',
     price: 870,
     gallery: [
         'https://picsum.photos/seed/abudhabi1/1200/800',
@@ -328,7 +350,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Phuket & Koh Phi Phi',
     country: 'Thailand',
     continent: 'Asia',
-    duration: '9 Days',
+    duration: '9',
     price: 2200,
     gallery: [
         'https://picsum.photos/seed/thailand1/1200/800',
@@ -351,7 +373,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Siem Reap',
     country: 'Cambodia',
     continent: 'Asia',
-    duration: '4 Days',
+    duration: '4',
     price: 1500,
     gallery: [
         'https://picsum.photos/seed/cambodia1/1200/800',
@@ -374,7 +396,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Singapore',
     country: 'Singapore',
     continent: 'Asia',
-    duration: '5 Days',
+    duration: '5',
     price: 2300,
     gallery: [
         'https://picsum.photos/seed/singapore1/1200/800',
@@ -397,7 +419,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Kuala Lumpur & Malacca',
     country: 'Malaysia',
     continent: 'Asia',
-    duration: '6 Days',
+    duration: '6',
     price: 1800,
     gallery: [
         'https://picsum.photos/seed/malaysia1/1200/800',
@@ -420,7 +442,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Seoul',
     country: 'South Korea',
     continent: 'Asia',
-    duration: '7 Days',
+    duration: '7',
     price: 2600,
     gallery: [
         'https://picsum.photos/seed/seoul1/1200/800',
@@ -443,7 +465,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Paris',
     country: 'France',
     continent: 'Europe',
-    duration: '5 Days',
+    duration: '5',
     price: 2800,
     gallery: [
         'https://picsum.photos/seed/paris1/1200/800',
@@ -466,7 +488,7 @@ export const packagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
     destination: 'Barcelona & Madrid',
     country: 'Spain',
     continent: 'Europe',
-    duration: '8 Days',
+    duration: '8',
     price: 3200,
     gallery: [
         'https://picsum.photos/seed/spain1/1200/800',

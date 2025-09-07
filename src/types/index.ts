@@ -1,3 +1,4 @@
+
 export interface ItineraryStep {
   day: number;
   title: string;
@@ -45,4 +46,11 @@ export interface Continent {
   dataAiHint: string;
   emoji?: string;
   description?: string;
+}
+
+export interface Country {
+    name: string;
+    flag: string;
+    heroImage: string;
+    tagline: string;
 }

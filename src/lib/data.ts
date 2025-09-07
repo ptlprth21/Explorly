@@ -1,9 +1,9 @@
 
 'use server';
-import type { Package, Review, Continent } from '@/types';
+import type { Package, Review, Continent, Country } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
-import { packagesData, reviews as allReviews, continents as allContinents } from './mock-data';
+import { packagesData, reviews as allReviews, continents as allContinents, countries as allCountries } from './mock-data';
 
 // This is a mock function that simulates the AI selection process.
 // In a real app, this would be an async call to the Genkit flow.
@@ -68,11 +68,11 @@ export const getPackagesByCountry = async (countrySlug: string): Promise<Package
     return allPackages.filter(p => slugify(p.country) === countrySlug);
 };
 
-export const getReviews = async (): Promise<Review[]> => {
+export async function getReviews(): Promise<Review[]> {
   return allReviews;
 }
 
-export const getReviewsByPackageId = async (packageId: string): Promise<Review[]> => {
+export async function getReviewsByPackageId(packageId: string): Promise<Review[]> {
     return allReviews.filter(review => review.packageId === packageId);
 }
 
@@ -82,6 +82,14 @@ export const getReviewsByCountry = async (countrySlug: string): Promise<Review[]
     return allReviews.filter(r => packageIds.includes(r.packageId));
 };
 
-export const getContinents = async (): Promise<Continent[]> => {
+export async function getContinents(): Promise<Continent[]> {
     return allContinents;
+}
+
+export async function getCountries(): Promise<Country[]> {
+  return allCountries;
+}
+
+export async function getCountryBySlug(slug: string): Promise<Country | undefined> {
+  return allCountries.find(c => slugify(c.name) === slug);
 }
