@@ -9,18 +9,22 @@ import { slugify } from '@/lib/utils';
 import Container from '../ui/Container';
 import GlobalSearch from './GlobalSearch';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
-interface GlobalHeroProps {
-  stats: GlobalStats;
-  countries: Country[];
-  packages: Package[];
-}
+
+const slideshowImages = [
+  { src: "https://picsum.photos/seed/norway-fjord-view/1920/1080", alt: "Breathtaking landscape of mountains and a fjord in Norway", hint: "norway fjord" },
+  { src: "https://picsum.photos/seed/amalfi-coast-italy/1920/1080", alt: "Vibrant cliffside village on the Amalfi Coast, Italy", hint: "italy coast" },
+  { src: "https://picsum.photos/seed/wadi-rum-jordan/1920/1080", alt: "Dramatic red desert landscape of Wadi Rum, Jordan", hint: "jordan desert" },
+  { src: "https://picsum.photos/seed/new-zealand-mountains/1920/1080", alt: "Snow-capped mountains reflecting in a crystal clear lake in New Zealand", hint: "new zealand mountains" },
+];
 
 export default function Hero() {
   const router = useRouter();
   const [countries, setCountries] = useState<Country[]>([]);
   const [packages, setPackages] = useState<Package[]>([]);
   const [stats, setStats] = useState<GlobalStats | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const [animatedStats, setAnimatedStats] = useState({
     countries: 0,
@@ -28,6 +32,14 @@ export default function Hero() {
     travelers: 0,
     rating: 0
   });
+
+   useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % slideshowImages.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,16 +109,22 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
+      {/* Animated Background Slideshow */}
       <div className="absolute inset-0">
-        <Image 
-          src="https://picsum.photos/seed/norway-fjord-view/1920/1080"
-          alt="Breathtaking landscape of mountains and a lake in Norway"
-          fill
-          className="object-cover"
-          data-ai-hint="norway fjord"
-          priority
-        />
+        {slideshowImages.map((image, index) => (
+          <Image
+            key={image.src}
+            src={image.src}
+            alt={image.alt}
+            fill
+            className={cn(
+              "object-cover transition-opacity duration-1000 ease-in-out",
+              index === currentImageIndex ? "opacity-100" : "opacity-0"
+            )}
+            data-ai-hint={image.hint}
+            priority={index === 0}
+          />
+        ))}
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background"></div>
         
         {/* Grid Pattern */}
