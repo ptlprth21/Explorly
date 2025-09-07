@@ -16,17 +16,17 @@ const Footer = () => {
               </Link>
               <p className="text-sm text-foreground/60">Your adventure starts here. Discover and book unique travel experiences worldwide.</p>
               <div className="flex gap-4">
-                <Link href="#" aria-label="Facebook"><Facebook className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></Link>
-                <Link href="#" aria-label="Twitter"><Twitter className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></Link>
-                <Link href="#" aria-label="Instagram"><Instagram className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></Link>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><Twitter className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
               </div>
             </div>
             <div className="md:col-span-1 lg:col-span-1">
               <h3 className="font-semibold mb-4">Explore</h3>
               <ul className="space-y-2">
                 <li><Link href="/destinations" className="text-sm text-foreground/60 hover:text-primary transition-colors">Destinations</Link></li>
-                <li><Link href="/destinations" className="text-sm text-foreground/60 hover:text-primary transition-colors">Popular Tours</Link></li>
-                <li><Link href="/destinations" className="text-sm text-foreground/60 hover:text-primary transition-colors">Special Offers</Link></li>
+                <li><Link href="/gallery" className="text-sm text-foreground/60 hover:text-primary transition-colors">Gallery</Link></li>
+                <li><Link href="/#continents" className="text-sm text-foreground/60 hover:text-primary transition-colors">Continents</Link></li>
               </ul>
             </div>
             <div className="md:col-span-1 lg:col-span-1">
@@ -34,15 +34,13 @@ const Footer = () => {
               <ul className="space-y-2">
                 <li><Link href="/about" className="text-sm text-foreground/60 hover:text-primary transition-colors">About Us</Link></li>
                 <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">Contact</Link></li>
-                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Privacy Policy</Link></li>
               </ul>
             </div>
             <div className="md:col-span-1 lg:col-span-1">
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2">
-                <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">Contact</Link></li>
                 <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">FAQ</Link></li>
-                <li><Link href="#" className="text-sm text-foreground/60 hover:text-primary transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">Help Center</Link></li>
               </ul>
             </div>
           </div>

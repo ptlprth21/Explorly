@@ -617,5 +617,5 @@ export const continents: Continent[] = [
     { name: 'North America', image: 'https://picsum.photos/seed/northamerica/800/600', dataAiHint: 'mountain lake' },
     { name: 'South America', image: 'https://picsum.photos/seed/southamerica/800/600', dataAiHint: 'inca ruins' },
     { name: 'Australia', image: 'https://picsum.photos/seed/australia/800/600', dataAiHint: 'outback desert' },
-    { name: 'Antarctica', image: 'https://picsum.photos/seed/antarctica/800/600', dataAiHint: 'iceberg penguin' },
+    { name: 'Antarctica', image: 'https://picsum.photos/seed/antarctica/800/600', dataAiHint: 'iceberg snow' },
 ];
