@@ -54,12 +54,12 @@ const Header = () => {
         <div className="relative flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <PlaneTakeoff className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold tracking-tight text-foreground">WorldTrips</span>
+            <span className="text-xl font-bold tracking-tight text-foreground">RoamReady</span>
           </Link>
           <div className="hidden items-center space-x-4 lg:flex">
             <nav className="flex items-center space-x-6 text-sm font-medium">
               {navigationLinks.map((link) => (
-                <Link key={`${link.href}-${link.label}`} href={link.href} className="text-foreground/80 transition-colors hover:text-primary">
+                <Link key={`${link.href}-${link.label}`} href={link.href} className={cn("transition-colors hover:text-primary", pathname === link.href ? "text-primary" : "text-foreground/80")}>
                   {link.label}
                 </Link>
               ))}
@@ -83,7 +83,7 @@ const Header = () => {
           >
             <nav className="grid gap-4 p-4">
               {navigationLinks.map((link) => (
-                <Link key={`${link.href}-${link.label}-mobile`} href={link.href} className="text-lg font-medium text-foreground/80 transition-colors hover:text-primary" onClick={toggleNavbar}>
+                <Link key={`${link.href}-${link.label}-mobile`} href={link.href} className={cn("text-lg font-medium transition-colors hover:text-primary", pathname === link.href ? "text-primary" : "text-foreground/80")} onClick={toggleNavbar}>
                   {link.label}
                 </Link>
               ))}
