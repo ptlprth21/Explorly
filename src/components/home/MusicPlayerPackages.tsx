@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Star, Clock, Play, Heart, ChevronLeft, ChevronRight, Filter } from 'lucide-react';
+import { Star, Clock, Play, Heart, ChevronLeft, ChevronRight, Filter, Ban } from 'lucide-react';
 import type { Package } from '@/types';
 import Image from 'next/image';
 import { Button } from '../ui/button';
@@ -52,6 +52,7 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
   };
 
   const currentPackage = filteredPackages[currentIndex];
+  const isFullyBooked = currentPackage && currentPackage.availableDates.length === 0;
 
   if (!packages.length) {
     return null;
@@ -157,6 +158,7 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
                     <Image
                     src={currentPackage.image}
                     alt={currentPackage.title}
+                    data-ai-hint={`${currentPackage.destination} ${currentPackage.country}`}
                     fill
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
@@ -169,10 +171,11 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <Button 
                         onClick={() => openWizard(currentPackage)}
-                        className="w-16 sm:w-20 h-16 sm:h-20 bg-primary/90 backdrop-blur-sm rounded-full text-white hover:bg-primary transition-colors transform hover:scale-110"
+                        disabled={isFullyBooked}
+                        className="w-16 sm:w-20 h-16 sm:h-20 bg-primary/90 backdrop-blur-sm rounded-full text-white hover:bg-primary transition-colors transform hover:scale-110 disabled:bg-muted disabled:cursor-not-allowed"
                         size="icon"
                     >
-                        <Play className="h-6 sm:h-8 w-6 sm:w-8 ml-1" />
+                      {isFullyBooked ? <Ban className="h-6 sm:h-8 w-6 sm:w-8" /> : <Play className="h-6 sm:h-8 w-6 sm:w-8 ml-1" />}
                     </Button>
                     </div>
                 </div>
@@ -189,15 +192,23 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
                     </div>
                     </div>
 
-                    <div className="mb-6">
-                    <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-2">
-                        <span>Availability</span>
-                        <span>{availability.seatsLeft}/{availability.totalSeats} seats left</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                        <div className="bg-primary h-2 rounded-full" style={{ width: `${(availability.seatsLeft / availability.totalSeats) * 100}%` }}></div>
-                    </div>
-                    </div>
+                    {isFullyBooked ? (
+                      <div className="mb-6 text-center bg-destructive/10 border border-destructive/20 text-destructive-foreground p-3 rounded-lg">
+                        <p className="font-bold">Fully Booked</p>
+                        <p className="text-xs">Check back later for new dates!</p>
+                      </div>
+                    ) : (
+                      <div className="mb-6">
+                        <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-2">
+                            <span>Availability</span>
+                            <span>{availability.seatsLeft}/{availability.totalSeats} seats left</span>
+                        </div>
+                        <div className="w-full bg-muted rounded-full h-2">
+                            <div className="bg-primary h-2 rounded-full" style={{ width: `${(availability.seatsLeft / availability.totalSeats) * 100}%` }}></div>
+                        </div>
+                      </div>
+                    )}
+
 
                     <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3 sm:space-x-4">

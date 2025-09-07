@@ -12,7 +12,7 @@ export default async function Home() {
   const countries = await getCountries();
   const packages = await getPackages();
 
-  const spotlightCountry = countries.find(c => c.name === 'Italy');
+  const spotlightCountry = countries.find(c => c.name === 'UAE');
 
   return (
     <div>
