@@ -1,7 +1,4 @@
 
-
-
-
 export interface ItineraryDay {
   day: number;
   title: string;
@@ -78,4 +75,23 @@ export interface GlobalStats {
   packages: number;
   happyTravelers: number;
   averageRating: number;
+}
+
+export interface BookingData {
+  id?: string;
+  userId: string;
+  packageId: string;
+  packageName: string;
+  packageImage: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  travelers: number;
+  selectedDate: string;
+  totalPrice: number;
+  specialRequests?: string;
+  bookingDate?: any;
+  paymentIntentId?: string;
+  status: 'confirmed' | 'pending' | 'cancelled';
 }

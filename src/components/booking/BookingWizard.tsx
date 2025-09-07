@@ -3,7 +3,6 @@
 
 import React, { useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import { X, ChevronLeft, ChevronRight, Check, Calendar, Users, CreditCard, MapPin, Star, Loader2 } from 'lucide-react';
 import type { Package } from '@/types';
 import { createBooking } from '@/lib/firebase-actions';
@@ -14,6 +13,8 @@ import { Textarea } from '../ui/textarea';
 import Image from 'next/image';
 import StripePaymentForm from './StripePaymentForm';
 import { getStripe } from '@/lib/stripe';
+import { useAuth } from '@/context/AuthContext';
+import Link from 'next/link';
 
 interface BookingWizardProps {
   selectedPackage: Package | null;
@@ -31,10 +32,12 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { user } = useAuth();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: '',
+    email: user?.email || '',
     phone: '',
     travelers: 2,
     selectedDate: '',
@@ -60,7 +63,6 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
     try {
       const bookingId = await createBooking({
         ...formData,
-        packageId: selectedPackage.id,
         package: selectedPackage,
         paymentIntentId: paymentIntentId,
       });
@@ -82,7 +84,7 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
       console.error('Booking error:', error);
       toast({
         title: 'An Error Occurred',
-        description: 'Please try again later.',
+        description: (error as Error).message || 'Please try again later.',
         variant: 'destructive',
       });
     } finally {
@@ -149,8 +151,18 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
           </div>
         </div>
 
-        {/* Step Content */}
-        <div className="p-6 overflow-y-auto">
+        {/* Auth Check */}
+        {!user && currentStep > 1 ? (
+             <div className="p-8 text-center animate-in fade-in-50">
+                <h3 className="text-xl font-bold text-white mb-4">Please Log In</h3>
+                <p className="text-muted-foreground mb-6">You need to be logged in to book a trip.</p>
+                <div className="flex justify-center gap-4">
+                    <Button asChild><Link href="/login">Log In</Link></Button>
+                    <Button asChild variant="outline"><Link href="/signup">Sign Up</Link></Button>
+                </div>
+            </div>
+        ) : (
+          <div className="p-6 overflow-y-auto">
           {currentStep !== 4 && (
             <>
               {/* Step 1: Package Info */}
@@ -325,6 +337,7 @@ export default function BookingWizard({ selectedPackage, onClose }: BookingWizar
             ) : null}
           </div>
         </div>
+        )}
       </div>
     </div>
   );

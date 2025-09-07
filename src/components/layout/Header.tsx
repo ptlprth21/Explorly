@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Container from '../ui/Container';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 const navigationLinks = [
   { href: '/', label: 'Home' },
@@ -21,6 +22,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const { user, signOut } = useAuth();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -63,10 +65,20 @@ const Header = () => {
                   {link.label}
                 </Link>
               ))}
+               {user && (
+                <Link href="/account" className={cn("transition-colors hover:text-primary", pathname === '/account' ? "text-primary" : "text-foreground/80")}>
+                  My Account
+                </Link>
+              )}
             </nav>
-            <Link href="/destinations">
-              <Button>Book a Trip</Button>
-            </Link>
+            {user ? (
+               <Button onClick={signOut} variant="outline">Sign Out</Button>
+            ) : (
+              <div className='flex items-center space-x-2'>
+                <Button asChild variant="ghost"><Link href="/login">Log In</Link></Button>
+                <Button asChild><Link href="/signup">Sign Up</Link></Button>
+              </div>
+            )}
           </div>
           <div className="lg:hidden">
             <Button onClick={toggleNavbar} variant="ghost" size="icon">
@@ -87,9 +99,20 @@ const Header = () => {
                   {link.label}
                 </Link>
               ))}
-              <Link href="/destinations">
-                <Button className="w-full">Book a Trip</Button>
-              </Link>
+               {user && (
+                <Link href="/account" className={cn("text-lg font-medium transition-colors hover:text-primary", pathname === '/account' ? "text-primary" : "text-foreground/80")} onClick={toggleNavbar}>
+                  My Account
+                </Link>
+              )}
+
+              {user ? (
+                <Button onClick={signOut} variant="outline">Sign Out</Button>
+              ) : (
+                <div className='grid grid-cols-2 gap-2'>
+                  <Button asChild variant="ghost"><Link href="/login">Log In</Link></Button>
+                  <Button asChild><Link href="/signup">Sign Up</Link></Button>
+                </div>
+              )}
             </nav>
           </div>
         )}

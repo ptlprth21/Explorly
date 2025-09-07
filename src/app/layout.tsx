@@ -13,11 +13,12 @@ import ErrorBoundary from '@/components/layout/ErrorBoundary';
 import { BookingWizardProvider, useBookingWizard } from '@/context/BookingWizardContext';
 import BookingWizard from '@/components/booking/BookingWizard';
 import FloatingBookingPanel from '@/components/layout/FloatingBookingPanel';
+import { AuthProvider } from '@/context/AuthContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 // export const metadata: Metadata = {
-//   title: 'WorldTrips - Your Adventure Awaits',
+//   title: 'RoamReady - Your Adventure Awaits',
 //   description: 'A modern travel booking platform for unforgettable journeys.',
 //   icons: {
 //     icon: '/favicon.ico',
@@ -51,6 +52,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+       <head>
+        <title>RoamReady - Your Adventure Awaits</title>
+        <meta name="description" content="A modern travel booking platform for unforgettable journeys." />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={cn('min-h-screen font-body antialiased flex flex-col', inter.variable)} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
@@ -58,12 +64,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ErrorBoundary>
-            <BookingWizardProvider>
-              <AppLayout>{children}</AppLayout>
-            </BookingWizardProvider>
-            <Toaster />
-          </ErrorBoundary>
+          <AuthProvider>
+            <ErrorBoundary>
+              <BookingWizardProvider>
+                <AppLayout>{children}</AppLayout>
+              </BookingWizardProvider>
+              <Toaster />
+            </ErrorBoundary>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,27 +1,21 @@
 
 'use server';
 
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, query, where, getDocs } from 'firebase/firestore';
 import { db } from './firebase'; // Assumes db is exported from firebase.ts
-import type { Package, Review } from '@/types';
+import type { Package, Review, BookingData } from '@/types';
+import { getAuth } from 'firebase/auth';
+import { app } from './firebase';
 
-export interface BookingData {
-  packageId: string;
-  packageName: string;
-  firstName: string;
+const auth = getAuth(app);
 
-  lastName: string;
-  email: string;
-  phone: string;
-  travelers: number;
-  selectedDate: string;
-  totalPrice: number;
-  specialRequests?: string;
-  bookingDate?: any;
-  paymentIntentId?: string;
-}
 
-export async function createBooking(bookingData: Omit<BookingData, 'packageName' | 'totalPrice'> & { package: Package }): Promise<string | null> {
+export async function createBooking(bookingData: Omit<BookingData, 'packageName' | 'totalPrice' | 'userId'> & { package: Package }): Promise<string | null> {
+  const user = auth.currentUser;
+  if (!user) {
+    throw new Error('You must be logged in to book a trip.');
+  }
+
   try {
     const bookingsCollection = collection(db, 'bookings');
     const { package: pkg, ...restOfBookingData } = bookingData;
@@ -30,7 +24,10 @@ export async function createBooking(bookingData: Omit<BookingData, 'packageName'
 
     const docRef = await addDoc(bookingsCollection, {
       ...restOfBookingData,
+      userId: user.uid, // Add the user's ID
       packageName: pkg.title,
+      packageId: pkg.id,
+      packageImage: pkg.image,
       totalPrice: totalPrice,
       bookingDate: serverTimestamp(),
       status: 'confirmed', // From 'pending' to 'confirmed' after payment
@@ -58,5 +55,22 @@ export async function addReview(reviewData: NewReviewData): Promise<string | nul
     } catch (e) {
         console.error('Error adding review: ', e);
         return null;
+    }
+}
+
+export async function getBookingsForUser(userId: string): Promise<BookingData[]> {
+    const bookingsCollection = collection(db, 'bookings');
+    const q = query(bookingsCollection, where('userId', '==', userId));
+
+    try {
+        const querySnapshot = await getDocs(q);
+        const bookings: BookingData[] = [];
+        querySnapshot.forEach((doc) => {
+            bookings.push({ id: doc.id, ...doc.data() } as BookingData);
+        });
+        return bookings;
+    } catch (error) {
+        console.error("Error fetching user bookings:", error);
+        return [];
     }
 }

@@ -39,8 +39,8 @@ const Footer = () => {
             <div className="md:col-span-1 lg:col-span-1">
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2">
-                <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">FAQ</Link></li>
-                <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">Help Center</Link></li>
+                <li><Link href="/faq" className="text-sm text-foreground/60 hover:text-primary transition-colors">FAQ</Link></li>
+                <li><Link href="/help" className="text-sm text-foreground/60 hover:text-primary transition-colors">Help Center</Link></li>
               </ul>
             </div>
           </div>
