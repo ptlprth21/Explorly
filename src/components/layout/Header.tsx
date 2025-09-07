@@ -23,6 +23,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { user, signOut } = useAuth();
+  const isHomePage = pathname === '/';
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -47,6 +48,8 @@ const Header = () => {
     setIsOpen(false);
   }, [pathname]);
 
+  const showFullHeader = !isHomePage || isScrolled;
+
   return (
     <header className={cn(
       "sticky top-0 z-50 w-full transition-all duration-300",
@@ -59,25 +62,29 @@ const Header = () => {
             <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
           </Link>
           <div className="hidden items-center space-x-4 lg:flex">
-            <nav className="flex items-center space-x-6 text-sm font-medium">
-              {navigationLinks.map((link) => (
-                <Link key={`${link.href}-${link.label}`} href={link.href} className={cn("transition-colors hover:text-primary", pathname === link.href ? "text-primary" : "text-foreground/80")}>
-                  {link.label}
-                </Link>
-              ))}
-               {user && (
-                <Link href="/account" className={cn("transition-colors hover:text-primary", pathname === '/account' ? "text-primary" : "text-foreground/80")}>
-                  My Account
-                </Link>
-              )}
-            </nav>
-            {user ? (
-               <Button onClick={signOut} variant="outline">Sign Out</Button>
-            ) : (
-              <div className='flex items-center space-x-2'>
-                <Button asChild variant="ghost"><Link href="/login">Log In</Link></Button>
-                <Button asChild><Link href="/signup">Sign Up</Link></Button>
-              </div>
+             {showFullHeader && (
+              <>
+                <nav className="flex items-center space-x-6 text-sm font-medium">
+                  {navigationLinks.map((link) => (
+                    <Link key={`${link.href}-${link.label}`} href={link.href} className={cn("transition-colors hover:text-primary", pathname === link.href ? "text-primary" : "text-foreground/80")}>
+                      {link.label}
+                    </Link>
+                  ))}
+                   {user && (
+                    <Link href="/account" className={cn("transition-colors hover:text-primary", pathname === '/account' ? "text-primary" : "text-foreground/80")}>
+                      My Account
+                    </Link>
+                  )}
+                </nav>
+                {user ? (
+                   <Button onClick={signOut} variant="outline">Sign Out</Button>
+                ) : (
+                  <div className='flex items-center space-x-2'>
+                    <Button asChild variant="ghost"><Link href="/login">Log In</Link></Button>
+                    <Button asChild><Link href="/signup">Sign Up</Link></Button>
+                  </div>
+                )}
+              </>
             )}
           </div>
           <div className="lg:hidden">
