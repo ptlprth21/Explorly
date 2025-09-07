@@ -11,11 +11,9 @@ import { Button } from '@/components/ui/button';
 
 interface CountrySpotlightProps {
   country: Country;
-  packages: Package[];
 }
 
-export default function CountrySpotlight({ country, packages }: CountrySpotlightProps) {
-  const countryPackages = packages.filter(pkg => pkg.country === country.name).slice(0, 3);
+export default function CountrySpotlight({ country }: CountrySpotlightProps) {
 
   if (!country) return null;
 
@@ -77,42 +75,6 @@ export default function CountrySpotlight({ country, packages }: CountrySpotlight
                 </Button>
             </div>
            </Link>
-        </div>
-
-        {/* Top 3 Packages */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
-          {countryPackages.map((pkg, index) => (
-            <Link href={`/packages/${pkg.id}`} key={pkg.id} className="group block">
-                <div className="group relative bg-neutral-900/40 backdrop-blur-sm border border-neutral-800/50 rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-teal-400/10 transition-all duration-300 hover:scale-[1.02] h-full flex flex-col">
-                <div className="relative h-32 sm:h-40 lg:h-48 overflow-hidden">
-                    <Image
-                    src={pkg.image}
-                    alt={pkg.title}
-                    fill
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    
-                    <div className="absolute top-3 left-3 w-6 h-6 sm:w-8 sm:h-8 bg-teal-500 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm">
-                    {index + 1}
-                    </div>
-                </div>
-                
-                <div className="p-4 sm:p-6 flex flex-col flex-grow">
-                    <h4 className="text-base sm:text-lg font-bold text-white mb-2 group-hover:text-teal-300 transition-colors flex-grow">
-                    {pkg.title}
-                    </h4>
-                    <div className="flex items-center justify-between text-sm mt-auto">
-                    <div className="flex items-center space-x-1">
-                        <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
-                        <span className="text-neutral-300">{pkg.rating}</span>
-                    </div>
-                    <div className="text-teal-400 font-bold">${pkg.price.toLocaleString()}</div>
-                    </div>
-                </div>
-                </div>
-            </Link>
-          ))}
         </div>
 
         {/* See All Tours CTA */}

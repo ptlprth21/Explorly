@@ -18,7 +18,7 @@ export default async function Home() {
     <div className="bg-black">
       <Hero />
       <MusicPlayerPackages packages={packages} />
-      {spotlightCountry && <CountrySpotlight country={spotlightCountry} packages={packages} />}
+      {spotlightCountry && <CountrySpotlight country={spotlightCountry} />}
       <ContinentsExplorer />
     </div>
   );
