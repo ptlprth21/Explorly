@@ -25,12 +25,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    allowedDevOrigins: [
-      "https://*.cluster-p5o54ufozbgxywgwqxykwgahws.cloudworkstations.dev",
-      "https://explorly.eu"
-    ]
-  }
 };
 
 export default nextConfig;
