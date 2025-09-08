@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import StarRating from '@/components/ui/StarRating';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 
 
 interface FirebaseReviewsProps {
@@ -25,13 +26,25 @@ export default function FirebaseReviews({ packageId, rating, reviewCount }: Fire
   const [submitting, setSubmitting] = useState(false);
   const [newReview, setNewReview] = useState({
     userName: '',
-    rating: 5,
+    rating: 0,
     comment: '',
   });
   const { toast } = useToast();
 
+  const handleRatingChange = (newRating: number) => {
+    setNewReview({ ...newReview, rating: newRating });
+  };
+
   const handleSubmitReview = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (newReview.rating === 0) {
+      toast({
+        title: 'Rating Required',
+        description: 'Please select a star rating before submitting.',
+        variant: 'destructive',
+      });
+      return;
+    }
     setSubmitting(true);
 
     try {
@@ -45,7 +58,7 @@ export default function FirebaseReviews({ packageId, rating, reviewCount }: Fire
       const reviewId = await addReview(reviewData);
 
       if (reviewId) {
-        setNewReview({ userName: '', rating: 5, comment: '' });
+        setNewReview({ userName: '', rating: 0, comment: '' });
         setShowReviewForm(false);
         refetch();
         toast({
@@ -70,15 +83,6 @@ export default function FirebaseReviews({ packageId, rating, reviewCount }: Fire
       setSubmitting(false);
     }
   };
-
-  if (loading) {
-    return (
-      <div className="text-center py-8">
-        <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
-        <p className="text-muted-foreground">Loading reviews...</p>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -113,9 +117,18 @@ export default function FirebaseReviews({ packageId, rating, reviewCount }: Fire
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium mb-1">Rating</label>
+                        <label className="block text-sm font-medium mb-2">Your Rating</label>
                         <div className="flex space-x-1">
-                          <StarRating rating={newReview.rating} size={24} />
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <Star
+                              key={star}
+                              className={cn(
+                                'h-7 w-7 cursor-pointer transition-colors',
+                                newReview.rating >= star ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
+                              )}
+                              onClick={() => handleRatingChange(star)}
+                            />
+                          ))}
                         </div>
                     </div>
                     <div>
