@@ -25,8 +25,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   const [allCountryPackages, setAllCountryPackages] = useState<Package[]>([]);
   const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { name: countrySlug } = params;
-
+  
   const { openWizard } = useBookingWizard();
   const [currentPackageIndex, setCurrentPackageIndex] = useState(0);
 
@@ -38,6 +37,9 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   
 
   useEffect(() => {
+    const countrySlug = params.name;
+    if (!countrySlug) return;
+    
     const fetchData = async () => {
       setIsLoading(true);
       const countryData = await getCountryBySlug(countrySlug);
@@ -49,7 +51,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
       setIsLoading(false);
     }
     fetchData();
-  }, [countrySlug]);
+  }, [params.name]);
 
   useEffect(() => {
     let packages = [...allCountryPackages];
