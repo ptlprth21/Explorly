@@ -11,6 +11,14 @@ import { db } from './firebase';
 // This is a mock function that simulates the AI selection process.
 // In a real app, this would be an async call to the Genkit flow.
 const getAiSelectedImage = async (gallery: string[], title: string) => {
+  if (!gallery || gallery.length === 0) {
+    // Return a placeholder if no images are available
+    return {
+      image: 'https://placehold.co/1200x800/222831/46C7C7?text=Image\\nNot+Found',
+      reason: 'No images were provided for this package.'
+    };
+  }
+
   try {
     const result = await aiImageSelection({
       imageUrls: gallery,
@@ -120,3 +128,4 @@ export async function searchPackages(searchTerm: string): Promise<Package[]> {
     pkg.highlights.some(h => h.toLowerCase().includes(searchTermLower))
   ).slice(0, 8); // Return top 8 matches
 }
+
