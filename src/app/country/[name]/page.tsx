@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -24,6 +25,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   const [allCountryPackages, setAllCountryPackages] = useState<Package[]>([]);
   const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { name: countrySlug } = params;
 
   const { openWizard } = useBookingWizard();
   const [currentPackageIndex, setCurrentPackageIndex] = useState(0);
@@ -38,8 +40,8 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const countryData = await getCountryBySlug(params.name);
-      const packageData = await getPackagesByCountry(params.name);
+      const countryData = await getCountryBySlug(countrySlug);
+      const packageData = await getPackagesByCountry(countrySlug);
       
       setCountry(countryData);
       setAllCountryPackages(packageData);
@@ -47,7 +49,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
       setIsLoading(false);
     }
     fetchData();
-  }, [params.name]);
+  }, [countrySlug]);
 
   useEffect(() => {
     let packages = [...allCountryPackages];
