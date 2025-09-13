@@ -1,0 +1,10 @@
+{
+    "aboutHero": "https://picsum.photos/seed/team-summit/1920/400",
+    "contactHero": "https://picsum.photos/seed/person-writing-notebook/1920/400",
+    "team": {
+        "alex": "https://picsum.photos/seed/alex-johnson/200/200",
+        "maria": "https://picsum.photos/seed/maria-garcia/200/200",
+        "sam": "https://picsum.photos/seed/sam-chen/200/200",
+        "emily": "https://picsum.photos/seed/emily-white/200/200"
+    }
+}

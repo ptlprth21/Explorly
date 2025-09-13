@@ -1,4 +1,5 @@
 
+
 'use server';
 import type { Package, Review, Continent, Country, Theme } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
@@ -65,6 +66,8 @@ const processPackages = async (): Promise<Package[]> => {
 };
 
 export const getPackages = async (): Promise<Package[]> => {
+  // Caching mechanism: if packages are already processed, return them.
+  // Otherwise, process and then cache.
   if (!packages) {
     packages = processPackages();
   }

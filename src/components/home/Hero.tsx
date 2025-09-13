@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import React, { useState, useEffect, Suspense } from 'react';
@@ -13,7 +14,7 @@ import { cn } from '@/lib/utils';
 
 
 const slideshowImages = [
-  { src: "https://picsum.photos/seed/norway-fjord-view/1920/1080", alt: "Breathtaking landscape of mountains and a fjord in Norway", hint: "norway fjord" },
+  { src: "https://picsum.photos/seed/himalayas-mountain-range/1920/1080", alt: "Breathtaking panoramic view of the Himalayas", hint: "himalayas mountains" },
   { src: "https://picsum.photos/seed/amalfi-coast-italy/1920/1080", alt: "Vibrant cliffside village on the Amalfi Coast, Italy", hint: "italy coast" },
   { src: "https://picsum.photos/seed/wadi-rum-jordan/1920/1080", alt: "Dramatic red desert landscape of Wadi Rum, Jordan", hint: "jordan desert" },
   { src: "https://picsum.photos/seed/new-zealand-mountains/1920/1080", alt: "Snow-capped mountains reflecting in a crystal clear lake in New Zealand", hint: "new zealand mountains" },
@@ -181,15 +182,22 @@ export default function Hero() {
             <div className="text-xs sm:text-sm text-muted-foreground">Average Rating</div>
           </div>
         </div>
-
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
-          <div className="w-1 h-3 bg-white/70 rounded-full animate-pulse"></div>
-        </div>
-      </div>
+      
+      {/* Slideshow Dots */}
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+        {slideshowImages.map((_, index) => (
+            <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={cn(
+                    'w-2 h-2 rounded-full transition-all duration-300',
+                    currentImageIndex === index ? 'bg-primary scale-125' : 'bg-white/50 hover:bg-white'
+                )}
+                aria-label={`Go to slide ${index + 1}`}
+            />
+        ))}
+       </div>
     </section>
   );
 }

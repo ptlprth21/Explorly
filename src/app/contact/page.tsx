@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Container from '@/components/ui/Container';
@@ -11,6 +12,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from '@/ai/flows/contact-flow';
+import placeholderImages from '@/lib/placeholder-images.json';
 
 
 export default function ContactPage() {
@@ -49,7 +51,7 @@ export default function ContactPage() {
     <>
       <section className="relative h-64 w-full">
         <Image
-          src="https://picsum.photos/seed/person-writing-notebook/1920/400"
+          src={placeholderImages.contactHero}
           alt="A person writing on a notebook with a laptop nearby"
           data-ai-hint="contact us"
           fill

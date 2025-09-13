@@ -1,15 +1,17 @@
 
+
 import Container from '@/components/ui/Container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Award, Globe, Heart, LifeBuoy } from 'lucide-react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import placeholderImages from '@/lib/placeholder-images.json';
 
 const teamMembers = [
-  { name: 'Alex Johnson', role: 'Founder & CEO', image: 'https://picsum.photos/seed/alex-johnson/200/200' },
-  { name: 'Maria Garcia', role: 'Head of Operations', image: 'https://picsum.photos/seed/maria-garcia/200/200' },
-  { name: 'Sam Chen', role: 'Lead Travel Designer', image: 'https://picsum.photos/seed/sam-chen/200/200' },
-  { name: 'Emily White', role: 'Customer Experience', image: 'https://picsum.photos/seed/emily-white/200/200' },
+  { name: 'Alex Johnson', role: 'Founder & CEO', image: placeholderImages.team.alex },
+  { name: 'Maria Garcia', role: 'Head of Operations', image: placeholderImages.team.maria },
+  { name: 'Sam Chen', role: 'Lead Travel Designer', image: placeholderImages.team.sam },
+  { name: 'Emily White', role: 'Customer Experience', image: placeholderImages.team.emily },
 ];
 
 const whyChooseUsItems = [
@@ -24,7 +26,7 @@ export default function AboutPage() {
     <>
       <section className="relative h-64 w-full">
         <Image
-          src="https://picsum.photos/seed/team-summit/1920/400"
+          src={placeholderImages.aboutHero}
           alt="A team of hikers celebrating on a mountain peak"
           data-ai-hint="team mountains"
           fill

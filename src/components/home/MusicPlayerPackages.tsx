@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -11,11 +12,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Input } from '../ui/input';
 import { useBookingWizard } from '@/context/BookingWizardContext';
 
-interface MusicPlayerPackagesProps {
+interface FeaturedPackagesProps {
   packages: Package[];
 }
 
-export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesProps) {
+export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
   const router = useRouter();
   const { openWizard } = useBookingWizard();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,7 +34,7 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
 
   const filters = [
     { id: 'all', name: 'All Packages', icon: '🌍' },
-    { id: 'adventure', name: 'Adventure', icon: '🏔️' },
+    { id: 'adventure', name: 'Adventure', icon: '⛰️' },
     { id: 'cultural', name: 'Cultural', icon: '🏛️' },
     { id: 'beach', name: 'Beach', icon: '🏖️' },
     { id: 'safari', name: 'Safari', icon: '🦁' },
@@ -69,7 +70,7 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
               <div className="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
-              Worldwide Adventures
+              Featured Adventures
             </h2>
           </div>
           <Button variant="link" onClick={() => router.push('/destinations')} className="text-primary hover:text-primary/80">
@@ -147,7 +148,7 @@ export default function MusicPlayerPackages({ packages }: MusicPlayerPackagesPro
           </div>
         )}
 
-        {/* Music Player Style Package Cards */}
+        {/* Package Cards */}
         <div className="relative">
           <div className="w-full max-w-3xl mx-auto">
             <div 

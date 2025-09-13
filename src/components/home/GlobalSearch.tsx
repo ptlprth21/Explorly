@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -40,7 +41,7 @@ export default function GlobalSearch() {
       try {
         const results = await searchPackages(searchTerm);
         setSearchResults(results);
-        setShowResults(results.length > 0);
+        setShowResults(true); // Always show results container if there's a search term
       } catch (error) {
         console.error('Search error:', error);
       } finally {
@@ -74,7 +75,7 @@ export default function GlobalSearch() {
           placeholder="Search destinations, experiences..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onFocus={() => setShowResults(searchTerm.length > 0 && searchResults.length > 0)}
+          onFocus={() => { if(searchTerm.length > 0) setShowResults(true) }}
           className="w-full pl-12 sm:pl-14 pr-4 py-3 sm:py-4 lg:py-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-gray-400 text-base sm:text-lg lg:text-xl focus:ring-2 focus:ring-teal-400 focus:border-transparent focus:bg-white/20 transition-all"
         />
         
@@ -86,12 +87,12 @@ export default function GlobalSearch() {
       </div>
 
       {/* Search Results */}
-      {showResults && searchResults.length > 0 && (
+      {showResults && (
         <div 
             className="absolute top-full left-0 right-0 mt-2 bg-black/90 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden z-50 max-h-80 overflow-y-auto"
             onMouseLeave={() => setShowResults(false)}
         >
-          {searchResults.slice(0, 8).map((pkg) => (
+          {searchResults.length > 0 ? searchResults.slice(0, 8).map((pkg) => (
             <button
               key={pkg.id}
               onClick={() => handlePackageSelect(pkg)}
@@ -124,7 +125,11 @@ export default function GlobalSearch() {
                 <div className="text-teal-400 font-bold text-sm">€{pkg.price}</div>
               </div>
             </button>
-          ))}
+          )) : (
+            <div className="p-4 text-center text-muted-foreground">
+                {loading ? 'Searching...' : 'No results found.'}
+            </div>
+          )}
         </div>
       )}
 
