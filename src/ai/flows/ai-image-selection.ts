@@ -39,18 +39,17 @@ const aiImageSelectionPrompt = ai.definePrompt(
     prompt: `
       You are an expert travel photo curator. Your task is to select the single most visually appealing and marketable image for a travel package gallery.
 
-      Analyze the following image URLs provided for the package titled "{{packageId}}".
+      Analyze the following images provided for the package titled "{{packageId}}".
 
-      Image URLs:
       {{#each imageUrls}}
-      - {{this}}
+      Image: {{media url=this}}
       {{/each}}
 
       Consider the following context:
       - Average Package Rating: {{averageRating}}/5
       - Review Sentiment: "{{reviewSentiment}}"
 
-      Based on standard principles of photography (composition, lighting, color, subject matter) and the provided context, select the one image URL that would be most effective in attracting customers. Provide a brief justification for your choice.
+      Based on standard principles of photography (composition, lighting, color, subject matter) and the provided context, select the one image URL that would be most effective in attracting customers. Provide a brief justification for your choice. The URL you select must be one of the URLs provided in the input.
     `,
   },
 );
