@@ -1,5 +1,4 @@
 
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -35,9 +34,8 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [sortBy, setSortBy] = useState('rating');
   
-  const countrySlug = params.name;
-
   useEffect(() => {
+    const countrySlug = params.name;
     if (!countrySlug) return;
     
     const fetchData = async () => {
@@ -51,7 +49,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
       setIsLoading(false);
     }
     fetchData();
-  }, [countrySlug]);
+  }, [params]);
 
   useEffect(() => {
     let packages = [...allCountryPackages];
@@ -467,3 +465,5 @@ export default function CountryDetailPage({ params }: { params: { name: string }
     </div>
   );
 }
+
+    
