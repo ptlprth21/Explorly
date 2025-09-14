@@ -19,7 +19,7 @@ import { useBookingWizard } from '@/context/BookingWizardContext';
 import { Card, CardContent } from '@/components/ui/card';
 
 
-export default function CountryDetailPage({ params }: { params: { name: string } }) {
+export default function CountryDetailPage({ params: { name: countrySlug } }: { params: { name: string } }) {
   const router = useRouter();
   const [country, setCountry] = useState<Country | null>(null);
   const [allCountryPackages, setAllCountryPackages] = useState<Package[]>([]);
@@ -37,7 +37,6 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   
 
   useEffect(() => {
-    const countrySlug = params.name;
     if (!countrySlug) return;
     
     const fetchData = async () => {
@@ -51,7 +50,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
       setIsLoading(false);
     }
     fetchData();
-  }, [params.name]);
+  }, [countrySlug]);
 
   useEffect(() => {
     let packages = [...allCountryPackages];
