@@ -31,6 +31,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'oaidalleapiprod.blob.core.windows.net',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'www.gstatic.com',
         port: '',
         pathname: '/**',

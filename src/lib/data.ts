@@ -4,7 +4,6 @@
 import type { Package, Review, Continent, Country, Theme } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
-import { packagesData as mockPackagesData, reviews as allReviews, continents as allContinents, countries as allCountries, themes as allThemes } from './mock-data';
 import { realPackagesData } from './real-data';
 import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { db } from './firebase';
@@ -47,18 +46,18 @@ const getAiSelectedImage = async (gallery: string[], title: string) => {
 let packages: Promise<Package[]> | null = null;
 
 const processPackages = async (): Promise<Package[]> => {
-  const allPackagesData = [...realPackagesData, ...mockPackagesData];
+  const allPackagesData = [...realPackagesData];
   const processedPackages = await Promise.all(
     allPackagesData.map(async (pkg) => {
       const id = slugify(pkg.title);
       const { image, reason } = await getAiSelectedImage(pkg.gallery, pkg.title);
-      const reviews = allReviews.filter(review => review.packageId === id);
+      // Reviews will now be fetched from Firebase, so we initialize with an empty array.
       return {
         ...pkg,
         id,
         image,
         aiReasoning: reason,
-        reviews,
+        reviews: [],
       };
     })
   );
@@ -85,34 +84,36 @@ export const getPackagesByCountry = async (countrySlug: string): Promise<Package
     return allPackages.filter(p => slugify(p.country) === countrySlug);
 };
 
-export async function getReviews(): Promise<Review[]> {
-  return allReviews;
-}
-
-export async function getReviewsByPackageId(packageId: string): Promise<Review[]> {
-    return allReviews.filter(review => review.packageId === packageId);
-}
 
 export const getReviewsByCountry = async (countrySlug: string): Promise<Review[]> => {
-    const countryPackages = await getPackagesByCountry(countrySlug);
-    const packageIds = countryPackages.map(p => p.id);
-    return allReviews.filter(r => packageIds.includes(r.packageId));
+    // This function will now fetch reviews from Firestore or a real backend.
+    // For now, it returns an empty array as mock data is removed.
+    return [];
 };
 
 export async function getContinents(): Promise<Continent[]> {
-    return allContinents;
+    return [
+      { name: 'Asia', image: 'https://picsum.photos/seed/asia-pagoda/800/600', dataAiHint: 'temple asia', emoji: '🏯' }
+    ];
 }
 
 export async function getCountries(): Promise<Country[]> {
-  return allCountries;
+  return [
+    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://picsum.photos/seed/uae-grand-mosque/1920/1080', dataAiHint: 'uae grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
+  ];
 }
 
 export async function getCountryBySlug(slug: string): Promise<Country | undefined> {
-  return allCountries.find(c => slugify(c.name) === slug);
+  const countries = await getCountries();
+  return countries.find(c => slugify(c.name) === slug);
 }
 
 export async function getThemes(): Promise<Theme[]> {
-    return allThemes;
+    return [
+      { id: 'all', name: 'All Themes', icon: '🌍' },
+      { id: 'cultural', name: 'Cultural', icon: '🏛️' },
+      { id: 'city', name: 'City Break', icon: '🏙️' },
+    ];
 }
 
 
@@ -131,4 +132,3 @@ export async function searchPackages(searchTerm: string): Promise<Package[]> {
     pkg.highlights.some(h => h.toLowerCase().includes(searchTermLower))
   ).slice(0, 8); // Return top 8 matches
 }
-
