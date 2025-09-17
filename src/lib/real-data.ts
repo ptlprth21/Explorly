@@ -2,7 +2,7 @@
 import type { Package } from '@/types';
 
 // This file contains the real, bookable packages for your live site.
-export const realPackagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] = [
+export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     {
       title: 'Desert Calm: 4 Days of Culture & Escape in Abu Dhabi',
       destination: 'Abu Dhabi',
@@ -10,7 +10,8 @@ export const realPackagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] =
       continent: 'Asia',
       duration: '4',
       price: 870,
-      gallery: [],
+      image: 'https://picsum.photos/seed/camel-desert-ride/1200/800',
+      gallery: ['https://picsum.photos/seed/camel-desert-ride/1200/800'],
       rating: 4.8,
       reviewCount: 175,
       type: 'Cultural',
@@ -53,7 +54,8 @@ export const realPackagesData: Omit<Package, 'id' | 'image' | 'aiReasoning'>[] =
       continent: 'Asia',
       duration: '7',
       price: 1390,
-      gallery: [],
+      image: 'https://picsum.photos/seed/dubai-abu-dhabi-skyline/1200/800',
+      gallery: ['https://picsum.photos/seed/dubai-abu-dhabi-skyline/1200/800'],
       rating: 4.9,
       reviewCount: 210,
       type: 'Cultural',
