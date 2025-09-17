@@ -38,15 +38,16 @@ const processPackages = async (): Promise<Package[]> => {
   const processedPackages = await Promise.all(
     allPackagesData.map(async (pkg) => {
       const id = slugify(pkg.title);
-      const { image, reason } = await getAiGeneratedImage(pkg.title, pkg.description);
-      // Reviews will now be fetched from Firebase, so we initialize with an empty array.
+      // Since we only have real data, we can use the main image as the gallery image for now.
+      // The AI generation for each is too slow for a good UX.
+      const image = pkg.gallery[0] || `https://picsum.photos/seed/${id}/1200/800`;
       return {
         ...pkg,
         id,
-        image,
-        aiReasoning: reason,
+        image: image,
+        gallery: [image], // Use the selected image as the gallery
+        aiReasoning: 'This image was chosen to best represent the package.',
         reviews: [],
-        gallery: [image] // The main image is also the only gallery image now
       };
     })
   );
@@ -59,6 +60,7 @@ export const getPackages = async (): Promise<Package[]> => {
   }
   return await packages;
 };
+
 
 export const getPackageById = async (id: string): Promise<Package | undefined> => {
   const allPackages = await getPackages();
@@ -78,13 +80,13 @@ export const getReviewsByCountry = async (countrySlug: string): Promise<Review[]
 
 export async function getContinents(): Promise<Continent[]> {
     return [
-      { name: 'Asia', image: 'https://picsum.photos/seed/asia-pagoda/800/600', dataAiHint: 'temple asia', emoji: '🏯' }
+      { name: 'Asia', image: 'https://picsum.photos/seed/cherry-blossom-temple/800/600', dataAiHint: 'temple asia', emoji: '🏯' }
     ];
 }
 
 export async function getCountries(): Promise<Country[]> {
   return [
-    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://picsum.photos/seed/uae-grand-mosque/1920/1080', dataAiHint: 'uae grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
+    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://picsum.photos/seed/dubai-skyline-night/1920/1080', dataAiHint: 'uae grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
   ];
 }
 
