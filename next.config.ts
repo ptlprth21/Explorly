@@ -58,6 +58,12 @@ const nextConfig: NextConfig = {
         hostname: 'travelpackage.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'oaidalleapistorage.blob.core.windows.net',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
