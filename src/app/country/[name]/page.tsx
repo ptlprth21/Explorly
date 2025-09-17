@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { ArrowLeft, Star, Clock, MapPin, Users, Calendar, Play, Heart, ChevronLeft, ChevronRight, Check, Filter, SortAsc } from 'lucide-react';
 import type { Package, Country } from '@/types';
 import { getPackagesByCountry, getCountryBySlug } from '@/lib/data';
@@ -18,8 +18,10 @@ import { useBookingWizard } from '@/context/BookingWizardContext';
 import { Card, CardContent } from '@/components/ui/card';
 
 
-export default function CountryDetailPage({ params }: { params: { name: string } }) {
+export default function CountryDetailPage() {
   const router = useRouter();
+  const params = useParams();
+  const name = params.name as string;
   const [country, setCountry] = useState<Country | null>(null);
   const [allCountryPackages, setAllCountryPackages] = useState<Package[]>([]);
   const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
@@ -35,7 +37,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
   const [sortBy, setSortBy] = useState('rating');
   
   useEffect(() => {
-    const countrySlug = params.name;
+    const countrySlug = name;
     if (!countrySlug) return;
     
     const fetchData = async () => {
@@ -49,7 +51,7 @@ export default function CountryDetailPage({ params }: { params: { name: string }
       setIsLoading(false);
     }
     fetchData();
-  }, [params]);
+  }, [name]);
 
   useEffect(() => {
     let packages = [...allCountryPackages];
