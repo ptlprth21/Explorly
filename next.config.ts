@@ -46,6 +46,12 @@ const nextConfig: NextConfig = {
         hostname: 'oaidalleapimix.blob.core.windows.net',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
