@@ -56,13 +56,13 @@ export const getReviewsByCountry = async (countrySlug: string): Promise<Review[]
 
 export async function getContinents(): Promise<Continent[]> {
     return [
-      { name: 'Asia', image: 'https://picsum.photos/seed/great-wall-of-china/800/600', dataAiHint: 'monument asia', emoji: '🏯' }
+      { name: 'Asia', image: 'https://picsum.photos/seed/asian-monument-landmark/800/600', dataAiHint: 'monument asia', emoji: '🏯' }
     ];
 }
 
 export async function getCountries(): Promise<Country[]> {
   return [
-    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://picsum.photos/seed/grand-mosque-abudhabi/1920/1080', dataAiHint: 'grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
+    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://i.imgur.com/gKk7WzW.jpeg', dataAiHint: 'grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
   ];
 }
 
