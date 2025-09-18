@@ -15,7 +15,7 @@ const processPackages = async (): Promise<Package[]> => {
     allPackagesData.map(async (pkg) => {
       const id = slugify(pkg.title);
       // Use the predefined image from real-data and ensure gallery has at least one image.
-      const image = pkg.image || pkg.gallery[0] || `https://picsum.photos/seed/${id}/1200/800`;
+      const image = pkg.image || `https://picsum.photos/seed/${id}/1200/800`;
       
       return {
         ...pkg,
@@ -56,13 +56,13 @@ export const getReviewsByCountry = async (countrySlug: string): Promise<Review[]
 
 export async function getContinents(): Promise<Continent[]> {
     return [
-      { name: 'Asia', image: 'https://picsum.photos/seed/asian-monument/800/600', dataAiHint: 'temple asia', emoji: '🏯' }
+      { name: 'Asia', image: 'https://picsum.photos/seed/asian-temple-architecture/800/600', dataAiHint: 'temple asia', emoji: '🏯' }
     ];
 }
 
 export async function getCountries(): Promise<Country[]> {
   return [
-    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://picsum.photos/seed/burj-khalifa-skyline/1920/1080', dataAiHint: 'dubai skyline', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
+    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://picsum.photos/seed/sheikh-zayed-mosque/1920/1080', dataAiHint: 'grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
   ];
 }
 
