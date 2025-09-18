@@ -2,7 +2,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '@/lib/firebase';
-import { nanoid } from 'nanoid';
 
 export async function POST(req: NextRequest) {
   try {
@@ -14,7 +13,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Give the file a unique name to prevent overwrites
-    const uniqueFileName = `${nanoid()}-${file.name}`;
+    const uniqueFileName = `${Date.now()}-${file.name}`;
     const storageRef = ref(storage, `uploads/${uniqueFileName}`);
 
     // Convert the file to a buffer to upload
