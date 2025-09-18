@@ -45,7 +45,7 @@ export const getPackageById = async (id: string): Promise<Package | undefined> =
 
 export const getPackagesByCountry = async (countrySlug: string): Promise<Package[]> => {
     const allPackages = await getPackages();
-    if (!countrySlug) return allPackages;
+if (!countrySlug) return allPackages;
     return allPackages.filter(p => slugify(p.country) === countrySlug);
 };
 
@@ -62,7 +62,7 @@ export async function getContinents(): Promise<Continent[]> {
 
 export async function getCountries(): Promise<Country[]> {
   return [
-    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://i.imgur.com/gKk7WzW.jpeg', dataAiHint: 'grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
+    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://firebasestorage.googleapis.com/v0/b/roamready-kyyht.appspot.com/o/uploads%2Fuae-skyline-night.png?alt=media', dataAiHint: 'grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
   ];
 }
 
