@@ -66,10 +66,10 @@ export default function CountrySpotlight({ country }: CountrySpotlightProps) {
 
           {/* Explore Button */}
           <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-8">
-              <Button asChild size="lg" className="bg-primary/90 hover:bg-primary/80 text-primary-foreground font-semibold transition-colors">
+              <Button asChild size="lg" className="bg-primary/90 hover:bg-primary/80 text-primary-foreground font-semibold transition-colors max-sm:px-2 max-sm:py-2">
                   <Link href={`/country/${slugify(country.name)}`}>
-                      <span>Explore {country.name}</span>
-                      <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+                      <span className="hidden sm:inline">Explore {country.name}</span>
+                      <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 max-sm:ml-0" />
                   </Link>
               </Button>
           </div>

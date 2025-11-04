@@ -63,11 +63,16 @@ export default function DestinationsPage() {
     
     // Apply sorting
     packages.sort((a, b) => {
+      const DURATION_A = parseInt(a.duration);
+      const DURATION_B= parseInt(b.duration);
+
       switch (sortBy) {
         case 'price-asc': return a.price - b.price;
         case 'price-desc': return b.price - a.price;
         case 'rating': return b.rating - a.rating;
-        case 'duration': return parseInt(a.duration) - parseInt(b.duration);
+        // case 'duration': return parseInt(a.duration) - parseInt(b.duration);
+        case 'duration-asc': return DURATION_A - DURATION_B;
+        case 'duration-desc' : return DURATION_B - DURATION_A;
         default: return b.rating - a.rating;
       }
     });
@@ -158,7 +163,9 @@ export default function DestinationsPage() {
                     <SelectItem value="rating">Rating</SelectItem>
                     <SelectItem value="price-asc">Price: Low to High</SelectItem>
                     <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                    <SelectItem value="duration">Duration</SelectItem>
+                    {/* <SelectItem value="duration">Duration</SelectItem> */}
+                    <SelectItem value="duration-asc">Duration: Short to Long</SelectItem>
+                    <SelectItem value="duration-desc">Duration: Long to Short</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

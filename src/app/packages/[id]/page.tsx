@@ -14,6 +14,7 @@ import FirebaseReviews from '@/components/packages/FirebaseReviews';
 import { useBookingWizard } from '@/context/BookingWizardContext';
 import PackageGallery from '@/components/packages/PackageGallery';
 import { useWishlist } from '@/context/WishlistContext';
+import { useAuth } from "@/context/AuthContext";
 
 
 export default function PackageDetailPage() {
@@ -26,6 +27,7 @@ export default function PackageDetailPage() {
   const router = useRouter();
   const { wishlist, toggleWishlist } = useWishlist();
   const isWishlisted = wishlist.includes(id);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -232,7 +234,13 @@ export default function PackageDetailPage() {
                 Book This Trip
               </Button>
 
-              <Button variant="outline" className="w-full" onClick={() => toggleWishlist(id)}>
+              <Button variant="outline" className="w-full" onClick={() => {
+                if (!user) {
+                  router.push("/login");
+                  return;
+                }
+                toggleWishlist(id);
+              }/*toggleWishlist(id)*/}>
                 <Heart className={`mr-2 h-4 w-4 ${isWishlisted ? 'fill-current text-red-500' : ''}`} />
                 {isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
               </Button>
