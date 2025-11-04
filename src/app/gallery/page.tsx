@@ -171,66 +171,116 @@ export default function GlobalGalleryPage() {
             </div>
         ) : (
             <>
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+            {/* <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"> */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {itemsToShow.map((item) => (
-                <div 
-                key={item.id} 
-                className="break-inside-avoid group cursor-pointer"
-                onClick={() => openLightbox(item)}
-                >
-                <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-card border">
-                    <div className="relative">
-                    <Image
-                        src={item.src}
-                        alt={item.title}
-                        width={500}
-                        height={500}
-                        data-ai-hint="gallery photo"
-                        className="w-full h-auto group-hover:scale-110 transition-transform duration-500"
-                    />
+                // <div 
+                // key={item.id} 
+                // className="break-inside-avoid group cursor-pointer"
+                // onClick={() => openLightbox(item)}
+                // >
+                // <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-card border">
+                //     <div className="relative">
+                //     <Image
+                //         src={item.src}
+                //         alt={item.title}
+                //         width={500}
+                //         height={500}
+                //         data-ai-hint="gallery photo"
+                //         className="w-full h-auto group-hover:scale-110 transition-transform duration-500"
+                //     />
                     
-                    {item.type === 'video' && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-12 sm:w-16 h-12 sm:h-16 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                            <Play className="h-5 sm:h-6 w-5 sm:w-6 ml-1" />
-                        </div>
-                        </div>
-                    )}
+                //     {item.type === 'video' && (
+                //         <div className="absolute inset-0 flex items-center justify-center">
+                //         <div className="w-12 sm:w-16 h-12 sm:h-16 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                //             <Play className="h-5 sm:h-6 w-5 sm:w-6 ml-1" />
+                //         </div>
+                //         </div>
+                //     )}
 
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
-                    <div className="absolute top-3 right-3 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            toggleLike(item.id);
-                        }}
-                        className={`w-8 h-8 sm:w-10 sm:h-10 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors ${
-                            likedItems.has(item.id) 
-                            ? 'bg-red-500/80 text-white' 
-                            : 'bg-black/60 text-white hover:bg-black/80'
-                        }`}
-                        >
-                        <Heart className={`h-4 w-4 sm:h-5 sm:w-5 ${likedItems.has(item.id) ? 'fill-current' : ''}`} />
-                        </button>
-                        <button className="w-8 h-8 sm:w-10 sm:h-10 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/80 transition-colors">
-                        <Share className="h-4 w-4 sm:h-5 sm:w-5" />
-                        </button>
-                    </div>
-                    </div>
+                //     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                //     <div className="absolute top-3 right-3 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                //         <button
+                //         onClick={(e) => {
+                //             e.stopPropagation();
+                //             toggleLike(item.id);
+                //         }}
+                //         className={`w-8 h-8 sm:w-10 sm:h-10 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors ${
+                //             likedItems.has(item.id) 
+                //             ? 'bg-red-500/80 text-white' 
+                //             : 'bg-black/60 text-white hover:bg-black/80'
+                //         }`}
+                //         >
+                //         <Heart className={`h-4 w-4 sm:h-5 sm:w-5 ${likedItems.has(item.id) ? 'fill-current' : ''}`} />
+                //         </button>
+                //         <button className="w-8 h-8 sm:w-10 sm:h-10 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/80 transition-colors">
+                //         <Share className="h-4 w-4 sm:h-5 sm:w-5" />
+                //         </button>
+                //     </div>
+                //     </div>
                     
-                    <div className="p-3 sm:p-4">
-                    <div className="flex items-center justify-between">
-                        <div>
-                        <h4 className="font-semibold text-foreground text-sm sm:text-base">{item.title}</h4>
-                        <p className="text-xs text-muted-foreground">{item.location}</p>
+                //     <div className="p-3 sm:p-4">
+                //     <div className="flex items-center justify-between">
+                //         <div>
+                //         <h4 className="font-semibold text-foreground text-sm sm:text-base">{item.title}</h4>
+                //         <p className="text-xs text-muted-foreground">{item.location}</p>
+                //         </div>
+                //         <div className="flex items-center space-x-2 text-xs sm:text-sm text-muted-foreground mt-1">
+                //             <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
+                //             <span>{item.likes + (likedItems.has(item.id) ? 1 : 0)}</span>
+                //         </div>
+                //     </div>
+                //     </div>
+                // </div>
+                // </div>
+
+                <div 
+                    key={item.id} 
+                    className="group cursor-pointer"
+                    onClick={() => openLightbox(item)}
+                >
+                    <div className="relative flex flex-col rounded-xl sm:rounded-2xl bg-card border overflow-hidden h-[350px]">
+                        <div className="relative h-1/2 w-full overflow-hidden z-0">
+                            <Image
+                                src={item.src}
+                                alt={item.title}
+                                fill
+                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors"></div>
                         </div>
-                        <div className="flex items-center space-x-2 text-xs sm:text-sm text-muted-foreground mt-1">
-                            <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
-                            <span>{item.likes + (likedItems.has(item.id) ? 1 : 0)}</span>
+                        <div className="flex flex-col justify-between flex-grow p-4 z-10">
+                            <div>
+                                <h4 className="font-semibold text-foreground text-sm sm:text-base line-clamp-2">{item.title}</h4>
+                                <p className="text-xs text-muted-foreground">{item.location}</p>
+                            </div>
+                            <div className="flex items-center justify-end space-x-1 text-xs sm:text-sm text-muted-foreground mt-2">
+                                <Heart className="h-3 w-3 sm:h-4 sm:w-4" />
+                                <span>{item.likes + (likedItems.has(item.id) ? 1 : 0)}</span>
+                            </div>
+                        </div>
+                        <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition">
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    toggleLike(item.id);
+                                }}
+
+                                className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center backdrop-blur-sm ${likedItems.has(item.id) ? 'bg-red-500/80 text-white' : 'bg-black/60 text-white hover:bg-black/80'}`}
+                            >
+                                <Heart className="h-4 w-4" />
+                            </button>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    openLightbox(item);
+                                }}
+                                className="w-8 h-8 sm:w-10 sm:h-10 bg-black/60 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-black/80 transition-colors"
+                            >
+                                <Share className="h-4 w-4 sm:h-5 sm:w-5" />
+                            </button>
                         </div>
                     </div>
-                    </div>
-                </div>
                 </div>
             ))}
             </div>
