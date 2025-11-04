@@ -127,7 +127,7 @@ export default function BookingWizard({ selectedPackage: initialPackage, onClose
         className="w-full max-w-3xl rounded-3xl bg-background/80 backdrop-blur-xl border border-white/20 shadow-2xl max-h-[95vh] flex flex-col"
       >
         {/* Header */}
-        <div className="sticky top-0 bg-background/90 backdrop-blur-sm border-b border-white/20 p-6">
+        <div className="sticky top-0 bg-background/90 backdrop-blur-sm border-b border-white/20 p-6 rounded-t-3xl">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-foreground">Book Your Adventure</h2>
             <Button 

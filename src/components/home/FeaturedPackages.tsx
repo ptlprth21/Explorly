@@ -102,7 +102,10 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
           <Button
             variant="outline"
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center space-x-2 bg-card hover:bg-muted px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300"
+            /*className="flex items-center space-x-2 bg-card hover:bg-muted px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300"*/
+            className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300
+              ${showFilters ? 'bg-primary/20 text-primary border-primary/30' : 'bg-card hover:bg-muted'}
+            `}
           >
             <Filter className="h-3 w-3 sm:h-4 sm:w-4" />
             <span>More Filters</span>

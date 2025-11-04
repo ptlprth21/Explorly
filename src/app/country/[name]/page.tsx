@@ -73,6 +73,9 @@ export default function CountryDetailPage() {
     
     // Apply sorting
     packages.sort((a, b) => {
+      const DURATION_A = parseInt(a.duration);
+      const DURATION_B= parseInt(b.duration);
+
       switch (sortBy) {
         case 'price-asc': return a.price - b.price;
         case 'price-desc': return b.price - a.price;
