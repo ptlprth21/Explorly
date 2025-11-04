@@ -48,7 +48,7 @@ const Header = () => {
     setIsOpen(false);
   }, [pathname]);
 
-  const showFullHeader = !isHomePage || isScrolled;
+  const showFullHeader = /*!isHomePage || isScrolled*/true;
 
   return (
     <header className={cn(
