@@ -62,27 +62,6 @@ export default function AboutPage() {
                 })}
             </div>
         </section>
-
-        <section>
-          <h2 className="text-3xl font-headline font-bold text-center mb-12">Meet Our Team</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            {teamMembers.map(member => (
-              <Card key={member.name} className="text-center border-0 bg-transparent shadow-none">
-                <CardHeader className="p-0">
-                  <Avatar className="w-32 h-32 mx-auto mb-4">
-                    <AvatarImage src={member.image} alt={member.name} />
-                    <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <CardTitle className="text-xl">{member.name}</CardTitle>
-                </CardHeader>
-                <CardContent className="p-0 pt-2">
-                  <p className="text-primary">{member.role}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
       </Container>
     </>
   );
