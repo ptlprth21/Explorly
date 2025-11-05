@@ -60,16 +60,16 @@ export interface Continent {
 }
 
 export interface Country {
-    name: string;
-    flag: string;
-    heroImage: string;
-    tagline: string;
-    continent: ContinentName;
-    culture: string;
-    bestTime: string;
-    currency: string;
-    language: string;
-    dataAiHint?: string;
+  name: string;
+  flag: string;
+  heroImage: string;
+  tagline: string;
+  continent: ContinentName;
+  culture: string;
+  bestTime: string;
+  currency: string;
+  language: string;
+  dataAiHint?: string;
 }
 
 export interface GlobalStats {
