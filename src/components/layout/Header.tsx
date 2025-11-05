@@ -13,7 +13,6 @@ import { useAuth } from '@/context/AuthContext';
 const navigationLinks = [
   { href: '/', label: 'Home' },
   { href: '/destinations', label: 'Destinations' },
-  { href: '/gallery', label: 'Gallery' },
   { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -48,7 +47,7 @@ const Header = () => {
     setIsOpen(false);
   }, [pathname]);
 
-  const showFullHeader = /*!isHomePage || isScrolled*/true;
+  const showFullHeader = true;
 
   return (
     <header className={cn(

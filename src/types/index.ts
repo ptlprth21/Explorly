@@ -39,7 +39,6 @@ export interface Package {
   gallery: string[];
   rating: number;
   reviewCount: number;
-  type: 'Safari' | 'Cultural' | 'Beach' | 'Adventure' | 'City Break';
   theme: ThemeId;
   difficulty: 'Easy' | 'Moderate' | 'Hard';
   highlights: string[];
