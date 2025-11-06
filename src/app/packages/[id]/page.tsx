@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { notFound, useRouter, useParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import StarRating from '@/components/ui/StarRating';
-import { Clock, Mountain, MapPin, CheckCircle, XCircle, ArrowLeft, Check, Heart } from 'lucide-react';
+import { Clock, Mountain, MapPin, CheckCircle, XCircle, ArrowLeft, Check, Heart, CalendarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import type { Package } from '@/types';
@@ -15,6 +15,8 @@ import { useBookingWizard } from '@/context/BookingWizardContext';
 import PackageGallery from '@/components/packages/PackageGallery';
 import { useWishlist } from '@/context/WishlistContext';
 import { useAuth } from "@/context/AuthContext";
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 
 export default function PackageDetailPage() {
@@ -28,6 +30,7 @@ export default function PackageDetailPage() {
   const { wishlist, toggleWishlist } = useWishlist();
   const isWishlisted = wishlist.includes(id);
   const { user } = useAuth();
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,10 +103,10 @@ export default function PackageDetailPage() {
               <Clock className="h-5 w-5" />
               <span>{pkg.duration}</span>
             </div>
-            <div className="flex items-center space-x-1">
+            {/* <div className="flex items-center space-x-1">
               <StarRating rating={pkg.rating} />
               <span>{pkg.rating} ({pkg.reviewCount} reviews)</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -200,7 +203,7 @@ export default function PackageDetailPage() {
                     </div>
                 )}
                 {activeTab === 'gallery' && <PackageGallery images={[pkg.image, ...pkg.gallery]} title={pkg.title} />}
-                {activeTab === 'reviews' && <FirebaseReviews packageId={pkg.id} rating={pkg.rating} reviewCount={pkg.reviewCount} />}
+                {activeTab === 'reviews' && <FirebaseReviews packageId={pkg.id} rating={0} /*{pkg.rating}*/ reviewCount={0}/*{pkg.reviewCount}*/ />}
               </div>
             </div>
           </div>
@@ -240,20 +243,43 @@ export default function PackageDetailPage() {
                   return;
                 }
                 toggleWishlist(id);
-              }/*toggleWishlist(id)*/}>
+              }}>
                 <Heart className={`mr-2 h-4 w-4 ${isWishlisted ? 'fill-current text-red-500' : ''}`} />
                 {isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
               </Button>
 
               <div className="mt-6 pt-6 border-t border-border">
-                <h4 className="font-semibold text-foreground mb-3">Available Dates</h4>
+                {/* <h4 className="font-semibold text-foreground mb-3">Available Dates</h4> */}
                 <div className="space-y-2">
-                  {pkg.availableDates.map((date) => (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <button
+                        className={`
+                          w-full px-3 py-2 rounded-lg flex items-center justify-between
+                          border "bg-neutral-800/60 border-neutral-700 text-neutral-200 hover:bg-neutral-700/60"
+                        `}
+                      >
+                        {selectedDate ? selectedDate.toLocaleDateString() : "Choose your start date"}
+                        <CalendarIcon className="h-4 w-4 opacity-70" />
+                      </button>
+                    </PopoverTrigger>
+                    
+                    <PopoverContent className="bg-neutral-900 border border-neutral-700 p-2 rounded-xl">
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={setSelectedDate}
+                        disabled={(date) => date < new Date()}
+                        className="rounded-md"
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  {/* {pkg.availableDates.map((date) => (
                     <div key={date} className="flex items-center justify-between text-sm">
                       <span>{new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                       <span className="text-green-400 font-medium">Available</span>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
               </div>
             </div>
