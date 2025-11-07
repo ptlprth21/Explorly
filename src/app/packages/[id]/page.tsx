@@ -191,7 +191,11 @@ export default function PackageDetailPage() {
                                 {step.day}
                             </div>
                             {index < pkg.itinerary.length - 1 && (
-                                <div className="absolute left-12 top-6 w-0.5 h-full bg-border -translate-x-1/2"></div>
+                                <div className="absolute left-12 top-12 w-px bg-border"
+                                    style={{
+                                        height: 'calc(100% - 12px)',
+                                        transform: 'translateX(-50%)'
+                                    }}></div>
                             )}
                             
                             <div className="ml-4">
