@@ -39,7 +39,6 @@ export interface Package {
   gallery: string[];
   rating: number;
   reviewCount: number;
-  type: 'Safari' | 'Cultural' | 'Beach' | 'Adventure' | 'City Break';
   theme: ThemeId;
   difficulty: 'Easy' | 'Moderate' | 'Hard';
   highlights: string[];
@@ -61,16 +60,16 @@ export interface Continent {
 }
 
 export interface Country {
-    name: string;
-    flag: string;
-    heroImage: string;
-    tagline: string;
-    continent: ContinentName;
-    culture: string;
-    bestTime: string;
-    currency: string;
-    language: string;
-    dataAiHint?: string;
+  name: string;
+  flag: string;
+  heroImage: string;
+  tagline: string;
+  continent: ContinentName;
+  culture: string;
+  bestTime: string;
+  currency: string;
+  language: string;
+  dataAiHint?: string;
 }
 
 export interface GlobalStats {

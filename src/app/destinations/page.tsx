@@ -1,85 +1,53 @@
+"use client";
 
-'use client';
-
-import React, { useState, useEffect, useMemo } from 'react';
-import type { Package, Theme } from '@/types';
-import { getPackages, getThemes } from '@/lib/data';
-import PackageGrid from '@/components/packages/PackageGrid';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import Container from '@/components/ui/Container';
-import { Card } from '@/components/ui/card';
-import { Filter, SortAsc } from 'lucide-react';
-import { Slider } from '@/components/ui/slider';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
-
+import React from "react";
+import Container from "@/components/ui/Container";
+import { Card } from "@/components/ui/card";
+import Image from "next/image";
+import Link from "next/link";
+import { Country, ContinentName } from "@/types";
+import { getCountries } from "@/lib/data";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Filter } from "lucide-react";
 
 export default function DestinationsPage() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const [countries, setCountries] = React.useState<Country[]>([]);
+  const [filteredCountries, setFilteredCountries] = React.useState<Country[]>([]);
+  const [continentFilter, setContinentFilter] = React.useState<ContinentName | "all">("all");
+  const [countryFilter, setCountryFilter] = React.useState<string | "all">("all");
 
-  const [allPackages, setAllPackages] = useState<Package[]>([]);
-  const [themes, setThemes] = useState<Theme[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  
-  // Filters
-  const [priceFilter, setPriceFilter] = useState([0, 10000]);
-  const [durationFilter, setDurationFilter] = useState('all');
-  const [difficultyFilter, setDifficultyFilter] = useState('all');
-  const [themeFilter, setThemeFilter] = useState(searchParams.get('theme') || 'all');
-  const [sortBy, setSortBy] = useState('rating');
-  
-
-  useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
-      const [packagesData, themesData] = await Promise.all([getPackages(), getThemes()]);
-      setAllPackages(packagesData);
-      setThemes(themesData.filter(t => t.id !== 'all')); // Remove 'All Themes' from filter options
-      setIsLoading(false);
+  React.useEffect(() => {
+    const load = async () => {
+      const data = await getCountries();
+      setCountries(data);
+      setFilteredCountries(data);
     };
-    loadData();
+    load();
   }, []);
 
-  const filteredPackages = useMemo(() => {
-    let packages = [...allPackages];
-    
-    // Apply filters
-    packages = packages.filter(pkg => {
-      const priceMatch = pkg.price >= priceFilter[0] && pkg.price <= priceFilter[1];
-      
-      const duration = parseInt(pkg.duration);
-      const durationMatch = durationFilter === 'all' || 
-        (durationFilter === 'short' && duration <= 5) ||
-        (durationFilter === 'medium' && duration > 5 && duration <= 10) ||
-        (durationFilter === 'long' && duration > 10);
-      
-      const difficultyMatch = difficultyFilter === 'all' || pkg.difficulty.toLowerCase() === difficultyFilter.toLowerCase();
-      const themeMatch = themeFilter === 'all' || pkg.theme === themeFilter;
-      
-      return priceMatch && durationMatch && difficultyMatch && themeMatch;
-    });
-    
-    // Apply sorting
-    packages.sort((a, b) => {
-      const DURATION_A = parseInt(a.duration);
-      const DURATION_B= parseInt(b.duration);
+  // Unique continents
+  const continents = [...new Set(countries.map((c) => c.continent))];
 
-      switch (sortBy) {
-        case 'price-asc': return a.price - b.price;
-        case 'price-desc': return b.price - a.price;
-        case 'rating': return b.rating - a.rating;
-        // case 'duration': return parseInt(a.duration) - parseInt(b.duration);
-        case 'duration-asc': return DURATION_A - DURATION_B;
-        case 'duration-desc' : return DURATION_B - DURATION_A;
-        default: return b.rating - a.rating;
-      }
-    });
+  // Countries visible depending on selected continent
+  const visibleCountries =
+    continentFilter === "all"
+      ? countries
+      : countries.filter((c) => c.continent === continentFilter);
 
-    return packages;
-  }, [priceFilter, durationFilter, difficultyFilter, themeFilter, sortBy, allPackages]);
+  // Filtering logic
+  React.useEffect(() => {
+    let filtered = [...countries];
 
+    if (continentFilter !== "all") {
+      filtered = filtered.filter((c) => c.continent === continentFilter);
+    }
+
+    if (countryFilter !== "all") {
+      filtered = filtered.filter((c) => c.name === countryFilter);
+    }
+
+    setFilteredCountries(filtered);
+  }, [continentFilter, countryFilter, countries]);
 
   return (
     <section className="py-20" id="destinations">
@@ -98,82 +66,94 @@ export default function DestinationsPage() {
           <Card className="bg-card/80 backdrop-blur-sm border border-border p-6">
             <div className="flex items-center space-x-2 mb-6">
               <Filter className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">Filter & Sort Packages</h3>
+              <h3 className="text-lg font-semibold">Filter Countries</h3>
             </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Price Range</label>
-                <Slider 
-                  value={priceFilter} 
-                  onValueChange={setPriceFilter} 
-                  max={10000} 
-                  step={100} 
-                />
-                <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                  <span>€{priceFilter[0]}</span>
-                  <span>€{priceFilter[1]}</span>
-                </div>
-              </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               
+              {/* Continent Filter */}
               <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Duration</label>
-                <Select value={durationFilter} onValueChange={setDurationFilter}>
-                  <SelectTrigger className="w-full text-sm"><SelectValue /></SelectTrigger>
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
+                  Continent
+                </label>
+                <Select
+                  value={continentFilter}
+                  onValueChange={(value) => {
+                    setContinentFilter(value as ContinentName | "all");
+                    setCountryFilter("all"); // Reset country when continent changes
+                  }}
+                >
+                  <SelectTrigger className="w-full text-sm">
+                    <SelectValue placeholder="Select continent" />
+                  </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All Durations</SelectItem>
-                    <SelectItem value="short">Short (1-5 days)</SelectItem>
-                    <SelectItem value="medium">Medium (6-10 days)</SelectItem>
-                    <SelectItem value="long">Long (10+ days)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Difficulty</label>
-                <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-                  <SelectTrigger className="w-full text-sm"><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Levels</SelectItem>
-                    <SelectItem value="Easy">Easy</SelectItem>
-                    <SelectItem value="Moderate">Moderate</SelectItem>
-                    <SelectItem value="Hard">Hard</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Theme</label>
-                <Select value={themeFilter} onValueChange={setThemeFilter}>
-                  <SelectTrigger className="w-full text-sm"><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Themes</SelectItem>
-                    {themes.map(theme => (
-                        <SelectItem key={theme.id} value={theme.id}>{theme.name}</SelectItem>
+                    <SelectItem value="all">All Continents</SelectItem>
+                    {continents.map((c) => (
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
 
+              {/* Country Filter */}
               <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Sort By</label>
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-full text-sm"><SelectValue /></SelectTrigger>
+                <label className="block text-sm font-medium text-muted-foreground mb-2">
+                  Country
+                </label>
+                <Select
+                  value={countryFilter}
+                  onValueChange={(value) => setCountryFilter(value)}
+                  disabled={visibleCountries.length === 0}
+                >
+                  <SelectTrigger className="w-full text-sm">
+                    <SelectValue placeholder="Select country" />
+                  </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="rating">Rating</SelectItem>
-                    <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                    <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                    {/* <SelectItem value="duration">Duration</SelectItem> */}
-                    <SelectItem value="duration-asc">Duration: Short to Long</SelectItem>
-                    <SelectItem value="duration-desc">Duration: Long to Short</SelectItem>
+                    <SelectItem value="all">All Countries</SelectItem>
+                    {visibleCountries.map((country) => (
+                      <SelectItem key={country.name} value={country.name}>
+                        {country.name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
+
             </div>
           </Card>
         </section>
 
-        <PackageGrid packages={filteredPackages} isLoading={isLoading} />
+        {/* Countries Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredCountries.map((country) => (
+            <Link
+              key={country.name}
+              href={`/packagesList?country=${country.name}`}
+            >
+              <Card className="overflow-hidden group cursor-pointer hover:shadow-xl transition-all">
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={country.heroImage}
+                    alt={country.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl font-bold">{country.name}</span>
+                    <span className="text-lg">{country.flag}</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {country.tagline}
+                  </p>
+                </div>
+              </Card>
+            </Link>
+          ))}
+        </div>
       </Container>
     </section>
   );
