@@ -1,14 +1,15 @@
 
-import { Package } from "@/types";
+import { Package, Theme } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Star, Clock, ArrowRight } from "lucide-react";
 
 interface PackageCardProps {
   package: Package;
+   theme?: Theme;
 }
 
-const PackageCard = ({ package: pkg }: PackageCardProps) => {
+const PackageCard = ({ package: pkg, theme }: PackageCardProps) => {
   return (
     <Link href={`/packages/${pkg.id}`} className="group block h-full">
       <div 
@@ -31,12 +32,13 @@ const PackageCard = ({ package: pkg }: PackageCardProps) => {
           {/* Top Section */}
           <div className="flex justify-between items-start">
             <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
-              <span className="text-sm font-medium">{pkg.type}</span>
+              <span className="text-sm font-medium">{theme.name}</span>
             </div>
-            <div className="flex items-center space-x-1 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
+            {/* Rating tag */}
+            {/* <div className="flex items-center space-x-1 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
               <Star className="h-4 w-4 text-yellow-400 fill-current" />
               <span className="text-sm font-semibold">{pkg.rating}</span>
-            </div>
+            </div> */}
           </div>
 
           {/* Bottom Section */}

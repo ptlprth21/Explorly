@@ -1,13 +1,14 @@
-import { Package } from "@/types";
+import { Package, Theme } from "@/types";
 import PackageCard from "./PackageCard";
 import { Skeleton } from "../ui/skeleton";
 
 interface PackageGridProps {
   packages: Package[];
   isLoading?: boolean;
+  themes: Theme[];
 }
 
-const PackageGrid = ({ packages, isLoading }: PackageGridProps) => {
+const PackageGrid = ({ packages, isLoading, themes }: PackageGridProps) => {
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -24,9 +25,10 @@ const PackageGrid = ({ packages, isLoading }: PackageGridProps) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {packages.map((pkg) => (
-        <PackageCard key={pkg.id} package={pkg} />
-      ))}
+      {packages.map(pkg => {
+          const theme = themes?.find(theme => theme.id === pkg.theme);
+          return <PackageCard key={pkg.id} package={pkg} theme={theme} />;
+        })}
     </div>
   );
 };

@@ -105,20 +105,11 @@ export default function ContactPage() {
               </div>
               <div className="flex items-start gap-4">
                 <div className="bg-primary/10 p-3 rounded-full">
-                  <Phone className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Phone</h3>
-                  <p className="text-muted-foreground">(+1) 234-567-890</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="bg-primary/10 p-3 rounded-full">
                   <MapPin className="w-6 h-6 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Office</h3>
-                  <p className="text-muted-foreground">123 Adventure Ave, Wanderlust City, 98765</p>
+                  <p className="text-muted-foreground">ul. Solipska 3/5, 02-482 Warsaw, Poland</p>
                 </div>
               </div>
             </div>
