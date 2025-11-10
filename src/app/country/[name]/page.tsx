@@ -149,7 +149,7 @@ export default function CountryDetailPage() {
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-center space-x-3 mb-6">
-            <span className="text-4xl sm:text-5xl lg:text-6xl animate-pulse">{country.flag}</span>
+            <span className="text-4xl sm:text-5xl lg:text-6xl animate-pulse"><img src={country.flag} alt="UAE flag" className="w-6 h-auto"/></span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 text-white">
             {country.name.toUpperCase()}
@@ -291,7 +291,7 @@ export default function CountryDetailPage() {
                         {currentPackage.title}
                       </h3>
                       <div className="flex items-center space-x-2 text-muted-foreground text-sm sm:text-base">
-                        <span className="text-base sm:text-lg">{country.flag}</span>
+                        <span className="text-base sm:text-lg"><img src={country.flag} alt="UAE flag" className="w-6 h-auto"/></span>
                         <span>{currentPackage.destination}</span>
                         <span>•</span>
                         <span>{currentPackage.duration}</span>

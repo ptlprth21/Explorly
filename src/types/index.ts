@@ -31,6 +31,7 @@ export interface Package {
   id: string;
   title: string;
   destination: string;
+  tagline: string;
   country: string;
   continent: ContinentName;
   duration: string;

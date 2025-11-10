@@ -144,7 +144,7 @@ export default function DestinationsPage() {
                 <div className="p-4">
                   <div className="flex items-center gap-2">
                     <span className="text-xl font-bold">{country.name}</span>
-                    <span className="text-lg">{country.flag}</span>
+                    <span className="text-lg"><img src={country.flag} alt="UAE flag" className="w-6 h-auto"/></span>
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">
                     {country.tagline}
