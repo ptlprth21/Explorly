@@ -68,9 +68,9 @@ export default function DestinationsPage() {
     let packages = [...allPackages];
 
     if (country) {
-        packages = packages.filter(pkg =>
-        pkg.country?.toLowerCase() === country.toLowerCase()
-        );
+      packages = packages.filter(pkg =>
+      pkg.country?.toLowerCase() === country.toLowerCase()
+      );
     }
 
     packages = packages.filter(pkg =>
