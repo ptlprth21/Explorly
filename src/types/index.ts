@@ -7,6 +7,11 @@ export interface ItineraryDay {
   description: string;
 }
 
+export interface CultureDetail {
+  title: string;
+  details: string;
+}
+
 export interface Review {
   id: string;
   packageId: string;
@@ -31,6 +36,7 @@ export interface Package {
   id: string;
   title: string;
   destination: string;
+  tagline: string;
   country: string;
   continent: ContinentName;
   duration: string;
@@ -63,9 +69,11 @@ export interface Country {
   name: string;
   flag: string;
   heroImage: string;
+  description: string;
   tagline: string;
   continent: ContinentName;
   culture: string;
+  cultureDetails: CultureDetail[];
   bestTime: string;
   currency: string;
   language: string;

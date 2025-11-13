@@ -156,7 +156,9 @@ export default function Hero() {
         <GlobalSearch />
 
         {/* Animated Global Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4 mt-12">
+        {/* Previous style for 4 elements */}
+        {/* "grid grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4 mt-12" */}
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4 mt-12">
           <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
               🌍 {animatedStats.countries}+
@@ -169,7 +171,7 @@ export default function Hero() {
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground">Packages</div>
           </div>
-          <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
+          {/* <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
               ❤️ {(animatedStats.travelers / 1000).toFixed(0)}K
             </div>
@@ -180,7 +182,7 @@ export default function Hero() {
               ⭐ {(animatedStats.rating / 10).toFixed(1)}
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground">Average Rating</div>
-          </div>
+          </div> */}
         </div>
       </div>
       

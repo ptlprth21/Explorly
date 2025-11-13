@@ -23,7 +23,7 @@ export default function CountrySpotlight({ country }: CountrySpotlightProps) {
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <span className="text-2xl sm:text-3xl">{country.flag}</span>
+            <span className="text-2xl sm:text-3xl"><img src={country.flag} alt="UAE flag" className="w-6 h-auto"/></span>
             <span className="text-accent font-medium text-sm uppercase tracking-wider">This Month's Featured Country</span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">

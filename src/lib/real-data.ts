@@ -6,6 +6,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Desert Calm: 4 Days of Culture & Escape in Abu Dhabi',
     destination: 'Abu Dhabi',
+    tagline: 'Where golden sands meet timeless stories.',
     country: 'UAE',
     continent: 'Asia',
     duration: '4',
@@ -49,6 +50,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Abu Dhabi Essentials',
     destination: 'Abu Dhabi & Dubai',
+    tagline: 'Culture, comfort, and discovery—designed for value-conscious explorers.',
     country: 'UAE',
     continent: 'Asia',
     duration: '4',
@@ -90,6 +92,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Sands & Skylines: 7 Days Across Abu Dhabi & Dubai (Option 1)',
     destination: 'Abu Dhabi & Dubai',
+    tagline: 'From sacred sands to shimmering towers, experience the UAE in one epic journey.',
     country: 'UAE',
     continent: 'Asia',
     duration: '7',
@@ -135,6 +138,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Sands & Skylines: 7 Days Across Abu Dhabi & Dubai (Option 2)',
     destination: 'Abu Dhabi & Dubai',
+    tagline: 'Experience the best of the UAE, from sacred sands to world-class water adventures.',
     country: 'UAE',
     continent: 'Asia',
     duration: '7',
@@ -184,19 +188,20 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     reviews: []
   },
   {
-    "title": "UAE Highlights Getaway",
-    "destination": "Abu Dhabi & Dubai",
-    "country": "UAE",
-    "continent": "Asia",
-    "duration": "7",
-    "price": 949,
-    "image": "",
-    "gallery": [""],
-    "rating": 4.9,
-    "reviewCount": 210,
-    "theme": "city",
-    "difficulty": "Moderate",
-    "highlights": [
+    title: "UAE Highlights Getaway",
+    destination: "Abu Dhabi & Dubai",
+    tagline: 'The best of both cities for the value-conscious traveler.',
+    country: "UAE",
+    continent: "Asia",
+    duration: "7",
+    price: 949,
+    image: "",
+    gallery: [""],
+    rating: 4.9,
+    reviewCount: 210,
+    theme: "city",
+    difficulty: "Moderate",
+    highlights: [
       "Sheikh Zayed Grand Mosque",
       "Louvre Abu Dhabi",
       "BAPS Hindu Mandir",
@@ -205,45 +210,45 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       "Burj Khalifa",
       "Dubai Mall & Fountain Show"
     ],
-    "description": "A 7-day journey through the UAE's most iconic landmarks — from the cultural heart of Abu Dhabi to the dazzling modern wonders of Dubai.",
-    "itinerary": [
+    description: "A 7-day journey through the UAE's most iconic landmarks — from the cultural heart of Abu Dhabi to the dazzling modern wonders of Dubai.",
+    itinerary: [
       {
-        "day": 1,
-        "title": "Arrival in Abu Dhabi",
-        "description": "Private pickup from Abu Dhabi International Airport (AUH) and transfer to hotel."
+        day: 1,
+        title: "Arrival in Abu Dhabi",
+        description: "Private pickup from Abu Dhabi International Airport (AUH) and transfer to hotel."
       },
       {
-        "day": 2,
-        "title": "Cultural Exploration in Abu Dhabi",
-        "description": "Visit Sheikh Zayed Grand Mosque, BAPS Hindu Mandir, and Louvre Abu Dhabi. Includes city photostops and private transportation."
+        day: 2,
+        title: "Cultural Exploration in Abu Dhabi",
+        description: "Visit Sheikh Zayed Grand Mosque, BAPS Hindu Mandir, and Louvre Abu Dhabi. Includes city photostops and private transportation."
       },
       {
-        "day": 3,
-        "title": "Abu Dhabi Desert Safari",
-        "description": "Afternoon desert safari with dune bashing, sandboarding, BBQ dinner & return transfer. *Shared* activity."
+        day: 3,
+        title: "Abu Dhabi Desert Safari",
+        description: "Afternoon desert safari with dune bashing, sandboarding, BBQ dinner & return transfer. *Shared* activity."
       },
       {
-        "day": 4,
-        "title": "Dubai Arrival",
-        "description": "Private transfer to Dubai. Free evening to explore Dubai Marina or JBR."
+        day: 4,
+        title: "Dubai Arrival",
+        description: "Private transfer to Dubai. Free evening to explore Dubai Marina or JBR."
       },
       {
-        "day": 5,
-        "title": "Dubai Landmarks",
-        "description": "Visit Burj Khalifa observation deck, explore Dubai Mall and enjoy the Fountain Show."
+        day: 5,
+        title: "Dubai Landmarks",
+        description: "Visit Burj Khalifa observation deck, explore Dubai Mall and enjoy the Fountain Show."
       },
       {
-        "day": 6,
-        "title": "Free Day / Optional Mega Attractions",
-        "description": "Choose between Aquaventure Waterpark, IMG Worlds of Adventure, or another desert experience."
+        day: 6,
+        title: "Free Day / Optional Mega Attractions",
+        description: "Choose between Aquaventure Waterpark, IMG Worlds of Adventure, or another desert experience."
       },
       {
-        "day": 7,
-        "title": "Cultural Souks & Departure",
-        "description": "Explore Old Dubai: Al Fahidi District, abra ride on Dubai Creek, Gold & Spice Souks. Transfer to DXB Airport."
+        day: 7,
+        title: "Cultural Souks & Departure",
+        description: "Explore Old Dubai: Al Fahidi District, abra ride on Dubai Creek, Gold & Spice Souks. Transfer to DXB Airport."
       }
     ],
-    "inclusions": [
+    inclusions: [
       "6 nights hotel stay (3 in Abu Dhabi, 3 in Dubai) - 4★ category",
       "Daily breakfast",
       "Private airport transfers (AUH arrival, DXB departure)",
@@ -254,25 +259,26 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       "English-speaking guide",
       "24/7 travel support team"
     ],
-    "exclusions": [
+    exclusions: [
       "Flights to/from UAE",
       "Lunches & Dinners (except desert safari)",
       "Personal expenses (souvenirs, tips, etc.)",
       "Optional attractions not mentioned",
       "Visa fees and travel insurance"
     ],
-    "availableDates": [
+    availableDates: [
       "2025-10-15",
       "2025-11-22",
       "2025-12-10",
       "2026-01-25",
       "2026-02-20"
     ],
-    "reviews": []
+    reviews: []
   },
   {
     "title": "Sky Above, Sands Below (Option 1)",
     "destination": "Dubai & Abu Dhabi",
+    "tagline": "Conquer the UAE's skies, seas, and sands in five days of high-octane luxury.",
     "country": "UAE",
     "continent": "Asia",
     "duration": "5",
@@ -349,6 +355,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Sky Above, Sands Below (Option 2)',
     destination: 'Dubai & Abu Dhabi',
+    tagline: 'Luxury adventures, from a private sunset cruise to the heights of the Arabian sky.',
     country: 'UAE',
     continent: 'Asia',
     duration: '5',
@@ -399,6 +406,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Coast to Culture',
     destination: 'Abu Dhabi & Dubai',
+    tagline: "Beach, sea, and sacred architecture—an exclusive tour of the UAE's finest.",
     country: 'UAE',
     continent: 'Asia',
     duration: '6',
@@ -452,6 +460,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Luxury in the Air & Sea',
     destination: 'Dubai',
+    tagline: 'Experience Dubai by sky, sea, and skyline in an exclusive short break.',
     country: 'UAE',
     continent: 'Asia',
     duration: '4',
@@ -500,6 +509,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Golden Dunes & Sunrise Skies',
     destination: 'Abu Dhabi & Dubai Desert',
+    tagline: 'A journey blending serene desert luxury with coastal tranquility.',
     country: 'UAE',
     continent: 'Asia',
     duration: '5',
@@ -543,6 +553,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: 'Dubai Explorer',
     destination: 'Dubai',
+    tagline: 'Balanced fun, modern city life, and a taste of authentic Dubai.',
     country: 'UAE',
     continent: 'Asia',
     duration: '5',
@@ -582,5 +593,4 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     availableDates: ['2025-10-05', '2025-11-15', '2025-12-20', '2026-01-18'],
     reviews: []
   }
-
 ];
