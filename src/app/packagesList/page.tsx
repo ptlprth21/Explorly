@@ -321,7 +321,6 @@ export default function DestinationsPage() {
               </div>
             )}
 
-
             {activeTab === 'guide' && (
               <div className="flex justify-center">
                 <table className="table-auto border-collapse border border-border text-left w-auto min-w-[500px] max-w-3xl">
@@ -345,6 +344,18 @@ export default function DestinationsPage() {
               </div>
             )}
 
+            {activeTab === 'facts' && (
+              <div className="space-y-6 max-w-3xl mx-auto p-6 border border-border rounded-lg bg-background/50">
+                <h3 className="text-xl font-semibold mb-4 text-center">Did You Know? Fun Facts About {selectedCountry.name}</h3>
+                <ul className="space-y-4 list-disc list-inside">
+                  {selectedCountry.facts.map((fact, index) => (
+                    <li key={index}>
+                      <span className="font-bold">{fact.title}:</span> <span className="text-muted-foreground">{fact.description}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>
