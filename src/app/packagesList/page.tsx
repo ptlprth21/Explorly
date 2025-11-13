@@ -219,13 +219,12 @@ export default function DestinationsPage() {
 
           <div className="p-6">
             {activeTab === 'overview' && (
-              <div className="space-y-6 prose prose-invert max-w-none">
-                <div>
+              <div className="space-y-6 prose prose-invert max-w-none flex flex-col items-center">
+                <div className="max-w-2xl text-center">
                   <h3 className="text-xl font-semibold mb-3">About This Trip</h3>
                   <p className="text-muted-foreground leading-relaxed">{selectedCountry.description}</p>
                 </div>
   
-                {/* Facts Table */}
                 <div className="flex justify-center">
                   <div className="w-full max-w-md bg-card/40 rounded-xl shadow-lg border border-border backdrop-blur-sm p-4">
                     <h3 className="text-xl font-semibold mb-3">Key Facts</h3>
@@ -264,31 +263,67 @@ export default function DestinationsPage() {
               </div>
             )}
 
-            {activeTab === 'itinerary' && (
-                <div className="space-y-8">
-                    {/* {selectedCountry.itinerary.map((step, index) => (
-                    <div key={step.day} className="relative pl-16">
-                        <div className="absolute left-6 top-0 w-12 h-12 bg-primary/20 border-2 border-primary/50 text-primary rounded-full flex items-center justify-center font-bold text-lg">
-                            {step.day}
-                        </div>
-                        {index < pkg.itinerary.length - 1 && (
-                            <div className="absolute left-12 top-12 w-px bg-border"
-                                style={{
-                                    height: 'calc(100% - 12px)',
-                                    transform: 'translateX(-50%)'
-                                }}></div>
-                        )}
-                        
-                        <div className="ml-4">
-                            <h4 className="font-bold text-xl mb-1 text-primary-foreground">{step.title}</h4>
-                            <p className="text-muted-foreground">{step.description}</p>
-                        </div>
-                    </div>
-                    ))} */}
+            {activeTab === 'culture' && (
+              <div className="space-y-10 flex flex-col items-center">
+                <div className="max-w-3xl text-center">
+                  <h3 className="text-2xl font-semibold mb-3">Culture</h3>
+                  {selectedCountry.cultureDesciption && (
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedCountry.cultureDesciption}
+                    </p>
+                  )}
                 </div>
+
+                {selectedCountry.cultureDetails?.map((section, index) => (
+                  <div
+                    key={index}
+                    className="w-full max-w-3xl bg-card/40 border border-border rounded-2xl shadow-md backdrop-blur-sm p-6"
+                  >
+                    <h4 className="text-xl font-semibold mb-3 text-primary">
+                      {section.title}
+                    </h4>
+
+                    {section.details.split('\n\n').map((paragraph, i) => (
+                      <p key={i} className="text-muted-foreground mb-3 whitespace-pre-line leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                ))}
+              </div>
             )}
-            {activeTab === 'gallery' && <PackageGallery images={[selectedCountry.image, ...selectedCountry.gallery]} title={selectedCountry.title} />}
-            {activeTab === 'reviews' && <FirebaseReviews packageId={selectedCountry.id} rating={0} /*{pkg.rating}*/ reviewCount={0}/*{pkg.reviewCount}*/ />}
+
+            {activeTab === 'history' && (
+              <div className="space-y-10 flex flex-col items-center">
+                <div className="max-w-3xl text-center">
+                  <h3 className="text-2xl font-semibold mb-3">History</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    The history of {selectedCountry.name} is one of incredible transformation.
+                  </p>
+                </div>
+
+                {selectedCountry.cultureDetails?.map((section, index) => (
+                  <div
+                    key={index}
+                    className="w-full max-w-3xl bg-card/40 border border-border rounded-2xl shadow-md backdrop-blur-sm p-6"
+                  >
+                    <h4 className="text-xl font-semibold mb-3 text-primary">
+                      {section.title}
+                    </h4>
+
+                    {section.details.split('\n\n').map((paragraph, i) => (
+                      <p key={i} className="text-muted-foreground mb-3 whitespace-pre-line leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+
+
+         
+
           </div>
         </div>
       </div>
