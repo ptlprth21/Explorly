@@ -8,12 +8,14 @@ import PackageGrid from '@/components/packages/PackageGrid';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import Container from '@/components/ui/Container';
 import { Card } from '@/components/ui/card';
-import { Filter, SortAsc, ArrowLeft, Clock, Mountain, MapPin, } from 'lucide-react';
+import { Filter, SortAsc, ArrowLeft, Clock, Mountain, MapPin, Check, CheckCircle, XCircle, } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import StarRating from '@/components/ui/StarRating';
+import PackageGallery from '@/components/packages/PackageGallery';
+import FirebaseReviews from '@/components/packages/FirebaseReviews';
 
 export default function DestinationsPage() {
   const router = useRouter();
@@ -25,6 +27,7 @@ export default function DestinationsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [countries, setCountries] = useState<Country[]>([]);
 
+  const [activeTab, setActiveTab] = useState('overview');
   
   // Filters
   const [priceFilter, setPriceFilter] = useState([0, 10000]);
@@ -32,8 +35,6 @@ export default function DestinationsPage() {
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [themeFilter, setThemeFilter] = useState(searchParams.get('theme') || 'all');
   const [sortBy, setSortBy] = useState('rating');
-  
-  const country = searchParams.get("country");
 
   useEffect(() => {
     const loadData = async () => {
@@ -48,13 +49,28 @@ export default function DestinationsPage() {
     loadData();
   }, []);
 
+  // if (isLoading || !countries) {
+  //   return (
+  //     <div className="min-h-screen bg-background flex items-center justify-center">
+  //       <div className="text-center p-24">
+  //           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary mx-auto"></div>
+  //           <p className="mt-4 text-muted-foreground">Loading Country...</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  const country = countries[0];
+
+  console.log(countries);
+
   const filteredPackages = useMemo(() => {
     let packages = [...allPackages];
 
     if (country) {
-        packages = packages.filter(pkg =>
-        pkg.country?.toLowerCase() === country.toLowerCase()
-        );
+      packages = packages.filter(pkg =>
+      pkg.country?.toLowerCase() === country.toLowerCase()
+      );
     }
 
     packages = packages.filter(pkg =>
@@ -123,16 +139,16 @@ export default function DestinationsPage() {
         {/* Hero Section */}
         {selectedCountry && (
             <div className="relative h-96 overflow-hidden">
-                <Image
-                src={selectedCountry.heroImage}
-                alt={selectedCountry.name}
-                fill
-                className="object-cover w-full h-full"
-                priority
-                />
-                <div className="absolute inset-0 bg-black/40"></div>
+              <Image
+              src={selectedCountry.heroImage}
+              alt={selectedCountry.name}
+              fill
+              className="object-cover w-full h-full"
+              priority
+              />
+              <div className="absolute inset-0 bg-black/40"></div>
 
-                <div className="absolute bottom-8 left-8 text-white">
+              <div className="absolute bottom-8 left-8 text-white">
                 <h1 className="text-4xl md:text-5xl font-bold mb-2">
                     {selectedCountry.name}
                 </h1>
@@ -142,9 +158,61 @@ export default function DestinationsPage() {
                     <MapPin className="h-5 w-5" />
                     <span>{selectedCountry.continent}</span>
                 </div>
-                </div>
+              </div>
             </div>
         )}
+
+        <div className="p-6">
+          {activeTab === 'overview' && (
+            <div className="space-y-6 prose prose-invert max-w-none">
+              <div>
+                <h3 className="text-xl font-semibold mb-3">About This Country</h3>
+                <p className="text-muted-foreground leading-relaxed">{country.description}</p>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold mb-3">Highlights</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {country.highlights.map((highlight, index) => (
+                    <div key={index} className="flex items-start space-x-2">
+                      <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-foreground">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-xl font-semibold mb-3">Included</h3>
+                  <div className="space-y-2">
+                    {country.inclusions.map((item, index) => (
+                      <div key={index} className="flex items-start space-x-2">
+                        <CheckCircle className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
+                        <span className="text-sm text-foreground">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+              </div>
+                
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Not Included</h3>
+                <div className="space-y-2">
+                  {country.exclusions.map((item, index) => (
+                    <div key={index} className="flex items-start space-x-2">
+                      <XCircle className="h-4 w-4 text-red-500 mt-1 flex-shrink-0" />
+                      <span className="text-sm text-foreground">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          )}
+
+          {activeTab === 'gallery' && <PackageGallery images={[country.image, ...country.gallery]} title={country.title} />}
+          {activeTab === 'reviews' && <FirebaseReviews packageId={country.id} rating={0} /*{pkg.rating}*/ reviewCount={0}/*{pkg.reviewCount}*/ />}
+        </div>
 
 
       <Container>

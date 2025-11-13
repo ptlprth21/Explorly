@@ -24,7 +24,7 @@ const whyChooseUsItems = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative h-64 w-full">
+      <section className="relative h-[450px] w-full">
         <Image
           src={placeholderImages.aboutHero}
           alt="A team of hikers celebrating on a mountain peak"
@@ -35,6 +35,13 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
           <h1 className="text-5xl font-headline font-bold text-white">About Explorly</h1>
         </div>
+      </section>
+
+      <section className="w-full bg-white/5 py-12 text-center">
+        <h5 className="max-w-5xl mx-auto text-3xl font-headline font-bold text-white">
+          Explorly is where passion for travel meets the excellence of THEVIPGROUP.
+          Join us, and let’s explore the world together.
+        </h5>
       </section>
 
       <Container className="py-16">
@@ -98,13 +105,6 @@ export default function AboutPage() {
           </div>
         </section>
       </Container>
-
-      <section className="w-full bg-white/5 py-12 text-center mt-20">
-        <h5 className="max-w-5xl mx-auto text-3xl md:text-4xl font-headline font-bold text-white px-6">
-          Explorly is where passion for travel meets the excellence of THEVIPGROUP.
-          Join us, and let’s explore the world together.
-        </h5>
-      </section>
     </>
   );
 }

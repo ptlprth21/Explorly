@@ -94,6 +94,9 @@ export default function PackageDetailPage() {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="absolute bottom-8 left-8 text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-2">{pkg.title}</h1>
+          <div>
+            <h3 className="font-bold mb-2">{pkg.tagline}</h3>
+          </div>
           <div className="flex items-center space-x-4 text-lg">
             <div className="flex items-center space-x-1">
               <MapPin className="h-5 w-5" />

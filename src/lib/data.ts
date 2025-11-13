@@ -1,5 +1,5 @@
 
-'use server';
+//'use server';
 import type { Package, Review, Continent, Country, Theme } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
@@ -62,7 +62,33 @@ export async function getContinents(): Promise<Continent[]> {
 
 export async function getCountries(): Promise<Country[]> {
   return [
-    { name: 'UAE', flag: '🇦🇪', heroImage: 'https://firebasestorage.googleapis.com/v0/b/roamready-kyyht.appspot.com/o/uploads%2Fuae-skyline-night.png?alt=media', dataAiHint: 'grand mosque', tagline: 'The Land of Seven Emirates', continent: 'Asia', culture: 'A blend of Bedouin heritage and futuristic ambition.', bestTime: 'Oct-Apr', currency: 'AED', language: 'Arabic' }
+    { 
+      name: 'UAE', 
+      flag: 'https://flagcdn.com/w40/ae.png', 
+      heroImage: 'https://firebasestorage.googleapis.com/v0/b/roamready-kyyht.appspot.com/o/uploads%2Fuae-skyline-night.png?alt=media', 
+      dataAiHint: 'grand mosque', 
+      tagline: 'The Land of Seven Emirates', 
+      description: 'The UAE is a federation of seven Emirates (Abu Dhabi, Dubai, Sharjah, Ajman, Umm Al Quwain, Fujairah, and Ras Al Khaimah). It is a global hub of commerce, luxury, and innovation, known for its audacious architecture, world-class resorts, and deep commitment to cultural preservation.',
+      continent: 'Asia', 
+      culture: 'The UAE is an Islamic country, and while modern and cosmopolitan, visitors are expected to observe certain local customs, particularly regarding respect and public conduct.', 
+      cultureDetails: [
+        {
+          title: 'Dress Code',
+          details: '• For Women: Shoulders and knees should generally be covered in public (malls, souks, Old Dubai). Lightweight scarves are useful for spontaneous visits to mosques or historical sites. Inside a resort or on a private beach, standard swimwear is fine.\n\n• For Men: Shorts and t-shirts are acceptable, but shirts must be worn at all times. Avoid revealing or excessively casual clothing in formal settings or at religious sites.\n\n• Mosques: When visiting a mosque (like the Sheikh Zayed Grand Mosque), both men and women must cover their arms and legs. Women must cover their hair. Appropriate clothing is often provided free of charge at the entrance of major mosques.'
+        },
+        {
+          title: 'Public Conduct ',
+          details: '• Public Display of Affection (PDA): It’s best to keep public affection to a minimum. Holding hands is generally acceptable, but kissing or hugging in public can be considered offensive.\n\n• Gestures: Avoid pointing the sole of your foot at anyone, as this is considered rude. Using your right hand for greetings, eating, and passing objects is considered good manners.\n\n• Alcohol: Alcohol is available in licensed hotels, restaurants, and bars. However, being intoxicated in public or driving under the influence is strictly prohibited and carries severe penalties.\n\n• Photography: Always ask permission before taking photos of local residents, especially Emirati women. Avoid taking pictures of government buildings, military sites, or police.'
+        },
+        {
+          title: 'Ramadan',
+          details: '• Do not eat, drink, or smoke in public outside of designated tourist zones or private hotel areas.\n\n• Business hours may be reduced.\n\n• Respect and quiet observance are appreciated.'
+        },
+      ],
+      bestTime: 'Oct-Apr', 
+      currency: 'AED', 
+      language: 'Arabic' 
+    }
   ];
 }
 
