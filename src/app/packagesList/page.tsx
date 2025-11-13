@@ -322,7 +322,28 @@ export default function DestinationsPage() {
             )}
 
 
-         
+            {activeTab === 'guide' && (
+              <div className="flex justify-center">
+                <table className="table-auto border-collapse border border-border text-left w-auto min-w-[500px] max-w-3xl">
+                  <thead>
+                    <tr className="bg-background/80">
+                      <th className="border border-border px-4 py-2 font-semibold text-muted-foreground">Emirate</th>
+                      <th className="border border-border px-4 py-2 font-semibold text-muted-foreground">Vibe & Focus</th>
+                      <th className="border border-border px-4 py-2 font-semibold text-muted-foreground">Key Highlight</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedCountry.guide.map((item, index) => (
+                      <tr key={index} className="odd:bg-background/50 even:bg-background/30">
+                        <td className="border border-border px-4 py-2">{item.emirate}</td>
+                        <td className="border border-border px-4 py-2">{item.vibeFocus}</td>
+                        <td className="border border-border px-4 py-2">{item.keyHighlight}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
 
           </div>
         </div>
