@@ -70,10 +70,17 @@ export interface Country {
   flag: string;
   heroImage: string;
   description: string;
+  capital: string;
+  largestCity: string;
+  timeZone: string;
+  formationDate: string;
   tagline: string;
   continent: ContinentName;
-  culture: string;
+  cultureDesciption: string;
   cultureDetails: CultureDetail[];
+  historyDetails: object[];
+  guide: object[];
+  facts: object[];
   bestTime: string;
   currency: string;
   language: string;

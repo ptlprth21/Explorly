@@ -155,9 +155,10 @@ export default function DestinationsPage() {
 
  const tabs = [
     { id: 'overview', label: 'Overview' },
-    { id: 'itinerary', label: 'Itinerary' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'reviews', label: 'Reviews' }
+    { id: 'culture', label: 'Culture' },
+    { id: 'history', label: 'History' },
+    { id: 'guide', label: 'Guide' },
+    { id: 'facts', label: 'Fun Facts' }
   ];
 
   return (
@@ -223,42 +224,41 @@ export default function DestinationsPage() {
                   <h3 className="text-xl font-semibold mb-3">About This Trip</h3>
                   <p className="text-muted-foreground leading-relaxed">{selectedCountry.description}</p>
                 </div>
-                
-                <div>
-                  <h3 className="text-xl font-semibold mb-3">Highlights</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {/* {selectedCountry.highlights.map((highlight, index) => (
-                      <div key={index} className="flex items-start space-x-2">
-                        <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="text-foreground">{highlight}</span>
-                      </div>
-                    ))} */}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="text-xl font-semibold mb-3">Included</h3>
-                    <div className="space-y-2">
-                      {/* {selectedCountry.inclusions.map((item, index) => (
-                        <div key={index} className="flex items-start space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-500 mt-1 flex-shrink-0" />
-                          <span className="text-sm text-foreground">{item}</span>
-                        </div>
-                      ))} */}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-3">Not Included</h3>
-                    <div className="space-y-2">
-                      {/* {selectedCountry.exclusions.map((item, index) => (
-                        <div key={index} className="flex items-start space-x-2">
-                          <XCircle className="h-4 w-4 text-red-500 mt-1 flex-shrink-0" />
-                          <span className="text-sm text-foreground">{item}</span>
-                        </div>
-                      ))} */}
-                    </div>
+  
+                {/* Facts Table */}
+                <div className="flex justify-center">
+                  <div className="w-full max-w-md bg-card/40 rounded-xl shadow-lg border border-border backdrop-blur-sm p-4">
+                    <h3 className="text-xl font-semibold mb-3">Key Facts</h3>
+                    <table className="w-full text-sm">
+                      <tbody>
+                        <tr className="border-b border-gray-700">
+                          <td className="px-4 py-2 font-semibold text-foreground">Capital</td>
+                          <td className="px-4 py-2 text-muted-foreground">{selectedCountry.capital}</td>
+                        </tr>
+                        <tr className="border-b border-gray-700">
+                          <td className="px-4 py-2 font-semibold text-foreground">Largest City</td>
+                          <td className="px-4 py-2 text-muted-foreground">{selectedCountry.largestCity}</td>
+                        </tr>
+                        <tr className="border-b border-gray-700">
+                          <td className="px-4 py-2 font-semibold text-foreground">Currency</td>
+                          <td className="px-4 py-2 text-muted-foreground">UAE Dirham (AED)</td>
+                        </tr>
+                        <tr className="border-b border-gray-700">
+                          <td className="px-4 py-2 font-semibold text-foreground">Official Language</td>
+                          <td className="px-4 py-2 text-muted-foreground">
+                            Arabic <span className="text-xs text-gray-400">(English is widely spoken)</span>
+                          </td>
+                        </tr>
+                        <tr className="border-b border-gray-700">
+                          <td className="px-4 py-2 font-semibold text-foreground">Time Zone</td>
+                          <td className="px-4 py-2 text-muted-foreground">{selectedCountry.timeZone}</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-2 font-semibold text-foreground">Formation Date</td>
+                          <td className="px-4 py-2 text-muted-foreground">{selectedCountry.formationDate}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
