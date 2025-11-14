@@ -77,7 +77,7 @@ export default function AccountPage() {
       <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
         {/* Sidebar */}
         <div className="w-full md:w-1/4">
-         <CardTitle className='mb-4 text-center'>Hello {user.email?.split('@')[0].toUpperCase()}</CardTitle>
+         <CardTitle className='mb-4 text-center'>Hello {user.displayName}</CardTitle>
           <Card className="sticky top-24">
             <CardHeader className="text-center">
                 <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-primary">
@@ -187,7 +187,11 @@ export default function AccountPage() {
                             <Label htmlFor="email">Email</Label>
                             <Input id="email" type="email" defaultValue={user.email || ''} readOnly />
                         </div>
-                         <Button disabled>Update Profile</Button>
+                        <div className="space-y-2">
+                            <Label htmlFor="psw">Password</Label>
+                            <Input id="psw" type="password" defaultValue=''/>
+                        </div>
+                         <Button>Update Profile</Button>
                     </CardContent>
                  </Card>
             </TabsContent>
