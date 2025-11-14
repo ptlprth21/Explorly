@@ -158,13 +158,14 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     theme: 'city',
     difficulty: 'Easy',
     highlights: [
-      'Sheikh Zayed Grand Mosque',
-      'Louvre Museum Abu Dhabi',
-      'Desert Safari with BBQ',
-      'Burj Khalifa & Dubai Mall',
-      'Old Dubai & Abra Ride'
+      'Cultural Immersion: Guided visits to Sheikh Zayed Grand Mosque, Louvre Abu Dhabi, and BAPS Hindu Mandir.',
+      'Unrivaled Thrills: Full-day access to Atlantis Aquaventure Waterpark with private transfers.',
+      'Iconic Sightseeing: Entry to the observation deck of the Burj Khalifa.',
+      'Desert Adventure: A shared Evening Desert Safari with 4x4 dune bashing and a BBQ Dinner.',
+      'History & Charm: An Old Dubai city tour, including an Abra ride and the Gold & Spice Souks.',
+      'Seamless Travel: All private airport and intercity transfers are included for maximum comfort.'
     ],
-    description: 'Discover the best of Abu Dhabi and Dubai with this 7-day tour including iconic landmarks, cultural experiences, desert adventure, and premium hotel stays.',
+    description: 'This premium version of our 7-day UAE tour is designed for travelers seeking both cultural depth and high-octane fun. You will spend three days immersed in the heritage and majestic sights of Abu Dhabi (including the Sheikh Zayed Grand Mosque and Louvre), and four days exploring the thrilling city of Dubai. The highlight of this package is the full-day experience at Atlantis Aquaventure Waterpark, complete with private round-trip transfers, ensuring a comfortable and memorable day of fun. As with all our combined packages, enjoy seamless logistics with private airport and intercity transfers, making your journey effortless.',
     itinerary: [
       { day: 1, title: 'Arrival in Abu Dhabi', description: 'Private pickup from AUH airport and check-in at hotel.' },
       { day: 2, title: 'Abu Dhabi Culture Tour', description: 'Full-day tour including Grand Mosque, Louvre Museum, BAPS Temple, and city sightseeing with return transfer.' },
@@ -198,7 +199,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
   {
     title: "UAE Highlights Getaway",
     destination: "Abu Dhabi & Dubai",
-    tagline: 'The best of both cities for the value-conscious traveler.',
+    tagline: "The best of both cities for the value-conscious traveler.",
     country: "UAE",
     continent: "Asia",
     duration: "7",
@@ -210,15 +211,14 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     theme: "city",
     difficulty: "Moderate",
     highlights: [
-      "Sheikh Zayed Grand Mosque",
-      "Louvre Abu Dhabi",
-      "BAPS Hindu Mandir",
-      "Desert Safari",
-      "Dubai Marina",
-      "Burj Khalifa",
-      "Dubai Mall & Fountain Show"
+      "Cultural Cornerstones: Visits to the Sheikh Zayed Grand Mosque, Louvre Abu Dhabi, and BAPS Hindu Mandir.",
+      "Iconic Dubai: See the city from above with a visit to the Burj Khalifa.",
+      "Desert Fun: An exciting Evening Desert Safari with 4x4 dune bashing and a classic BBQ Dinner.",
+      "Historical Charm: A detailed city tour of Old Dubai, including the Al Fahidi District, Abra ride, and exploration of the famous souks.",
+      "Cost-Effective Comfort: Stay in well-rated 4-Star Hotels for the entire 6 nights.",
+      "Zero Stress Travel: Includes all private airport and intercity transfers."
     ],
-    description: "A 7-day journey through the UAE's most iconic landmarks — from the cultural heart of Abu Dhabi to the dazzling modern wonders of Dubai.",
+    description: "Our UAE Highlights Getaway is the smart choice for travelers who want to see the key attractions of both Abu Dhabi and Dubai over seven days without compromising comfort. This mid-range package maximizes value by focusing on essential cultural sites, iconic modern landmarks, and unforgettable desert adventure. You will enjoy the seamless flow of our itinerary, featuring private transfers for arrival, intercity travel, and departure, alongside efficient shared transport for all major sightseeing tours. This package guarantees a comprehensive and well-organized introduction to the UAE's distinct charm. ",
     itinerary: [
       {
         day: 1,
@@ -284,56 +284,56 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     reviews: []
   },
   {
-    "title": "Sky Above, Sands Below (Option 1)",
-    "destination": "Dubai & Abu Dhabi",
-    "tagline": "Conquer the UAE's skies, seas, and sands in five days of high-octane luxury.",
-    "country": "UAE",
-    "continent": "Asia",
-    "duration": "5",
-    "price": 1799,
-    "image": "",
-    "gallery": [""],
-    "rating": 4.9,
-    "reviewCount": 210,
-    "theme": "city",
-    "difficulty": "Moderate",
-    "highlights": [
-      "Skydive The Palm",
-      "Platinum Heritage Desert Safari",
-      "Private Sunset Yacht Cruise",
-      "Sheikh Zayed Grand Mosque",
-      "Louvre Abu Dhabi",
-      "CLYMB Abu Dhabi"
+    title: "Sky Above, Sands Below (Option 1)",
+    destination: "Dubai & Abu Dhabi",
+    tagline: "Conquer the UAE's skies, seas, and sands in five days of high-octane luxury.",
+    country: "UAE",
+    continent: "Asia",
+    duration: "5",
+    price: 1799,
+    image: "",
+    gallery: [""],
+    rating: 4.9,
+    reviewCount: 210,
+    theme: "city",
+    difficulty: "Moderate",
+    highlights: [
+      "Sky High Adrenaline: A thrilling Tandem Skydive over The Palm Jumeirah (one of the world's most iconic jump zones).",
+      "Exclusive Desert: Experience the Platinum Luxury Desert Safari in a vintage Land Rover, complete with a gourmet four-course dinner.",
+      "Seaside Splendor: A private Sunset Dinner Yacht Cruise in Dubai.",
+      "Culture & Majesty: Visits to the Louvre Abu Dhabi and the stunning Sheikh Zayed Grand Mosque.",
+      "Indoor Thrill: Entry to CLYMB Abu Dhabi (Yas Island's indoor adventure hub).",
+      "Unmatched Service: All private, dedicated transfers throughout the 5-day journey."
     ],
-    "description": "An elite luxury adventure where adrenaline meets elegance — jump over the iconic Palm Jumeirah, explore the desert in ultimate style, and dine on a private yacht at sunset.",
-    "itinerary": [
+    description: "Designed for the discerning, thrill-seeking traveler, the Sky Above, Sands Below package is a five-day journey that packs the most luxurious and adrenaline-fueled experiences of the UAE into one unforgettable trip. Start in Dubai with the ultimate thrill—a Tandem Skydive over The Palm Jumeirah—followed by an exclusive Platinum Luxury Desert Safari and a Private Yacht Dinner Cruise. You will then transition seamlessly (via private transfer) to Abu Dhabi to explore its world-class cultural institutions and a unique indoor adventure at CLYMB. This package is defined by its five-star service, exclusive activities, and all-private transfers.",
+    itinerary: [
       {
-        "day": 1,
-        "title": "Arrival in Dubai",
-        "description": "Private pickup from Dubai International Airport (DXB) and check-in at your 5★ hotel."
+        day: 1,
+        title: "Arrival in Dubai",
+        description: "Private pickup from Dubai International Airport (DXB) and check-in at your 5★ hotel."
       },
       {
-        "day": 2,
-        "title": "Sky High Experience",
-        "description": "Transfer to Skydive The Palm for a tandem jump experience over Dubai’s most spectacular skyline. Return transfer to hotel."
+        day: 2,
+        title: "Sky High Experience",
+        description: "Transfer to Skydive The Palm for a tandem jump experience over Dubai’s most spectacular skyline. Return transfer to hotel."
       },
       {
-        "day": 3,
-        "title": "Luxury Desert Safari + Yacht Dinner",
-        "description": "Afternoon Platinum Heritage Desert Safari with 4-course dinner, camel ride & falcon show. Later, private transfer for a sunset yacht dinner cruise. Night return to hotel."
+        day: 3,
+        title: "Luxury Desert Safari + Yacht Dinner",
+        description: "Afternoon Platinum Heritage Desert Safari with 4-course dinner, camel ride & falcon show. Later, private transfer for a sunset yacht dinner cruise. Night return to hotel."
       },
       {
-        "day": 4,
-        "title": "Abu Dhabi Icons",
-        "description": "Private morning transfer from Dubai to Abu Dhabi. Visits to Louvre Abu Dhabi, Sheikh Zayed Grand Mosque & CLYMB Abu Dhabi. Final transfer to hotel in Abu Dhabi."
+        day: 4,
+        title: "Abu Dhabi Icons",
+        description: "Private morning transfer from Dubai to Abu Dhabi. Visits to Louvre Abu Dhabi, Sheikh Zayed Grand Mosque & CLYMB Abu Dhabi. Final transfer to hotel in Abu Dhabi."
       },
       {
-        "day": 5,
-        "title": "Departure",
-        "description": "Private transfer to Abu Dhabi International Airport (AUH) for departure flight."
+        day: 5,
+        title: "Departure",
+        description: "Private transfer to Abu Dhabi International Airport (AUH) for departure flight."
       }
     ],
-    "inclusions": [
+    inclusions: [
       "4 nights in 5★ hotels (2 nights Dubai, 2 nights Abu Dhabi)",
       "Daily breakfast",
       "Tandem skydiving experience at The Palm",
@@ -344,125 +344,118 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       "English-speaking support team",
       "24/7 on-trip assistance"
     ],
-    "exclusions": [
+    exclusions: [
       "Flights to/from UAE",
       "Lunches and dinners (except included experiences)",
       "Personal expenses and tips",
       "Optional activities not mentioned",
       "Visa fees and travel insurance"
     ],
-    "availableDates": [
+    availableDates: [
       "2025-10-08",
       "2025-11-18",
       "2025-12-05",
       "2026-01-14",
       "2026-03-02"
     ],
-    "reviews": []
-  },
-  {
-    title: 'Sky Above, Sands Below (Option 2)',
-    destination: 'Dubai & Abu Dhabi',
-    tagline: 'Luxury adventures, from a private sunset cruise to the heights of the Arabian sky.',
-    country: 'UAE',
-    continent: 'Asia',
-    duration: '5',
-    price: 1749,
-    image: '',
-    gallery: [''],
-    rating: 4.9,
-    reviewCount: 215,
-    theme: 'city',
-    difficulty: 'Moderate',
-    highlights: [
-      'Skydiving at The Palm',
-      'Platinum Luxury Desert Safari',
-      'Private Yacht Sunset Dinner Cruise',
-      'Sheikh Zayed Grand Mosque',
-      'Louvre Abu Dhabi',
-      'CLYMB Abu Dhabi'
-    ],
-    description: 'Thrill in Dubai skies, glide across golden dunes, and explore Abu Dhabi’s top icons — a luxury-filled adventure from start to finish.',
-    itinerary: [
-      { day: 1, title: 'Arrival (DXB)', description: 'Private pickup from Dubai International Airport (DXB) to the hotel and free time.' },
-      { day: 2, title: 'Sky High', description: 'Morning transfer for Tandem Skydive – Skydive At The Palm. Return transfer to the hotel.' },
-      { day: 3, title: 'Desert & Yacht Luxury', description: 'Afternoon Platinum Luxury Desert Safari. Evening Private Yacht Sunset Dinner Cruise. Final return transfer to the hotel.' },
-      { day: 4, title: 'Abu Dhabi Icons', description: 'Private transfer from Dubai to Abu Dhabi. Visits to Louvre Abu Dhabi, Sheikh Zayed Grand Mosque, and CLYMB Abu Dhabi. Return transfer to the hotel.' },
-      { day: 5, title: 'Farewell', description: 'Free time and departure transfer from Abu Dhabi hotel.' }
-    ],
-    inclusions: [
-      '4 nights hotel accommodation (5★: 2 in Dubai, 2 in Abu Dhabi)',
-      'Daily breakfast',
-      'Private airport transfers',
-      'All scheduled transfers to activities',
-      'Tandem Skydive – Skydive At The Palm',
-      'Platinum Luxury Desert Safari with full experience inclusions',
-      'Private Yacht Sunset Dinner Cruise (2 hours, BBQ snacks, water & soft drinks)',
-      'Entry to Louvre Abu Dhabi, Sheikh Zayed Grand Mosque & CLYMB Abu Dhabi',
-      '24/7 on-trip support'
-    ],
-    exclusions: [
-      'Flights to/from UAE',
-      'Travel insurance',
-      'Meals other than breakfast and activity inclusions',
-      'Personal expenses',
-      'Visa fees (if applicable)'
-    ],
-    availableDates: ['2025-10-05', '2025-11-18', '2025-12-08', '2026-01-22'],
     reviews: []
   },
   {
-    title: 'Coast to Culture',
-    destination: 'Abu Dhabi & Dubai',
-    tagline: "Beach, sea, and sacred architecture—an exclusive tour of the UAE's finest.",
-    country: 'UAE',
-    continent: 'Asia',
-    duration: '6',
-    price: 1299,
-    image: '',
-    gallery: [''],
-    rating: 4.8,
-    reviewCount: 190,
-    theme: 'city',
-    difficulty: 'Easy',
+    title: "Sky Above, Sands Below (Option 2)",
+    destination: "Dubai & Abu Dhabi",
+    tagline: "Luxury adventures, from a private sunset cruise to the heights of the Arabian sky.",
+    country: "UAE",
+    continent: "Asia",
+    duration: "5",
+    price: 1749,
+    image: "",
+    gallery: [""],
+    rating: 4.9,
+    reviewCount: 215,
+    theme: "city",
+    difficulty: "Moderate",
     highlights: [
-      'Sheikh Zayed Grand Mosque',
-      'Louvre Abu Dhabi',
-      'BAPS Hindu Mandir',
-      'Jubail Mangrove Park Kayaking',
-      'Zaya Nurai Island',
-      'Helicopter Tour Dubai',
-      'Burj Khalifa & Downtown Dubai'
+      "Sky High Adrenaline: A thrilling Tandem Skydive over The Palm Jumeirah at one of the world's most desired drop zones.",
+      "Exclusive Desert: Experience the Platinum Luxury Desert Safari in a vintage Land Rover, complete with a gourmet dinner.",
+      "Sunset at Sea: A 2-Hour Private Yacht Sunset Dinner Cruise with BBQ snacks, soft drinks, and water.",
+      "Culture & Majesty: Visits to the Louvre Abu Dhabi and the stunning Sheikh Zayed Grand Mosque.",
+      "Indoor Thrill: Entry to CLYMB Abu Dhabi (Yas Island's vertical adventure hub).",
+      "Unmatched Service: All private, dedicated transfers throughout the 5-day journey."
     ],
-    description: 'Experience the perfect mix of stunning coastline, cultural wonders, and luxury adventures from Abu Dhabi to Dubai.',
+    description: "This exclusive 5-day itinerary delivers a concentrated dose of the UAE's most thrilling and luxurious experiences. Starting in Dubai, you'll feel the rush of a Tandem Skydive over The Palm Jumeirah and indulge in a Private Yacht Sunset Dinner Cruise with BBQ snacks. The package also features the exceptional Platinum Luxury Desert Safari. Seamlessly transition to Abu Dhabi via private car to explore cultural landmarks like the Louvre Abu Dhabi and the Sheikh Zayed Grand Mosque, followed by an indoor adventure at CLYMB. Defined by its 5-star accommodation and dedicated private transportation, this tour offers the adventurous traveler an elevated, hassle-free holiday. ",
     itinerary: [
-      { day: 1, title: 'Arrival (AUH)', description: 'Private pickup from Abu Dhabi International Airport (AUH) to the hotel.' },
-      { day: 2, title: 'Culture & Sacred Spaces', description: 'Visits to Sheikh Zayed Grand Mosque, BAPS Hindu Mandir, and Louvre Abu Dhabi. Return transfer to the hotel.' },
-      { day: 3, title: 'Mangroves & Marina Transfer', description: 'Kayaking at Jubail Mangrove Park followed by private transfer from Abu Dhabi to Dubai hotel.' },
-      { day: 4, title: 'Private Island Escape', description: 'Morning transfer for a day visit to Zaya Nurai Island. Return to the hotel.' },
-      { day: 5, title: 'Helicopter Tour & Downtown', description: 'Morning helicopter tour followed by afternoon Burj Khalifa & Dubai Mall visit. Return transfer to hotel.' },
-      { day: 6, title: 'Farewell', description: 'Free time and departure transfer from Dubai hotel.' }
+      { day: 1, title: "Arrival (DXB)", description: "Private pickup from Dubai International Airport (DXB) to the hotel and free time." },
+      { day: 2, title: "Sky High", description: "Morning transfer for Tandem Skydive – Skydive At The Palm. Return transfer to the hotel." },
+      { day: 3, title: "Desert & Yacht Luxury", description: "Afternoon Platinum Luxury Desert Safari. Evening Private Yacht Sunset Dinner Cruise. Final return transfer to the hotel." },
+      { day: 4, title: "Abu Dhabi Icons", description: "Private transfer from Dubai to Abu Dhabi. Visits to Louvre Abu Dhabi, Sheikh Zayed Grand Mosque, and CLYMB Abu Dhabi. Return transfer to the hotel." },
+      { day: 5, title: "Farewell", description: "Free time and departure transfer from Abu Dhabi hotel." }
     ],
     inclusions: [
-      '5 nights hotel accommodation (5★: 3 in Abu Dhabi, 2 in Dubai)',
-      'Daily breakfast',
-      'Private airport transfers',
-      'All scheduled transfers to activities',
-      'Entry to Sheikh Zayed Grand Mosque, BAPS Hindu Mandir, and Louvre Abu Dhabi',
-      'Kayaking at Jubail Mangrove Park',
-      'Zaya Nurai Island visit with transfers',
-      'Dubai Helicopter Tour + Burj Khalifa entry',
-      '24/7 on-trip support'
+      "4 nights hotel accommodation (5★: 2 in Dubai, 2 in Abu Dhabi)",
+      "Daily breakfast",
+      "Private airport transfers",
+      "All scheduled transfers to activities",
+      "Tandem Skydive – Skydive At The Palm",
+      "Platinum Luxury Desert Safari with full experience inclusions",
+      "Private Yacht Sunset Dinner Cruise (2 hours, BBQ snacks, water & soft drinks)",
+      "Entry to Louvre Abu Dhabi, Sheikh Zayed Grand Mosque & CLYMB Abu Dhabi",
+      "24/7 on-trip support"
     ],
     exclusions: [
-      'Flights to/from UAE',
-      'Travel insurance',
-      'Meals other than breakfast',
-      'Personal expenses',
-      'Optional activities',
-      'Visa fees (if applicable)'
+      "Flights to/from UAE",
+      "Travel insurance",
+      "Meals other than breakfast and activity inclusions",
+      "Personal expenses",
+      "Visa fees (if applicable)"
     ],
-    availableDates: ['2025-10-12', '2025-11-25', '2025-12-09', '2026-02-18'],
+    availableDates: ["2025-10-05", "2025-11-18", "2025-12-08", "2026-01-22"],
+    reviews: []
+  },
+  {
+    title: "Coast to Culture",
+    destination: "Abu Dhabi & Dubai",
+    tagline: "Beach, sea, and sacred architecture—an exclusive tour of the UAE's finest.",
+    country: "UAE",
+    continent: "Asia",
+    duration: "6",
+    price: 1299,
+    image: "",
+    gallery: [""],
+    rating: 4.8,
+    reviewCount: 190,
+    theme: "city",
+    difficulty: "Easy",
+    highlights: [
+      "Exclusive Island Day: Full-day visit to Zaya Nurai Island for the ultimate private beach escape.",
+      "Aerial Views: A thrilling Helicopter Tour offering unparalleled views of Dubai's skyline, including The Palm and Burj Al Arab.",
+      "Cultural Giants: Visits to the Sheikh Zayed Grand Mosque, BAPS Temple, and the Louvre Abu Dhabi.",
+      "Eco-Adventure: A tranquil kayaking experience in the beautiful Jubail Mangrove Park.",
+      "Dubai Icons: Entry to the observation deck of the magnificent Burj Khalifa.",
+      "Maximum Comfort: All accommodation in 5-Star Hotels and all transfers are private."
+    ],
+    description: "Our Coast to Culture package is an elegant six-day journey combining the serenity of the Arabian coastline with the energy of the modern metropolises. Designed for travelers who appreciate both comfort and unique experiences, this tour focuses on water-based activities, including a kayaking trip through the Jubail Mangrove Park and a decadent day on the private Zaya Nurai Island. The itinerary culminates with luxury sightseeing in Dubai, featuring a Helicopter Tour over the city's icons and a visit to the Burj Khalifa. With all transfers being private and accommodation in 5-star hotels, this package promises a seamless, high-end vacation experience.",
+    itinerary: [
+      { day: 1, title: "Arrival (AUH)", description: "Private pickup from Abu Dhabi International Airport (AUH) to the hotel." },
+      { day: 2, title: "Culture & Sacred Spaces", description: "Visits to Sheikh Zayed Grand Mosque, BAPS Hindu Mandir, and Louvre Abu Dhabi. Return transfer to the hotel." },
+      { day: 3, title: "Mangroves & Marina Transfer", description: "Kayaking at Jubail Mangrove Park followed by private transfer from Abu Dhabi to Dubai hotel." },
+      { day: 4, title: "Private Island Escape", description: "Morning transfer for a day visit to Zaya Nurai Island. Return to the hotel." },
+      { day: 5, title: "Helicopter Tour & Downtown", description: "Morning helicopter tour followed by afternoon Burj Khalifa & Dubai Mall visit. Return transfer to hotel." },
+      { day: 6, title: "Farewell", description: "Free time and departure transfer from Dubai hotel." }
+    ],
+    inclusions: [
+      "5 nights in 5-Star luxury hotels (3 in AUH, 2 in DXB). (Booking managed by THEVIPGROUP).",
+      "Daily breakfast at the hotel.",
+      "All Transfers are Private: Airport transfers (Arrival AUH, Departure DXB), intercity transfer (AUH to DXB), and all transfers for scheduled activities.",
+      "Visit/Entry to: Sheikh Zayed Grand Mosque, BAPS Temple, Louvre Abu Dhabi, Kayaking at Jubail Mangrove Park, Full-day Zaya Nurai Island visit (including boat transfer), Helicopter Tour, Burj Khalifa entry.",
+    ],
+    exclusions: [
+      "Airfare: International or domestic flights to/from the UAE.",
+      "Meals: Lunch and dinner (except daily breakfast).",
+      "Personal Expenses: Tips, souvenirs, spa/massage treatments, minibar.",
+      "Insurance: Travel or medical insurance (highly recommended).",
+      "Visa Fees (If applicable)."
+    ],
+    availableDates: ["2025-10-12", "2025-11-25", "2025-12-09", "2026-02-18"],
     reviews: []
   },
   {
