@@ -110,7 +110,7 @@ export default function CountryDetailPage() {
   return (
     <div className="min-h-screen">
       <Container>
-      {/* Header with Breadcrumbs */}
+      {/* Header */}
       <div className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border">
         <Container className="py-3 sm:py-4">
           <div className="flex items-center justify-between">
@@ -133,7 +133,7 @@ export default function CountryDetailPage() {
         </Container>
       </div>
 
-      {/* Cinematic Hero */}
+      {/* Hero */}
       <section className="relative h-[60vh] overflow-hidden flex items-center justify-center my-8 rounded-xl">
         <div className="absolute inset-0">
           <Image
