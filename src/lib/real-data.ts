@@ -473,12 +473,13 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     theme: 'city',
     difficulty: 'Easy',
     highlights: [
-      'Helicopter Tour Dubai',
-      'Private Yacht Tour',
-      'Museum of the Future',
-      'Dinner in the Sky'
+      'Aerial Views: A thrilling 17-minute Helicopter Tour over The Palm, providing spectacular views of Dubai\'s famous landmarks.',
+      'Exclusive Sea Time: A Private Yacht Tour departing from Dubai Harbour Yacht Club.',
+      'Unique Dining: A spectacular culinary experience with Dinner in the Sky at Dubai Marina.',
+      'Architectural Wonder: Entry and visit to the globally celebrated Museum of the Future.',
+      'Unwavering Luxury: 3 nights in a high-end Luxury Hotel and all transfers are private.'
     ],
-    description: 'Experience Dubai from above and at sea with the perfect blend of luxury, iconic views, and exclusive experiences.',
+    description: 'The Luxury in the Air & Sea package is a concentrated, 4-day VIP itinerary showcasing the absolute best of modern Dubai. This package is all about experiencing the city from exclusive vantage points, offering thrilling perspectives from a Helicopter Tour and serene sunset views from a Private Yacht Tour. Indulge in a unique culinary experience with Dinner in the Sky, and explore the architectural marvels of the Museum of the Future. Designed for luxury and efficiency, this trip ensures a comfortable and unforgettable experience with dedicated private transfers from arrival to departure.',
     itinerary: [
       { day: 1, title: 'Arrival (DXB)', description: 'Private pickup from Dubai International Airport (DXB) to the hotel.' },
       { day: 2, title: 'Helicopter & Yacht Day', description: 'Helicopter ride above Palm Jumeirah in the morning, Private Yacht Tour in the afternoon. Return transfers included.' },
@@ -486,23 +487,17 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       { day: 4, title: 'Farewell', description: 'Private transfer from the hotel to DXB for departure.' }
     ],
     inclusions: [
-      '3 nights luxury hotel accommodation in Dubai',
-      'Daily breakfast',
-      'Private airport transfers',
-      'Helicopter Ride (17 min - Palm Tour)',
-      'Private Yacht Tour',
-      'Museum of the Future entry',
-      'Dinner in the Sky experience',
-      'All scheduled transfers',
-      '24/7 on-trip support'
+      '3 nights in a luxury hotel in Dubai. (Booking managed by THEVIPGROUP).',
+      'Daily breakfast at the hotel. Dinner in the Sky experience (Day 3).',
+      'All Transfers are Private: Airport transfers (Arrival DXB, Departure DXB), and all round-trip transfers for scheduled activities.',
+      '17-minute Palm Helicopter Tour from Dubai Police Academy. Private Yacht Tour from Dubai Harbour Yacht Club. Entry to the Museum of the Future. Dinner in the Sky experience.'
     ],
     exclusions: [
-      'Flights to/from UAE',
-      'Travel insurance',
-      'Meals other than breakfast and Dinner in the Sky',
-      'Personal expenses',
-      'Optional activities',
-      'Visa fees (if applicable)'
+      'Airfare: International or domestic flights to/from Dubai (DXB).',
+      'Meals: Lunch (except as specified) and other dinners.',
+      'Personal Expenses: Tips, souvenirs, minibar, optional activities.',
+      'Insurance: Travel or medical insurance (highly recommended).',
+      'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-10-20', '2025-11-18', '2025-12-12', '2026-01-22'],
     reviews: []
@@ -521,8 +516,14 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     reviewCount: 160,
     theme: 'city',
     difficulty: 'Moderate',
-    highlights: ['Luxury Desert Resort Stay', 'Hot Air Balloon Flight', 'Camel Trekking', 'Wildlife Tour'],
-    description: 'Sleep under the desert stars and rise above the golden dunes with a breathtaking hot air balloon ride. A perfect blend of luxury and adventure.',
+    highlights: [
+      'Iconic Sunrise: A breathtaking Sunrise Hot Air Balloon Flight over the vast Arabian Desert.',
+      'Luxury Stays: 2 nights in a Luxury Desert Resort and 2 nights in an Abu Dhabi Beachfront Hotel.',
+      'Nature & Wildlife: A guided visit to Emirates Park Zoo (AUH) for a unique wildlife encounter.',
+      'Authentic Adventure: Optional enhanced desert activities including a Falconry Show and Camel Ride.',
+      'Ultimate Comfort: All transfers are private for airport and intercity travel.'
+    ],
+    description: 'The Golden Dunes & Sunrise Skies package is crafted for those seeking a premium retreat focused on nature, luxury, and unforgettable sunrise moments. The journey begins with two nights in a spectacular Luxury Desert Resort, highlighted by an optional Sunrise Hot Air Balloon Flight over the dunes. The itinerary smoothly transitions to Abu Dhabi\'s coast for two nights of relaxation in a Beachfront Hotel. You will also enjoy a unique wildlife encounter and seamless, all-private transfers for airport and intercity travel. Choose your preferred Hot Air Balloon option for a tailor-made luxury adventure.',
     itinerary: [
       { day: 1, title: 'Arrival to Desert Retreat', description: 'Private pickup from Dubai (DXB) and check-in at a luxury desert resort.' },
       { day: 2, title: 'Sunrise Hot Air Balloon', description: 'Early morning Hot Air Balloon flight including international buffet breakfast, falconry demonstration, camel ride, and flight certificate. Return to the resort.' },
@@ -531,22 +532,17 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       { day: 5, title: 'Departure', description: 'Private transfer to the airport for departure.' }
     ],
     inclusions: [
-      '4 nights accommodation (2 luxury desert resort + 2 Abu Dhabi beachfront hotel)',
-      'Daily breakfast included',
-      'Private airport and inter-hotel transfers',
-      'Hot Air Balloon flight with breakfast',
-      'Falconry show and camel ride experience',
-      'Wildlife tour',
-      'All scheduled transfers',
-      '24/7 support during the trip'
+      '4 nights in luxury hotels (2 Desert Resort, 2 AUH Beachfront). (Booking managed by THEVIPGROUP).',
+      'All Private Transfers: Airport pickup (DXB), intercity transfer (Desert to AUH Beach), and airport drop-off (AUH or DXB). Shared 4x4 transfers for the Hot Air Balloon experience.',
+      'Hot Air Balloon Flight (Up to 60 mins) with pre-flight refreshments. Guided Visit to Emirates Park Zoo (AUH). Camel Trekking activity (as part of Day 3 activities).',
+      'Optional Upgrade (€1,099) -> International Buffet Breakfast at the Majlis, 30-min Falconry Show, and extended Camel Ride (as part of the Hot Air Balloon experience).'
     ],
     exclusions: [
-      'Flights to/from UAE',
-      'Meals not mentioned above',
-      'Travel insurance',
-      'Personal expenses',
-      'Optional tours and activities',
-      'Visa fees (if applicable)'
+      'Airfare: International or domestic flights to/from the UAE.',
+      'Meals: Daily breakfast (unless the €1,099 option is chosen), lunch, and dinner.',
+      'Personal Expenses: Tips, souvenirs, minibar, optional spa services.',
+      'Insurance: Travel or medical insurance (highly recommended).',
+      'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-10-12', '2025-11-20', '2025-12-18', '2026-02-10'],
     reviews: []
@@ -565,8 +561,14 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     reviewCount: 250,
     theme: 'city',
     difficulty: 'Easy',
-    highlights: ['Burj Khalifa Visit', 'Desert Safari BBQ', 'Dubai Mall Experience'],
-    description: 'Explore Dubai’s most iconic attractions and enjoy an authentic Desert Safari with BBQ dinner. Designed for travelers seeking comfort, convenience, and unforgettable experiences.',
+    highlights: [
+      'Skyline View: Entry to the observation deck of the magnificent Burj Khalifa.',
+      'Arabian Night: A classic Evening Desert Safari with 4x4 dune bashing and a traditional BBQ Dinner.',
+      'Historical Charm: A cultural walking tour of Old Dubai (Al Fahidi, Gold & Spice Souks) and an authentic Abra boat ride.',
+      'Iconic Photostops: Drive-by and photo opportunities at Burj Al Arab, Museum of the Future, and Dubai Frame.',
+      'Comfort & Value: 4 nights in a great-value, well-located 4-Star Hotel.'
+    ],
+    description: 'Our Dubai Explorer package is designed for the savvy traveler who wants to experience all the essential highlights of Dubai over five days at an exceptional value. This itinerary perfectly balances the city\'s two contrasting sides: the awe-inspiring modern landmarks and the charming historical core. You will stand atop the iconic Burj Khalifa, feel the thrill of the Desert Safari, and step back in time in the Al Fahidi Historical District. With comfortable 4-star accommodation and streamlined shared transfers for tours, this is the most efficient and enjoyable way to discover Dubai.',
     itinerary: [
       { day: 1, title: 'Arrival in Dubai', description: 'Private pickup from DXB airport and check-in at 4-star hotel.' },
       { day: 2, title: 'Dubai City Icons', description: 'Guided morning visit to Burj Khalifa and Dubai Mall with shared transfers.' },
@@ -575,21 +577,17 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       { day: 5, title: 'Departure', description: 'Private transfer to the airport for your flight home.' }
     ],
     inclusions: [
-      '4 nights hotel accommodation in a 4-star hotel in Dubai',
-      'Private airport pickup & drop-off (DXB)',
-      'Shared guided Burj Khalifa + Dubai Mall visit',
-      'Desert Safari with BBQ dinner',
-      'Dune bashing, sandboarding, henna, belly dance show',
-      'Water & limited soft drinks during safari',
-      '24/7 support during the trip'
+      '4 nights in a 4-Star hotel in Dubai. (Booking managed by THEVIPGROUP).',
+      'Daily breakfast at the hotel. BBQ Dinner during the desert safari (Day 3).',
+      'Private airport transfers (Arrival DXB & Departure DXB). Shared (SIC) transport for all scheduled tours (City Icons, Desert Safari, and Old Dubai Tour).',
+      'Entry to Burj Khalifa (non-prime hours). Evening Desert Safari (shared, with dune bashing and dinner). Old Dubai City Tour (walking tour, Abra ride, souks).'
     ],
     exclusions: [
-      'Flights to/from UAE',
-      'Meals not mentioned above',
-      'Travel insurance',
-      'Personal expenses',
-      'Optional activities and attraction tickets',
-      'Visa fees (if applicable)'
+      'Airfare: International or domestic flights to/from Dubai (DXB).',
+      'Meals: Lunch and dinner (except the desert safari BBQ).',
+      'Personal Expenses: Tips, souvenirs, minibar, optional activities.',
+      'Insurance: Travel or medical insurance (highly recommended).',
+      'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-10-05', '2025-11-15', '2025-12-20', '2026-01-18'],
     reviews: []
