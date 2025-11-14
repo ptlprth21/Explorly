@@ -77,6 +77,7 @@ export default function AccountPage() {
       <div className="flex flex-col md:flex-row items-start gap-8 md:gap-12">
         {/* Sidebar */}
         <div className="w-full md:w-1/4">
+         <CardTitle className='mb-4 text-center'>Hello {user.email?.split('@')[0].toUpperCase()}</CardTitle>
           <Card className="sticky top-24">
             <CardHeader className="text-center">
                 <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-primary">

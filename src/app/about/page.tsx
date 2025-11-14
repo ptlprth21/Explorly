@@ -32,16 +32,18 @@ export default function AboutPage() {
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-          <h1 className="text-5xl font-headline font-bold text-white">About Explorly</h1>
+        
+        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center px-6 text-center">
+          <h1 className="text-5xl font-headline font-bold text-white mb-4">
+            About Explorly
+          </h1>
+          <br />
+          <h5 className="max-w-3xl text-lg md:text-2xl text-white">
+            Explorly is where passion for travel meets the excellence of THEVIPGROUP.
+            <br />
+            Join us, and let’s explore the world together.
+          </h5>
         </div>
-      </section>
-
-      <section className="w-full bg-white/5 py-12 text-center">
-        <h5 className="max-w-5xl mx-auto text-3xl font-headline font-bold text-white">
-          Explorly is where passion for travel meets the excellence of THEVIPGROUP.
-          Join us, and let’s explore the world together.
-        </h5>
       </section>
 
       <Container className="py-16">
