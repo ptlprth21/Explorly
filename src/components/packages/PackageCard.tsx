@@ -30,16 +30,18 @@ const PackageCard = ({ package: pkg, theme }: PackageCardProps) => {
         {/* Content Overlay */}
         <div className="relative h-full flex flex-col justify-between p-6 text-white">
           {/* Top Section */}
-          <div className="flex justify-between items-start">
-            <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
-              <span className="text-sm font-medium">{theme.name}</span>
+          {theme && (
+            <div className="flex justify-between items-start">
+              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
+                <span className="text-sm font-medium">{theme.name}</span>
+              </div>
+              {/* Rating tag */}
+              {/* <div className="flex items-center space-x-1 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
+                <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                <span className="text-sm font-semibold">{pkg.rating}</span>
+              </div> */}
             </div>
-            {/* Rating tag */}
-            {/* <div className="flex items-center space-x-1 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full">
-              <Star className="h-4 w-4 text-yellow-400 fill-current" />
-              <span className="text-sm font-semibold">{pkg.rating}</span>
-            </div> */}
-          </div>
+          )}
 
           {/* Bottom Section */}
           <div>
