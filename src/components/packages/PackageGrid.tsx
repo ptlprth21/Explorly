@@ -5,7 +5,7 @@ import { Skeleton } from "../ui/skeleton";
 interface PackageGridProps {
   packages: Package[];
   isLoading?: boolean;
-  themes: Theme[];
+  themes?: Theme[];
 }
 
 const PackageGrid = ({ packages, isLoading, themes }: PackageGridProps) => {
