@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Compass, X } from 'lucide-react';
+import { Menu, Compass, X, User } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -69,9 +69,19 @@ const Header = () => {
                       {link.label}
                     </Link>
                   ))}
-                   {user && (
+                   {/* {user && (
                     <Link href="/account" className={cn("transition-colors hover:text-primary", pathname === '/account' ? "text-primary" : "text-foreground/80")}>
                       My Account
+                    </Link>
+                  )} */}
+                  {user && (
+                    <Link href="/account" className={cn(
+                        "transition-colors hover:text-primary p-2 rounded-full",
+                        pathname === '/account' ? "text-primary" : "text-foreground/80"
+                      )}
+                      aria-label="My Account"
+                    >
+                      <User className="h-6 w-6" />
                     </Link>
                   )}
                 </nav>
