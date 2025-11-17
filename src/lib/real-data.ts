@@ -11,7 +11,7 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     continent: 'Asia',
     duration: '4',
     price: 649,
-    image: '',
+    image: '/images/pakage1/1.jpg',
     gallery: [''],
     rating: 4.8,
     reviewCount: 175,
