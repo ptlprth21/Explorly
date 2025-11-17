@@ -302,7 +302,7 @@ export default function DestinationsPage() {
                   </p>
                 </div>
 
-                {selectedCountry.cultureDetails?.map((section, index) => (
+                {selectedCountry?.historyDetails?.map((section, index) => (
                   <div
                     key={index}
                     className="w-full max-w-3xl bg-card/40 border border-border rounded-2xl shadow-md backdrop-blur-sm p-6"
