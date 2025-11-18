@@ -294,6 +294,36 @@ export default function AccountPage() {
             </div>
           )}
 
+          {activeSection === "security" && (
+            <div className="mt-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Password & Security</CardTitle>
+                  <CardDescription>Update your password to keep your account secure.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="currentPassword">Current Password</Label>
+                    <Input id="currentPassword" type="password" placeholder="Enter current password" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="newPassword">New Password</Label>
+                    <Input id="newPassword" type="password" placeholder="Enter new password" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                    <Input id="confirmPassword" type="password" placeholder="Confirm new password" />
+                  </div>
+
+                  <Button>Update Password</Button>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+
           {activeSection === "notifications" && (
             <div className="mt-6">
               <Card className="p-6">
