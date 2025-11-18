@@ -202,26 +202,26 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                       </div>
                     ) : (
                       <div className="mb-6">
-                        <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-2">
+                        {/* <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-2">
                             <span>Availability</span>
                             <span>{availability.seatsLeft}/{availability.totalSeats} seats left</span>
                         </div>
                         <div className="w-full bg-muted rounded-full h-2">
                             <div className="bg-primary h-2 rounded-full" style={{ width: `${(availability.seatsLeft / availability.totalSeats) * 100}%` }}></div>
-                        </div>
+                        </div> */}
                       </div>
                     )}
 
 
                     <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3 sm:space-x-4">
-                        <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
-                        <Heart className="h-5 w-5" />
-                        </Button>
+                        {/* <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+                          <Heart className="h-5 w-5" />
+                        </Button> */}
                         <div className="flex items-center space-x-1">
-                        <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                        {/* <Star className="h-4 w-4 text-yellow-400 fill-current" />
                         <span className="font-semibold text-sm sm:text-base">{currentPackage.rating}</span>
-                        <span className="text-muted-foreground text-xs sm:text-sm">({currentPackage.reviewCount})</span>
+                        <span className="text-muted-foreground text-xs sm:text-sm">({currentPackage.reviewCount})</span> */}
                         </div>
                     </div>
                     
