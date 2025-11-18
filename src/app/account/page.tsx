@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Loader2, PlaneTakeoff, User, LogOut, Briefcase, Settings, Heart, Bell } from 'lucide-react';
+import { Loader2, PlaneTakeoff, User, LogOut, Briefcase, Settings, Heart, Bell, Wallet, Shield } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useWishlist } from '@/context/WishlistContext';
@@ -93,6 +93,15 @@ export default function AccountPage() {
             <CardContent className="space-y-2">
               <Button
                 variant="ghost"
+                className={`w-full justify-start ${activeSection === "profile" && "bg-muted"}`}
+                onClick={() => setActiveSection("profile")}
+              >
+                <Settings className="mr-2 h-4 w-4" />
+                My Profile
+              </Button>
+
+              <Button
+                variant="ghost"
                 className={`w-full justify-start ${activeSection === "bookings" && "bg-muted"}`}
                 onClick={() => setActiveSection("bookings")}
               >
@@ -111,11 +120,11 @@ export default function AccountPage() {
 
               <Button
                 variant="ghost"
-                className={`w-full justify-start ${activeSection === "profile" && "bg-muted"}`}
-                onClick={() => setActiveSection("profile")}
+                className={`w-full justify-start ${activeSection === "wallet" && "bg-muted"}`}
+                onClick={() => setActiveSection("wallet")}
               >
-                <Settings className="mr-2 h-4 w-4" />
-                My Profile
+                <Wallet className="mr-2 h-4 w-4" />
+                Wallet & Vouchers
               </Button>
 
               <Button
@@ -125,6 +134,15 @@ export default function AccountPage() {
               >
                 <Bell className="mr-2 h-4 w-4" />
                 Notifications
+              </Button>
+
+              <Button
+                variant="ghost"
+                className={`w-full justify-start ${activeSection === "security" && "bg-muted"}`}
+                onClick={() => setActiveSection("security")}
+              >
+                <Shield className="mr-2 h-4 w-4" />
+                Password & Security
               </Button>
 
               <Button onClick={signOut} variant="outline" className="w-full mt-4">
@@ -206,7 +224,7 @@ export default function AccountPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Personal Information</CardTitle>
-                  <CardDescription>Manage your account details.</CardDescription>
+                  <CardDescription>Manage your public profile and personal details.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -217,10 +235,10 @@ export default function AccountPage() {
                     <Label htmlFor="email">Email</Label>
                     <Input id="email" type="email" defaultValue={user.email || ''} readOnly />
                   </div>
-                  <div className="space-y-2">
+                  {/* <div className="space-y-2">
                     <Label htmlFor="psw">Password</Label>
                     <Input id="psw" type="password" defaultValue=''/>
-                  </div>
+                  </div> */}
                   <Button>Update Profile</Button>
                 </CardContent>
               </Card>
