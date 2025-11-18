@@ -18,6 +18,7 @@ import Link from 'next/link';
 import { useWishlist } from '@/context/WishlistContext';
 import { getPackageById } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
+import { Switch } from '@/components/ui/switch';
 
 export default function AccountPage() {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -256,7 +257,6 @@ export default function AccountPage() {
             </div>
           )}
 
-
           {activeSection === "profile" && (
             <div className="mt-6">
               <Card>
@@ -323,14 +323,37 @@ export default function AccountPage() {
             </div>
           )}
 
-
           {activeSection === "notifications" && (
             <div className="mt-6">
-              <Card className="p-6">
-                <p className="text-muted-foreground">You have no notifications yet.</p>
+              <Card className="p-6 space-y-6">
+                <CardHeader>
+                  <CardTitle>Notification Settings</CardTitle>
+                  <CardDescription>Manage how we communicate with you.</CardDescription>
+                </CardHeader>
+
+                <div className="flex items-center justify-between p-4 border rounded-md bg-muted">
+                  <div className="flex flex-col">
+                    <span className="font-semibold">Promotional Emails</span>
+                    <span className="text-sm text-muted-foreground">
+                      Receive updates on new destinations and special offers.
+                    </span>
+                  </div>
+                  <Switch checked={false} onCheckedChange={() => {}} />
+                </div>
+
+                <div className="flex items-center justify-between p-4 border rounded-md bg-muted">
+                  <div className="flex flex-col">
+                    <span className="font-semibold">Booking Updates</span>
+                    <span className="text-sm text-muted-foreground">
+                      Get important notifications about your upcoming trips.
+                    </span>
+                  </div>
+                  <Switch checked={true} onCheckedChange={() => {}} />
+                </div>
               </Card>
             </div>
           )}
+
 
         </div>
 
