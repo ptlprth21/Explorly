@@ -27,7 +27,7 @@ export default function AccountPage() {
   const { wishlist, toggleWishlist } = useWishlist();
   const [wishlistPackages, setWishlistPackages] = useState<Package[]>([]);
   const [loadingWishlist, setLoadingWishlist] = useState(true);
-  const [activeSection, setActiveSection] = useState("bookings");
+  const [activeSection, setActiveSection] = useState("profile");
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -197,95 +197,73 @@ export default function AccountPage() {
             </div>
           )}
 
-          {/* {activeSection === "wishlist" && (
-            <div className="mt-6">
-              {loadingWishlist ? (
-                <div className="text-center py-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  <p className="mt-2 text-muted-foreground">Loading your wishlist...</p>
-                </div>
-              ) : wishlistPackages.length === 0 ? (
-                <Card className="text-center p-8">
-                  <Heart className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                  <h3 className="text-xl font-semibold mb-2">Your Wishlist is Empty</h3>
-                  <p className="text-muted-foreground mb-4">Find trips you love and add them here to plan your next adventure.</p>
-                  <Button asChild>
-                    <Link href="/destinations">Explore Destinations</Link>
-                  </Button>
-                </Card>
-              ) : (
-                <PackageGrid packages={wishlistPackages} />
-              )}
-            </div>
-          )} */}
 
           {activeSection === "wishlist" && (
             <div className="mt-6">
-              <h2 className="text-3xl font-bold mb-2">My Wishlist</h2>
-              <p className="text-muted-foreground mb-6">Your saved adventures. Ready to make one a reality?</p>
+              <Card className="p-6 space-y-4">
+                <CardHeader>
+                  <CardTitle>My Wishlist</CardTitle>
+                  <CardDescription>Your saved adventures. Ready to make one a reality?</CardDescription>
+                </CardHeader>
 
-              {loadingWishlist ? (
-                <div className="text-center py-12">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  <p className="mt-2 text-muted-foreground">Loading your wishlist...</p>
-                </div>
-              ) : wishlistPackages.length === 0 ? (
-                <Card className="text-center p-8">
-                  <Heart className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                  <h3 className="text-xl font-semibold mb-2">Your Wishlist is Empty</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Find trips you love and add them here to plan your next adventure.
-                  </p>
-                  <Button asChild>
-                    <Link href="/destinations">Explore Destinations</Link>
-                  </Button>
-                </Card>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {wishlistPackages.map((pkg) => (
-                    <Card key={pkg.id} className="text-white relative overflow-hidden rounded-lg shadow-lg group">
-                      <button
-                        onClick={() => toggleWishlist(pkg.id)}
-                        className="absolute top-2 right-2 z-10 w-6 h-6 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition opacity-80 hover:opacity-100"
-                      >
-                        &times;
-                      </button>
+                {loadingWishlist ? (
+                  <div className="text-center py-12">
+                    <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                    <p className="mt-2 text-muted-foreground">Loading your wishlist...</p>
+                  </div>
+                ) : wishlistPackages.length === 0 ? (
+                  <div className="text-center p-8">
+                    <Heart className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+                    <CardTitle>Your Wishlist is Empty</CardTitle>
+                    <CardDescription>
+                      Find trips you love and add them here to plan your next adventure.
+                    </CardDescription>
+                    <Button asChild className="mt-4">
+                      <Link href="/destinations">Explore Destinations</Link>
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {wishlistPackages.map((pkg) => (
+                      <Card key={pkg.id} className="relative overflow-hidden group">
+                        <button
+                          onClick={() => toggleWishlist(pkg.id)}
+                          className="absolute top-2 right-2 z-10 w-6 h-6 rounded-full bg-red-600 flex items-center justify-center text-white hover:bg-red-700 transition opacity-80 hover:opacity-100"
+                        >
+                          &times;
+                        </button>
 
-                      <div className="relative h-48 w-full">
-                        <Image
-                          src={pkg.image}
-                          alt={pkg.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-
-                      <div className="p-4 space-y-1">
-                        <p className="text-sm text-gray-400 flex items-center gap-1">
-                          <MapPin className="w-4 h-4" /> {pkg.destination}
-                        </p>
-                        <h3 className="text-lg font-bold">{pkg.title}</h3>
-                        <div className="flex items-center gap-3 text-sm text-gray-400 mt-1">
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" /> {pkg.duration} Days
-                          </span>
-                          {/* <span className="flex items-center gap-1">
-                            <Star className="w-4 h-4 text-yellow-400" /> {pkg.rating} ({pkg.reviews})
-                          </span> */}
+                        <div className="relative h-48 w-full">
+                          <Image
+                            src={pkg.image}
+                            alt={pkg.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
                         </div>
-                        <div className="flex items-center justify-between mt-3">
-                          <span className="text-primary font-bold text-lg">€{pkg.price}</span>
-                          <Button asChild size="sm">
-                            <Link href={`/packages/${pkg.id}`}>View Details →</Link>
-                          </Button>
+
+                        <div className="p-4 space-y-1">
+                          <CardHeader>
+                            <CardTitle>{pkg.title}</CardTitle>
+                            <CardDescription className="text-sm text-gray-400 flex items-center gap-1">
+                              <MapPin className="w-4 h-4" /> {pkg.destination} • {pkg.duration} Days
+                            </CardDescription>
+                          </CardHeader>
+                          <div className="flex items-center justify-between mt-3">
+                            <span className="text-primary font-bold text-lg">€{pkg.price}</span>
+                            <Button asChild size="sm">
+                              <Link href={`/packages/${pkg.id}`}>View Details →</Link>
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              )}
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </Card>
             </div>
           )}
+
 
           {activeSection === "profile" && (
             <div className="mt-6">
