@@ -1,6 +1,7 @@
 
 import Link from 'next/link';
 import { Compass, Facebook, X, Instagram } from 'lucide-react';
+import { Icon } from '@iconify/react';  
 import Container from '../ui/Container';
 
 const Footer = () => {
@@ -16,9 +17,10 @@ const Footer = () => {
               </Link>
               <p className="text-sm text-foreground/60">Your adventure starts here. Discover and book unique travel experiences worldwide.</p>
               <div className="flex gap-4">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
-                <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X"><X className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
+                <a href="https://www.facebook.com/profile.php?id=61584087081987" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
+                <a href="https://x.com/explorly___" target="_blank" rel="noopener noreferrer" aria-label="X"><X className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
+                <a href="https://www.instagram.com/explorly___/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
+                <a href="https://www.tiktok.com/@explorly" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><Icon icon="simple-icons:tiktok" className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
               </div>
             </div>
             <div className="md:col-span-1 lg:col-span-1">
