@@ -96,14 +96,12 @@ const Header = () => {
                     </div>
                   )}
                 </nav>
-                {/* {user ? (
-                   <Button onClick={signOut} variant="outline">Sign Out</Button>
-                ) : (
+                {!user && (
                   <div className='flex items-center space-x-2'>
                     <Button asChild variant="ghost"><Link href="/login">Log In</Link></Button>
                     <Button asChild><Link href="/signup">Sign Up</Link></Button>
                   </div>
-                )} */}
+                )}
               </>
             )}
           </div>
