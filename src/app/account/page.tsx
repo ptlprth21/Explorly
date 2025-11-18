@@ -79,18 +79,10 @@ export default function AccountPage() {
 
         {/* Sidebar */}
         <div className="w-full md:w-1/4">
-          <CardTitle className="mb-4 text-center">Hello {user.displayName}</CardTitle>
+          {/* <CardTitle className="mb-4 text-center">Hello {user.displayName}</CardTitle> */}
 
           <Card className="sticky top-24">
-            <CardHeader className="text-center">
-              <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-primary">
-                <User className="h-12 w-12 text-primary" />
-              </div>
-              <CardTitle>My Account</CardTitle>
-              <CardDescription>{user.email}</CardDescription>
-            </CardHeader>
-
-            <CardContent className="space-y-2">
+            <CardContent className="space-y-2 p-4">
               <Button
                 variant="ghost"
                 className={`w-full justify-start ${activeSection === "profile" && "bg-muted"}`}
@@ -273,6 +265,17 @@ export default function AccountPage() {
                   <CardDescription>Manage your public profile and personal details.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center border-2 border-primary flex-shrink-0">
+                      <User className="h-12 w-12 text-primary" />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <span className="text-lg font-bold">My Account</span>
+                      <span className="text-sm text-muted-foreground">{user.email}</span>
+                    </div>
+                  </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="displayName">Display Name</Label>
                     <Input id="displayName" defaultValue={user.displayName || 'Adventurer'} />
