@@ -57,7 +57,7 @@ const Header = () => {
       <Container>
         <div className="relative flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Compass className="h-8 w-8 text-primary" />
+            <img src="/images/logo.png" className="h-12 w-12"/>
             <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
           </Link>
           <div className="hidden items-center space-x-4 lg:flex">
