@@ -19,6 +19,7 @@ import { useWishlist } from '@/context/WishlistContext';
 import { getPackageById } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import { Switch } from '@/components/ui/switch';
+import { updateUserPassword, updateUserProfile } from '@/lib/user-profile';
 
 export default function AccountPage() {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -29,6 +30,8 @@ export default function AccountPage() {
   const [wishlistPackages, setWishlistPackages] = useState<Package[]>([]);
   const [loadingWishlist, setLoadingWishlist] = useState(true);
   const [activeSection, setActiveSection] = useState("profile");
+  const [notifyEmail, setNotifyEmail] = useState(false);
+  const [notifyInApp, setNotifyInApp] = useState(true);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -73,6 +76,40 @@ export default function AccountPage() {
       </div>
     );
   }
+
+  // set user properties
+  const [displayName, setDisplayName] = useState(user.displayName || '');
+  const [email, setEmail] = useState(user.email || '');
+  const [photoURL, setPhotoURL] = useState(user.photoURL || '');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleUpdateProfile = async () => {
+    try {
+      if (displayName !== user.displayName || photoURL !== user.photoURL) {
+        await updateUserProfile(user, displayName, photoURL);
+        //alert("Perfil actualizado correctamente");
+      }
+    } catch (error) {
+      // console.error(error);
+      // alert("Error actualizando el perfil");
+    }
+  };
+
+  const handleUpdatePassword = async () => {
+    try {
+      if (!currentPassword || !newPassword) return;
+
+      await updateUserPassword(user, currentPassword, newPassword);
+
+      setCurrentPassword('');
+      setNewPassword('');
+    } catch (error) {
+      // console.error(error);
+      // alert("Error al actualizar la contraseña: la contraseña actual puede ser incorrecta");
+    }
+  };
 
   return (
     <Container className="py-16">
@@ -271,24 +308,26 @@ export default function AccountPage() {
                     </div>
 
                     <div className="flex flex-col">
-                      <span className="text-lg font-bold">My Account</span>
+                      <span className="text-lg font-bold">{user.displayName}</span>
                       <span className="text-sm text-muted-foreground">{user.email}</span>
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="displayName">Display Name</Label>
-                    <Input id="displayName" defaultValue={user.displayName || 'Adventurer'} />
+                    <Input id="displayName" value={displayName} onChange={e => setDisplayName(e.target.value)}/>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" defaultValue={user.email || ''} readOnly />
+                    <Input id="email" value={email} onChange={e => setEmail(e.target.value)}/>
                   </div>
                   {/* <div className="space-y-2">
                     <Label htmlFor="psw">Password</Label>
                     <Input id="psw" type="password" defaultValue=''/>
                   </div> */}
-                  <Button>Update Profile</Button>
+                  <Button onClick={handleUpdateProfile} disabled={displayName === user.displayName && email === user.email /* && photoURL === user.photoURL*/}>
+                    Update Profile
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -304,24 +343,72 @@ export default function AccountPage() {
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="currentPassword">Current Password</Label>
-                    <Input id="currentPassword" type="password" placeholder="Enter current password" />
+                    <Input id="currentPassword" type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="newPassword">New Password</Label>
-                    <Input id="newPassword" type="password" placeholder="Enter new password" />
+                    <Input id="newPassword" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} placeholder="Enter new password"/>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                    <Input id="confirmPassword" type="password" placeholder="Confirm new password" />
+                    <Input id="confirmPassword" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Enter new password"/>
                   </div>
 
-                  <Button>Update Password</Button>
+                  <Button  onClick={handleUpdatePassword} disabled={newPassword === '' || newPassword !== confirmPassword}>
+                    Update Password
+                  </Button>
                 </CardContent>
               </Card>
             </div>
           )}
+
+          {activeSection === "wallet" && (
+            <div className="mt-6 space-y-6">
+              <Card className="p-6">
+                <CardHeader>
+                  <CardTitle>My Wallet</CardTitle>
+                  <CardDescription>Your current balance and active vouchers.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+
+                  <div className="bg-slate-800 p-4 rounded-md flex items-center gap-4">
+                    <Wallet className="w-6 h-6 text-teal-400" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Current Balance</p>
+                      <p className="text-xl font-bold">€0.00</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold">Active Vouchers</h4>
+
+                    <div className="flex justify-between items-center p-4 border rounded-md bg-slate-800">
+                      <div>
+                        <p className="font-semibold text-orange-400">€50 off your next summer adventure!</p>
+                        <p className="text-sm text-muted-foreground">
+                          Code: SUMMER24 · Expires: 2024-08-31
+                        </p>
+                      </div>
+                      <Button size="sm">Apply</Button>
+                    </div>
+
+                    <div className="flex justify-between items-center p-4 border rounded-md bg-slate-800">
+                      <div>
+                        <p className="font-semibold text-orange-400">10% off your first booking.</p>
+                        <p className="text-sm text-muted-foreground">
+                          Code: WELCOME10 · Expires: 2024-12-31
+                        </p>
+                      </div>
+                      <Button size="sm">Apply</Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
 
           {activeSection === "notifications" && (
             <div className="mt-6">
@@ -338,7 +425,7 @@ export default function AccountPage() {
                       Receive updates on new destinations and special offers.
                     </span>
                   </div>
-                  <Switch checked={false} onCheckedChange={() => {}} />
+                  <Switch checked={notifyEmail} onCheckedChange={setNotifyEmail} />
                 </div>
 
                 <div className="flex items-center justify-between p-4 border rounded-md bg-muted">
@@ -348,7 +435,7 @@ export default function AccountPage() {
                       Get important notifications about your upcoming trips.
                     </span>
                   </div>
-                  <Switch checked={true} onCheckedChange={() => {}} />
+                  <Switch checked={notifyInApp} onCheckedChange={setNotifyInApp} />
                 </div>
               </Card>
             </div>
