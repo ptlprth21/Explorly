@@ -332,14 +332,7 @@ export default function AccountPage() {
                     <Label htmlFor="psw">Password</Label>
                     <Input id="psw" type="password" defaultValue=''/>
                   </div> */}
-                  <Button onClick={async () => {
-                    const displayName = document.getElementById("displayName")?.value;
-
-                    await updateUserProfile(user, displayName);
-
-                    alert("Perfil actualizado correctamente");
-                    }}
-                  >
+                  <Button onClick={handleUpdateProfile} disabled={!hasProfileChanges()}>
                     Update Profile
                   </Button>
                 </CardContent>
@@ -370,7 +363,9 @@ export default function AccountPage() {
                     <Input id="newPassword" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} placeholder="Enter new password"/>
                   </div>
 
-                  <Button>Update Password</Button>
+                  <Button  onClick={handleUpdatePassword} disabled={!currentPassword || !newPassword}>
+                    Update Password
+                  </Button>
                 </CardContent>
               </Card>
             </div>
