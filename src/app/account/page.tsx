@@ -364,6 +364,52 @@ export default function AccountPage() {
             </div>
           )}
 
+          {activeSection === "wallet" && (
+            <div className="mt-6 space-y-6">
+              <Card className="p-6">
+                <CardHeader>
+                  <CardTitle>My Wallet</CardTitle>
+                  <CardDescription>Your current balance and active vouchers.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+
+                  <div className="bg-slate-800 p-4 rounded-md flex items-center gap-4">
+                    <Wallet className="w-6 h-6 text-teal-400" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Current Balance</p>
+                      <p className="text-xl font-bold">€0.00</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold">Active Vouchers</h4>
+
+                    <div className="flex justify-between items-center p-4 border rounded-md bg-slate-800">
+                      <div>
+                        <p className="font-semibold text-orange-400">€50 off your next summer adventure!</p>
+                        <p className="text-sm text-muted-foreground">
+                          Code: SUMMER24 · Expires: 2024-08-31
+                        </p>
+                      </div>
+                      <Button size="sm">Apply</Button>
+                    </div>
+
+                    <div className="flex justify-between items-center p-4 border rounded-md bg-slate-800">
+                      <div>
+                        <p className="font-semibold text-orange-400">10% off your first booking.</p>
+                        <p className="text-sm text-muted-foreground">
+                          Code: WELCOME10 · Expires: 2024-12-31
+                        </p>
+                      </div>
+                      <Button size="sm">Apply</Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+
           {activeSection === "notifications" && (
             <div className="mt-6">
               <Card className="p-6 space-y-6">
