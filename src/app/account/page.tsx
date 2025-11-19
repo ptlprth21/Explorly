@@ -30,6 +30,8 @@ export default function AccountPage() {
   const [wishlistPackages, setWishlistPackages] = useState<Package[]>([]);
   const [loadingWishlist, setLoadingWishlist] = useState(true);
   const [activeSection, setActiveSection] = useState("profile");
+  const [notifyEmail, setNotifyEmail] = useState(false);
+  const [notifyInApp, setNotifyInApp] = useState(true);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -377,7 +379,7 @@ export default function AccountPage() {
                       Receive updates on new destinations and special offers.
                     </span>
                   </div>
-                  <Switch checked={false} onCheckedChange={() => {}} />
+                  <Switch checked={notifyEmail} onCheckedChange={setNotifyEmail} />
                 </div>
 
                 <div className="flex items-center justify-between p-4 border rounded-md bg-muted">
@@ -387,7 +389,7 @@ export default function AccountPage() {
                       Get important notifications about your upcoming trips.
                     </span>
                   </div>
-                  <Switch checked={true} onCheckedChange={() => {}} />
+                  <Switch checked={notifyInApp} onCheckedChange={setNotifyInApp} />
                 </div>
               </Card>
             </div>
