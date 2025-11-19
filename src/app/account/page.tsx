@@ -271,7 +271,7 @@ export default function AccountPage() {
                     </div>
 
                     <div className="flex flex-col">
-                      <span className="text-lg font-bold">My Account</span>
+                      <span className="text-lg font-bold">{user.displayName}</span>
                       <span className="text-sm text-muted-foreground">{user.email}</span>
                     </div>
                   </div>
@@ -288,7 +288,16 @@ export default function AccountPage() {
                     <Label htmlFor="psw">Password</Label>
                     <Input id="psw" type="password" defaultValue=''/>
                   </div> */}
-                  <Button>Update Profile</Button>
+                  <Button onClick={async () => {
+                    const displayName = document.getElementById("displayName")?.value;
+
+                    await updateUserProfile(user, displayName);
+
+                    alert("Perfil actualizado correctamente");
+                    }}
+                  >
+                    Update Profile
+                  </Button>
                 </CardContent>
               </Card>
             </div>
