@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MapPin, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Loader2, Facebook, X, Instagram } from 'lucide-react';
+import { Icon } from '@iconify/react'; 
 import Image from 'next/image';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
@@ -85,32 +86,97 @@ export default function ContactPage() {
               </Button>
             </form>
           </div>
-
-          <div className="space-y-8">
+          <div className="space-y-8 bg-background p-8 md:p-12 rounded-xl shadow-xl">
             <div>
               <h2 className="text-3xl font-headline font-bold mb-4">Contact Information</h2>
               <p className="text-muted-foreground">
                 Have questions? We're here to help. Reach out to us via phone, email, or visit us at our main office. We look forward to planning your next adventure!
               </p>
             </div>
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <Mail className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Email</h3>
-                  <p className="text-muted-foreground">support@explorly.eu</p>
-                </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2">
+              {/* Email */}
+              <div className="bg-card p-4 md:p-6 rounded-xl shadow-lg flex flex-col items-center text-center hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                <Mail className="w-10 md:w-12 h-10 md:h-12 text-primary mb-3 md:mb-4" />
+                <p className="text-base md:text-lg font-semibold text-foreground mb-1">
+                  Email
+                </p>
+                <a
+                  href="mailto:support@explorly.eu"
+                  className="text-primary hover:underline transition duration-300 text-sm md:text-base break-all"
+                >
+                  support@explorly.eu
+                </a>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="bg-primary/10 p-3 rounded-full">
-                  <MapPin className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Office</h3>
-                  <p className="text-muted-foreground">ul. Solipska 3/5, 02-482 Warsaw, Poland</p>
-                </div>
+
+              {/* Address */}
+              <div className="bg-card p-4 md:p-6 rounded-xl shadow-lg flex flex-col items-center text-center hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                <MapPin className="w-10 md:w-12 h-10 md:h-12 text-primary mb-3 md:mb-4" />
+                <p className="text-base md:text-lg font-semibold text-foreground mb-1">
+                  Office
+                </p>
+                <a
+                  href="https://www.google.com/maps?q=ul.+Solipska+3/5,+02-482+Warsaw,+Poland"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline transition duration-300 text-sm md:text-base break-all"
+                >
+                  ul. Solipska 3/5, 02-482 Warsaw, Poland
+                </a>
+              </div>
+            </div>
+
+            {/* Social icons */}
+            <div className="space-y-4 pt-4 text-center">
+              <h3 className="text-2xl font-headline font-bold">Find Us on Social Media</h3>
+
+              <div className="flex justify-center items-center gap-6">
+                {/* Facebook */}
+                <a
+                  href="https://www.facebook.com/profile.php?id=61584087081987"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="transition-colors"
+                >
+                  <Facebook className="h-6 w-6 text-foreground/60 hover:text-primary" />
+                </a>
+
+                {/* X / Twitter */}
+                <a
+                  href="https://x.com/explorly___"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="X"
+                  className="transition-colors"
+                >
+                  <X className="h-6 w-6 text-foreground/60 hover:text-primary" />
+                </a>
+
+                {/* Instagram */}
+                <a
+                  href="https://www.instagram.com/explorly___/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="transition-colors"
+                >
+                  <Instagram className="h-6 w-6 text-foreground/60 hover:text-primary" />
+                </a>
+
+                {/* TikTok */}
+                <a
+                  href="https://www.tiktok.com/@explorly"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  className="transition-colors"
+                >
+                  <Icon
+                    icon="simple-icons:tiktok"
+                    className="h-6 w-6 text-foreground/60 hover:text-primary"
+                  />
+                </a>
               </div>
             </div>
           </div>
