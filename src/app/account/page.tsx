@@ -81,14 +81,7 @@ export default function AccountPage() {
   const [photoURL, setPhotoURL] = useState(user.photoURL || '');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-
-  const hasProfileChanges = () => {
-    return (
-      displayName !== user.displayName ||
-      email !== user.email ||
-      photoURL !== user.photoURL
-    );
-  };
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleUpdateProfile = async () => {
     try {
@@ -115,8 +108,6 @@ export default function AccountPage() {
       // alert("Error al actualizar la contraseña: la contraseña actual puede ser incorrecta");
     }
   };
-
-
 
   return (
     <Container className="py-16">
@@ -326,13 +317,13 @@ export default function AccountPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" value={email} readOnly />
+                    <Input id="email" value={email} onChange={e => setEmail(e.target.value)}/>
                   </div>
                   {/* <div className="space-y-2">
                     <Label htmlFor="psw">Password</Label>
                     <Input id="psw" type="password" defaultValue=''/>
                   </div> */}
-                  <Button onClick={handleUpdateProfile} disabled={!hasProfileChanges()}>
+                  <Button onClick={handleUpdateProfile} disabled={displayName === user.displayName && email === user.email /* && photoURL === user.photoURL*/}>
                     Update Profile
                   </Button>
                 </CardContent>
@@ -360,10 +351,10 @@ export default function AccountPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                    <Input id="newPassword" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} placeholder="Enter new password"/>
+                    <Input id="confirmPassword" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Enter new password"/>
                   </div>
 
-                  <Button  onClick={handleUpdatePassword} disabled={!currentPassword || !newPassword}>
+                  <Button  onClick={handleUpdatePassword} disabled={newPassword === '' || newPassword !== confirmPassword}>
                     Update Password
                   </Button>
                 </CardContent>
