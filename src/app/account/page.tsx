@@ -19,6 +19,7 @@ import { useWishlist } from '@/context/WishlistContext';
 import { getPackageById } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import { Switch } from '@/components/ui/switch';
+import { updateUserPassword, updateUserProfile } from '@/lib/user-profile';
 
 export default function AccountPage() {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -73,6 +74,49 @@ export default function AccountPage() {
       </div>
     );
   }
+
+  // set user properties
+  const [displayName, setDisplayName] = useState(user.displayName || '');
+  const [email, setEmail] = useState(user.email || '');
+  const [photoURL, setPhotoURL] = useState(user.photoURL || '');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+
+  const hasProfileChanges = () => {
+    return (
+      displayName !== user.displayName ||
+      email !== user.email ||
+      photoURL !== user.photoURL
+    );
+  };
+
+  const handleUpdateProfile = async () => {
+    try {
+      if (displayName !== user.displayName || photoURL !== user.photoURL) {
+        await updateUserProfile(user, displayName, photoURL);
+        //alert("Perfil actualizado correctamente");
+      }
+    } catch (error) {
+      // console.error(error);
+      // alert("Error actualizando el perfil");
+    }
+  };
+
+  const handleUpdatePassword = async () => {
+    try {
+      if (!currentPassword || !newPassword) return;
+
+      await updateUserPassword(user, currentPassword, newPassword);
+
+      setCurrentPassword('');
+      setNewPassword('');
+    } catch (error) {
+      // console.error(error);
+      // alert("Error al actualizar la contraseña: la contraseña actual puede ser incorrecta");
+    }
+  };
+
+
 
   return (
     <Container className="py-16">
@@ -278,11 +322,11 @@ export default function AccountPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="displayName">Display Name</Label>
-                    <Input id="displayName" defaultValue={user.displayName || 'Adventurer'} />
+                    <Input id="displayName" value={displayName} onChange={e => setDisplayName(e.target.value)}/>
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" defaultValue={user.email || ''} readOnly />
+                    <Input id="email" value={email} readOnly />
                   </div>
                   {/* <div className="space-y-2">
                     <Label htmlFor="psw">Password</Label>
@@ -313,17 +357,17 @@ export default function AccountPage() {
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="currentPassword">Current Password</Label>
-                    <Input id="currentPassword" type="password" placeholder="Enter current password" />
+                    <Input id="currentPassword" type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="newPassword">New Password</Label>
-                    <Input id="newPassword" type="password" placeholder="Enter new password" />
+                    <Input id="newPassword" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} placeholder="Enter new password"/>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                    <Input id="confirmPassword" type="password" placeholder="Confirm new password" />
+                    <Input id="newPassword" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} placeholder="Enter new password"/>
                   </div>
 
                   <Button>Update Password</Button>
