@@ -298,7 +298,7 @@ export default function CountryDetailPage() {
                       </div>
                     </div>
 
-                    <div className="mb-6">
+                    {/* <div className="mb-6">
                       <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-2">
                         <span>Rating</span>
                          <StarRating rating={currentPackage.rating} />
@@ -306,18 +306,18 @@ export default function CountryDetailPage() {
                       <div className="w-full bg-muted rounded-full h-2">
                         <div className="bg-primary h-2 rounded-full" style={{ width: `${(currentPackage.rating / 5) * 100}%` }}></div>
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="flex items-center justify-between flex-wrap gap-4">
                       <div className="flex items-center space-x-4">
-                        <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+                        {/* <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
                           <Heart className="h-5 w-5" />
                         </Button>
                         <div className="flex items-center space-x-1 text-sm">
                           <Star className="h-4 w-4 text-yellow-400 fill-current" />
                           <span className="font-semibold">{currentPackage.rating}</span>
                           <span className="text-muted-foreground">({currentPackage.reviewCount})</span>
-                        </div>
+                        </div> */}
                       </div>
                       
                       <div className="flex items-center space-x-3 sm:space-x-4">
