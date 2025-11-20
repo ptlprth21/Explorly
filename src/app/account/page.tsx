@@ -19,7 +19,7 @@ import { useWishlist } from '@/context/WishlistContext';
 import { getPackageById } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import { Switch } from '@/components/ui/switch';
-import { updateUserPassword, updateUserProfile } from '@/lib/user-profile';
+import { updateUserPassword, updateUserProfile, deleteUserAccount } from '@/lib/user-profile';
 
 export default function AccountPage() {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -178,6 +178,28 @@ export default function AccountPage() {
               <Button onClick={signOut} variant="outline" className="w-full mt-4">
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign Out
+              </Button>
+
+              <Button
+                variant="link"
+                className="w-full text-left text-red-600 hover:text-red-700 mt-2"
+                onClick={async () => {
+                  if (!user) return;
+
+                  const currentPassword = prompt('Please enter your current password to confirm account deletion:');
+                  if (!currentPassword) return;
+
+                  try {
+                    await deleteUserAccount(user, currentPassword);
+                    alert('Your account has been deleted.');
+                    router.push('/login');
+                  } catch (error: any) {
+                    // console.error(error);
+                    // alert('Failed to delete account: ' + error.message);
+                  }
+                }}
+              >
+                Delete Account
               </Button>
             </CardContent>
           </Card>
