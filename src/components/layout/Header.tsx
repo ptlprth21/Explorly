@@ -27,9 +27,9 @@ const Header = () => {
 
   // Only as an example
   const notifications = [
-    { id: 1, message: "Your booking has been confirmed!" },
-    { id: 2, message: "A new destination was added to your wishlist." },
-    { id: 3, message: "Price dropped for a package you're watching!" }
+    // { id: 1, message: "Your booking has been confirmed!" },
+    // { id: 2, message: "A new destination was added to your wishlist." },
+    // { id: 3, message: "Price dropped for a package you're watching!" }
   ];
 
 

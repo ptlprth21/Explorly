@@ -405,26 +405,6 @@ export default function AccountPage() {
 
                   <div className="space-y-4">
                     <h4 className="text-lg font-semibold">Active Vouchers</h4>
-
-                    <div className="flex justify-between items-center p-4 border rounded-md bg-slate-800">
-                      <div>
-                        <p className="font-semibold text-orange-400">€50 off your next summer adventure!</p>
-                        <p className="text-sm text-muted-foreground">
-                          Code: SUMMER24 · Expires: 2024-08-31
-                        </p>
-                      </div>
-                      <Button size="sm">Apply</Button>
-                    </div>
-
-                    <div className="flex justify-between items-center p-4 border rounded-md bg-slate-800">
-                      <div>
-                        <p className="font-semibold text-orange-400">10% off your first booking.</p>
-                        <p className="text-sm text-muted-foreground">
-                          Code: WELCOME10 · Expires: 2024-12-31
-                        </p>
-                      </div>
-                      <Button size="sm">Apply</Button>
-                    </div>
                   </div>
                 </CardContent>
               </Card>
