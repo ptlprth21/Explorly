@@ -110,7 +110,7 @@ export default function DestinationsPage() {
 
     // theme
     if (themeFilter !== 'all') {
-      packages = packages.filter(pkg => pkg.theme === themeFilter);
+      packages = packages.filter(pkg => pkg.themes.some(t => t === themeFilter));
     }
 
     // sorting
