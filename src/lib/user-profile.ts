@@ -4,6 +4,7 @@ import {
   updatePassword, 
   EmailAuthProvider, 
   reauthenticateWithCredential,
+  deleteUser,
   User
 } from "firebase/auth";
 
@@ -24,4 +25,9 @@ export async function updateUserEmail(user: User, newEmail: string, currentPassw
 export async function updateUserPassword(user: User, currentPassword: string, newPassword: string) {
   await reauthenticateUser(user, currentPassword);
   return await updatePassword(user, newPassword);
+}
+
+export async function deleteUserAccount(user: User, currentPassword: string) {
+  await reauthenticateUser(user, currentPassword);
+  await deleteUser(user);
 }
