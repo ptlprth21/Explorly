@@ -218,76 +218,45 @@ export default function DestinationsPage() {
             </nav>
           </div>
 
-          <div className="p-6">
+          <div className="p-6 space-y-8">
             {activeTab === 'overview' && (
-              <div className="space-y-6 prose prose-invert max-w-none flex flex-col items-center">
-                <div className="max-w-2xl text-center">
-                  <h3 className="text-xl font-semibold mb-3">About This Trip</h3>
-                  <p className="text-muted-foreground leading-relaxed">{selectedCountry.description}</p>
+              <div className="grid grid-cols-1 gap-8 max-w-5xl mx-auto">
+                <div className="bg-card/50 backdrop-blur-md rounded-2xl shadow-md p-6">
+                  <h3 className="text-2xl font-bold text-primary mb-4 text-center">About This Trip</h3>
+                  <p className="text-muted-foreground leading-relaxed text-center">{selectedCountry.description}</p>
                 </div>
-  
-                <div className="flex justify-center">
-                  <div className="w-full max-w-md bg-card/40 rounded-xl shadow-lg border border-border backdrop-blur-sm p-4">
-                    <h3 className="text-xl font-semibold mb-3">Key Facts</h3>
-                    <table className="w-full text-sm">
-                      <tbody>
-                        <tr className="border-b border-gray-700">
-                          <td className="px-4 py-2 font-semibold text-foreground">Capital</td>
-                          <td className="px-4 py-2 text-muted-foreground">{selectedCountry.capital}</td>
-                        </tr>
-                        <tr className="border-b border-gray-700">
-                          <td className="px-4 py-2 font-semibold text-foreground">Largest City</td>
-                          <td className="px-4 py-2 text-muted-foreground">{selectedCountry.largestCity}</td>
-                        </tr>
-                        <tr className="border-b border-gray-700">
-                          <td className="px-4 py-2 font-semibold text-foreground">Currency</td>
-                          <td className="px-4 py-2 text-muted-foreground">UAE Dirham (AED)</td>
-                        </tr>
-                        <tr className="border-b border-gray-700">
-                          <td className="px-4 py-2 font-semibold text-foreground">Official Language</td>
-                          <td className="px-4 py-2 text-muted-foreground">
-                            Arabic <span className="text-xs text-gray-400">(English is widely spoken)</span>
-                          </td>
-                        </tr>
-                        <tr className="border-b border-gray-700">
-                          <td className="px-4 py-2 font-semibold text-foreground">Time Zone</td>
-                          <td className="px-4 py-2 text-muted-foreground">{selectedCountry.timeZone}</td>
-                        </tr>
-                        <tr>
-                          <td className="px-4 py-2 font-semibold text-foreground">Formation Date</td>
-                          <td className="px-4 py-2 text-muted-foreground">{selectedCountry.formationDate}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                  {[
+                    { label: 'Capital', value: selectedCountry.capital },
+                    { label: 'Largest City', value: selectedCountry.largestCity },
+                    { label: 'Currency', value: 'UAE Dirham (AED)' },
+                    { label: 'Official Language', value: 'Arabic (English widely spoken)' },
+                    { label: 'Time Zone', value: selectedCountry.timeZone },
+                    { label: 'Formation Date', value: selectedCountry.formationDate },
+                  ].map((fact, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-card/40 backdrop-blur-sm border border-border rounded-xl shadow-sm p-4 flex flex-col items-center"
+                    >
+                      <span className="text-muted-foreground text-sm">{fact.label}</span>
+                      <span className="font-semibold text-lg text-foreground text-center">{fact.value}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
 
             {activeTab === 'culture' && (
-              <div className="space-y-10 flex flex-col items-center">
-                <div className="max-w-3xl text-center">
-                  <h3 className="text-2xl font-semibold mb-3">Culture</h3>
-                  {selectedCountry.cultureDesciption && (
-                    <p className="text-muted-foreground leading-relaxed">
-                      {selectedCountry.cultureDesciption}
-                    </p>
-                  )}
-                </div>
-
-                {selectedCountry.cultureDetails?.map((section, index) => (
+              <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+                {selectedCountry.cultureDetails?.map((section, idx) => (
                   <div
-                    key={index}
-                    className="w-full max-w-3xl bg-card/40 border border-border rounded-2xl shadow-md backdrop-blur-sm p-6"
+                    key={idx}
+                    className="bg-card/40 backdrop-blur-md rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow"
                   >
-                    <h4 className="text-xl font-semibold mb-3 text-primary">
-                      {section.title}
-                    </h4>
-
+                    <h4 className="text-xl font-semibold text-primary mb-3">{section.title}</h4>
                     {section.details.split('\n\n').map((paragraph, i) => (
-                      <p key={i} className="text-muted-foreground mb-3 whitespace-pre-line leading-relaxed">
-                        {paragraph}
-                      </p>
+                      <p key={i} className="text-muted-foreground leading-relaxed mb-3 whitespace-pre-line">{paragraph}</p>
                     ))}
                   </div>
                 ))}
@@ -295,27 +264,15 @@ export default function DestinationsPage() {
             )}
 
             {activeTab === 'history' && (
-              <div className="space-y-10 flex flex-col items-center">
-                <div className="max-w-3xl text-center">
-                  <h3 className="text-2xl font-semibold mb-3">History</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    The history of {selectedCountry.name} is one of incredible transformation.
-                  </p>
-                </div>
-
-                {selectedCountry?.historyDetails?.map((section, index) => (
+              <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+                {selectedCountry.historyDetails?.map((section, idx) => (
                   <div
-                    key={index}
-                    className="w-full max-w-3xl bg-card/40 border border-border rounded-2xl shadow-md backdrop-blur-sm p-6"
+                    key={idx}
+                    className="bg-card/40 backdrop-blur-md rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow"
                   >
-                    <h4 className="text-xl font-semibold mb-3 text-primary">
-                      {section.title}
-                    </h4>
-
+                    <h4 className="text-xl font-semibold text-primary mb-3">{section.title}</h4>
                     {section.details.split('\n\n').map((paragraph, i) => (
-                      <p key={i} className="text-muted-foreground mb-3 whitespace-pre-line leading-relaxed">
-                        {paragraph}
-                      </p>
+                      <p key={i} className="text-muted-foreground leading-relaxed mb-3 whitespace-pre-line">{paragraph}</p>
                     ))}
                   </div>
                 ))}
@@ -323,41 +280,37 @@ export default function DestinationsPage() {
             )}
 
             {activeTab === 'guide' && (
-              <div className="flex justify-center">
-                <table className="table-auto border-collapse border border-border text-left w-auto min-w-[500px] max-w-3xl">
-                  <thead>
-                    <tr className="bg-background/80">
-                      <th className="border border-border px-4 py-2 font-semibold text-muted-foreground">Emirate</th>
-                      <th className="border border-border px-4 py-2 font-semibold text-muted-foreground">Vibe & Focus</th>
-                      <th className="border border-border px-4 py-2 font-semibold text-muted-foreground">Key Highlight</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedCountry.guide.map((item, index) => (
-                      <tr key={index} className="odd:bg-background/50 even:bg-background/30">
-                        <td className="border border-border px-4 py-2">{item.emirate}</td>
-                        <td className="border border-border px-4 py-2">{item.vibeFocus}</td>
-                        <td className="border border-border px-4 py-2">{item.keyHighlight}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                {selectedCountry.guide.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-card/50 backdrop-blur-md rounded-2xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition-shadow"
+                  >
+                    <div className="mb-4">
+                      <h4 className="text-lg sm:text-xl font-semibold text-primary mb-1">{item.emirate}</h4>
+                      <p className="text-sm sm:text-base text-muted-foreground">{item.vibeFocus}</p>
+                    </div>
+                    <div className="mt-auto">
+                      <span className="font-medium text-foreground">Highlight:</span>
+                      <p className="text-sm sm:text-base text-muted-foreground">{item.keyHighlight}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
 
             {activeTab === 'facts' && (
-              <div className="space-y-6 max-w-3xl mx-auto p-6 border border-border rounded-lg bg-background/50">
-                <h3 className="text-xl font-semibold mb-4 text-center">Did You Know? Fun Facts About {selectedCountry.name}</h3>
-                <ul className="space-y-4 list-disc list-inside">
-                  {selectedCountry.facts.map((fact, index) => (
-                    <li key={index}>
-                      <span className="font-bold">{fact.title}:</span> <span className="text-muted-foreground">{fact.description}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                {selectedCountry.facts.map((fact, idx) => (
+                  <div key={idx} className="bg-card/40 backdrop-blur-sm rounded-2xl shadow-md p-4 hover:shadow-lg transition-shadow">
+                    <h4 className="text-lg font-semibold text-primary mb-2">{fact.title}</h4>
+                    <p className="text-muted-foreground leading-relaxed">{fact.description}</p>
+                  </div>
+                ))}
               </div>
             )}
           </div>
+
         </div>
       </div>
 
