@@ -77,7 +77,7 @@ export interface Continent {
 export interface Country {
   name: string;
   flag: string;
-  heroImage: string;
+  heroVideo: string;
   description: string;
   capital: string;
   largestCity: string;

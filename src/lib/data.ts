@@ -65,7 +65,7 @@ export async function getCountries(): Promise<Country[]> {
     { 
       name: 'UAE', 
       flag: 'https://flagcdn.com/w40/ae.png', 
-      heroImage: 'https://firebasestorage.googleapis.com/v0/b/roamready-kyyht.appspot.com/o/uploads%2Fuae-skyline-night.png?alt=media', 
+      heroVideo: '/videos/46950-450094784.mp4', 
       dataAiHint: 'grand mosque', 
       tagline: 'The Land of Seven Emirates', 
       description: 'The UAE is a federation of seven Emirates (Abu Dhabi, Dubai, Sharjah, Ajman, Umm Al Quwain, Fujairah, and Ras Al Khaimah). It is a global hub of commerce, luxury, and innovation, known for its audacious architecture, world-class resorts, and deep commitment to cultural preservation.',

@@ -176,12 +176,13 @@ export default function DestinationsPage() {
       {/* Hero */}
       {selectedCountry && (
         <div className="relative h-96 overflow-hidden">
-          <Image
-            src={selectedCountry.heroImage}
-            alt={selectedCountry.name}
-            fill
+          <video
+            src={selectedCountry.heroVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
             className="object-cover w-full h-full"
-            priority
           />
           <div className="absolute inset-0 bg-black/40"></div>
 

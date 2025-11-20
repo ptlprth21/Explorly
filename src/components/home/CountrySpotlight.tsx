@@ -4,7 +4,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Star, Video } from 'lucide-react';
 import type { Country, Package } from '@/types';
 import { slugify } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -36,10 +36,12 @@ export default function CountrySpotlight({ country }: CountrySpotlightProps) {
 
         {/* Hero Image with Overlay */}
         <div className="relative h-64 sm:h-80 lg:h-96 rounded-2xl sm:rounded-3xl overflow-hidden mb-12 sm:mb-16 group">
-          <Image
-              src={country.heroImage}
-              alt={country.name}
-              fill
+          <video
+              src="/videos/105085-668973349.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
