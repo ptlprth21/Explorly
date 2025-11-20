@@ -6,7 +6,7 @@ import { MapPin, Star, Clock, ArrowRight } from "lucide-react";
 
 interface PackageCardProps {
   package: Package;
-   theme?: Theme;
+  theme?: Theme;
 }
 
 const PackageCard = ({ package: pkg, theme }: PackageCardProps) => {
