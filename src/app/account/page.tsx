@@ -19,7 +19,11 @@ import { useWishlist } from '@/context/WishlistContext';
 import { getPackageById } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import { Switch } from '@/components/ui/switch';
+<<<<<<< HEAD
+import { updateUserPassword, updateUserProfile, deleteUserAccount } from '@/lib/user-profile';
+=======
 import { updateUserPassword, updateUserProfile } from '@/lib/user-profile';
+>>>>>>> b9584624a929327e552631827020ed874c8673ea
 
 export default function AccountPage() {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -178,6 +182,28 @@ export default function AccountPage() {
               <Button onClick={signOut} variant="outline" className="w-full mt-4">
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign Out
+              </Button>
+
+              <Button
+                variant="link"
+                className="w-full text-left text-red-600 hover:text-red-700 mt-2"
+                onClick={async () => {
+                  if (!user) return;
+
+                  const currentPassword = prompt('Please enter your current password to confirm account deletion:');
+                  if (!currentPassword) return;
+
+                  try {
+                    await deleteUserAccount(user, currentPassword);
+                    alert('Your account has been deleted.');
+                    router.push('/login');
+                  } catch (error: any) {
+                    // console.error(error);
+                    // alert('Failed to delete account: ' + error.message);
+                  }
+                }}
+              >
+                Delete Account
               </Button>
             </CardContent>
           </Card>
@@ -383,26 +409,6 @@ export default function AccountPage() {
 
                   <div className="space-y-4">
                     <h4 className="text-lg font-semibold">Active Vouchers</h4>
-
-                    <div className="flex justify-between items-center p-4 border rounded-md bg-slate-800">
-                      <div>
-                        <p className="font-semibold text-orange-400">€50 off your next summer adventure!</p>
-                        <p className="text-sm text-muted-foreground">
-                          Code: SUMMER24 · Expires: 2024-08-31
-                        </p>
-                      </div>
-                      <Button size="sm">Apply</Button>
-                    </div>
-
-                    <div className="flex justify-between items-center p-4 border rounded-md bg-slate-800">
-                      <div>
-                        <p className="font-semibold text-orange-400">10% off your first booking.</p>
-                        <p className="text-sm text-muted-foreground">
-                          Code: WELCOME10 · Expires: 2024-12-31
-                        </p>
-                      </div>
-                      <Button size="sm">Apply</Button>
-                    </div>
                   </div>
                 </CardContent>
               </Card>

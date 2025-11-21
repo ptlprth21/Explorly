@@ -41,8 +41,12 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
   ];
 
   const filteredPackages = packages.filter(pkg => {
-    return filter === 'all' || pkg.theme.toLowerCase() === filter;
+    return (
+      filter === 'all' || 
+      pkg.themes.some(t => t.toLowerCase() === filter)
+    );
   });
+
 
   const nextPackage = () => {
     setCurrentIndex((prev) => (prev + 1) % filteredPackages.length);

@@ -35,7 +35,11 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.8,
     reviewCount: 175,
-    theme: 'cultural',
+    themes: [
+      'cultural',
+      'heritage',
+      'relaxation'
+    ],
     difficulty: 'Easy',
     highlights: [
       'Spiritual Wonders: A guided visit to the colossal Sheikh Zayed Grand Mosque.',
@@ -67,10 +71,17 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-11-10', '2025-12-05', '2026-01-20', '2026-02-15'],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '4-Day Abu Dhabi', 
+      'Culture Tour', 
+      'Sheikh Zayed',
+      'Luxury Calm', 
+      'Desert Retreat'
+    ]
   },
   {
-    title: 'Abu Dhabi Essentials',
+    title: 'Abu Dhabi Essentials: 4-Day Mid-Range Discovery',
     destination: 'Abu Dhabi & Dubai',
     tagline: 'Culture, comfort, and discovery—designed for value-conscious explorers.',
     country: 'UAE',
@@ -93,7 +104,10 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.9,
     reviewCount: 210,
-    theme: 'city',
+    themes: [
+      'city',
+      'value'
+    ],
     difficulty: 'Moderate',
     highlights: [
       'Architectural Marvel: Visit the magnificent Sheikh Zayed Grand Mosque.',
@@ -123,10 +137,16 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-10-15', '2025-11-22', '2025-12-10', '2026-01-25', '2026-02-20'],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '4-Day Abu Dhabi Tour', 
+      'Budget Friendly', 
+      'City Discovery', 
+      'Abu Dhabi Essentials'
+    ]
   },
   {
-    title: 'Sands & Skylines: 7 Days Across Abu Dhabi & Dubai (Option 1)',
+    title: 'Sands & Skylines: 7 Days Across Abu Dhabi & Dubai',
     destination: 'Abu Dhabi & Dubai',
     tagline: 'From sacred sands to shimmering towers, experience the UAE in one epic journey.',
     country: 'UAE',
@@ -155,7 +175,10 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.9,
     reviewCount: 210,
-    theme: 'city',
+    themes: [
+      'luxury',
+      'contrast'
+    ],
     difficulty: 'Easy',
     highlights: [
       'Ultimate Culture: Visits to the Sheikh Zayed Grand Mosque, Louvre Abu Dhabi, and BAPS Hindu Mandir in Abu Dhabi.',
@@ -191,10 +214,16 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-10-15', '2025-11-22', '2025-12-10', '2026-01-25', '2026-02-20'],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '7-Day Dubai Abu Dhabi Luxury', 
+      'Bespoke UAE Tour', 
+      'Arabian Splendor', 
+      'Premium Package'
+    ],
   },
   {
-    title: 'Sands & Skylines: 7 Days Across Abu Dhabi & Dubai (Option 2)',
+    title: 'Sands & Skylines: 7 Days with Aquaventure Thrills',
     destination: 'Abu Dhabi & Dubai',
     tagline: 'Experience the best of the UAE, from sacred sands to world-class water adventures.',
     country: 'UAE',
@@ -217,7 +246,10 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.8,
     reviewCount: 260,
-    theme: 'city',
+    themes: [
+      'familyAdventure',
+      'city'
+    ],
     difficulty: 'Easy',
     highlights: [
       'Cultural Immersion: Guided visits to Sheikh Zayed Grand Mosque, Louvre Abu Dhabi, and BAPS Hindu Mandir.',
@@ -256,10 +288,16 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       'Visa fees (if required)'
     ],
     availableDates: ['2025-09-15', '2025-10-20', '2025-12-10', '2026-01-25'],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '7-Day Dubai Family Package', 
+      'Aquaventure Thrills', 
+      'Kids Friendly UAE', 
+      'Atlantis Tour'
+    ]
   },
   {
-    title: "UAE Highlights Getaway",
+    title: "UAE Highlights Getaway: 7-Day Value Explorer",
     destination: "Abu Dhabi & Dubai",
     tagline: "The best of both cities for the value-conscious traveler.",
     country: "UAE",
@@ -279,7 +317,10 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.9,
     reviewCount: 210,
-    theme: "city",
+    themes: [
+      'value',
+      'highlights'
+    ],
     difficulty: "Moderate",
     highlights: [
       "Cultural Cornerstones: Visits to the Sheikh Zayed Grand Mosque, Louvre Abu Dhabi, and BAPS Hindu Mandir.",
@@ -352,10 +393,15 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       "2026-01-25",
       "2026-02-20"
     ],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '7-Day UAE Tour Package', 
+      'Best Value Holidays', 
+      'Dubai Abu Dhabi Highlights'
+    ]
   },
   {
-    title: "Sky Above, Sands Below (Option 1)",
+    title: "Sky Above, Sands Below: 5-Day VIP Adrenaline & Luxury",
     destination: "Dubai & Abu Dhabi",
     tagline: "Conquer the UAE's skies, seas, and sands in five days of high-octane luxury.",
     country: "UAE",
@@ -384,7 +430,10 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.9,
     reviewCount: 210,
-    theme: "city",
+    themes: [
+      'adrenaline',
+      'VIPluxury'
+    ],
     difficulty: "Moderate",
     highlights: [
       "Sky High Adrenaline: A thrilling Tandem Skydive over The Palm Jumeirah (one of the world's most iconic jump zones).",
@@ -447,10 +496,16 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       "2026-01-14",
       "2026-03-02"
     ],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '5-Day Dubai Adrenaline', 
+      'Luxury Adventure Tour', 
+      'VIP Desert Experience', 
+      'Action Sports Dubai'
+    ]
   },
   {
-    title: "Sky Above, Sands Below (Option 2)",
+    title: "Beyond the Horizon: 5-Day VIP Thrills & Timeless Tales",
     destination: "Dubai & Abu Dhabi",
     tagline: "Luxury adventures, from a private sunset cruise to the heights of the Arabian sky.",
     country: "UAE",
@@ -486,7 +541,10 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.9,
     reviewCount: 215,
-    theme: "city",
+    themes: [
+      'VIPculture',
+      'adrenaline'
+    ],
     difficulty: "Moderate",
     highlights: [
       "Sky High Adrenaline: A thrilling Tandem Skydive over The Palm Jumeirah at one of the world's most desired drop zones.",
@@ -523,7 +581,12 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       "Visa fees (if applicable)"
     ],
     availableDates: ["2025-10-05", "2025-11-18", "2025-12-08", "2026-01-22"],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '5-Day VIP Dubai Culture Tour', 
+      'Thrills and Heritage', 
+      'Bespoke Arabian Tales'
+    ]
   },
   {
     title: "Coast to Culture",
@@ -548,7 +611,11 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.8,
     reviewCount: 190,
-    theme: "city",
+    themes: [
+      'beach',
+      'relaxation',
+      'luxury'
+    ],
     difficulty: "Easy",
     highlights: [
       "Exclusive Island Day: Full-day visit to Zaya Nurai Island for the ultimate private beach escape.",
@@ -581,7 +648,13 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       "Visa Fees (If applicable)."
     ],
     availableDates: ["2025-10-12", "2025-11-25", "2025-12-09", "2026-02-18"],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '6-Day Dubai Beach Holiday', 
+      'Luxury Coastal Trip', 
+      'Dubai Skyline Journey', 
+      'Relaxation Package'
+    ]
   },
   {
     title: 'Luxury in the Air & Sea',
@@ -604,7 +677,11 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.9,
     reviewCount: 220,
-    theme: 'city',
+    themes: [
+      'luxury',
+      'city',
+      'VIPexperience'
+    ],
     difficulty: 'Easy',
     highlights: [
       'Aerial Views: A thrilling 17-minute Helicopter Tour over The Palm, providing spectacular views of Dubai\'s famous landmarks.',
@@ -634,7 +711,13 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-10-20', '2025-11-18', '2025-12-12', '2026-01-22'],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '4-Day VIP Dubai Tour', 
+      'Luxury Yacht Trip', 
+      'Dubai High-End Experience', 
+      '4-Day Dubai Break'
+    ]
   },
   {
     title: 'Golden Dunes & Sunrise Skies',
@@ -654,7 +737,12 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.9,
     reviewCount: 160,
-    theme: 'city',
+    themes: [
+      'wellness',
+      'retreat',
+      'desert',
+      'immersion'
+    ],
     difficulty: 'Moderate',
     highlights: [
       'Iconic Sunrise: A breathtaking Sunrise Hot Air Balloon Flight over the vast Arabian Desert.',
@@ -685,7 +773,12 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-10-12', '2025-11-20', '2025-12-18', '2026-02-10'],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '5-Day Dubai Wellness', 
+      'Desert Retreat Package', 
+      'Luxury Spa UAE, Sunrise Dunes Yoga'
+    ]
   },
   {
     title: 'Dubai Explorer',
@@ -710,7 +803,11 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
     ],
     rating: 4.8,
     reviewCount: 250,
-    theme: 'city',
+    themes: [
+      'city',
+      'mid-range',
+      'value'
+    ],
     difficulty: 'Easy',
     highlights: [
       'Skyline View: Entry to the observation deck of the magnificent Burj Khalifa.',
@@ -741,6 +838,11 @@ export const realPackagesData: Omit<Package, 'id' | 'aiReasoning'>[] = [
       'Visa Fees (If applicable).'
     ],
     availableDates: ['2025-10-05', '2025-11-15', '2025-12-20', '2026-01-18'],
-    reviews: []
+    reviews: [],
+    seoKeywords: [
+      '5-Day Dubai City Break', 
+      'Mid-Range Dubai Explorer', 
+      'Dubai Sightseeing Tour'
+    ]
   }
 ];

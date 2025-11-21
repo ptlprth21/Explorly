@@ -136,13 +136,13 @@ export default function CountryDetailPage() {
       {/* Hero */}
       <section className="relative h-[60vh] overflow-hidden flex items-center justify-center my-8 rounded-xl">
         <div className="absolute inset-0">
-          <Image
-            src={country.heroImage}
-            alt={country.name}
-            data-ai-hint="country landscape"
-            fill
+          <video
+            src="/videos/105085-668973349.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         </div>
