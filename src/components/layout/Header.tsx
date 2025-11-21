@@ -23,6 +23,15 @@ const Header = () => {
   const pathname = usePathname();
   const { user, signOut } = useAuth();
   const isHomePage = pathname === '/';
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  // Only as an example
+  const notifications = [
+    // { id: 1, message: "Your booking has been confirmed!" },
+    // { id: 2, message: "A new destination was added to your wishlist." },
+    // { id: 3, message: "Price dropped for a package you're watching!" }
+  ];
+
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -47,11 +56,23 @@ const Header = () => {
     setIsOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const close = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.notification-menu')) {
+        setShowNotifications(false);
+      }
+    };
+
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, []);
+
   const showFullHeader = true;
 
   return (
     <header className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
+      "sticky top-0 z-50 w-full transition-all duration-300 overflow-visible",
       isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border/40" : "bg-transparent"
     )}>
       <Container>
@@ -76,6 +97,41 @@ const Header = () => {
                   )} */}
                   {user && (
                     <div className="flex items-center space-x-2">
+<<<<<<< HEAD
+                      <div className="relative notification-menu">
+                        <button
+                          onClick={() => setShowNotifications(!showNotifications)}
+                          className={cn(
+                            "transition-colors hover:text-primary p-2 rounded-full",
+                            showNotifications ? "text-primary" : "text-foreground/80"
+                          )}
+                        >
+                          <Bell className="h-6 w-6" />
+                        </button>
+
+                        {showNotifications && (
+                          <div className="absolute right-0 mt-2 notification-menu w-72 bg-background/80 text-gray-300 shadow-xl rounded-xl border border-gray-200 z-50 ">
+                            <div className="p-3 font-semibold border-b text-white">Notifications</div>
+
+                            <div className="max-h-64 overflow-y-auto">
+                              {notifications.length > 0 ? (
+                                notifications.map((n) => (
+                                  <div
+                                    key={n.id}
+                                    className="px-4 py-3 hover:bg-accent cursor-pointer text-sm border-b last:border-none"
+                                  >
+                                    {n.message}
+                                  </div>
+                                ))
+                              ) : (
+                                <div className="p-4 text-sm text-gray-600">No notifications</div>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+=======
                       <Link href="/notifications" className={cn(
                           "transition-colors hover:text-primary p-2 rounded-full",
                           pathname === '/notifications' ? "text-primary" : "text-foreground/80"
@@ -84,6 +140,7 @@ const Header = () => {
                       >
                         <Bell className="h-6 w-6" />
                       </Link>
+>>>>>>> b9584624a929327e552631827020ed874c8673ea
 
                       <Link href="/account" className={cn(
                           "transition-colors hover:text-primary p-2 rounded-full",

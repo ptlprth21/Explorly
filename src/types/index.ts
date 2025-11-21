@@ -23,7 +23,15 @@ export interface Review {
   country?: string;
 }
 
-export type ThemeId = 'all' | 'safari' | 'cultural' | 'beach' | 'adventure' | 'city';
+export type ThemeId = 'all' | 'safari' | 'cultural' | 
+                      'beach' | 'adventure' | 'city' | 
+                      'luxury' | 'relaxation' | 'value' |
+                      'bespoke' | 'contrast' | 'familyAdventure' |
+                      'explorer' | 'highlights' | 'adrenaline' |
+                      'VIPluxury' | 'VIPculture' | 'beach' |
+                      'VIPexperience' | 'wellness' | 'retreat' |
+                      'desert' | 'immersion' | 'mid-range' |
+                      'heritage';
 export interface Theme {
     id: ThemeId;
     name: string;
@@ -45,7 +53,7 @@ export interface Package {
   gallery: string[];
   rating: number;
   reviewCount: number;
-  theme: ThemeId;
+  themes: ThemeId[];
   difficulty: 'Easy' | 'Moderate' | 'Hard';
   highlights: string[];
   description: string;
@@ -55,6 +63,7 @@ export interface Package {
   availableDates: string[];
   aiReasoning: string;
   reviews: Review[];
+  seoKeywords: string[];
 }
 
 export interface Continent {
@@ -68,7 +77,7 @@ export interface Continent {
 export interface Country {
   name: string;
   flag: string;
-  heroImage: string;
+  heroVideo: string;
   description: string;
   capital: string;
   largestCity: string;

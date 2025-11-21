@@ -65,7 +65,7 @@ export async function getCountries(): Promise<Country[]> {
     { 
       name: 'UAE', 
       flag: 'https://flagcdn.com/w40/ae.png', 
-      heroImage: 'https://firebasestorage.googleapis.com/v0/b/roamready-kyyht.appspot.com/o/uploads%2Fuae-skyline-night.png?alt=media', 
+      heroVideo: '/videos/46950-450094784.mp4', 
       dataAiHint: 'grand mosque', 
       tagline: 'The Land of Seven Emirates', 
       description: 'The UAE is a federation of seven Emirates (Abu Dhabi, Dubai, Sharjah, Ajman, Umm Al Quwain, Fujairah, and Ras Al Khaimah). It is a global hub of commerce, luxury, and innovation, known for its audacious architecture, world-class resorts, and deep commitment to cultural preservation.',
@@ -177,8 +177,29 @@ export async function getCountryBySlug(slug: string): Promise<Country | undefine
 export async function getThemes(): Promise<Theme[]> {
     return [
       { id: 'all', name: 'All Themes', icon: '🌍' },
+      { id: 'safari', name: 'Safari', icon: '🦁' },
       { id: 'cultural', name: 'Cultural', icon: '🏛️' },
+      { id: 'beach', name: 'Beach', icon: '🏖️' },
+      { id: 'adventure', name: 'Adventure', icon: '⛰️' },
       { id: 'city', name: 'City Break', icon: '🏙️' },
+      { id: 'luxury', name: 'Luxury', icon: '💎' },
+      { id: 'relaxation', name: 'Relaxation', icon: '😌' },
+      { id: 'value', name: 'Value', icon: '💰' },
+      { id: 'bespoke', name: 'Bespoke', icon: '🧵' },
+      { id: 'contrast', name: 'Contrast', icon: '⚖️' },
+      { id: 'familyAdventure', name: 'Family Adventure', icon: '👨‍👩‍👧‍👦' },
+      { id: 'explorer', name: 'Explorer', icon: '🧭' },
+      { id: 'highlights', name: 'Highlights', icon: '⭐' },
+      { id: 'adrenaline', name: 'Adrenaline', icon: '🔥' },
+      { id: 'VIPluxury', name: 'VIP Luxury', icon: '👑' },
+      { id: 'VIPculture', name: 'VIP Culture', icon: '🎭' },
+      { id: 'VIPexperience', name: 'VIP Experience', icon: '🥂' },
+      { id: 'wellness', name: 'Wellness', icon: '🧘‍♂️' },
+      { id: 'retreat', name: 'Retreat', icon: '🌿' },
+      { id: 'desert', name: 'Desert', icon: '🏜️' },
+      { id: 'immersion', name: 'Immersion', icon: '🌊' },
+      { id: 'mid-range', name: 'Mid-Range', icon: '💼' },
+      {id: 'heritage', name: 'Heritage', icon: '🏺'},
     ];
 }
 

@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="border-t border-border/40 bg-background/95">
       <Container>
         <div className="py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             <div className="flex flex-col gap-4 md:col-span-1 lg:col-span-1">
               <Link href="/" className="flex items-center gap-2">
                 <Compass className="h-8 w-8 text-primary" />
@@ -36,6 +36,13 @@ const Footer = () => {
               <ul className="space-y-2">
                 <li><Link href="/about" className="text-sm text-foreground/60 hover:text-primary transition-colors">About Us</Link></li>
                 <li><Link href="/contact" className="text-sm text-foreground/60 hover:text-primary transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            <div className="md:col-span-1 lg:col-span-1">
+              <h3 className="font-semibold mb-4">Legal</h3>
+              <ul className="space-y-2">
+                <li><Link href="/conditions" className="text-sm text-foreground/60 hover:text-primary transition-colors">Terms & Conditions</Link></li>
+                <li><Link href="/privacy" className="text-sm text-foreground/60 hover:text-primary transition-colors">Privacy Policy</Link></li>
               </ul>
             </div>
             <div className="md:col-span-1 lg:col-span-1">

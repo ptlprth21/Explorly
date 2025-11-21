@@ -244,6 +244,20 @@ export default function PackageDetailPage() {
                 Book This Trip
               </Button>
 
+              <Button
+                onClick={() => {
+                  const depositPrice = pkg.price * 0.2;
+                  openWizard({
+                    ...pkg,
+                    price: depositPrice
+                  });
+                }}
+                size="lg"
+                className="w-full bg-yellow-500 hover:bg-yellow-600 text-white mb-4"
+              >
+                Reserve This Trip (20%)
+              </Button>
+
               <Button variant="outline" className="w-full" onClick={() => {
                 if (!user) {
                   router.push("/login");

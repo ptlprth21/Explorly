@@ -134,10 +134,12 @@ export default function DestinationsPage() {
             >
               <Card className="overflow-hidden group cursor-pointer hover:shadow-xl transition-all">
                 <div className="relative h-48 w-full">
-                  <Image
-                    src={country.heroImage}
-                    alt={country.name}
-                    fill
+                  <video
+                    src={country.heroVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
