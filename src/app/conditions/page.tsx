@@ -16,7 +16,6 @@ export default function TermsConditions() {
           you agree to be bound by these Terms and Conditions.
         </p>
 
-        {/* 1. OUR ROLE AS OPERATOR AND AGENT */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-primary mb-4">
             1. Our Role as Operator and Agent
@@ -36,7 +35,6 @@ export default function TermsConditions() {
           </p>
         </section>
 
-        {/* 2. BOOKING AND PAYMENTS */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-primary mb-4">
             2. Booking and Payments
@@ -64,7 +62,6 @@ export default function TermsConditions() {
           </p>
         </section>
 
-        {/* 3. CLIENT RESPONSIBILITY */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-primary mb-4">
             3. Client Responsibility and Documentation
@@ -88,7 +85,6 @@ export default function TermsConditions() {
           </p>
         </section>
 
-        {/* 4. CANCELLATIONS AND AMENDMENTS */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-primary mb-4">
             4. Cancellations and Amendments
@@ -130,7 +126,6 @@ export default function TermsConditions() {
           </ul>
         </section>
 
-        {/* 5. LIABILITY */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-primary mb-4">5. Limitation of Liability</h2>
 
@@ -146,7 +141,6 @@ export default function TermsConditions() {
           </p>
         </section>
 
-        {/* 6. INTELLECTUAL PROPERTY */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-primary mb-4">
             6. Website Use and Intellectual Property
@@ -159,7 +153,6 @@ export default function TermsConditions() {
           </p>
         </section>
 
-        {/* 7. COMPLAINTS & LAW */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-primary mb-4">
             7. Complaints and Governing Law
@@ -177,7 +170,6 @@ export default function TermsConditions() {
           </p>
         </section>
 
-        {/* EFFECTIVE DATES */}
         <section>
           <p className="text-center text-lg text-foreground/70 mb-2">
             Effective Date: November 19, 2025
