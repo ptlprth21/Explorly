@@ -97,6 +97,7 @@ const Header = () => {
                   )} */}
                   {user && (
                     <div className="flex items-center space-x-2">
+<<<<<<< HEAD
                       <div className="relative notification-menu">
                         <button
                           onClick={() => setShowNotifications(!showNotifications)}
@@ -130,6 +131,16 @@ const Header = () => {
                         )}
                       </div>
 
+=======
+                      <Link href="/notifications" className={cn(
+                          "transition-colors hover:text-primary p-2 rounded-full",
+                          pathname === '/notifications' ? "text-primary" : "text-foreground/80"
+                        )}
+                        aria-label="Notifications"
+                      >
+                        <Bell className="h-6 w-6" />
+                      </Link>
+>>>>>>> b9584624a929327e552631827020ed874c8673ea
 
                       <Link href="/account" className={cn(
                           "transition-colors hover:text-primary p-2 rounded-full",

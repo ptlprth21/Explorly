@@ -19,7 +19,11 @@ import { useWishlist } from '@/context/WishlistContext';
 import { getPackageById } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import { Switch } from '@/components/ui/switch';
+<<<<<<< HEAD
 import { updateUserPassword, updateUserProfile, deleteUserAccount } from '@/lib/user-profile';
+=======
+import { updateUserPassword, updateUserProfile } from '@/lib/user-profile';
+>>>>>>> b9584624a929327e552631827020ed874c8673ea
 
 export default function AccountPage() {
   const { user, signOut, loading: authLoading } = useAuth();
