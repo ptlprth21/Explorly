@@ -135,13 +135,14 @@ export default function DestinationsPage() {
               <Card className="overflow-hidden group cursor-pointer hover:shadow-xl transition-all">
                 <div className="relative h-48 w-full">
                   <video
-                    src={country.heroVideo}
                     autoPlay
                     loop
                     muted
                     playsInline
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  >
+                    <source src={country.heroVideo} type="video/mp4"/>
+                  </video>
                 </div>
                 <div className="p-4">
                   <div className="flex items-center gap-2">
