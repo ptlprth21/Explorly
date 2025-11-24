@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import Container from '../ui/Container';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navigationLinks = [
   { href: '/', label: 'Home' },
@@ -84,6 +85,9 @@ const Header = () => {
           <div className="hidden items-center space-x-4 lg:flex">
              {showFullHeader && (
               <>
+
+                <ThemeToggle />
+
                 <nav className="flex items-center space-x-6 text-sm font-medium">
                   {navigationLinks.map((link) => (
                     <Link key={`${link.href}-${link.label}`} href={link.href} className={cn("transition-colors hover:text-primary", pathname === link.href ? "text-primary" : "text-foreground/80")}>
@@ -165,6 +169,9 @@ const Header = () => {
             )}
           >
             <nav className="grid gap-4 p-4">
+
+              <ThemeToggle />
+
               {navigationLinks.map((link) => (
                 <Link key={`${link.href}-${link.label}-mobile`} href={link.href} className={cn("text-lg font-medium transition-colors hover:text-primary", pathname === link.href ? "text-primary" : "text-foreground/80")} onClick={toggleNavbar}>
                   {link.label}
