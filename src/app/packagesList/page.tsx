@@ -177,13 +177,14 @@ export default function DestinationsPage() {
       {selectedCountry && (
         <div className="relative h-96 overflow-hidden">
           <video
-            src={selectedCountry.heroVideo}
             autoPlay
             loop
             muted
             playsInline
             className="object-cover w-full h-full"
-          />
+          >
+            <source src={selectedCountry.heroVideo} type="video/mp4"/>
+          </video>
           <div className="absolute inset-0 bg-black/40"></div>
 
           <div className="absolute bottom-8 left-8 text-white">
