@@ -137,13 +137,14 @@ export default function CountryDetailPage() {
       <section className="relative h-[60vh] overflow-hidden flex items-center justify-center my-8 rounded-xl">
         <div className="absolute inset-0">
           <video
-            src="/videos/105085-668973349.mp4"
             autoPlay
             loop
             muted
             playsInline
             className="w-full h-full object-cover"
-          />
+          >
+            <source src="/videos/105085-668973349.mp4" type="video/mp4"/>
+          </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         </div>
         
