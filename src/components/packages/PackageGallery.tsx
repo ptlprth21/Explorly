@@ -17,9 +17,13 @@ const PackageGallery = ({ images, title }: PackageGalleryProps) => {
               src={image}
               alt={`${title} - Photo ${index + 1}`}
               fill
+              quality={85}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               data-ai-hint="travel landscape"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 480px) 100vw,
+                     (max-width: 768px) 100vw, 
+                     (max-width: 1200px) 50vw, 
+                     33vw"
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
           </div>
