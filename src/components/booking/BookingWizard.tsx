@@ -204,10 +204,10 @@ export default function BookingWizard({ selectedPackage: initialPackage, onClose
                         <div className="flex-1">
                           <h4 className="font-semibold text-white">{selectedPackage.title}</h4>
                           <p className="text-sm text-muted-foreground">{selectedPackage.destination} • {selectedPackage.duration}</p>
-                          <div className="flex items-center space-x-2 mt-2">
+                          {/* <div className="flex items-center space-x-2 mt-2">
                             <Star className="h-4 w-4 text-yellow-400 fill-current" />
                             <span className="text-sm text-muted-foreground">{selectedPackage.rating} ({selectedPackage.reviewCount} reviews)</span>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="text-right">
                           <div className="text-xl font-bold text-primary">€{selectedPackage.price.toLocaleString()}</div>
