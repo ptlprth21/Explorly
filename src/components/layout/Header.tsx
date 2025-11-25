@@ -114,7 +114,7 @@ const Header = () => {
 
                         {showNotifications && (
                           <div className="absolute right-0 mt-2 notification-menu w-72 bg-background/80 text-gray-300 shadow-xl rounded-xl border border-gray-200 z-50 ">
-                            <div className="p-3 font-semibold border-b text-white">Notifications</div>
+                            <div className="p-3 font-semibold border-b text-foreground">Notifications</div>
 
                             <div className="max-h-64 overflow-y-auto">
                               {notifications.length > 0 ? (

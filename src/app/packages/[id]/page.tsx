@@ -277,7 +277,7 @@ export default function PackageDetailPage() {
                       <button
                         className={`
                           w-full px-3 py-2 rounded-lg flex items-center justify-between
-                          border "bg-neutral-800/60 border-neutral-700 text-neutral-200 hover:bg-neutral-700/60"
+                          border "bg-neutral-800/60 border-neutral-700 text-foreground hover:bg-neutral-700/60"
                         `}
                       >
                         {selectedDate ? selectedDate.toLocaleDateString() : "Choose your start date"}
