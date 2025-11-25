@@ -9,7 +9,7 @@ export default function HelpCenterPage() {
     <Container className="py-16">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Help Center</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-[var(--foreground)] mb-4">Help Center</h1>
           <p className="text-lg text-muted-foreground">How can we help you plan your next adventure?</p>
         </div>
 
