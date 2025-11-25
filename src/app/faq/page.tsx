@@ -76,7 +76,7 @@ export default function FaqPage() {
       <div className="max-w-5xl mx-auto">
         {/* Title */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Frequently Asked Questions</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-[var(--foreground)] mb-4">Frequently Asked Questions</h1>
           <p className="text-lg text-muted-foreground">
             Find answers to common questions about our trips and services.
           </p>
@@ -90,7 +90,7 @@ export default function FaqPage() {
               className="bg-card/60 backdrop-blur-sm border border-border shadow-md"
             >
               <CardHeader className="bg-secondary/20 rounded-t-xl px-6 py-4">
-                <CardTitle className="text-xl font-semibold text-white">
+                <CardTitle className="text-xl font-semibold text-[var(--foreground)]">
                   {category.title}
                 </CardTitle>
               </CardHeader>
