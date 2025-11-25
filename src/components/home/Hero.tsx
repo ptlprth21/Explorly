@@ -126,7 +126,12 @@ export default function Hero() {
             priority={index === 0}
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background"></div>
+        <div className={cn("absolute inset-0",
+                           document.body.classList.contains("light")
+                           ? "bg-gradient-to-b from-background/50 to-foreground"
+                           : "bg-gradient-to-b from-background/10 to-background"
+        )}
+        ></div>
         
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-5">
