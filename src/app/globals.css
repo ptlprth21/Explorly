@@ -84,3 +84,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .bg-white { @apply bg-background; }
+  .bg-black { @apply bg-foreground; }
+  .bg-gray-900 { @apply bg-background; }
+  .text-white { @apply text-foreground; }
+  .text-black { @apply text-background; }
+}
