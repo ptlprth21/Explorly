@@ -395,7 +395,7 @@ export default function AccountPage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
 
-                  <div className="bg-slate-800 p-4 rounded-md flex items-center gap-4">
+                  <div className="bg-card border border-[var(--border)] p-4 rounded-md flex items-center gap-4">
                     <Wallet className="w-6 h-6 text-teal-400" />
                     <div>
                       <p className="text-sm text-muted-foreground">Current Balance</p>
