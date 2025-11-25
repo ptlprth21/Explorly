@@ -195,14 +195,14 @@ export default function PackageDetailPage() {
                             </div>
                             {index < pkg.itinerary.length - 1 && (
                                 <div className="absolute left-12 top-12 w-px bg-border"
-                                    style={{
+                                     style={{
                                         height: 'calc(100% - 12px)',
                                         transform: 'translateX(-50%)'
-                                    }}></div>
+                                     }}></div>
                             )}
                             
                             <div className="ml-4">
-                                <h4 className="font-bold text-xl mb-1 text-primary-foreground">{step.title}</h4>
+                                <h4 className="font-bold text-xl mb-1 text-foreground">{step.title}</h4>
                                 <p className="text-muted-foreground">{step.description}</p>
                             </div>
                         </div>
@@ -277,7 +277,7 @@ export default function PackageDetailPage() {
                       <button
                         className={`
                           w-full px-3 py-2 rounded-lg flex items-center justify-between
-                          border "bg-neutral-800/60 border-neutral-700 text-neutral-200 hover:bg-neutral-700/60"
+                          border "bg-neutral-800/60 border-neutral-700 text-foreground hover:bg-neutral-700/60"
                         `}
                       >
                         {selectedDate ? selectedDate.toLocaleDateString() : "Choose your start date"}
