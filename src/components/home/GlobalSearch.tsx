@@ -147,7 +147,7 @@ export default function GlobalSearch() {
             onClick={() => router.push('/destinations')}
             size="lg"
             variant="outline"
-            className="border-2 border-white/30 backdrop-blur-sm text-white font-semibold hover:bg-white/10"
+            className="border-2 border-white/30 backdrop-blur-sm text-[var(--foreground)] font-semibold hover:bg-white/10"
         >
             <span>Explore Tours</span>
             <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
