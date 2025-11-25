@@ -195,14 +195,14 @@ export default function PackageDetailPage() {
                             </div>
                             {index < pkg.itinerary.length - 1 && (
                                 <div className="absolute left-12 top-12 w-px bg-border"
-                                    style={{
+                                     style={{
                                         height: 'calc(100% - 12px)',
                                         transform: 'translateX(-50%)'
-                                    }}></div>
+                                     }}></div>
                             )}
                             
                             <div className="ml-4">
-                                <h4 className="font-bold text-xl mb-1 text-primary-foreground">{step.title}</h4>
+                                <h4 className="font-bold text-xl mb-1 text-foreground">{step.title}</h4>
                                 <p className="text-muted-foreground">{step.description}</p>
                             </div>
                         </div>
