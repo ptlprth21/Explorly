@@ -33,6 +33,22 @@ export default function AccountPage() {
   const [activeSection, setActiveSection] = useState("profile");
   const [notifyEmail, setNotifyEmail] = useState(false);
   const [notifyInApp, setNotifyInApp] = useState(true);
+  
+  // set user properties
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setDisplayName(user.user_metadata.full_name || '');
+      setEmail(user.email || '');
+      setPhotoURL(user.user_metadata.picture || '');
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -113,14 +129,6 @@ export default function AccountPage() {
       </div>
     );
   }
-
-  // set user properties
-  const [displayName, setDisplayName] = useState(user.user_metadata.full_name || '');
-  const [email, setEmail] = useState(user.email || '');
-  const [photoURL, setPhotoURL] = useState(user.user_metadata.picture || '');
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleUpdateProfile = async () => {
     try {
