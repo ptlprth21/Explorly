@@ -1,77 +1,89 @@
-
 'use client';
 
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import {
-  getAuth,
-  onAuthStateChanged,
-  User,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  sendPasswordResetEmail
-} from 'firebase/auth';
-import { app } from '@/lib/firebase'; // Ensure your firebase config is correctly exported
-import { Loader2 } from 'lucide-react';
+import { createClientSupabase } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabase';
+import { User } from '@supabase/supabase-js';
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  signUp: (email: string, password: string) => Promise<any>;
-  signIn: (email: string, password: string) => Promise<any>;
-  signOut: () => Promise<any>;
+  signUp: (email: string,  password: string) => Promise<User | null>;
+  signIn: (email: string, password: string) => Promise<User | null>;
+  //signInWithGoogle: () => Promise<User | null>;
+  signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<any>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const auth = getAuth(app);
-
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const supabase = createClientSupabase(); 
+  
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
       setLoading(false);
+    };
+    getUser();
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
     });
-    return () => unsubscribe();
-  }, []);
 
-  const signUp = (email: string, password: string) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, [supabase]);
+
+  const signUp = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) throw error;
+    return data.user;
   };
 
-  const signIn = (email: string, password: string) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  const signIn = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    return data.user;
   };
 
-  const logOut = () => {
-    return signOut(auth);
+  // const signInWithGoogle = async () => {
+  //   const { data, error } = await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //     options: {
+  //       redirectTo: `${window.location.origin}/auth/callback`
+  //     }
+  //   });
+
+  //   if (error) throw error;
+  //};
+
+  const logOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
   };
 
-  const resetPassword = (email: string) => {
-    return sendPasswordResetEmail(auth, email);
+  const resetPassword = async (email: string) => {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+    if (error) throw error;
+    return data;
   };
 
-  const value = {
-    user,
-    loading,
-    signUp,
-    signIn,
-    signOut: logOut,
-    resetPassword
-  };
+  const value = { user, loading, signUp, signIn/*, signInWithGoogle*/, signOut: logOut, resetPassword };
 
   if (loading) {
-     return (
-        <div className="min-h-screen bg-background flex items-center justify-center">
-             <div className="text-center p-24">
-                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary mx-auto"></div>
-                <p className="mt-4 text-muted-foreground">Loading Your Adventure...</p>
-            </div>
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center p-24">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Loading Your Adventure...</p>
         </div>
+      </div>
     );
   }
 
@@ -80,8 +92,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
+  if (!context) throw new Error('useAuth must be used within an AuthProvider');
   return context;
 };

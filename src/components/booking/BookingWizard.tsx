@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { X, ChevronLeft, ChevronRight, Check, Calendar, Users, CreditCard, MapPin, Star, Loader2 } from 'lucide-react';
 import type { Package } from '@/types';
-import { createBooking } from '@/lib/firebase-actions';
+import { createBooking } from '@/lib/supabase-actions';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '../ui/input';
@@ -261,7 +261,7 @@ export default function BookingWizard({ selectedPackage: initialPackage, onClose
                   <div>
                     <h4 className="text-sm font-medium text-muted-foreground mb-3">Available Departures</h4>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-                      {selectedPackage.availableDates.map(date => (
+                      {selectedPackage.available_dates.map(date => (
                         <Button
                           key={date}
                           onClick={() => setFormData({...formData, selectedDate: date})}

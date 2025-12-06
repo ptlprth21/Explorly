@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
        <head>
-        <title>Explorly - Your Adventure Awaits</title>
+        <title>Explorly - We Plan. You Explore.</title>
         <meta name="description" content="A modern travel booking platform for unforgettable journeys." />
         <link rel="icon" href="/favicon.ico" />
       </head>

@@ -12,10 +12,10 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             <div className="flex flex-col gap-4 md:col-span-1 lg:col-span-1">
               <Link href="/" className="flex items-center gap-2">
-                <Compass className="h-8 w-8 text-primary" />
+                <img src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/logo.png" alt="logo" width="40" height="40"/>
                 <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
               </Link>
-              <p className="text-sm text-foreground/60">Your adventure starts here. Discover and book unique travel experiences worldwide.</p>
+              <p className="text-sm text-foreground/60">A curated collection of the world's best trips, vetted by experts. No clutter, just the best experiences.</p>
               <div className="flex gap-4">
                 <a href="https://www.facebook.com/profile.php?id=61584087081987" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
                 <a href="https://x.com/explorly___" target="_blank" rel="noopener noreferrer" aria-label="X"><X className="h-5 w-5 text-foreground/60 hover:text-primary transition-colors" /></a>
@@ -55,6 +55,8 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border/40 py-6 text-center text-sm text-foreground/60">
+          <p className="mb-2">Explorly is a brand of TheVIPGroup Sp. z o.o. 📍 Ul. Solipska 3/5, Warsaw, Poland 🏢 KRS: 0001184948 | NIP (VAT):5223341887 📞 +48 729 449 766 | ✉️ support@explorly.eu
+          </p>
           <p>&copy; {new Date().getFullYear()} Explorly. All rights reserved.</p>
         </div>
       </Container>

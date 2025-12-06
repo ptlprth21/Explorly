@@ -4,7 +4,7 @@
 import { use, useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { getBookingsForUser } from '@/lib/firebase-actions';
+import { getBookingsForUser } from '@/lib/supabase-actions';
 import type { BookingData, Package } from '@/types';
 import Container from '@/components/ui/Container';
 import { Button } from '@/components/ui/button';
@@ -20,6 +20,7 @@ import { getPackageById } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import { Switch } from '@/components/ui/switch';
 import { updateUserPassword, updateUserProfile, deleteUserAccount } from '@/lib/user-profile';
+import { getUserNotificationSettings, updateUserNotificationSettings } from '@/actions/notifications';
 
 export default function AccountPage() {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -40,10 +41,24 @@ export default function AccountPage() {
   }, [user, authLoading, router]);
 
   useEffect(() => {
+    const fetchNotificationSettings = async () => {
+      if (!user || !user.id) return;
+      try {
+        const settings = await getUserNotificationSettings(user.id);
+        setNotifyInApp(settings.notify_in_app);
+        setNotifyEmail(settings.notify_email);
+      } catch (error) {
+        console.error('Error fetching notification settings:', error);
+      }
+    };
+    fetchNotificationSettings();
+  }, [user]);
+
+  useEffect(() => {
     if (user) {
       const fetchBookings = async () => {
         setLoadingBookings(true);
-        const userBookings = await getBookingsForUser(user.uid);
+        const userBookings = await getBookingsForUser(user.id);
         setBookings(userBookings);
         setLoadingBookings(false);
       };
@@ -51,7 +66,7 @@ export default function AccountPage() {
     }
   }, [user]);
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchWishlistPackages = async () => {
       setLoadingWishlist(true);
       const packages = await Promise.all(
@@ -69,6 +84,28 @@ export default function AccountPage() {
     }
   }, [wishlist]);
 
+  const handleToggleNotifyEmail = async (value: boolean) => {
+    if (!user || !user.id) return; 
+
+    try {
+        await updateUserNotificationSettings(user.id, notifyInApp, value); 
+        setNotifyEmail(value);
+      } catch (error) {
+        console.error('Failed to update email notification setting:', error);
+      }
+  };
+
+  const handleToggleNotifyInApp = async (value: boolean) => {
+    if (!user || !user.id) return; 
+    
+    try {
+      await updateUserNotificationSettings(user.id, value, notifyEmail);
+      setNotifyInApp(value);
+    } catch (error) {
+      console.error('Failed to update in-app notification setting:', error);
+    }
+  };
+
   if (authLoading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -78,16 +115,16 @@ export default function AccountPage() {
   }
 
   // set user properties
-  const [displayName, setDisplayName] = useState(user.displayName || '');
+  const [displayName, setDisplayName] = useState(user.user_metadata.full_name || '');
   const [email, setEmail] = useState(user.email || '');
-  const [photoURL, setPhotoURL] = useState(user.photoURL || '');
+  const [photoURL, setPhotoURL] = useState(user.user_metadata.picture || '');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleUpdateProfile = async () => {
     try {
-      if (displayName !== user.displayName || photoURL !== user.photoURL) {
+      if (displayName !== user.user_metadata.full_name || photoURL !== user.user_metadata.picture) {
         await updateUserProfile(user, displayName, photoURL);
         //alert("Perfil actualizado correctamente");
       }
@@ -325,12 +362,10 @@ export default function AccountPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center border-2 border-primary flex-shrink-0">
-                      <User className="h-12 w-12 text-primary" />
-                    </div>
+                    <img className="rounded-full" src={photoURL} alt="user image" />
 
                     <div className="flex flex-col">
-                      <span className="text-lg font-bold">{user.displayName}</span>
+                      <span className="text-lg font-bold">{user.user_metadata.full_name}</span>
                       <span className="text-sm text-muted-foreground">{user.email}</span>
                     </div>
                   </div>
@@ -341,13 +376,13 @@ export default function AccountPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" value={email} onChange={e => setEmail(e.target.value)}/>
+                    <Input id="email" value={email} onChange={e => setEmail(e.target.value)} disabled/>
                   </div>
                   {/* <div className="space-y-2">
                     <Label htmlFor="psw">Password</Label>
                     <Input id="psw" type="password" defaultValue=''/>
                   </div> */}
-                  <Button onClick={handleUpdateProfile} disabled={displayName === user.displayName && email === user.email /* && photoURL === user.photoURL*/}>
+                  <Button onClick={handleUpdateProfile} disabled={displayName === user.user_metadata.full_name && email === user.email /* && photoURL === user.photoURL*/}>
                     Update Profile
                   </Button>
                 </CardContent>
@@ -427,7 +462,7 @@ export default function AccountPage() {
                       Receive updates on new destinations and special offers.
                     </span>
                   </div>
-                  <Switch checked={notifyEmail} onCheckedChange={setNotifyEmail} />
+                  <Switch checked={notifyEmail} onCheckedChange={handleToggleNotifyEmail} />
                 </div>
 
                 <div className="flex items-center justify-between p-4 border rounded-md bg-muted">
@@ -437,7 +472,7 @@ export default function AccountPage() {
                       Get important notifications about your upcoming trips.
                     </span>
                   </div>
-                  <Switch checked={notifyInApp} onCheckedChange={setNotifyInApp} />
+                  <Switch checked={notifyInApp} onCheckedChange={handleToggleNotifyInApp} />
                 </div>
               </Card>
             </div>
