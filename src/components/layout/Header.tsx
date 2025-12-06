@@ -10,6 +10,7 @@ import Container from '../ui/Container';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import ThemeToggle from "@/components/ThemeToggle";
+import { getUserNotifications } from '@/actions/notifications';
 
 const navigationLinks = [
   { href: '/', label: 'Home' },
@@ -25,14 +26,7 @@ const Header = () => {
   const { user, signOut } = useAuth();
   const isHomePage = pathname === '/';
   const [showNotifications, setShowNotifications] = useState(false);
-
-  // Only as an example
-  const notifications = [
-    // { id: 1, message: "Your booking has been confirmed!" },
-    // { id: 2, message: "A new destination was added to your wishlist." },
-    // { id: 3, message: "Price dropped for a package you're watching!" }
-  ];
-
+  const [notifications, setNotifications] = useState<Object>();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -52,6 +46,15 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+    const fetchNotifications = async () => {
+      const data = await getUserNotifications(user.id);
+      setNotifications(data);
+    };
+    fetchNotifications();
+  }, [user]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -79,14 +82,12 @@ const Header = () => {
       <Container>
         <div className="relative flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/images/logo.png" className="h-12 w-12"/>
+            <img src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/logo.png" className="h-12 w-12"/>
             <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
           </Link>
           <div className="hidden items-center space-x-4 lg:flex">
              {showFullHeader && (
               <>
-
-                <ThemeToggle />
 
                 <nav className="flex items-center space-x-6 text-sm font-medium">
                   {navigationLinks.map((link) => (
@@ -119,10 +120,7 @@ const Header = () => {
                             <div className="max-h-64 overflow-y-auto">
                               {notifications.length > 0 ? (
                                 notifications.map((n) => (
-                                  <div
-                                    key={n.id}
-                                    className="px-4 py-3 hover:bg-accent cursor-pointer text-sm border-b last:border-none"
-                                  >
+                                  <div key={n.id} className="px-4 py-3 hover:bg-accent cursor-pointer text-sm border-b last:border-none">
                                     {n.message}
                                   </div>
                                 ))
@@ -152,6 +150,8 @@ const Header = () => {
                     <Button asChild><Link href="/signup">Sign Up</Link></Button>
                   </div>
                 )}
+
+                <ThemeToggle />
               </>
             )}
           </div>

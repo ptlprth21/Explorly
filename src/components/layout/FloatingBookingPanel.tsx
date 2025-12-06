@@ -29,10 +29,12 @@ export default function FloatingBookingPanel() {
     fetchPackages();
   }, []);
 
-  const uniqueCountries = [...new Set(packages.map(pkg => pkg.country))];
+  const uniqueCountries = [
+    ...new Set(packages.map(pkg => typeof pkg.country === 'string' ? pkg.country : pkg.country.name))
+  ];
 
   const filteredPackages = selectedCountry
-    ? packages.filter(pkg => pkg.country === selectedCountry)
+    ? packages.filter(pkg => pkg.country.name === selectedCountry)
     : [];
 
   const handleOpenWizard = () => {

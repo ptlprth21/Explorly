@@ -143,7 +143,7 @@ export default function CountryDetailPage() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/videos/105085-668973349.mp4" type="video/mp4"/>
+            <source src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/videos/105085-668973349.mp4" type="video/mp4"/>
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         </div>

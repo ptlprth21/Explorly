@@ -18,7 +18,7 @@ export default function ContinentsExplorer() {
       const continentsData = await getContinents();
       // Add emoji and description to the fetched data.
       const enrichedData = continentsData.map(c => {
-        switch (c.name) {
+        switch (c.id) {
             case 'Europe': return {...c, emoji: '🏰', description: 'Historic cities, alpine adventures, and cultural treasures'};
             case 'Asia': return {...c, emoji: '🏯', description: 'Ancient traditions, modern cities, and spiritual journeys'};
             case 'Africa': return {...c, emoji: '🦁', description: 'Safari adventures, diverse cultures, and natural wonders'};
@@ -60,17 +60,17 @@ export default function ContinentsExplorer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {continents.map((continent) => (
             <div
-              key={continent.name}
-              onMouseEnter={() => setHoveredContinent(continent.name)}
+              key={continent.id}
+              onMouseEnter={() => setHoveredContinent(continent.id)}
               onMouseLeave={() => setHoveredContinent(null)}
-              onClick={() => handleContinentClick(continent.name)}
+              onClick={() => handleContinentClick(continent.id)}
               className="group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl h-64 sm:h-72 lg:h-80 transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary/20"
             >
               {/* Background Image */}
               <div className="absolute inset-0">
                 <Image
                   src={continent.image}
-                  alt={continent.name}
+                  alt={continent.id}
                   data-ai-hint={continent.dataAiHint}
                   fill
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
@@ -88,7 +88,7 @@ export default function ContinentsExplorer() {
                 {/* Bottom Section */}
                 <div>
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2 group-hover:text-primary transition-colors">
-                    {continent.name}
+                    {continent.id}
                   </h3>
                   <p className="text-sm sm:text-base text-gray-300 mb-4 leading-relaxed">
                     {continent.description}
@@ -101,7 +101,7 @@ export default function ContinentsExplorer() {
                     </div>
                     
                     <div className={`flex items-center space-x-2 transition-all duration-300 ${
-                      hoveredContinent === continent.name ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+                      hoveredContinent === continent.id ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
                     }`}>
                       <span className="text-sm font-semibold text-primary">Explore</span>
                       <ArrowRight className="h-4 w-4 text-primary" />

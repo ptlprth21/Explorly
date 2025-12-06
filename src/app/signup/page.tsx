@@ -10,15 +10,19 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import Container from '@/components/ui/Container';
+import { supabase } from '@/lib/supabase';
 
 export default function SignUpPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signUp } = useAuth();
+  const { signUp/*, signInWithGoogle*/ } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
+
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +35,17 @@ export default function SignUpPage() {
       return;
     }
     setLoading(true);
-    try {
-      await signUp(email, password);
+      try {
+        const user = await signUp(email, password);
+
+      if (user) {
+        await supabase.from('user_profiles').insert({
+          id: user.id,
+          full_name: fullName,
+          phone: phone
+        });
+      }
+
       router.push('/account');
     } catch (error: any) {
       toast({
@@ -64,6 +77,27 @@ export default function SignUpPage() {
             />
           </div>
           <div className="relative">
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Full Name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+              className="pl-10"
+            />
+          </div>
+
+          <div className="relative">
+            <Input
+              type="text"
+              placeholder="Phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          <div className="relative">
             <Key className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
               type="password"
@@ -87,6 +121,30 @@ export default function SignUpPage() {
           </div>
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? <Loader2 className="animate-spin" /> : 'Sign Up'}
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full flex items-center justify-center gap-2"
+            onClick={async () => {
+              try {
+                await supabase.auth.signInWithOAuth({
+                  provider: 'google',
+                  options: {
+                    redirectTo: `${window.location.origin}/auth/callback`
+                  }
+                });
+              } catch (error) {
+                console.error('Error signing in with Google:', error);
+              }
+            }}
+          >
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            Continue with Google
           </Button>
         </form>
         <div className="text-center text-sm text-muted-foreground">

@@ -18,7 +18,14 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     if (stored) {
       setTheme(stored);
       document.documentElement.classList.toggle("dark", stored === "dark");
+      return;
     }
+
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    const systemTheme: Theme = prefersDark ? "dark" : "light";
+    setTheme(systemTheme);
+    document.documentElement.classList.toggle("dark", systemTheme === "dark");
   }, []);
 
   const toggleTheme = () => {

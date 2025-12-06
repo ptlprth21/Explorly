@@ -129,7 +129,7 @@ export default function Hero() {
         <div className={cn("absolute inset-0",
                            document.body.classList.contains("light")
                            ? "bg-gradient-to-b from-background/50 to-foreground"
-                           : "bg-gradient-to-b from-background/10 to-background"
+                           : ""
         )}
         ></div>
         
@@ -147,15 +147,15 @@ export default function Hero() {
         
         {/* Headlines */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight mb-4 sm:mb-6 text-foreground px-4">
-          Explore the World,
+          Curated Adventures,
           <span className="block text-primary">
-            One Trip at a Time
+            Unforgettable Stories
           </span>
         </h1>
         
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
+        {/* <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-4xl mx-auto leading-relaxed px-4">
           {animatedStats.countries}+ countries · {animatedStats.packages}+ curated trips · endless memories
-        </p>
+        </p> */}
 
         {/* Search Section */}
         <GlobalSearch />
@@ -163,7 +163,7 @@ export default function Hero() {
         {/* Animated Global Stats */}
         {/* Previous style for 4 elements */}
         {/* "grid grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4 mt-12" */}
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4 mt-12">
+        {/* <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto px-4 mt-12">
           <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
               🌍 {animatedStats.countries}+
@@ -175,7 +175,7 @@ export default function Hero() {
               🏞️ {animatedStats.packages}+
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground">Packages</div>
-          </div>
+          </div> */}
           {/* <div className="text-center bg-card/50 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-border">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-primary mb-1">
               ❤️ {(animatedStats.travelers / 1000).toFixed(0)}K
@@ -188,7 +188,7 @@ export default function Hero() {
             </div>
             <div className="text-xs sm:text-sm text-muted-foreground">Average Rating</div>
           </div> */}
-        </div>
+        {/* </div> */}
       </div>
       
       {/* Slideshow Dots */}

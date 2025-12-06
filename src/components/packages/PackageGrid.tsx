@@ -26,8 +26,7 @@ const PackageGrid = ({ packages, isLoading, themes }: PackageGridProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {packages.map(pkg => {
-          const pkgThemes = themes?.filter(t => pkg.themes.includes(t.id));
-          return <PackageCard key={pkg.id} package={pkg} themes={pkgThemes} />;
+          return <PackageCard key={pkg.id} package={pkg} themes={pkg.themes} />;
         })}
     </div>
   );

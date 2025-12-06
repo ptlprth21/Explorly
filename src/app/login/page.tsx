@@ -10,14 +10,17 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import Container from '@/components/ui/Container';
+//import { supabase } from '@/lib/supabase';
+import { createClientSupabase } from '@/lib/supabase/client';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn/*, signInWithGoogle*/ } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
+  const supabase = createClientSupabase();
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +36,17 @@ export default function LoginPage() {
       });
       setLoading(false);
     }
+  };
+
+  const handleGoogleLogin = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      }
+    });
+
+    if (error) console.error(error);
   };
 
   return (
@@ -72,6 +86,19 @@ export default function LoginPage() {
           </div>
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? <Loader2 className="animate-spin" /> : 'Log In'}
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full flex items-center justify-center gap-2"
+            onClick={() => handleGoogleLogin()}
+          >
+            <img
+              src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/google-logo-search-new-svgrepo-com.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            Continue with Google
           </Button>
         </form>
         <div className="text-center text-sm text-muted-foreground">

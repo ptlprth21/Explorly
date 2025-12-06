@@ -67,7 +67,7 @@ export interface Package {
 }
 
 export interface Continent {
-  name: ContinentName;
+  id: ContinentName;
   image: string;
   dataAiHint: string;
   emoji?: string;

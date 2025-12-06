@@ -57,7 +57,9 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
   };
 
   const currentPackage = filteredPackages[currentIndex];
-  const isFullyBooked = currentPackage && currentPackage.availableDates.length === 0;
+  //const isFullyBooked = currentPackage && currentPackage.availableDates.length === 0;
+  const isFullyBooked = currentPackage?.availableDates?.length === 0;
+
 
   if (!packages.length) {
     return null;
@@ -172,7 +174,7 @@ export default function FeaturedPackages({ packages }: FeaturedPackagesProps) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
                     
                     <div className="absolute top-3 sm:top-4 left-3 sm:left-4 bg-black/60 backdrop-blur-sm px-2 sm:px-3 py-1 rounded-full border border-white/20 text-white">
-                        <span className="text-xs sm:text-sm font-medium">{currentPackage.country}</span>
+                        <span className="text-xs sm:text-sm font-medium">{currentPackage.country.name}</span>
                     </div>
 
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { slugify } from '@/lib/utils';
+import SurpriseWizard from '../surprise/SurpriseWizard';
 
 export default function GlobalSearch() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function GlobalSearch() {
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState<Country[]>([]);
+  const [showSurprise, setShowSurprise] = useState(false);
 
   useEffect(() => {
       const fetchCountries = async () => {
@@ -54,9 +56,11 @@ export default function GlobalSearch() {
   }, [searchTerm]);
 
   const handleSurpriseMe = () => {
-    if (countries.length === 0) return;
-    const randomCountry = countries[Math.floor(Math.random() * countries.length)];
-    router.push(`/country/${slugify(randomCountry.name)}`);
+    // if (countries.length === 0) return;
+    // const randomCountry = countries[Math.floor(Math.random() * countries.length)];
+    // router.push(`/country/${slugify(randomCountry.name)}`);
+    //router.push(`/finder`);
+    setShowSurprise(true);
   };
 
   const handlePackageSelect = (pkg: Package) => {
@@ -153,6 +157,8 @@ export default function GlobalSearch() {
             <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
         </Button>
       </div>
+
+      {showSurprise && <SurpriseWizard onClose={() => setShowSurprise(false)} />}
     </div>
   );
 }

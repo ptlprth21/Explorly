@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { Star, User, Shield, ThumbsUp, Plus, Loader2 } from 'lucide-react';
 import { useReviews } from '@/hooks/use-firestore';
-import { addReview } from '@/lib/firebase-actions';
+import { addReview } from '@/lib/supabase-actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';

@@ -26,7 +26,7 @@ export default function AboutPage() {
     <>
       <section className="relative h-[450px] w-full">
         <Image
-          src="/images/logo.png" /*{placeholderImages.aboutHero}*/
+          src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/logo.png" /*{placeholderImages.aboutHero}*/
           alt="A team of hikers celebrating on a mountain peak"
           data-ai-hint="team mountains"
           fill
@@ -48,7 +48,7 @@ export default function AboutPage() {
 
       <Container className="py-16">
         <section className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-headline font-bold">Our Story</h2>
+          <h2 className="text-3xl font-headline font-bold text-primary">Our Story</h2>
           <p className="mt-4 text-lg text-muted-foreground">
             Explorly is the dedicated travel service of THEVIPGROUP Sp. z o.o., a company built on 
             the foundation of excellence and comprehensive service. Born from THEVIPGROUP's 
@@ -64,7 +64,7 @@ export default function AboutPage() {
         </section>
 
         <section className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl font-headline font-bold">Our Mission</h2>
+          <h2 className="text-3xl font-headline font-bold text-primary">Our Mission</h2>
           <p className="mt-4 text-lg text-muted-foreground">
             At Explorly, we believe that travel has the power to transform. Our core mission is to craft 
             unique, authentic, and sustainable travel experiences that connect you with the world, its 
@@ -74,7 +74,7 @@ export default function AboutPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-headline font-bold text-center mb-12">
+          <h2 className="text-3xl font-headline font-bold text-center mb-12 text-primary">
             Why Choose Explorly?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

@@ -88,7 +88,7 @@ export default function DestinationsPage() {
 
     if (selectedCountry) {
       const selectedNameLower = selectedCountry.name.toLowerCase();
-      packages = packages.filter(pkg => (pkg.country ?? '').toLowerCase() === selectedNameLower);
+      packages = packages.filter(pkg => (pkg.country.name ?? '').toLowerCase() === selectedNameLower);
     }
 
     // price
@@ -110,7 +110,7 @@ export default function DestinationsPage() {
 
     // theme
     if (themeFilter !== 'all') {
-      packages = packages.filter(pkg => pkg.themes.some(t => t === themeFilter));
+      packages = packages.filter(pkg => pkg.themes.some(t => t.id === themeFilter));
     }
 
     // sorting
