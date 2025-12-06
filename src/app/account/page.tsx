@@ -33,6 +33,22 @@ export default function AccountPage() {
   const [activeSection, setActiveSection] = useState("profile");
   const [notifyEmail, setNotifyEmail] = useState(false);
   const [notifyInApp, setNotifyInApp] = useState(true);
+  
+  // set user properties
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setDisplayName(user.user_metadata.full_name || '');
+      setEmail(user.email || '');
+      setPhotoURL(user.user_metadata.picture || '');
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -114,14 +130,6 @@ export default function AccountPage() {
     );
   }
 
-  // set user properties
-  const [displayName, setDisplayName] = useState(user.user_metadata.full_name || '');
-  const [email, setEmail] = useState(user.email || '');
-  const [photoURL, setPhotoURL] = useState(user.user_metadata.picture || '');
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   const handleUpdateProfile = async () => {
     try {
       if (displayName !== user.user_metadata.full_name || photoURL !== user.user_metadata.picture) {
@@ -134,19 +142,19 @@ export default function AccountPage() {
     }
   };
 
-  const handleUpdatePassword = async () => {
-    try {
-      if (!currentPassword || !newPassword) return;
+  // const handleUpdatePassword = async () => {
+  //   try {
+  //     if (!currentPassword || !newPassword) return;
 
-      await updateUserPassword(user, currentPassword, newPassword);
+  //     await updateUserPassword(user, currentPassword, newPassword);
 
-      setCurrentPassword('');
-      setNewPassword('');
-    } catch (error) {
-      // console.error(error);
-      // alert("Error al actualizar la contraseña: la contraseña actual puede ser incorrecta");
-    }
-  };
+  //     setCurrentPassword('');
+  //     setNewPassword('');
+  //   } catch (error) {
+  //     // console.error(error);
+  //     // alert("Error al actualizar la contraseña: la contraseña actual puede ser incorrecta");
+  //   }
+  // };
 
   return (
     <Container className="py-16">
@@ -203,21 +211,21 @@ export default function AccountPage() {
                 Notifications
               </Button>
 
-              <Button
+              {/* <Button
                 variant="ghost"
                 className={`w-full justify-start ${activeSection === "security" && "bg-muted"}`}
                 onClick={() => setActiveSection("security")}
               >
                 <Shield className="mr-2 h-4 w-4" />
                 Password & Security
-              </Button>
+              </Button> */}
 
               <Button onClick={signOut} variant="outline" className="w-full mt-4">
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign Out
               </Button>
 
-              <Button
+              {/* <Button
                 variant="link"
                 className="w-full text-left text-red-600 hover:text-red-700 mt-2"
                 onClick={async () => {
@@ -237,7 +245,7 @@ export default function AccountPage() {
                 }}
               >
                 Delete Account
-              </Button>
+              </Button> */}
             </CardContent>
           </Card>
         </div>
@@ -390,7 +398,7 @@ export default function AccountPage() {
             </div>
           )}
 
-          {activeSection === "security" && (
+          {/* {activeSection === "security" && (
             <div className="mt-6">
               <Card>
                 <CardHeader>
@@ -419,7 +427,7 @@ export default function AccountPage() {
                 </CardContent>
               </Card>
             </div>
-          )}
+          )} */}
 
           {activeSection === "wallet" && (
             <div className="mt-6 space-y-6">

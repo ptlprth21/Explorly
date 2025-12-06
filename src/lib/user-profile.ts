@@ -1,33 +1,66 @@
-import { 
-  updateProfile, 
-  updateEmail, 
-  updatePassword, 
-  EmailAuthProvider, 
-  reauthenticateWithCredential,
-  deleteUser,
-  User
-} from "firebase/auth";
+import { createClientSupabase } from "@/lib/supabase/client";
 
-export async function reauthenticateUser(user: User, currentPassword: string) {
-  const credential = EmailAuthProvider.credential(user.email!, currentPassword);
-  await reauthenticateWithCredential(user, credential);
+async function getCurrentUser() {
+  const supabase = createClientSupabase();
+
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error) throw error;
+  if (!user) throw new Error("User not authenticated");
+
+  return { supabase, user };
 }
 
-export async function updateUserProfile(user: User, displayName: string, photoURL?: string) {
-  return await updateProfile(user, { displayName, photoURL });
+export async function updateUserProfile(user: object, displayName: string, photoURL?: string) {
+  const { supabase } = await getCurrentUser();
+
+  const { error } = await supabase
+    .from("user_profiles")
+    .update({
+      full_name: displayName,
+      avatar_url: photoURL ?? null,
+      updated_at: new Date().toISOString()
+    })
+    .eq("id", user.id);
+
+  if (error) throw error;
+
+  return true;
 }
 
-export async function updateUserEmail(user: User, newEmail: string, currentPassword: string) {
-  await reauthenticateUser(user, currentPassword);
-  return await updateEmail(user, newEmail);
-}
+// export async function updateUserEmail(newEmail: string) {
+//   const { supabase } = await getCurrentUser();
 
-export async function updateUserPassword(user: User, currentPassword: string, newPassword: string) {
-  await reauthenticateUser(user, currentPassword);
-  return await updatePassword(user, newPassword);
-}
+//   const { data, error } = await supabase.auth.updateUser({
+//     email: newEmail,
+//   });
 
-export async function deleteUserAccount(user: User, currentPassword: string) {
-  await reauthenticateUser(user, currentPassword);
-  await deleteUser(user);
-}
+//   if (error) throw error;
+
+//   return data;
+// }
+
+// export async function updateUserPassword(newPassword: string) {
+//   const { supabase } = await getCurrentUser();
+
+//   const { data, error } = await supabase.auth.updateUser({
+//     password: newPassword,
+//   });
+
+//   if (error) throw error;
+
+//   return data;
+// }
+
+// export async function deleteUserAccount() {
+//   const { supabase } = await getCurrentUser();
+
+//   const { error } = await supabase.rpc("delete_current_user");
+
+//   if (error) throw error;
+
+//   return true;
+// }

@@ -4,7 +4,7 @@ import type { Package, Review, Continent, Country, Theme } from '@/types';
 import { aiImageSelection } from '@/ai/flows/ai-image-selection';
 import { slugify } from './utils';
 import { fetchPackagesFromDB } from './real-data';
-import { collection, query, where, getDocs, limit } from 'firebase/firestore';
+//import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { supabase } from './supabase';
 
 // let packages: Promise<Package[]> | null = null;

@@ -26,11 +26,11 @@ export default function AboutPage() {
     <>
       <section className="relative h-[450px] w-full">
         <Image
-          src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/logo.png" /*{placeholderImages.aboutHero}*/
+          src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/1764588263608.jpg" /*{placeholderImages.aboutHero}*/
           alt="A team of hikers celebrating on a mountain peak"
           data-ai-hint="team mountains"
           fill
-          className="object-contain"
+          className="object-cover"
         />
         
         <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center px-6 text-center">

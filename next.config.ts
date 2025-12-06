@@ -10,7 +10,11 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+<<<<<<< HEAD
+    domains: ['stlkmeffboaouzmdgiia.supabase.co'],
+=======
     domains: ['qykdgddijeumcxrunxsh.supabase.co'],
+>>>>>>> 2aa63ca26e69cf4e3d55fca294fc2ba8bc88d744
     remotePatterns: [
       {
         protocol: 'https',
@@ -66,12 +70,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'firebasestorage.googleapis.com',
-        port: '',
-        pathname: '/**',
-      },
+      // {
+      //   protocol: 'https',
+      //   hostname: 'firebasestorage.googleapis.com',
+      //   port: '',
+      //   pathname: '/**',
+      // },
       {
         protocol: 'https',
         hostname: 'images.pexels.com',
