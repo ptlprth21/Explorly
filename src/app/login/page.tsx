@@ -56,7 +56,7 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold">Welcome Back</h1>
           <p className="text-muted-foreground">Sign in to continue your adventure</p>
         </div>
-        <form onSubmit={handleSignIn} className="space-y-6">
+        {/* <form onSubmit={handleSignIn} className="space-y-6">
           <div className="relative">
             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
@@ -87,7 +87,9 @@ export default function LoginPage() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? <Loader2 className="animate-spin" /> : 'Log In'}
           </Button>
-          <Button
+          
+        </form> */}
+        <Button
             type="button"
             variant="outline"
             className="w-full flex items-center justify-center gap-2"
@@ -100,13 +102,12 @@ export default function LoginPage() {
             />
             Continue with Google
           </Button>
-        </form>
-        <div className="text-center text-sm text-muted-foreground">
+        {/* <div className="text-center text-sm text-muted-foreground">
           Don't have an account?{' '}
           <Link href="/signup">
             <span className="font-semibold text-primary hover:underline">Sign Up</span>
           </Link>
-        </div>
+        </div> */}
       </div>
     </Container>
   );
