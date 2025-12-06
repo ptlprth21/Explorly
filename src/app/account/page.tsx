@@ -211,14 +211,14 @@ export default function AccountPage() {
                 Notifications
               </Button>
 
-              <Button
+              {/* <Button
                 variant="ghost"
                 className={`w-full justify-start ${activeSection === "security" && "bg-muted"}`}
                 onClick={() => setActiveSection("security")}
               >
                 <Shield className="mr-2 h-4 w-4" />
                 Password & Security
-              </Button>
+              </Button> */}
 
               <Button onClick={signOut} variant="outline" className="w-full mt-4">
                 <LogOut className="mr-2 h-4 w-4" />
@@ -398,7 +398,7 @@ export default function AccountPage() {
             </div>
           )}
 
-          {activeSection === "security" && (
+          {/* {activeSection === "security" && (
             <div className="mt-6">
               <Card>
                 <CardHeader>
@@ -427,7 +427,7 @@ export default function AccountPage() {
                 </CardContent>
               </Card>
             </div>
-          )}
+          )} */}
 
           {activeSection === "wallet" && (
             <div className="mt-6 space-y-6">
