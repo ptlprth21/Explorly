@@ -96,7 +96,7 @@ export default function LoginPage() {
             onClick={() => handleGoogleLogin()}
           >
             <img
-              src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/google-logo-search-new-svgrepo-com.svg"
+              src="https://stlkmeffboaouzmdgiia.supabase.co/storage/v1/object/public/media/images/google-logo-search-new-svgrepo-com.svg"
               alt="Google"
               className="w-5 h-5"
             />
