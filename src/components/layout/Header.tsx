@@ -82,11 +82,7 @@ const Header = () => {
       <Container>
         <div className="relative flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-<<<<<<< HEAD
-            <img src="https://stlkmeffboaouzmdgiia.supabase.co/storage/v1/object/public/media/images/logo.png" className="h-12 w-12"/>
-=======
-            <img src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/logo.png" className="h-12 w-12"/>
->>>>>>> 2aa63ca26e69cf4e3d55fca294fc2ba8bc88d744
+            <img src="https://0ec90b57d6e95fcbda19832f.supabase.co/storage/v1/object/public/media/images/logo.png" className="h-12 w-12"/>
             <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
           </Link>
           <div className="hidden items-center space-x-4 lg:flex">

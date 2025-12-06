@@ -43,11 +43,7 @@ export default function CountrySpotlight({ country }: CountrySpotlightProps) {
               playsInline
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           >
-<<<<<<< HEAD
-            <source src="https://stlkmeffboaouzmdgiia.supabase.co/storage/v1/object/public/media/videos/105085-668973349.mp4" type="video/mp4"/>
-=======
-            <source src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/videos/105085-668973349.mp4" type="video/mp4"/>
->>>>>>> 2aa63ca26e69cf4e3d55fca294fc2ba8bc88d744
+            <source src="https://0ec90b57d6e95fcbda19832f.supabase.co/storage/v1/object/public/media/videos/105085-668973349.mp4" type="video/mp4"/>
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
         
