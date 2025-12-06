@@ -225,7 +225,7 @@ export default function AccountPage() {
                 Sign Out
               </Button>
 
-              <Button
+              {/* <Button
                 variant="link"
                 className="w-full text-left text-red-600 hover:text-red-700 mt-2"
                 onClick={async () => {
@@ -245,7 +245,7 @@ export default function AccountPage() {
                 }}
               >
                 Delete Account
-              </Button>
+              </Button> */}
             </CardContent>
           </Card>
         </div>
