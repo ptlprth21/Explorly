@@ -142,19 +142,19 @@ export default function AccountPage() {
     }
   };
 
-  const handleUpdatePassword = async () => {
-    try {
-      if (!currentPassword || !newPassword) return;
+  // const handleUpdatePassword = async () => {
+  //   try {
+  //     if (!currentPassword || !newPassword) return;
 
-      await updateUserPassword(user, currentPassword, newPassword);
+  //     await updateUserPassword(user, currentPassword, newPassword);
 
-      setCurrentPassword('');
-      setNewPassword('');
-    } catch (error) {
-      // console.error(error);
-      // alert("Error al actualizar la contraseña: la contraseña actual puede ser incorrecta");
-    }
-  };
+  //     setCurrentPassword('');
+  //     setNewPassword('');
+  //   } catch (error) {
+  //     // console.error(error);
+  //     // alert("Error al actualizar la contraseña: la contraseña actual puede ser incorrecta");
+  //   }
+  // };
 
   return (
     <Container className="py-16">
