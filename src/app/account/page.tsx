@@ -1,7 +1,6 @@
-
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { getBookingsForUser } from '@/lib/supabase-actions';
@@ -19,12 +18,14 @@ import { useWishlist } from '@/context/WishlistContext';
 import { getPackageById } from '@/lib/data';
 import PackageGrid from '@/components/packages/PackageGrid';
 import { Switch } from '@/components/ui/switch';
-import { updateUserPassword, updateUserProfile, deleteUserAccount } from '@/lib/user-profile';
+import { updateUserProfile, deleteUserAccount } from '@/lib/user-profile';
 import { getUserNotificationSettings, updateUserNotificationSettings } from '@/actions/notifications';
+import { createClientSupabase } from '@/lib/supabase/client';
 
 export default function AccountPage() {
   const { user, signOut, loading: authLoading } = useAuth();
   const router = useRouter();
+  const supabase = createClientSupabase();
   const [bookings, setBookings] = useState<BookingData[]>([]);
   const [loadingBookings, setLoadingBookings] = useState(true);
   const { wishlist, toggleWishlist } = useWishlist();
@@ -142,19 +143,25 @@ export default function AccountPage() {
     }
   };
 
-  // const handleUpdatePassword = async () => {
-  //   try {
-  //     if (!currentPassword || !newPassword) return;
+  const handleDeleteAccount = async () => {
+    if (!user) return;
 
-  //     await updateUserPassword(user, currentPassword, newPassword);
+    const confirmed = confirm(
+      'Are you sure you want to delete your account? This action cannot be undone.'
+    );
+    if (!confirmed) return;
 
-  //     setCurrentPassword('');
-  //     setNewPassword('');
-  //   } catch (error) {
-  //     // console.error(error);
-  //     // alert("Error al actualizar la contraseña: la contraseña actual puede ser incorrecta");
-  //   }
-  // };
+    try {
+      await deleteUserAccount();
+      alert('Your account has been successfully deleted.');
+      // Log the user out and redirect
+      await supabase.auth.signOut();
+      router.push('/login');
+    } catch (error: any) {
+      console.error('Failed to delete account:', error);
+      alert('Failed to delete account: ' + error.message);
+    }
+  };
 
   return (
     <Container className="py-16">
@@ -162,8 +169,6 @@ export default function AccountPage() {
 
         {/* Sidebar */}
         <div className="w-full md:w-1/4">
-          {/* <CardTitle className="mb-4 text-center">Hello {user.displayName}</CardTitle> */}
-
           <Card className="sticky top-24">
             <CardContent className="space-y-2 p-4">
               <Button
@@ -211,41 +216,18 @@ export default function AccountPage() {
                 Notifications
               </Button>
 
-              {/* <Button
-                variant="ghost"
-                className={`w-full justify-start ${activeSection === "security" && "bg-muted"}`}
-                onClick={() => setActiveSection("security")}
-              >
-                <Shield className="mr-2 h-4 w-4" />
-                Password & Security
-              </Button> */}
-
               <Button onClick={signOut} variant="outline" className="w-full mt-4">
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign Out
               </Button>
 
-              {/* <Button
+              <Button
                 variant="link"
                 className="w-full text-left text-red-600 hover:text-red-700 mt-2"
-                onClick={async () => {
-                  if (!user) return;
-
-                  const currentPassword = prompt('Please enter your current password to confirm account deletion:');
-                  if (!currentPassword) return;
-
-                  try {
-                    await deleteUserAccount(user, currentPassword);
-                    alert('Your account has been deleted.');
-                    router.push('/login');
-                  } catch (error: any) {
-                    // console.error(error);
-                    // alert('Failed to delete account: ' + error.message);
-                  }
-                }}
+                onClick={handleDeleteAccount}
               >
                 Delete Account
-              </Button> */}
+              </Button>
             </CardContent>
           </Card>
         </div>
@@ -386,48 +368,13 @@ export default function AccountPage() {
                     <Label htmlFor="email">Email</Label>
                     <Input id="email" value={email} onChange={e => setEmail(e.target.value)} disabled/>
                   </div>
-                  {/* <div className="space-y-2">
-                    <Label htmlFor="psw">Password</Label>
-                    <Input id="psw" type="password" defaultValue=''/>
-                  </div> */}
-                  <Button onClick={handleUpdateProfile} disabled={displayName === user.user_metadata.full_name && email === user.email /* && photoURL === user.photoURL*/}>
+                  <Button onClick={handleUpdateProfile} disabled={displayName === user.user_metadata.full_name && email === user.email}>
                     Update Profile
                   </Button>
                 </CardContent>
               </Card>
             </div>
           )}
-
-          {/* {activeSection === "security" && (
-            <div className="mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Password & Security</CardTitle>
-                  <CardDescription>Update your password to keep your account secure.</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="currentPassword">Current Password</Label>
-                    <Input id="currentPassword" type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="newPassword">New Password</Label>
-                    <Input id="newPassword" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} placeholder="Enter new password"/>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                    <Input id="confirmPassword" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Enter new password"/>
-                  </div>
-
-                  <Button  onClick={handleUpdatePassword} disabled={newPassword === '' || newPassword !== confirmPassword}>
-                    Update Password
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          )} */}
 
           {activeSection === "wallet" && (
             <div className="mt-6 space-y-6">
@@ -493,3 +440,4 @@ export default function AccountPage() {
 
   );
 }
+
