@@ -135,18 +135,17 @@ export default function AccountPage() {
     try {
       if (displayName !== user.user_metadata.full_name || photoURL !== user.user_metadata.picture) {
         await updateUserProfile(user, displayName, photoURL);
-        //alert("Perfil actualizado correctamente");
       }
     } catch (error) {
-      // console.error(error);
-      // alert("Error actualizando el perfil");
+      console.error(error);
+      alert("Error updating profile");
     }
   };
 
   const handleDeleteAccount = async () => {
     if (!user) return;
 
-    const confirmed = confirm(
+    const confirmed = window.confirm(
       'Are you sure you want to delete your account? This action cannot be undone.'
     );
     if (!confirmed) return;
@@ -154,8 +153,7 @@ export default function AccountPage() {
     try {
       await deleteUserAccount();
       alert('Your account has been successfully deleted.');
-      // Log the user out and redirect
-      await supabase.auth.signOut();
+      await signOut();
       router.push('/login');
     } catch (error: any) {
       console.error('Failed to delete account:', error);
@@ -440,4 +438,5 @@ export default function AccountPage() {
 
   );
 }
+
 
