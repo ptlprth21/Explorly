@@ -56,39 +56,88 @@ export default function LoginPage() {
           <h1 className="text-3xl font-bold">Welcome Back</h1>
           <p className="text-muted-foreground">Sign in to continue your adventure</p>
         </div>
-        {/* <form onSubmit={handleSignIn} className="space-y-6">
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <Input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="pl-10"
-            />
-          </div>
-          <div className="relative">
-            <Key className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <Input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="pl-10"
-            />
-          </div>
-          <div className="flex items-center justify-end">
-            <Link href="/forgot-password">
-              <span className="text-sm text-primary hover:underline">Forgot password?</span>
-            </Link>
-          </div>
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? <Loader2 className="animate-spin" /> : 'Log In'}
-          </Button>
-          
-        </form> */}
+        <form onSubmit={handleSignIn} className="space-y-6">
+  <div>
+    <Label
+      htmlFor="email"
+      className="block text-sm font-medium text-gray-700"
+    >
+      Email address
+    </Label>
+    <div className="mt-1">
+      <Input
+        id="email"
+        name="email"
+        type="email"
+        autoComplete="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+      />
+    </div>
+  </div>
+
+  <div>
+    <Label
+      htmlFor="password"
+      className="block text-sm font-medium text-gray-700"
+    >
+      Password
+    </Label>
+    <div className="mt-1">
+      <Input
+        id="password"
+        name="password"
+        type="password"
+        autoComplete="current-password"
+        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+      />
+    </div>
+  </div>
+
+  <div className="flex items-center justify-between">
+    <div className="flex items-center">
+      <input
+        id="remember-me"
+        name="remember-me"
+        type="checkbox"
+        className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+      />
+      <Label
+        htmlFor="remember-me"
+        className="ml-2 block text-sm text-gray-900"
+      >
+        Remember me
+      </Label>
+    </div>
+
+    <div className="text-sm">
+      <Link
+        href="/forgot-password"
+        className="font-medium text-primary hover:text-primary-dark"
+      >
+        Forgot your password?
+      </Link>
+    </div>
+  </div>
+
+  {error && <p className="text-red-500 text-sm">{error}</p>}
+
+  <div>
+    <Button
+      type="submit"
+      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+      disabled={loading}
+    >
+      {loading ? "Signing in..." : "Sign in"}
+    </Button>
+  </div>
+</form>
+
         <Button
             type="button"
             variant="outline"
