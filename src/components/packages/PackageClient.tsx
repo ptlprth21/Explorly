@@ -21,10 +21,10 @@ interface Props {
 
 export default function PackageClient({ pkg }: Props) {
     const [activeTab, setActiveTab] = useState('overview');
-    const { openWizard } = useBookingWizard();
-    const { wishlist, toggleWishlist } = useWishlist();
+    const wizard = useBookingWizard();
+    const wishlistContext = useWishlist();
     const router = useRouter();
-    const isWishlisted = wishlist.includes(pkg.id);
+    const isWishlisted = wishlistContext?.wishlist.includes(pkg.id) ?? false;
     const { user } = useAuth();
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
 
@@ -34,6 +34,37 @@ export default function PackageClient({ pkg }: Props) {
         { id: 'gallery', label: 'Gallery' },
         { id: 'reviews', label: 'Reviews' }
     ];
+    
+    // Handlers with safety checks
+    const handleBookNow = (isDeposit: boolean) => {
+        if (!wizard) {
+            console.error("Booking wizard context not available!");
+            // Optionally, show a toast notification to the user
+            return;
+        }
+
+        if (isDeposit) {
+            const depositPrice = pkg.price * 0.2;
+            wizard.openWizard({ ...pkg, price: depositPrice });
+        } else {
+            wizard.openWizard(pkg);
+        }
+    };
+
+    const handleWishlistToggle = () => {
+        if (!user) {
+            router.push("/login");
+            return;
+        }
+        if (!wishlistContext) {
+            console.error("Wishlist context not available!");
+            return;
+        }
+        wishlistContext.toggleWishlist(pkg.id);
+    };
+
+    const itineraries = pkg.itineraries ?? [];
+    const galleryImages = pkg.gallery ?? [];
 
     return (
     <>
@@ -75,10 +106,6 @@ export default function PackageClient({ pkg }: Props) {
                 <Clock className="h-5 w-5" />
                 <span>{pkg.duration}</span>
                 </div>
-                {/* <div className="flex items-center space-x-1">
-                <StarRating rating={pkg.rating} />
-                <span>{pkg.rating} ({pkg.reviewCount} reviews)</span>
-                </div> */}
             </div>
             </div>
         </div>
@@ -157,12 +184,12 @@ export default function PackageClient({ pkg }: Props) {
                     
                     {activeTab === 'itinerary' && (
                         <div className="space-y-8">
-                        {(pkg.itineraries ?? []).map((step, index) => (
+                        {itineraries.map((step, index) => (
                             <div key={step.day} className="relative pl-16">
                                 <div className="absolute left-6 top-0 w-12 h-12 bg-primary/20 border-2 border-primary/50 text-primary rounded-full flex items-center justify-center font-bold text-lg">
                                     {step.day}
                                 </div>
-                                {index < pkg.itineraries.length - 1 && (
+                                {index < itineraries.length - 1 && (
                                 <div className="absolute left-12 top-12 w-px bg-border"
                                         style={{
                                         height: 'calc(100% - 12px)',
@@ -178,8 +205,8 @@ export default function PackageClient({ pkg }: Props) {
                         ))}
                         </div>
                     )}
-                    {activeTab === 'gallery' && <PackageGallery images={[/*pkg.image,*/ ...pkg.gallery]} title={pkg.title} />}
-                    {activeTab === 'reviews' && <FirebaseReviews packageId={pkg.id} rating={0} /*{pkg.rating}*/ reviewCount={0}/*{pkg.reviewCount}*/ />}
+                    {activeTab === 'gallery' && <PackageGallery images={[...galleryImages]} title={pkg.title} />}
+                    {activeTab === 'reviews' && <FirebaseReviews packageId={pkg.id} rating={0} reviewCount={0} />}
                 </div>
                 </div>
             </div>
@@ -206,7 +233,7 @@ export default function PackageClient({ pkg }: Props) {
                 </div>
 
                 <Button
-                    onClick={() => openWizard(pkg)}
+                    onClick={() => handleBookNow(false)}
                     size="lg"
                     className="w-full bg-accent hover:bg-accent/90 text-accent-foreground mb-4"
                 >
@@ -214,32 +241,19 @@ export default function PackageClient({ pkg }: Props) {
                 </Button>
 
                 <Button
-                    onClick={() => {
-                    const depositPrice = pkg.price * 0.2;
-                    openWizard({
-                        ...pkg,
-                        price: depositPrice
-                    });
-                    }}
+                    onClick={() => handleBookNow(true)}
                     size="lg"
                     className="w-full bg-yellow-500 hover:bg-yellow-600 text-white mb-4"
                 >
                     Reserve This Trip (20%)
                 </Button>
 
-                <Button variant="outline" className="w-full" onClick={() => {
-                    if (!user) {
-                    router.push("/login");
-                    return;
-                    }
-                    toggleWishlist(pkg.id);
-                }}>
+                <Button variant="outline" className="w-full" onClick={handleWishlistToggle}>
                     <Heart className={`mr-2 h-4 w-4 ${isWishlisted ? 'fill-current text-red-500' : ''}`} />
                     {isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}
                 </Button>
 
                 <div className="mt-6 pt-6 border-t border-border">
-                    {/* <h4 className="font-semibold text-foreground mb-3">Available Dates</h4> */}
                     <div className="space-y-2">
                     <Popover>
                         <PopoverTrigger asChild>
@@ -264,12 +278,6 @@ export default function PackageClient({ pkg }: Props) {
                         />
                         </PopoverContent>
                     </Popover>
-                    {/* {pkg.availableDates.map((date) => (
-                        <div key={date} className="flex items-center justify-between text-sm">
-                        <span>{new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-                        <span className="text-green-400 font-medium">Available</span>
-                        </div>
-                    ))} */}
                     </div>
                 </div>
                 </div>
