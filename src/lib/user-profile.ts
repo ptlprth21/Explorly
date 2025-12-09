@@ -55,12 +55,12 @@ export async function updateUserProfile(user: object, displayName: string, photo
 //   return data;
 // }
 
-// export async function deleteUserAccount() {
-//   const { supabase } = await getCurrentUser();
+export async function deleteUserAccount() {
+  const { supabase } = await getCurrentUser();
 
-//   const { error } = await supabase.rpc("delete_current_user");
+  const { error } = await supabase.rpc("delete_current_user");
 
-//   if (error) throw error;
+  if (error) throw error;
 
-//   return true;
-// }
+  return true;
+}
