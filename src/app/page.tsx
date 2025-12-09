@@ -1,5 +1,3 @@
-
-
 import Hero from '@/components/home/Hero';
 import ContinentsExplorer from '@/components/home/ContinentsExplorer';
 import Container from '@/components/ui/Container';
@@ -19,7 +17,7 @@ export default async function Home() {
       <Hero />
       <FeaturedPackages packages={packages} />
       {spotlightCountry && <CountrySpotlight country={spotlightCountry} />}
-      <ContinentsExplorer />
+      <ContinentsExplorer continents={continents} />
     </div>
   );
 }
