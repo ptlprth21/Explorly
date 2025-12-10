@@ -26,7 +26,7 @@ export default function AboutPage() {
     <>
       <section className="relative h-[450px] w-full">
         <Image
-          src="https://qykdgddijeumcxrunxsh.supabase.co/storage/v1/object/public/media/images/1764588263608.jpg" /*{placeholderImages.aboutHero}*/
+          src="https://stlkmeffboaouzmdgiia.supabase.co/storage/v1/object/public/media/images/1764588263608.jpg" /*{placeholderImages.aboutHero}*/
           alt="A team of hikers celebrating on a mountain peak"
           data-ai-hint="team mountains"
           fill
