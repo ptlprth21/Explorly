@@ -12,8 +12,11 @@ interface SurpriseWizardProps {
 }
 
 export default function SurpriseWizard({ onClose }: SurpriseWizardProps) {
+  const [step, setStep] = useState(1);
+
   const [vibe, setVibe] = useState<'relax' | 'adventure' | null>(null);
   const [budget, setBudget] = useState<number>(2000);
+
   const [allPackages, setAllPackages] = useState<Package[]>([]);
   const [themes, setThemes] = useState<Theme[]>([]);
   const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
@@ -35,6 +38,14 @@ export default function SurpriseWizard({ onClose }: SurpriseWizardProps) {
     fetchData();
   }, []);
 
+  const handleNext = () => {
+    if (step === 1 && !vibe) return;
+    if (step === 2) {
+      handleFilter(); 
+    }
+    setStep(step + 1);
+  };
+
   const handleFilter = () => {
     const results = allPackages.filter(pkg => {
       const matchesBudget = pkg.price <= budget;
@@ -44,13 +55,14 @@ export default function SurpriseWizard({ onClose }: SurpriseWizardProps) {
 
       return matchesBudget && matchesVibe;
     });
+
     setFilteredPackages(results);
   };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
       <div 
-        className="w-full max-w-3xl rounded-3xl bg-background/90 backdrop-blur-xl border border-white/20 shadow-2xl max-h-[90vh] overflow-y-auto"
+        className="w-full max-w-3xl rounded-3xl bg-background/90 backdrop-blur-xl border border-white/20 shadow-2xl max-h-[90vh] overflow-y-auto overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -63,19 +75,21 @@ export default function SurpriseWizard({ onClose }: SurpriseWizardProps) {
 
         {/* Body */}
         <div className="p-6 space-y-6">
-          {/* Preguntas */}
-          <div className="space-y-6">
-
-            {/* Vibe */}
-            <div className="text-center space-x-4">
+          {step === 1 && (
+            <div className="text-center space-y-4">
               <label className="block text-sm font-medium text-white mb-2">Vibe</label>
               <div className="flex justify-center gap-4">
-                <Button variant={vibe === 'relax' ? 'default' : 'outline'} onClick={() => setVibe('relax')}>Relax</Button>
-                <Button variant={vibe === 'adventure' ? 'default' : 'outline'} onClick={() => setVibe('adventure')}>Adventure</Button>
+                <Button variant={vibe === 'relax' ? 'default' : 'outline'} onClick={() => setVibe('relax')}>
+                  Relax
+                </Button>
+                <Button variant={vibe === 'adventure' ? 'default' : 'outline'} onClick={() => setVibe('adventure')}>
+                  Adventure
+                </Button>
               </div>
             </div>
+          )}
 
-            {/* Budget */}
+          {step === 2 && (
             <div className="text-center">
               <label className="block text-sm font-medium text-white mb-2">Budget (€)</label>
               <input
@@ -86,20 +100,30 @@ export default function SurpriseWizard({ onClose }: SurpriseWizardProps) {
                 className="w-32 text-center p-2 rounded-lg border border-white/20 bg-background/70 text-white"
               />
             </div>
+          )}
 
-          </div>
-
-          <Button onClick={handleFilter} className="w-full bg-teal-500 hover:bg-teal-400">Find My Trip</Button>
-
-          {/* Resultados */}
-          {filteredPackages.length > 0 && (
+          {step === 3 && (
             <div className="mt-6">
-              <PackageGrid packages={filteredPackages} isLoading={loading} themes={themes} />
+              {filteredPackages.length > 0 ? (
+                <PackageGrid packages={filteredPackages} isLoading={loading} themes={themes} />
+              ) : (
+                !loading && (
+                  <p className="text-white mt-4 text-center">No packages found for your selections.</p>
+                )
+              )}
             </div>
           )}
-          {filteredPackages.length === 0 && !loading && (
-            <p className="text-white mt-4 text-center">No packages found for your selections.</p>
+
+          {step < 3 && (
+            <Button 
+              onClick={handleNext} 
+              className="w-full bg-teal-500 hover:bg-teal-400"
+              disabled={(step === 1 && !vibe)}
+            >
+              Next
+            </Button>
           )}
+
         </div>
       </div>
     </div>
