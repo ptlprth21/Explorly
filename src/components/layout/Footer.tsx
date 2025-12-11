@@ -6,13 +6,14 @@ import Container from '../ui/Container';
 
 const Footer = () => {
   return (
+    <>
     <footer className="border-t border-border/40 bg-background/95">
       <Container>
         <div className="py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             <div className="flex flex-col gap-4 md:col-span-1 lg:col-span-1">
               <Link href="/" className="flex items-center gap-2">
-                <img src="https://0ec90b57d6e95fcbda19832f.supabase.co/storage/v1/object/public/media/images/logo.png" alt="logo" width="40" height="40"/>
+                <img src="https://stlkmeffboaouzmdgiia.supabase.co/storage/v1/object/public/media/images/logo.png" alt="logo" width="40" height="40"/>
                 <span className="text-xl font-bold tracking-tight text-foreground">Explorly</span>
               </Link>
               <p className="text-sm text-foreground/60">A curated collection of the world's best trips, vetted by experts. No clutter, just the best experiences.</p>
@@ -61,6 +62,7 @@ const Footer = () => {
         </div>
       </Container>
     </footer>
+    </>
   );
 };
 
